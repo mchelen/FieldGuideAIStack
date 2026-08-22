@@ -29,7 +29,7 @@ An [agent](agent) loops without you for many turns. Background execution is a
 stronger claim: the loop survives you leaving.
 
 Anthropic's Cowork documentation describes sessions that run in the cloud and
-continue while you are offline. Gemini Spark is described as running on Google's
+continue while you are offline. [Gemini Spark](gemini-spark) is described as running on Google's
 cloud infrastructure "even after you close your laptop or lock your phone." Both
 are the same architectural move — the session is not your window, it is a
 process somewhere else that your window happens to be attached to.

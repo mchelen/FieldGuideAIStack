@@ -1,0 +1,85 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<div id="linkpreview" role="tooltip" hidden>
+  <p class="lp-title"><span class="lp-kind"></span><span class="lp-name"></span></p>
+  <p class="lp-summary"></p>
+</div>
+
+<script define:vars={{ base }}>
+  // Previews any link pointing at a node page, wherever it appears — prose
+  // cross-references, the comparison matrix, relation lists, index cards.
+  // Attaching by href rather than by a class means new link sites get previews
+  // without anyone remembering to opt in.
+  const card = document.getElementById('linkpreview');
+  if (card) {
+    const nameEl = card.querySelector('.lp-name');
+    const kindEl = card.querySelector('.lp-kind');
+    const sumEl = card.querySelector('.lp-summary');
+    const pattern = new RegExp(`${base}/nodes/([a-z0-9-]+)/?$`);
+
+    let index = null;
+    let pending = null;
+    let current = null;
+
+    const load = () => {
+      if (index) return Promise.resolve(index);
+      pending ||= fetch(`${base}/nodes-index.json`)
+        .then((r) => r.json())
+        .then((d) => (index = d))
+        .catch(() => (index = {}));
+      return pending;
+    };
+
+    const place = (anchor) => {
+      const r = anchor.getBoundingClientRect();
+      card.hidden = false;
+      const c = card.getBoundingClientRect();
+      // Prefer below; flip above when there is not room, and keep it on screen
+      // horizontally so a link near the right edge still shows a full card.
+      const room = window.innerHeight - r.bottom;
+      const top = room > c.height + 12 ? r.bottom + 8 : r.top - c.height - 8;
+      const left = Math.min(
+        Math.max(8, r.left),
+        Math.max(8, window.innerWidth - c.width - 8),
+      );
+      card.style.transform = `translate(${Math.round(left)}px, ${Math.round(top)}px)`;
+    };
+
+    const show = async (anchor) => {
+      const m = anchor.getAttribute('href')?.match(pattern);
+      if (!m) return;
+      const data = (await load())[m[1]];
+      if (!data || current !== anchor) return;
+      nameEl.textContent = data.title;
+      kindEl.textContent = data.kind === 'product' ? (data.vendor ?? 'Product') : 'Concept';
+      kindEl.className = `lp-kind is-${data.kind}`;
+      sumEl.textContent = data.summary;
+      place(anchor);
+    };
+
+    const hide = () => {
+      current = null;
+      card.hidden = true;
+    };
+
+    document.addEventListener('mouseover', (e) => {
+      const a = e.target.closest?.('a[href]');
+      if (!a) return;
+      current = a;
+      show(a);
+    });
+    document.addEventListener('mouseout', (e) => {
+      if (e.target.closest?.('a[href]') === current) hide();
+    });
+    // Keyboard users get the same affordance.
+    document.addEventListener('focusin', (e) => {
+      const a = e.target.closest?.('a[href]');
+      if (a) { current = a; show(a); }
+    });
+    document.addEventListener('focusout', hide);
+    document.addEventListener('keydown', (e) => e.key === 'Escape' && hide());
+    window.addEventListener('scroll', hide, { passive: true });
+  }
+</script>

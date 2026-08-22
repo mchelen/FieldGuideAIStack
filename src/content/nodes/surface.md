@@ -25,7 +25,7 @@ Surface is the most under-used word in this vocabulary, and the one that
 dissolves the most confusion. It names *where you sit* — not what is doing the
 work.
 
-Anthropic's own documentation is explicit that Claude Code runs on several
+Anthropic's own documentation is explicit that [Claude Code](claude-code) runs on several
 surfaces — terminal, IDE extensions, desktop app, web — and that "each surface
 connects to the same underlying Claude Code engine." Cowork's docs go further:
 Cowork "uses the same agentic architecture that powers Claude Code, accessible
@@ -44,7 +44,7 @@ mysterious:
 - **Different engine, same surface** — a genuine capability difference hiding
   behind a familiar window.
 - **Different sandbox per surface** — the same product can have different
-  powers depending on where it runs. ChatGPT Work's documentation is direct
+  powers depending on where it runs. [ChatGPT Work](chatgpt-work)'s documentation is direct
   about this: on the web it "operates in isolated cloud environments and cannot
   directly access local files or apps," while the desktop app can reach local
   resources.

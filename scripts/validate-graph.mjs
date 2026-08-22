@@ -150,6 +150,56 @@ if (missingUseCase.length) {
   warnings.push(`no use case recorded yet (${missingUseCase.length}): ${missingUseCase.join(', ')}`);
 }
 
+// 3d. Wiki-style cross-linking. A term that has its own page should be linked
+//     the first time another page uses it -- an unlinked mention is a dead end
+//     for a reader who does not already know the word.
+//
+//     Only multi-word terms are checked. Single common words like "model",
+//     "agent" and "Claude" appear as ordinary prose constantly, and flagging
+//     them would bury the real signal in noise nobody reads twice.
+//     Vendor-attributed aliases are proper nouns and are matched case
+//     sensitively: Google's "Connected Apps" is a product name, while
+//     "connected apps" is an ordinary phrase that appears in prose about
+//     entirely different products. Titles and informal synonyms match
+//     case-insensitively, since "context window" is usually written lowercase.
+const lexicon = nodes.map((n) => ({
+  id: n.id,
+  terms: [
+    { term: n.data.title, exact: false },
+    ...(n.data.aka ?? []).map((a) =>
+      typeof a === 'string' ? { term: a, exact: false } : { term: a.term, exact: true },
+    ),
+  ].filter((t) => t.term && t.term.split(/\s+/).length >= 2),
+  own: new Set(
+    [n.data.title, ...(n.data.aka ?? []).map((a) => (typeof a === 'string' ? a : a.term))]
+      .filter(Boolean)
+      .map((t) => t.toLowerCase()),
+  ),
+}));
+
+for (const n of nodes) {
+  const prose = n.content
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/`[^`]*`/g, '');
+  const linked = new Set([...prose.matchAll(/\]\(([a-z0-9-]+)\)/g)].map((m) => m[1]));
+  const self = lexicon.find((l) => l.id === n.id);
+
+  for (const entry of lexicon) {
+    if (entry.id === n.id || linked.has(entry.id)) continue;
+    for (const { term, exact } of entry.terms) {
+      if (self?.own.has(term.toLowerCase())) continue;
+      const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const re = new RegExp(`(?<!\\[)\\b${escaped}\\b`, exact ? '' : 'i');
+      if (re.test(prose)) {
+        warnings.push(
+          `${n.file}: mentions “${term}” without linking it — write [${term}](${entry.id})`,
+        );
+        break;
+      }
+    }
+  }
+}
+
 // 4. Symmetric relations declared from both ends.
 for (const n of nodes) {
   for (const rel of n.data.relations ?? []) {

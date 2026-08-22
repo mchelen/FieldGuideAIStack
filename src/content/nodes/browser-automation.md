@@ -35,8 +35,8 @@ matters is **whose session the browser is in**.
 
 | | Credentialed |
 | --- | --- |
-| ChatGPT Work's cloud browser | No — documented as unable to "accept credentials, use a password manager or saved form entries, sign in to a website, or complete payments" |
-| Gemini Spark in Chrome | Yes — documented as able to use "your logged-in accounts and saved passwords" with permission |
+| [ChatGPT Work](chatgpt-work)'s cloud browser | No — documented as unable to "accept credentials, use a password manager or saved form entries, sign in to a website, or complete payments" |
+| [Gemini Spark](gemini-spark) in Chrome | Yes — documented as able to use "your logged-in accounts and saved passwords" with permission |
 | Cowork with Claude in Chrome | Pairs with Claude in Chrome to "automate your tasks on any website" |
 
 An uncredentialed cloud browser can research. A credentialed one can act as you.

@@ -110,7 +110,7 @@ exist, authenticated, without you writing code.
 
 Cowork's documentation describes connecting Claude to tools and data sources
 "using MCP", alongside skills and plugins, managed from a Customize panel and
-synced from your account at session start. ChatGPT Work describes connected
+synced from your account at session start. [ChatGPT Work](chatgpt-work) describes connected
 apps under admin-controlled permissions. Gemini describes extensions into
 Workspace, Maps, YouTube and others.
 
@@ -121,7 +121,7 @@ The same shape, three vocabularies.
 Connectors are attached to an *account*, not to a machine, and the boundary is
 sharper than it looks. Anthropic's documentation notes that Cowork loads the
 connectors, skills and plugins enabled for your claude.ai account and
-deliberately does **not** read the Claude Code CLI's `~/.claude` directory —
+deliberately does **not** read the [Claude Code](claude-code) CLI's `~/.claude` directory —
 so a skill that exists only on your machine is invisible to Cowork until you
 add it in Customize.
 
