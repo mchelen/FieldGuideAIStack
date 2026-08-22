@@ -27,18 +27,32 @@ any new development work.
 - Enable auto-merge on the pull request when you open it, and delete the branch
   on merge. Green checks merge it; nothing waits on a human unless a reviewer
   asks for changes.
-  - Three repository settings make this work. "Allow auto-merge" and
-    "Automatically delete head branches" under Settings → General → Pull
-    Requests, plus branch protection on `main` requiring the `build` check.
-  - The required check is not optional hardening — it is what auto-merge waits
-    on. Without it GitHub treats every passing PR as already mergeable and
+  - The required `build` check is what auto-merge waits on. Without a required
+    check, GitHub treats every passing pull request as already mergeable and
     refuses to arm auto-merge at all: *"the pull request is already in clean
     status (all checks passed) — you can merge directly."*
   - If auto-merge cannot be armed, confirm the checks are green and merge
-    directly rather than leaving the PR open. Say in the PR that auto-merge was
-    refused and why.
-  - Hold auto-merge only when a human has asked to read the PR first. Say so in
-    the PR description when you do.
+    directly rather than leaving the pull request open. Say in the pull request
+    that auto-merge was refused and why.
+  - Hold auto-merge when a human has asked to read the pull request first, or
+    when it touches a code-owned file. Say so in the description when you do.
+
+## Repository configuration
+- Repository settings are code. `.github/settings.yml` is the source of truth,
+  and the repository-settings app applies it on every push to `main`. Change a
+  setting by editing that file in a pull request — a change made in the GitHub
+  UI holds only until the next sync, then reverts.
+- The app must stay installed for the file to do anything at all. If a setting
+  will not take, check the installation before debugging the YAML.
+- Every top-level key under `protection` must be present; set the ones you do
+  not want to `null`. Omitting one makes the app skip the entire block without
+  reporting an error.
+- `.github/CODEOWNERS` covers the files that can change what this automation is
+  permitted to do: `settings.yml`, `CODEOWNERS` itself, the workflows, and
+  `CHARTER.md`. Never merge a pull request touching those without the code
+  owner's approval — even when checks are green, and even though
+  `enforce_admins` is false and the merge would technically succeed. The gate
+  is a convention this file binds you to, not a mechanism that stops you.
 
 ## Processing
 - Push significant processing into tools and CI jobs, not tokens. Link checking,
