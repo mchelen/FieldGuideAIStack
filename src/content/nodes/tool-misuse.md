@@ -38,8 +38,8 @@ sources:
 ---
 OWASP's ASI02 describes agents misusing legitimate tools "due to [prompt
 injection](prompt-injection), misalignment, or unsafe delegation or ambiguous
-instruction", leading to data exfiltration, tool output manipulation or workflow
-hijacking.[[cite:owasp-agentic-top]]
+instruction", leading to [data exfiltration](data-exfiltration), tool output
+manipulation or workflow hijacking.[[cite:owasp-agentic-top]]
 
 The word doing the work is *legitimate*. No tool was compromised and no
 permission was exceeded. The agent used what it was given, in a way nobody

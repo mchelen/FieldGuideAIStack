@@ -90,8 +90,8 @@ use, and that is a normal, common outcome — not a contradiction.
 
 ## What restrictions actually look like
 
-Meta's Llama 4 Community License is the load-bearing example because its
-restrictions are concrete and easy to check:
+Meta's Llama 4 [Community License](community-license) is the load-bearing
+example because its restrictions are concrete and easy to check:
 
 - **A scale ceiling.** Organizations with more than 700 million monthly active
   users in the preceding calendar month must request a separate license from
@@ -99,8 +99,8 @@ restrictions are concrete and easy to check:
 - **Compelled attribution.** Distributors must prominently display "Built with
   Llama", and any model trained or improved on Llama materials must have a name
   beginning with "Llama".
-- **An incorporated use policy.** A separate Acceptable Use Policy binds by
-  reference, so the license text alone does not tell you what is prohibited.
+- **An incorporated use policy.** A separate [Acceptable Use Policy](acceptable-use-policy) binds by reference, so the license text alone does not tell you
+  what is prohibited.
 
 Each of these is a field-identifiable mark. A downstream user with 800 million
 users, or one that wants to name its fine-tune something else, has a real legal

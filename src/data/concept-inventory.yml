@@ -793,7 +793,7 @@ concepts:
     gloss: >-
       Checks around the model that block disallowed input or output.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Excessive agency
     slug: excessive-agency
     area: safety
@@ -830,14 +830,14 @@ concepts:
     gloss: >-
       The credential an agent acts under, and who is accountable for it.
     attestedBy: []
-    status: pending
+    status: written
   - term: Data exfiltration
     slug: data-exfiltration
     area: safety
     gloss: >-
       An agent being induced to send data somewhere it should not.
     attestedBy: []
-    status: pending
+    status: written
   - term: AI bill of materials
     slug: ai-bill-of-materials
     aka: [AIBOM]
@@ -845,7 +845,7 @@ concepts:
     gloss: >-
       An inventory of the models, tools and servers a system depends on.
     attestedBy: []
-    status: pending
+    status: written
   - term: Permissive license
     slug: permissive-license
     aka: [Apache 2.0, MIT]
@@ -853,7 +853,7 @@ concepts:
     gloss: >-
       A licence allowing reuse with minimal conditions.
     attestedBy: []
-    status: pending
+    status: written
   - term: Copyleft
     slug: copyleft
     aka: [share-alike]
@@ -861,7 +861,7 @@ concepts:
     gloss: >-
       A licence requiring derivatives to carry the same terms.
     attestedBy: []
-    status: pending
+    status: written
   - term: Community license
     slug: community-license
     aka: [bespoke model license]
@@ -869,7 +869,7 @@ concepts:
     gloss: >-
       A vendor's own model licence, usually with conditions open source forbids.
     attestedBy: []
-    status: pending
+    status: written
   - term: Acceptable use policy
     slug: acceptable-use-policy
     aka: [AUP]
@@ -877,7 +877,7 @@ concepts:
     gloss: >-
       Terms constraining what a model may be used for, incorporated by reference.
     attestedBy: []
-    status: pending
+    status: written
   - term: Provenance
     slug: provenance
     aka: [content credentials]
@@ -885,14 +885,14 @@ concepts:
     gloss: >-
       Evidence of where a model, dataset or output came from.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Watermarking
     slug: watermarking
     area: openness
     gloss: >-
       Marking generated content so it can later be identified.
     attestedBy: []
-    status: pending
+    status: written
   - term: Token pricing
     slug: token-pricing
     aka: [per-token billing]
@@ -1178,7 +1178,7 @@ concepts:
     gloss: >-
       Low-quality generated content produced at volume because it is cheap.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Latency
     slug: latency
     area: serving
