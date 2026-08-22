@@ -13,7 +13,7 @@
     "check:freshness": "node scripts/check-freshness.mjs"
   },
   "dependencies": {
-    "astro": "^5.14.1",
+    "astro": "^7.1.1",
     "cytoscape": "^3.33.1",
     "unist-util-visit": "^5.1.0"
   },
