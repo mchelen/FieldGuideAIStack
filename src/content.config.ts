@@ -58,6 +58,47 @@ const relationType = z.enum(
  */
 const zoom = z.union([z.literal(1), z.literal(2), z.literal(3)]);
 
+/**
+ * A vendor's name for a concept. A bare string is an informal synonym; the
+ * object form is a claim that a named vendor calls it that, which is a product
+ * claim and therefore needs a source and a date like any other.
+ */
+const alias = z.union([
+  z.string(),
+  z.object({
+    term: z.string().min(1),
+    usedBy: z.string().min(1),
+    url: z.string().url(),
+    verifiedOn: z.coerce.date(),
+    note: z.string().optional(),
+  }),
+]);
+
+/**
+ * Whether a canonical term exists at all. The charter asks us to prefer
+ * existing industry terms over invented ones, which makes "there isn't one"
+ * a finding worth recording rather than a blank to leave empty.
+ *   standard   — a standards body or specification defines it
+ *   de-facto   — one organisation's term that the field adopted
+ *   contested  — vendors use different words for the same thing
+ *   none       — no settled term; the guide is picking one
+ */
+const canonical = z.object({
+  status: z.enum(['standard', 'de-facto', 'contested', 'none']),
+  term: z.string().optional(),
+  body: z.string().optional(),
+  note: z.string().optional(),
+  url: z.string().url().optional(),
+  title: z.string().optional(),
+  verifiedOn: z.coerce.date().optional(),
+});
+
+/** A concrete situation the concept shows up in. Generic for now. */
+const useCase = z.object({
+  scenario: z.string().min(1),
+  detail: z.string().min(1),
+});
+
 const nodes = defineCollection({
   loader: glob({ base: './src/content/nodes', pattern: '**/*.md' }),
   schema: z.object({
@@ -70,7 +111,9 @@ const nodes = defineCollection({
     kind: z.enum(['concept', 'product']).default('concept'),
     /** Products only: who sells it. */
     vendor: z.string().optional(),
-    aka: z.array(z.string()).default([]),
+    aka: z.array(alias).default([]),
+    canonical: canonical.optional(),
+    useCase: useCase.optional(),
     tags: z.array(z.string()).min(1),
     zoom: zoom.default(2),
     // One sentence. Shown on cards, in graph tooltips, and in search results.

@@ -19,6 +19,18 @@ const { Content } = await render(entry);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const fmt = (d: Date) => d.toISOString().slice(0, 10);
+
+// Bare strings are informal synonyms; objects are sourced vendor naming.
+const aliases = entry.data.aka;
+const plainAliases = aliases.filter((a): a is string => typeof a === 'string');
+const vendorAliases = aliases.filter((a) => typeof a !== 'string');
+
+const canonicalLabel: Record<string, string> = {
+  standard: 'Defined by a standard',
+  'de-facto': 'De facto standard term',
+  contested: 'No agreed term — vendors differ',
+  none: 'No established term',
+};
 const relations = graph.neighborsOf(id);
 const authored = relations.filter((r) => !r.derived);
 const derived = relations.filter((r) => r.derived);
@@ -36,9 +48,9 @@ const derived = relations.filter((r) => r.derived);
       )
     }
     {
-      entry.data.aka.length > 0 && (
+      plainAliases.length > 0 && (
         <p class="lede" style="font-size:0.95rem;margin-bottom:0.8rem">
-          Also called: {entry.data.aka.join(', ')}
+          Also called: {plainAliases.join(', ')}
         </p>
       )
     }
@@ -49,6 +61,39 @@ const derived = relations.filter((r) => r.derived);
       ))}
       <li><span class="chip">zoom {entry.data.zoom}</span></li>
     </ul>
+
+    {
+      entry.data.canonical && (
+        <div class="canonical">
+          <strong>{canonicalLabel[entry.data.canonical.status]}</strong>
+          {
+            entry.data.canonical.term && (
+              <p class="term">
+                “{entry.data.canonical.term}”
+                {entry.data.canonical.body && <span class="body"> · {entry.data.canonical.body}</span>}
+              </p>
+            )
+          }
+          {entry.data.canonical.note && <p class="note">{entry.data.canonical.note}</p>}
+          {
+            entry.data.canonical.url && (
+              <p class="ref">
+                <span class="ref-label">
+                  {entry.data.canonical.status === 'standard' ||
+                  entry.data.canonical.status === 'de-facto'
+                    ? 'Reference'
+                    : 'Nearest reference'}:
+                </span>{' '}
+                <a href={entry.data.canonical.url}>{entry.data.canonical.title}</a>
+                {entry.data.canonical.verifiedOn && (
+                  <span class="when"> — read {fmt(entry.data.canonical.verifiedOn)}</span>
+                )}
+              </p>
+            )
+          }
+        </div>
+      )
+    }
 
     {
       entry.data.fieldMark && (
@@ -66,6 +111,56 @@ const derived = relations.filter((r) => r.derived);
 
   <div class="wrap narrow prose">
     <Content />
+
+    {
+      vendorAliases.length > 0 && (
+        <>
+          <h2>What each vendor calls it</h2>
+          <p style="color:var(--ink-soft);font-size:0.95rem">
+            The same idea under different names. Knowing the mapping is most of
+            what it takes to read one vendor's documentation while using another's
+            product.
+          </p>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Term</th>
+                  <th>Used by</th>
+                  <th>Checked</th>
+                </tr>
+              </thead>
+              <tbody>
+                {vendorAliases.map((a: any) => (
+                  <tr>
+                    <td>
+                      <a href={a.url}>{a.term}</a>
+                      {a.note && <div style="color:var(--ink-soft);font-size:0.85em">{a.note}</div>}
+                    </td>
+                    <td>{a.usedBy}</td>
+                    <td style="font-family:var(--font-mono);font-size:0.8rem;white-space:nowrap">
+                      {fmt(a.verifiedOn)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )
+    }
+
+    {
+      entry.data.useCase && (
+        <>
+          <h2>What it looks like in use</h2>
+          <div class="usecase">
+            <p class="scenario">{entry.data.useCase.scenario}</p>
+            <p class="detail">{entry.data.useCase.detail}</p>
+          </div>
+        </>
+      )
+    }
 
     <h2>Relations</h2>
     <ul class="rel-list">

@@ -98,6 +98,58 @@ for (const n of nodes) {
   }
 }
 
+// 3c. Concept anatomy. Every concept page should say what the canonical term
+//     is (or that there isn't one), how each vendor names it, and what it looks
+//     like in use. Missing sections are a warning so the backlog stays visible
+//     without blocking unrelated work; malformed ones are an error.
+const missingCanonical = [];
+const missingUseCase = [];
+
+for (const n of nodes) {
+  if (n.data.kind === 'product') continue;
+
+  const c = n.data.canonical;
+  if (!c) {
+    missingCanonical.push(n.id);
+  } else if (c.status === 'standard' || c.status === 'de-facto') {
+    for (const field of ['term', 'url', 'title', 'verifiedOn']) {
+      if (!c[field]) {
+        problems.push(`${n.file}: canonical is "${c.status}" but has no ${field}`);
+      }
+    }
+  } else {
+    if (!c.note) {
+      problems.push(
+        `${n.file}: canonical is "${c.status}" but does not say why there is no settled term`,
+      );
+    }
+    // Headlining a term under "no agreed term" reads as a contradiction. Any
+    // reference for a contested concept belongs in the note and the link.
+    if (c.term) {
+      problems.push(
+        `${n.file}: canonical is "${c.status}" so it must not headline a term — put the nearest standard in the note`,
+      );
+    }
+  }
+
+  if (!n.data.useCase) missingUseCase.push(n.id);
+
+  for (const a of n.data.aka ?? []) {
+    if (typeof a === 'string') continue;
+    // A vendor naming claim is a product claim and needs the same evidence.
+    for (const field of ['usedBy', 'url', 'verifiedOn']) {
+      if (!a[field]) problems.push(`${n.file}: alias "${a.term}" has no ${field}`);
+    }
+  }
+}
+
+if (missingCanonical.length) {
+  warnings.push(`no canonical term recorded yet (${missingCanonical.length}): ${missingCanonical.join(', ')}`);
+}
+if (missingUseCase.length) {
+  warnings.push(`no use case recorded yet (${missingUseCase.length}): ${missingUseCase.join(', ')}`);
+}
+
 // 4. Symmetric relations declared from both ends.
 for (const n of nodes) {
   for (const rel of n.data.relations ?? []) {

@@ -100,6 +100,25 @@ any new development work.
 - So the guard is you honouring it. Treat a code-owned file as needing approval
   because this file says so, not because GitHub will stop you.
 
+## Concept pages
+- A concept page carries four things beyond its prose:
+  - **The canonical term**, or an explicit statement that there is not one. Use
+    `canonical.status`: `standard` when a body or specification defines it,
+    `de-facto` when one organisation's term was adopted generally, `contested`
+    when vendors disagree, `none` when nothing has settled. A `contested` or
+    `none` entry must say why, and must not headline a term of its own — put
+    the nearest standard in the note and the link.
+  - **Alternate terms with attribution**, in `aka`. A bare string is an informal
+    synonym. The object form claims a named vendor uses that word, which is a
+    product claim and needs a URL and a `verifiedOn` like any other.
+  - **Popular examples** in `examples` — the concrete things a reader will have
+    met, not only the vendors.
+  - **A use case** in `useCase`: one scenario line, one paragraph of detail.
+    Generic for now; these are the natural hook for the fictional organisation
+    when it arrives.
+- Missing sections are warnings rather than errors, so the backlog stays visible
+  in CI without blocking unrelated work. Malformed ones are errors.
+
 ## Products and capabilities
 - A product page is only as useful as the capability nodes it can point at. The
   comparison table is built from `bundles` edges, so a capability no product
@@ -127,5 +146,15 @@ any new development work.
 ## Content rules
 - Every product or license claim needs a source URL and a `verifiedOn` date.
   Fetch it; never write one from memory.
+- **Cite at the claim, not at the page.** A reader should be able to tell which
+  sentence rests on which source, the way a Wikipedia article does — a bulk
+  list at the foot of the page does not say which reference supports what, and
+  a claim that looks sourced but is not is worse than an obviously unsourced
+  one. Attach the reference inline to the sentence making the claim.
+- A source nobody cites inline is either unused or the prose around it is
+  under-cited. Both are worth noticing rather than leaving.
+- Where a source could not be read directly — a publisher blocking automated
+  clients, a paywall — say so on the source itself rather than letting a
+  citation imply a confidence the retrieval does not support.
 - Content lives in the graph. Adding a concept is one new node file, never
   a new hand-written page.

@@ -1,6 +1,25 @@
 ---
 title: Open Source AI
 aka: [OSAID, Open Source AI Definition]
+canonical:
+  status: standard
+  term: Open Source AI
+  body: Open Source Initiative, Open Source AI Definition 1.0
+  url: https://opensource.org/ai/open-source-ai-definition
+  title: The Open Source AI Definition – 1.0 — Open Source Initiative
+  verifiedOn: 2026-08-22
+useCase:
+  scenario: >-
+    A procurement review asks whether you can legally fine-tune a model on
+    internal data and ship the result in a product.
+  detail: >-
+    The marketing page says "open source", so the question looks settled. Under
+    OSAID 1.0 it is not: the definition requires data information, training code
+    and parameters all under open terms, and most releases ship only the third.
+    Checking the release against those three components turns a vague licensing
+    worry into a specific finding you can act on — usually that you have
+    downloadable weights under a bespoke licence, which is a different legal
+    position from open source.
 tags: [licensing, openness, standard]
 zoom: 2
 summary: A defined term, not a vibe — under OSI's Open Source AI Definition 1.0
