@@ -1,0 +1,63 @@
+---
+import Icon from './Icon.astro';
+
+export interface Section {
+  id: string;
+  label: string;
+  icon: string;
+}
+
+interface Props {
+  sections: Section[];
+}
+const { sections } = Astro.props;
+---
+
+{
+  sections.length > 1 && (
+    <nav class="pagenav" aria-label="On this page">
+      <p class="pagenav-title">
+        <Icon name="contents" size={14} /> On this page
+      </p>
+      <ul>
+        {sections.map((s) => (
+          <li>
+            <a href={`#${s.id}`}>
+              <Icon name={s.icon} size={14} />
+              <span>{s.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+
+<script>
+  // Highlight the section currently in view. Progressive enhancement: with no
+  // JS the nav is still a working list of anchors.
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('.pagenav a')];
+  const targets = links
+    .map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1))))
+    .filter((el): el is HTMLElement => Boolean(el));
+
+  if (targets.length && 'IntersectionObserver' in window) {
+    const seen = new Map<string, boolean>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) seen.set(e.target.id, e.isIntersecting);
+        const active = targets.find((t) => seen.get(t.id));
+        for (const a of links) {
+          a.classList.toggle(
+            'is-active',
+            Boolean(active) && a.hash === `#${active!.id}`,
+          );
+        }
+      },
+      // Bias towards the top of the viewport so the heading you just scrolled
+      // past stops being "current" as soon as the next one arrives.
+      { rootMargin: '-72px 0px -70% 0px', threshold: 0 },
+    );
+    for (const t of targets) observer.observe(t);
+  }
+</script>
