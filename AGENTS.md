@@ -85,9 +85,20 @@ any new development work.
 - `.github/CODEOWNERS` covers the files that can change what this automation is
   permitted to do: `settings.yml`, `CODEOWNERS` itself, the workflows, and
   `CHARTER.md`. Never merge a pull request touching those without the code
-  owner's approval — even when checks are green, and even though
-  `enforce_admins` is false and the merge would technically succeed. The gate
-  is a convention this file binds you to, not a mechanism that stops you.
+  owner's approval, even when checks are green.
+- **That rule is a convention, not a mechanism. It does not block anything.**
+  Tested on #13: a pull request modifying `.github/CODEOWNERS` — matched by an
+  exact-path rule, so not a pattern problem — reported `mergeable_state: clean`
+  with checks green and could have merged unapproved.
+- The cause is identity, not configuration. An agent pushing with the owner's
+  credentials authors pull requests *as the owner*, and GitHub never requires
+  the author to approve their own pull request, so `require_code_owner_reviews`
+  has nobody left to satisfy it. No CODEOWNERS pattern fixes this; any
+  two-party control collapses when both parties are one account. Giving the
+  agent a separate identity (a GitHub App or bot account) is what would make
+  the gate bind.
+- So the guard is you honouring it. Treat a code-owned file as needing approval
+  because this file says so, not because GitHub will stop you.
 
 ## Processing
 - Push significant processing into tools and CI jobs, not tokens. Link checking,
