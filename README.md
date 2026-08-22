@@ -77,16 +77,43 @@ link and freshness checks weekly and opens a single issue listing whatever needs
 a human to re-open the page. **Never bump a `verifiedOn` date without actually
 re-reading the source.**
 
-`deploy.yml` publishes `dist/` to GitHub Pages on push to `main`. Enable Pages
-with source "GitHub Actions" in repository settings for the first deploy to
-land.
+`deploy.yml` publishes `dist/` to GitHub Pages on push to `main`.
+
+## Repository configuration
+
+Repository settings are code too. [`.github/settings.yml`](.github/settings.yml)
+is the source of truth — merge settings, branch protection, labels, topics —
+and the [repository-settings app](https://github.com/repository-settings/app)
+applies it. Change a setting by editing that file in a pull request; a change
+made in the GitHub UI holds only until the next sync, then reverts.
+
+Two things about that sync are worth knowing before you debug it:
+
+- **It runs on a push to `main`, not on install.** Installing the app applies
+  nothing by itself. The next merge to `main` is what triggers the first sync.
+- **Every key under `protection` must be present.** Set the ones you do not
+  want to `null`. Omitting one makes the app skip the whole block without
+  reporting an error.
+
+[`.github/CODEOWNERS`](.github/CODEOWNERS) covers the files that can change what
+the automation is allowed to do — `settings.yml`, `CODEOWNERS` itself, the
+workflows, and `CHARTER.md`. Branch protection requires zero approvals in
+general but code owner approval on those, so ordinary content pull requests
+auto-merge on green while changes to the guardrails wait for a human.
+
+Note that `enforce_admins` is `false`, which it has to be: nobody can approve
+their own pull request, so enforcing protection on admins would deadlock a solo
+owner on any code-owned change. That makes the review requirement binding by
+convention rather than by mechanism. `AGENTS.md` is where the convention is
+written down.
 
 ## Status
 
 Implemented: content schema and graph model, derived reverse edges,
 per-node neighbourhood diagrams, the full graph explorer, source verification
-tooling, CI, and Pages deploy — with 11 nodes covering the
-model / harness / provider / host distinctions and the openness vocabulary.
+tooling, CI, Pages deploy, and repository settings as code — with 11 nodes
+covering the model / harness / provider / host distinctions and the openness
+vocabulary.
 
 Not yet built, from the charter:
 
