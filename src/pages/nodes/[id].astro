@@ -2,6 +2,8 @@
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Neighborhood from '../../components/Neighborhood.astro';
+import Icon from '../../components/Icon.astro';
+import PageNav from '../../components/PageNav.astro';
 import { loadGraph } from '../../lib/graph';
 
 export async function getStaticPaths() {
@@ -15,7 +17,7 @@ export async function getStaticPaths() {
 const { id } = Astro.props;
 const graph = await loadGraph();
 const entry = graph.byId.get(id)!;
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const fmt = (d: Date) => d.toISOString().slice(0, 10);
@@ -24,6 +26,32 @@ const fmt = (d: Date) => d.toISOString().slice(0, 10);
 const aliases = entry.data.aka;
 const plainAliases = aliases.filter((a): a is string => typeof a === 'string');
 const vendorAliases = aliases.filter((a) => typeof a !== 'string');
+
+// The section list is assembled in the order the sections actually render, so
+// the nav cannot drift out of sync with the page by being maintained by hand.
+const sections = [
+  { id: 'diagram', label: 'What it touches', icon: 'diagram' },
+  ...headings
+    .filter((h) => h.depth === 2)
+    .map((h) => ({ id: h.slug, label: h.text, icon: 'concept' })),
+  vendorAliases.length > 0 && {
+    id: 'vendor-naming',
+    label: 'What each vendor calls it',
+    icon: 'naming',
+  },
+  entry.data.useCase && { id: 'use-case', label: 'In use', icon: 'usecase' },
+  { id: 'relations', label: 'Relations', icon: 'relations' },
+  entry.data.examples.length > 0 && {
+    id: 'in-the-wild',
+    label: 'In the wild',
+    icon: 'wild',
+  },
+  entry.data.sources.length > 0 && {
+    id: 'sources',
+    label: 'Sources',
+    icon: 'sources',
+  },
+].filter(Boolean) as { id: string; label: string; icon: string }[];
 
 const canonicalLabel: Record<string, string> = {
   standard: 'Defined by a standard',
@@ -37,16 +65,22 @@ const derived = relations.filter((r) => r.derived);
 ---
 
 <Base title={`${entry.data.title} — Field Guide to the AI Stack`} description={entry.data.summary}>
-  <div class="wrap narrow" style="padding-block: 2.5rem 1rem">
+  <div class="wrap node-shell">
+  <div class="node-main">
+  <div style="padding-block: 2.5rem 1rem">
     <h1>{entry.data.title}</h1>
-    {
-      entry.data.kind === 'product' && (
-        <p style="margin:0 0 0.5rem;color:var(--ink-faint);font-size:0.9rem">
-          Product{entry.data.vendor && ` · ${entry.data.vendor}`} ·{' '}
+    <p class="kindline">
+      <span class={`kind-badge is-${entry.data.kind}`}>
+        <Icon name={entry.data.kind} size={13} />
+        {entry.data.kind === 'product' ? 'Product' : 'Concept'}
+      </span>
+      {entry.data.vendor && <span class="vendor-name">{entry.data.vendor}</span>}
+      {
+        entry.data.kind === 'product' && (
           <a href={`${base}/compare`}>compare with the others</a>
-        </p>
-      )
-    }
+        )
+      }
+    </p>
     {
       plainAliases.length > 0 && (
         <p class="lede" style="font-size:0.95rem;margin-bottom:0.8rem">
@@ -64,8 +98,19 @@ const derived = relations.filter((r) => r.derived);
 
     {
       entry.data.canonical && (
-        <div class="canonical">
-          <strong>{canonicalLabel[entry.data.canonical.status]}</strong>
+        <div class={`canonical is-${entry.data.canonical.status}`}>
+          <strong>
+            <Icon
+              name={
+                entry.data.canonical.status === 'standard' ||
+                entry.data.canonical.status === 'de-facto'
+                  ? 'standard'
+                  : 'contested'
+              }
+              size={13}
+            />
+            {canonicalLabel[entry.data.canonical.status]}
+          </strong>
           {
             entry.data.canonical.term && (
               <p class="term">
@@ -105,17 +150,17 @@ const derived = relations.filter((r) => r.derived);
     }
   </div>
 
-  <div class="wrap" style="max-width:52rem">
+  <div id="diagram">
     <Neighborhood graph={graph} id={id} />
   </div>
 
-  <div class="wrap narrow prose">
+  <div class="prose">
     <Content />
 
     {
       vendorAliases.length > 0 && (
         <>
-          <h2>What each vendor calls it</h2>
+          <h2 id="vendor-naming"><Icon name="naming" /> What each vendor calls it</h2>
           <p style="color:var(--ink-soft);font-size:0.95rem">
             The same idea under different names. Knowing the mapping is most of
             what it takes to read one vendor's documentation while using another's
@@ -153,7 +198,7 @@ const derived = relations.filter((r) => r.derived);
     {
       entry.data.useCase && (
         <>
-          <h2>What it looks like in use</h2>
+          <h2 id="use-case"><Icon name="usecase" /> What it looks like in use</h2>
           <div class="usecase">
             <p class="scenario">{entry.data.useCase.scenario}</p>
             <p class="detail">{entry.data.useCase.detail}</p>
@@ -162,7 +207,7 @@ const derived = relations.filter((r) => r.derived);
       )
     }
 
-    <h2>Relations</h2>
+    <h2 id="relations"><Icon name="relations" /> Relations</h2>
     <ul class="rel-list">
       {authored.map((r) => (
         <li>
@@ -192,7 +237,7 @@ const derived = relations.filter((r) => r.derived);
     {
       entry.data.examples.length > 0 && (
         <>
-          <h2>In the wild</h2>
+          <h2 id="in-the-wild"><Icon name="wild" /> In the wild</h2>
           <div class="table-scroll">
             <table>
               <thead>
@@ -225,7 +270,7 @@ const derived = relations.filter((r) => r.derived);
     {
       entry.data.sources.length > 0 && (
         <>
-          <h2>Sources</h2>
+          <h2 id="sources"><Icon name="sources" /> Sources</h2>
           <ul class="sources">
             {entry.data.sources.map((s) => (
               <li>
@@ -238,5 +283,8 @@ const derived = relations.filter((r) => r.derived);
         </>
       )
     }
+    </div>
+  </div>
+  <PageNav sections={sections} />
   </div>
 </Base>

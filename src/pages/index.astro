@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
 import { loadGraph, tagIndex } from '../lib/graph';
 
 const graph = await loadGraph();
@@ -53,7 +54,7 @@ const zoomBlurb: Record<number, string> = {
 
   <div class="wrap">
     <section style="margin-top:2.6rem">
-      <h2 style="margin-bottom:0.2rem">Products</h2>
+      <h2 style="margin-bottom:0.2rem"><Icon name="product" /> Products</h2>
       <p style="color:var(--ink-soft);margin:0">
         The things you can actually buy or install, decomposed into the
         capabilities they ship. <a href={`${base}/compare`}>See them side by side.</a>
@@ -64,7 +65,7 @@ const zoomBlurb: Record<number, string> = {
             <h3 style="margin-bottom:0.2rem">{group.vendor}</h3>
             <ul class="cards">
               {group.nodes.map((n) => (
-                <li class="card">
+                <li class="card is-product">
                   <a class="title" href={`${base}/nodes/${n.id}/`}>{n.title}</a>
                   <p>{n.summary}</p>
                 </li>
@@ -80,7 +81,7 @@ const zoomBlurb: Record<number, string> = {
         (group) =>
           group.nodes.length > 0 && (
             <section style="margin-top:2.6rem">
-              <h2 style="margin-bottom:0.2rem">Zoom {group.zoom}</h2>
+              <h2 style="margin-bottom:0.2rem"><Icon name="concept" /> Zoom {group.zoom}</h2>
               <p style="color:var(--ink-soft);margin:0">{zoomBlurb[group.zoom]}</p>
               <ul class="cards">
                 {group.nodes.map((n) => (
@@ -99,7 +100,7 @@ const zoomBlurb: Record<number, string> = {
     }
 
     <section style="margin-top:3rem">
-      <h2>By tag</h2>
+      <h2><Icon name="naming" /> By tag</h2>
       <ul class="cards">
         {
           tags.map((t) => (

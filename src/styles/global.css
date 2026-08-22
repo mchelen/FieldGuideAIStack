@@ -206,3 +206,110 @@ pre code { background: none; padding: 0; }
 .usecase .scenario { margin: 0 0 0.5rem; font-weight: 560; }
 .usecase .detail { margin: 0; color: var(--ink-soft); }
 .canonical .ref-label { color: var(--ink-faint); font-size: 0.8rem; }
+
+/* --- Icons -------------------------------------------------------------- */
+svg[aria-hidden] { flex: none; vertical-align: -0.14em; }
+h2 svg, h3 svg { color: var(--ink-faint); margin-right: 0.15em; }
+
+/* --- Kind badge --------------------------------------------------------- */
+.kindline {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin: 0 0 0.7rem;
+  font-size: 0.88rem;
+}
+.kind-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 0.16rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+}
+.kind-badge.is-concept { color: var(--mark); background: var(--mark-soft); }
+.kind-badge.is-product { color: var(--accent); background: var(--accent-soft); }
+.vendor-name { color: var(--ink-soft); }
+
+/* --- Canonical status --------------------------------------------------- */
+.canonical strong { display: flex; align-items: center; gap: 0.35rem; }
+.canonical.is-standard, .canonical.is-de-facto { border-left: 3px solid var(--mark); }
+.canonical.is-standard strong, .canonical.is-de-facto strong { color: var(--mark); }
+.canonical.is-contested, .canonical.is-none { border-left: 3px solid var(--accent); }
+.canonical.is-contested strong, .canonical.is-none strong { color: var(--accent); }
+
+/* --- Node shell: page column plus a sticky section nav ------------------ */
+.node-shell { max-width: 68rem; }
+.node-main { max-width: 46rem; min-width: 0; }
+
+.pagenav {
+  border: 1px solid var(--rule);
+  border-radius: 9px;
+  background: var(--bg-raised);
+  padding: 0.75rem 0.9rem;
+  margin: 0 0 1.6rem;
+}
+.pagenav-title {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0 0 0.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  font-weight: 600;
+}
+.pagenav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.12rem; }
+.pagenav a {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.24rem 0.4rem;
+  margin-inline: -0.4rem;
+  border-radius: 5px;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  line-height: 1.35;
+}
+.pagenav a:hover { background: var(--bg-sunken); color: var(--ink); }
+.pagenav a svg { color: var(--ink-faint); }
+.pagenav a.is-active { color: var(--accent); font-weight: 560; }
+.pagenav a.is-active svg { color: var(--accent); }
+
+@media (min-width: 62rem) {
+  .node-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 46rem) 14rem;
+    gap: 3rem;
+    align-items: start;
+  }
+  .node-main { grid-column: 1; }
+  .pagenav {
+    grid-column: 2;
+    position: sticky;
+    top: 5rem;
+    margin: 0;
+    border: none;
+    background: none;
+    padding: 0;
+    border-left: 1px solid var(--rule);
+    padding-left: 1rem;
+  }
+}
+
+/* Headings get a little more air now that they carry an icon. */
+.prose h2 { display: flex; align-items: center; gap: 0.4rem; scroll-margin-top: 5rem; }
+.prose h3 { scroll-margin-top: 5rem; }
+#diagram { scroll-margin-top: 5rem; }
+
+/* Products read as a distinct class of thing on the index. */
+.card.is-product { border-left: 3px solid var(--accent); }
+h2 svg, h3 svg { flex: none; }
+section h2 { display: flex; align-items: center; gap: 0.4rem; }

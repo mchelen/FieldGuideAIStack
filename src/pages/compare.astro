@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
 import { comparison, loadGraph } from '../lib/graph';
 
 const graph = await loadGraph();
@@ -32,7 +33,7 @@ const vendors = [...new Set(products.map((p) => p.vendor ?? '—'))];
       <table class="matrix">
         <thead>
           <tr>
-            <th scope="col">Capability</th>
+            <th scope="col"><Icon name="concept" size={13} /> Capability</th>
             {
               products.map((p) => (
                 <th scope="col">
@@ -85,7 +86,7 @@ const vendors = [...new Set(products.map((p) => p.vendor ?? '—'))];
     </p>
 
     <div class="narrow" style="margin-top:2.5rem">
-      <h2>How to read this</h2>
+      <h2><Icon name="concept" /> How to read this</h2>
       <p>
         The rows are the interesting part. A capability that every product has is
         table stakes; one that splits the field is where the vendors actually
