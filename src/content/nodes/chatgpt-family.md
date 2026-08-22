@@ -20,10 +20,12 @@ relations:
   - type: kind-of
     target: product-suite
 sources:
-  - url: https://learn.chatgpt.com/docs
+  - id: openai-openai-codex
+    url: https://learn.chatgpt.com/docs
     title: OpenAI Codex and ChatGPT documentation
     verifiedOn: 2026-08-22
-  - url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
+  - id: openai-chatgpt-work
+    url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
     title: ChatGPT Work overview — OpenAI
     verifiedOn: 2026-08-22
 ---

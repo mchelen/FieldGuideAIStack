@@ -29,7 +29,8 @@ examples:
       extensions into Workspace, Maps and YouTube.
     verifiedOn: 2026-08-22
 sources:
-  - url: https://gemini.google/overview/
+  - id: google-gemini-app
+    url: https://gemini.google/overview/
     title: Gemini app overview — Google
     verifiedOn: 2026-08-22
 ---

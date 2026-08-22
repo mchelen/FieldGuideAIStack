@@ -277,15 +277,15 @@ const derived = relations.filter((r) => r.derived);
       entry.data.sources.length > 0 && (
         <>
           <h2 id="sources"><Icon name="sources" /> Sources</h2>
-          <ul class="sources">
+          <ol class="sources">
             {entry.data.sources.map((s) => (
-              <li>
+              <li id={`src-${s.id}`}>
                 <a href={s.url}>{s.title}</a>
                 <span class="when"> — read {fmt(s.verifiedOn)}</span>
                 {s.note && <div class="caveat">{s.note}</div>}
               </li>
             ))}
-          </ul>
+          </ol>
         </>
       )
     }

@@ -44,10 +44,12 @@ examples:
       produces Excel, PowerPoint and formatted documents.
     verifiedOn: 2026-08-22
 sources:
-  - url: https://claude.com/docs/cowork/overview
+  - id: anthropic-cowork-overview
+    url: https://claude.com/docs/cowork/overview
     title: Cowork overview — Anthropic
     verifiedOn: 2026-08-22
-  - url: https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork
+  - id: anthropic-get-started
+    url: https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork
     title: Get started with Claude Cowork — Anthropic Help Center
     verifiedOn: 2026-08-22
 ---
@@ -55,7 +57,7 @@ sources:
 Cowork is the clearest illustration in this guide of why [surface](surface) is
 worth separating from engine. Anthropic's documentation states it plainly:
 Cowork "uses the same agentic architecture that powers [Claude Code](claude-code), accessible
-within Claude Desktop without opening the terminal."
+within Claude Desktop without opening the terminal."[[cite:anthropic-cowork-overview]]
 
 The engine did not change. The audience did.
 
@@ -72,7 +74,7 @@ The engine did not change. The audience did.
 - **[Connectors](connector)**, skills and plugins, from your claude.ai account.
 
 Requires a paid plan and, for local file and computer access, the desktop app on
-macOS or Windows.
+macOS or Windows.[[cite:anthropic-get-started]]
 
 ## The detail most comparisons miss
 
@@ -82,5 +84,5 @@ directory. Same engine, same vendor, different extension scope — so a skill yo
 wrote for the CLI does not simply appear here.
 
 Execution is also not local: code and commands run in an isolated environment on
-Anthropic's servers, with your granted folders as the input. "Works on my files"
+Anthropic's servers, with your granted folders as the input.[[cite:anthropic-get-started]] "Works on my files"
 and "runs code on my machine" are separate claims, and only the first one holds.

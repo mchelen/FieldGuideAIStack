@@ -33,10 +33,12 @@ examples:
       the ChatGPT desktop app, and Codex cloud.
     verifiedOn: 2026-08-22
 sources:
-  - url: https://code.claude.com/docs/en/overview
+  - id: anthropic-claude-code
+    url: https://code.claude.com/docs/en/overview
     title: Claude Code overview — Anthropic
     verifiedOn: 2026-08-22
-  - url: https://learn.chatgpt.com/docs
+  - id: openai-openai-codex
+    url: https://learn.chatgpt.com/docs
     title: OpenAI Codex documentation
     verifiedOn: 2026-08-22
 ---

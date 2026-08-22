@@ -32,7 +32,8 @@ relations:
   - type: distinguished-from
     target: model
 sources:
-  - url: https://opensource.org/ai/open-source-ai-definition
+  - id: osi-the-open
+    url: https://opensource.org/ai/open-source-ai-definition
     title: The Open Source AI Definition – 1.0 — Open Source Initiative
     verifiedOn: 2026-08-22
     note: >-

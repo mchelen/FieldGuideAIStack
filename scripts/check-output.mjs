@@ -52,6 +52,18 @@ for (const id of ids) {
   }
   rewritten += [...html.matchAll(/data-node-link=/g)].length;
 
+  // 2b. Citations resolved. If the citation plugin stops running, raw
+  //     [[cite:id]] markers ship as literal text -- fluent-looking prose with
+  //     brackets in it, which is exactly the kind of break a green build hides.
+  if (html.includes('[[cite:')) {
+    problems.push(`${id}: raw [[cite:…]] marker in output — the citation plugin did not run`);
+  }
+  for (const m of html.matchAll(/data-cite="([a-z0-9-]+)"/g)) {
+    if (!html.includes(`id="src-${m[1]}"`)) {
+      problems.push(`${id}: citation to "${m[1]}" has no matching reference anchor`);
+    }
+  }
+
   // 3. The neighbourhood diagram is generated, not empty.
   if (!html.includes('<svg')) problems.push(`${id}: no neighbourhood diagram`);
   const boxes = [...html.matchAll(/class="box/g)].length;
@@ -61,6 +73,13 @@ if (rewritten === 0) {
   problems.push('no rewritten cross-links anywhere -- the rehype plugin is not running');
 }
 ok(`${rewritten} cross-links rewritten, all diagrams non-empty`);
+
+const cited = (await Promise.all(
+  ids.map(async (id) =>
+    (await readFile(join(DIST, 'nodes', id, 'index.html'), 'utf8')).includes('data-cite='),
+  ),
+)).filter(Boolean).length;
+ok(`${cited} page(s) carry resolved inline citations`);
 
 // 4. The graph explorer still ships its data and its bundle.
 const graph = await readFile(join(DIST, 'graph', 'index.html'), 'utf8');

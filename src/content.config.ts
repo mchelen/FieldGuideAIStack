@@ -7,6 +7,14 @@ import { glob } from 'astro/loaders';
  * not the date the claim was written. See AGENTS.md.
  */
 const source = z.object({
+  /**
+   * Stable handle for citing this source from prose as [[cite:id]]. Stable
+   * rather than positional so reordering the list cannot silently repoint a
+   * citation at a different reference.
+   */
+  id: z
+    .string()
+    .regex(/^[a-z0-9][a-z0-9-]*$/, 'source id must be lowercase kebab-case'),
   url: z.string().url(),
   title: z.string().min(1),
   verifiedOn: z.coerce.date(),

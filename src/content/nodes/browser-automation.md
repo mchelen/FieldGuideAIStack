@@ -15,13 +15,16 @@ relations:
     target: tool-use
     note: Tool use calls a defined function; this drives an interface built for humans.
 sources:
-  - url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
+  - id: openai-chatgpt-work
+    url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
     title: ChatGPT Work overview — OpenAI
     verifiedOn: 2026-08-22
-  - url: https://blog.google/innovation-and-ai/products/gemini-app/gemini-spark-updates-july-2026/
+  - id: google-gemini-spark
+    url: https://blog.google/innovation-and-ai/products/gemini-app/gemini-spark-updates-july-2026/
     title: Gemini Spark, new Chrome browsing integration — Google
     verifiedOn: 2026-08-22
-  - url: https://claude.com/docs/cowork/overview
+  - id: anthropic-cowork-overview
+    url: https://claude.com/docs/cowork/overview
     title: Cowork overview — Anthropic
     verifiedOn: 2026-08-22
 ---

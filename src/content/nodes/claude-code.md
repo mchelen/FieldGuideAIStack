@@ -43,7 +43,8 @@ examples:
       desktop app and web, all connecting to the same underlying engine.
     verifiedOn: 2026-08-22
 sources:
-  - url: https://code.claude.com/docs/en/overview
+  - id: anthropic-claude-code
+    url: https://code.claude.com/docs/en/overview
     title: Claude Code overview — Anthropic
     verifiedOn: 2026-08-22
 ---

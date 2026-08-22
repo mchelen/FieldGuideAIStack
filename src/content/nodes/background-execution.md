@@ -14,13 +14,16 @@ relations:
     target: agent
     note: Autonomy across turns is not the same as surviving without you.
 sources:
-  - url: https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork
+  - id: anthropic-get-started
+    url: https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork
     title: Get started with Claude Cowork — Anthropic Help Center
     verifiedOn: 2026-08-22
-  - url: https://blog.google/innovation-and-ai/products/gemini-app/gemini-spark-updates-july-2026/
+  - id: google-gemini-spark
+    url: https://blog.google/innovation-and-ai/products/gemini-app/gemini-spark-updates-july-2026/
     title: Gemini Spark, new Chrome browsing integration — Google
     verifiedOn: 2026-08-22
-  - url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
+  - id: openai-chatgpt-work
+    url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
     title: ChatGPT Work overview — OpenAI
     verifiedOn: 2026-08-22
 ---

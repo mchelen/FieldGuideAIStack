@@ -17,10 +17,12 @@ relations:
   - type: kind-of
     target: product-suite
 sources:
-  - url: https://gemini.google/overview/
+  - id: google-gemini-app
+    url: https://gemini.google/overview/
     title: Gemini app overview — Google
     verifiedOn: 2026-08-22
-  - url: https://blog.google/innovation-and-ai/products/gemini-app/gemini-spark-updates-july-2026/
+  - id: google-gemini-spark
+    url: https://blog.google/innovation-and-ai/products/gemini-app/gemini-spark-updates-july-2026/
     title: Gemini Spark, new Chrome browsing integration — Google
     verifiedOn: 2026-08-22
 ---

@@ -40,10 +40,12 @@ examples:
       Claude, ChatGPT, Visual Studio Code, and Cursor.
     verifiedOn: 2026-08-22
 sources:
-  - url: https://modelcontextprotocol.io/docs/getting-started/intro
+  - id: mcp-what-is
+    url: https://modelcontextprotocol.io/docs/getting-started/intro
     title: What is the Model Context Protocol (MCP)? — modelcontextprotocol.io
     verifiedOn: 2026-08-22
-  - url: https://modelcontextprotocol.io/docs/learn/architecture
+  - id: mcp-model-context
+    url: https://modelcontextprotocol.io/docs/learn/architecture
     title: Model Context Protocol — Architecture overview
     verifiedOn: 2026-08-22
 ---

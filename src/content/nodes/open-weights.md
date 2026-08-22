@@ -52,14 +52,16 @@ examples:
       Policy by reference.
     verifiedOn: 2026-08-22
 sources:
-  - url: https://developer.meta.com/ai/llama4/license/
+  - id: meta-llama-4
+    url: https://developer.meta.com/ai/llama4/license/
     title: Llama 4 Community License Agreement — Meta
     verifiedOn: 2026-08-22
     note: >-
       Read directly. Reached via redirect from llama.com/llama4/license/;
       returns HTTP 400 to scripted clients, so the link check reports it as
       blocked rather than broken.
-  - url: https://opensource.org/ai/open-source-ai-definition
+  - id: osi-the-open
+    url: https://opensource.org/ai/open-source-ai-definition
     title: The Open Source AI Definition – 1.0 — Open Source Initiative
     verifiedOn: 2026-08-22
     note: >-
