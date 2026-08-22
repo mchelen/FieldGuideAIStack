@@ -50,7 +50,14 @@ are separate questions with separate answers.
 
 Everything that distinguishes [Cowork](claude-cowork) and
 [Claude Code](claude-code) — [local file access](local-file-access),
-[sub-agents](sub-agent), [background execution](background-execution),
+[command execution](command-execution), [sub-agents](sub-agent),
+[background execution](background-execution),
 [approval modes](approval-mode) — is absent here. Claude is a
 [model](model) behind a chat [surface](surface), with the loop closed by you
 rather than by a [harness](harness).
+
+The two that matter most are the first two, and they are separate. Claude can
+write you a script; it cannot save that script to your disk, and it cannot run
+it. Claude Code can do both. That gap — describing work versus doing it — is
+the single largest difference between the two products, and it is worth more
+than any comparison of the models underneath, which are the same models.

@@ -22,6 +22,10 @@ relations:
     note: Cloud browser only — documented as unable to accept credentials, sign in, or complete payments.
     support: partial
   - type: bundles
+    target: command-execution
+    note: Code and shell execution inside an isolated cloud environment, with configurable network access.
+    support: partial
+  - type: bundles
     target: background-execution
   - type: bundles
     target: connector

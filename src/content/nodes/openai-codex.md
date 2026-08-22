@@ -17,6 +17,10 @@ relations:
     note: Through the CLI and IDE extension; Codex cloud runs remotely instead.
     support: partial
   - type: bundles
+    target: command-execution
+    note: Locally through the CLI and IDE extension; remotely in Codex cloud.
+    support: partial
+  - type: bundles
     target: background-execution
     note: Via Codex cloud.
   - type: bundles

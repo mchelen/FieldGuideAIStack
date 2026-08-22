@@ -19,6 +19,10 @@ relations:
     note: Desktop app only, and limited to folders you explicitly grant.
     support: partial
   - type: bundles
+    target: command-execution
+    note: Runs in an isolated environment on Anthropic's servers, not on your machine.
+    support: partial
+  - type: bundles
     target: browser-automation
     note: Via Claude in Chrome, paired with Cowork.
   - type: bundles

@@ -100,6 +100,24 @@ any new development work.
 - So the guard is you honouring it. Treat a code-owned file as needing approval
   because this file says so, not because GitHub will stop you.
 
+## Products and capabilities
+- A product page is only as useful as the capability nodes it can point at. The
+  comparison table is built from `bundles` edges, so a capability no product
+  declares simply does not exist as a row — the table cannot show an absence it
+  was never told about.
+- So when adding or revising a product, read its documentation for **verbs**,
+  not features: runs, reads, writes, schedules, signs in, installs. Check each
+  against the existing capability nodes, and add a node when the product does
+  something none of them covers. Command execution was missed on the first pass
+  exactly this way: it was described in prose on four product pages while being
+  invisible in the comparison.
+- Capabilities are worth splitting when products differ on them independently.
+  Reading files and running commands travel together in marketing and apart in
+  practice, which is why they are two nodes rather than one.
+- Where a capability runs is often the real distinction, and it belongs in the
+  relation's `note`. "Runs commands" is true of four products here and means
+  something different in each.
+
 ## Processing
 - Push significant processing into tools and CI jobs, not tokens. Link checking,
   content validation, and graph integrity are scripts, not agent tasks.

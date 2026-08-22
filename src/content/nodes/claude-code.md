@@ -13,6 +13,9 @@ relations:
   - type: bundles
     target: local-file-access
   - type: bundles
+    target: command-execution
+    note: On your machine, in your working directory.
+  - type: bundles
     target: browser-automation
     note: Through its Chrome integration, for debugging live web applications.
     support: partial
@@ -54,8 +57,13 @@ servers work across all of them."
 ## What it ships
 
 Everything [Cowork](claude-cowork) has, plus the things a codebase demands:
-command execution in your working directory, git operations, CI integration, and
-[MCP](mcp) servers configured per project.
+[command execution](command-execution) in your working directory, git
+operations, CI integration, and [MCP](mcp) servers configured per project.
+
+The execution detail is where it separates from Cowork most sharply. Both can
+run commands; Claude Code runs them on **your machine**, against your
+toolchain and your working tree, while Cowork runs them in an isolated
+environment on Anthropic's servers. Same engine, different blast radius.
 
 The [browser automation](browser-automation) is narrower than Cowork's — a
 Chrome integration aimed at debugging live web applications rather than general
