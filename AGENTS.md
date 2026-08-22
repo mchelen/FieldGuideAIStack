@@ -119,6 +119,20 @@ any new development work.
 - Missing sections are warnings rather than errors, so the backlog stays visible
   in CI without blocking unrelated work. Malformed ones are errors.
 
+## Cross-linking
+- Link the first mention of any term that has its own page, and only the first.
+  An unlinked mention is a dead end for a reader who does not already know the
+  word; linking every occurrence is what makes wiki prose unreadable.
+- If prose leans on a term that has no page and the sentence would be worse
+  without it, that is the signal to write the page. A term worth explaining in
+  passing is usually worth explaining properly.
+- The validator warns about unlinked mentions, but only for terms of two or
+  more words. Single common words — model, agent, surface, Claude — appear as
+  ordinary prose constantly, and flagging them would bury the signal.
+- Vendor-attributed terms are matched case sensitively, because the lowercase
+  form is often an ordinary phrase. Google's "Connected Apps" is a product
+  name; "connected apps" is what you call apps that are connected.
+
 ## Products and capabilities
 - A product page is only as useful as the capability nodes it can point at. The
   comparison table is built from `bundles` edges, so a capability no product

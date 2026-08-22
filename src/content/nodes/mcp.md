@@ -54,7 +54,7 @@ works everywhere instead of once per product.
 
 ## Three participants, and the one everyone mixes up
 
-- **MCP Host** — the AI application (a [harness](harness) like Claude Code, or
+- **MCP Host** — the AI application (a [harness](harness) like [Claude Code](claude-code), or
   an IDE) that coordinates connections.
 - **MCP Client** — a connection manager. The host creates *one client per
   server*.
