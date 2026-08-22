@@ -6,11 +6,24 @@
 # sources and this list does not.
 #
 # `attestedBy` is computed, not asserted: it records which public glossaries
-# were found to carry the term when the inventory was compiled, from
-# developers.google.com/machine-learning/glossary and the Wikipedia Glossary of
-# artificial intelligence, both read 2026-08-22. An empty list means neither
-# lists it, which is common for terms specific to the applied stack and is a
-# signal about how new the vocabulary is rather than a mark against it.
+# were found to carry the term when the inventory was compiled. Eight sources,
+# all read 2026-08-22:
+#
+#   google-ml     developers.google.com/machine-learning/glossary (incl. the
+#                 generative section, which is part of the same publication and
+#                 is therefore not counted separately)
+#   wikipedia     en.wikipedia.org/wiki/Glossary_of_artificial_intelligence
+#                 and Outline_of_artificial_intelligence
+#   claude-code   code.claude.com/docs/en/glossary
+#   anthropic     platform.claude.com/docs/en/about-claude/glossary
+#   hf            huggingface.co/docs/transformers/glossary
+#   mistral       docs.mistral.ai/getting-started/glossary
+#   promptguide   promptingguide.ai/techniques
+#   outline       Wikipedia outline of AI
+#
+# An empty list means no surveyed glossary carries the term, which is common
+# for the applied stack and is a signal about how new the vocabulary is rather
+# than a mark against it.
 #
 # Run `npm run backlog` for coverage.
 
@@ -21,7 +34,7 @@ concepts:
     area: models
     gloss: >-
       The trained artifact itself: architecture plus learned weights, nothing more.
-    attestedBy: []
+    attestedBy: [google-ml]
     status: written
   - term: Harness
     slug: harness
@@ -37,7 +50,7 @@ concepts:
     area: agentic
     gloss: >-
       A model driven in a loop by a harness, with tools, working toward a goal.
-    attestedBy: []
+    attestedBy: [google-ml]
     status: written
   - term: Sub-agent
     slug: sub-agent
@@ -45,7 +58,7 @@ concepts:
     area: agentic
     gloss: >-
       A parent agent spawning child loops and merging their results.
-    attestedBy: []
+    attestedBy: [google-ml]
     status: written
   - term: Approval mode
     slug: approval-mode
@@ -53,7 +66,7 @@ concepts:
     area: agentic
     gloss: >-
       The policy deciding which agent actions need a human say-so.
-    attestedBy: []
+    attestedBy: [google-ml]
     status: written
   - term: Background execution
     slug: background-execution
@@ -125,7 +138,7 @@ concepts:
     area: interfaces
     gloss: >-
       A packaged link between an assistant and an outside service.
-    attestedBy: []
+    attestedBy: [google-ml]
     status: written
   - term: Context window
     slug: context-window
@@ -133,7 +146,7 @@ concepts:
     area: context
     gloss: >-
       The per-call ceiling on how much a model can attend to at once.
-    attestedBy: []
+    attestedBy: [google-ml]
     status: written
   - term: Model provider
     slug: model-provider
@@ -204,7 +217,7 @@ concepts:
     area: models
     gloss: >-
       The attention-based architecture nearly all current language models are built on.
-    attestedBy: [google-ml, wikipedia]
+    attestedBy: [google-ml, hf, wikipedia]
     status: pending
   - term: Attention
     slug: attention
@@ -212,7 +225,7 @@ concepts:
     area: models
     gloss: >-
       The mechanism letting a model weigh every token against every other.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, hf]
     status: pending
   - term: Parameter
     slug: parameter
@@ -234,7 +247,7 @@ concepts:
     area: models
     gloss: >-
       The unit a model reads and writes, and the unit you are billed in.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, hf]
     status: pending
   - term: Embedding
     slug: embedding
@@ -525,7 +538,7 @@ concepts:
     area: agentic
     gloss: >-
       An agent working out the steps before taking them.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, outline]
     status: pending
   - term: ReAct
     slug: react
@@ -533,7 +546,7 @@ concepts:
     area: agentic
     gloss: >-
       The interleaving of reasoning and tool calls in a loop.
-    attestedBy: []
+    attestedBy: [promptguide]
     status: pending
   - term: Reflection
     slug: reflection
@@ -621,7 +634,7 @@ concepts:
     area: agentic
     gloss: >-
       A fixed sequence of steps, as opposed to a model-decided one.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, hf]
     status: pending
   - term: Context engineering
     slug: context-engineering
@@ -652,7 +665,7 @@ concepts:
     area: context
     gloss: >-
       Teaching by examples inside the prompt rather than by training.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, promptguide]
     status: pending
   - term: Retrieval-augmented generation
     slug: retrieval-augmented-generation
@@ -933,5 +946,273 @@ concepts:
     area: orgs
     gloss: >-
       Several products sharing an engine, account and extensions.
+    attestedBy: []
+    status: pending
+  - term: Compaction
+    slug: compaction
+    aka: [context compaction, summarisation]
+    area: context
+    gloss: >-
+      Squeezing earlier turns into a summary so a long run fits the window.
+    attestedBy: []
+    status: pending
+  - term: Prompt engineering
+    slug: prompt-engineering
+    area: context
+    gloss: >-
+      Shaping the prompt to change behaviour, without touching the model.
+    attestedBy: [google-ml]
+    status: pending
+  - term: Chain-of-thought prompting
+    slug: chain-of-thought-prompting
+    aka: [CoT]
+    area: context
+    gloss: >-
+      Asking for intermediate reasoning steps rather than only an answer.
+    attestedBy: [google-ml, promptguide]
+    status: pending
+  - term: Zero-shot prompting
+    slug: zero-shot-prompting
+    area: context
+    gloss: >-
+      Asking with no examples, relying on what training already instilled.
+    attestedBy: [google-ml, promptguide]
+    status: pending
+  - term: Prompt chaining
+    slug: prompt-chaining
+    area: context
+    gloss: >-
+      Feeding one prompt's output into the next as an explicit pipeline.
+    attestedBy: [google-ml, promptguide]
+    status: pending
+  - term: Self-consistency
+    slug: self-consistency
+    area: context
+    gloss: >-
+      Sampling several reasoning paths and taking the majority answer.
+    attestedBy: [promptguide]
+    status: pending
+  - term: Tree of thoughts
+    slug: tree-of-thoughts
+    aka: [ToT]
+    area: context
+    gloss: >-
+      Exploring branching reasoning paths rather than one linear chain.
+    attestedBy: [promptguide]
+    status: pending
+  - term: Meta prompting
+    slug: meta-prompting
+    area: context
+    gloss: >-
+      Using a model to write or improve the prompt given to a model.
+    attestedBy: [promptguide]
+    status: pending
+  - term: Agentic coding
+    slug: agentic-coding
+    area: agentic
+    gloss: >-
+      Using an agent to write, run and fix code rather than to suggest it.
+    attestedBy: []
+    status: pending
+  - term: Agentic loop
+    slug: agentic-loop
+    aka: [reasoning loop]
+    area: agentic
+    gloss: >-
+      The cycle of context, model call, tool execution, repeat.
+    attestedBy: [google-ml]
+    status: pending
+  - term: Verification loop
+    slug: verification-loop
+    area: agentic
+    gloss: >-
+      An agent checking its own work by running it, then fixing what failed.
+    attestedBy: []
+    status: pending
+  - term: Session
+    slug: session
+    area: agentic
+    gloss: >-
+      One continuous run of an agent, and the state scoped to it.
+    attestedBy: []
+    status: pending
+  - term: Turn
+    slug: turn
+    area: agentic
+    gloss: >-
+      One exchange within a session, which is the unit autonomy is measured in.
+    attestedBy: []
+    status: pending
+  - term: Hook
+    slug: hook
+    area: agentic
+    gloss: >-
+      A user-defined command the harness runs before or after its actions.
+    attestedBy: []
+    status: pending
+  - term: Skill
+    slug: skill
+    aka: [reusable instructions]
+    area: agentic
+    gloss: >-
+      Packaged instructions that teach an agent a repeatable workflow.
+    attestedBy: []
+    status: pending
+  - term: Checkpoint and rollback
+    slug: checkpoint-and-rollback
+    aka: [undo]
+    area: agentic
+    gloss: >-
+      Restoring an agent's work to an earlier point after a bad step.
+    attestedBy: []
+    status: pending
+  - term: Effort level
+    slug: effort-level
+    aka: [reasoning effort, extended thinking]
+    area: agentic
+    gloss: >-
+      How much inference compute a request is allowed to spend on reasoning.
+    attestedBy: []
+    status: pending
+  - term: Multi-agent system
+    slug: multi-agent-system
+    aka: [agent teams]
+    area: agentic
+    gloss: >-
+      Several agents coordinating, with the delegation problems that brings.
+    attestedBy: [wikipedia]
+    status: pending
+  - term: Autonomous agent
+    slug: autonomous-agent
+    area: agentic
+    gloss: >-
+      An agent operating without step-by-step human direction.
+    attestedBy: [google-ml]
+    status: pending
+  - term: Project trust
+    slug: project-trust
+    aka: [workspace trust]
+    area: agentic
+    gloss: >-
+      Whether an agent may act on a codebase it has not been vetted against.
+    attestedBy: []
+    status: pending
+  - term: Generative AI
+    slug: generative-ai
+    aka: [GenAI]
+    area: models
+    gloss: >-
+      Models that produce new content rather than only classifying existing content.
+    attestedBy: [google-ml, wikipedia]
+    status: pending
+  - term: Autoregressive model
+    slug: autoregressive-model
+    area: models
+    gloss: >-
+      A model generating one token at a time, each conditioned on the last.
+    attestedBy: []
+    status: pending
+  - term: Pretrained model
+    slug: pretrained-model
+    area: models
+    gloss: >-
+      A model released after pretraining, before task-specific adaptation.
+    attestedBy: [hf]
+    status: pending
+  - term: Transfer learning
+    slug: transfer-learning
+    area: models
+    gloss: >-
+      Reusing what a model learned on one task to do better on another.
+    attestedBy: [google-ml, hf, wikipedia]
+    status: pending
+  - term: Self-supervised learning
+    slug: self-supervised-learning
+    area: models
+    gloss: >-
+      Learning from structure in unlabelled data by predicting held-out parts.
+    attestedBy: [google-ml, hf]
+    status: pending
+  - term: Encoder and decoder
+    slug: encoder-and-decoder
+    aka: [seq2seq]
+    area: models
+    gloss: >-
+      The two halves of the architecture, and which half a model keeps.
+    attestedBy: []
+    status: pending
+  - term: Fill in the middle
+    slug: fill-in-the-middle
+    aka: [FIM]
+    area: models
+    gloss: >-
+      Generating text given both what precedes and what follows it.
+    attestedBy: []
+    status: pending
+  - term: Factuality
+    slug: factuality
+    aka: [groundedness]
+    area: evaluation
+    gloss: >-
+      Whether output is actually true, as distinct from whether it sounds right.
+    attestedBy: [google-ml]
+    status: pending
+  - term: Citation precision and recall
+    slug: citation-precision-and-recall
+    area: evaluation
+    gloss: >-
+      Whether cited sources support the claim, and whether claims are cited.
+    attestedBy: []
+    status: pending
+  - term: Autorater evaluation
+    slug: autorater-evaluation
+    aka: [model-graded]
+    area: evaluation
+    gloss: >-
+      Automated scoring by a model rather than by a human.
+    attestedBy: [google-ml]
+    status: pending
+  - term: AI slop
+    slug: ai-slop
+    area: safety
+    gloss: >-
+      Low-quality generated content produced at volume because it is cheap.
+    attestedBy: [google-ml]
+    status: pending
+  - term: Latency
+    slug: latency
+    area: serving
+    gloss: >-
+      How long a request takes, split into time to first token and throughput.
+    attestedBy: [google-ml]
+    status: pending
+  - term: Token billing
+    slug: token-billing
+    aka: [pay-as-you-go]
+    area: serving
+    gloss: >-
+      Charging by consumption rather than by seat or licence.
+    attestedBy: []
+    status: pending
+  - term: Fill-in-the-middle API
+    slug: fill-in-the-middle-api
+    aka: [FIM API]
+    area: interfaces
+    gloss: >-
+      An endpoint shaped for completion inside existing text, not after it.
+    attestedBy: []
+    status: pending
+  - term: MCP server
+    slug: mcp-server
+    area: interfaces
+    gloss: >-
+      The program that serves tools, resources and prompts to an MCP client.
+    attestedBy: []
+    status: pending
+  - term: MCP client
+    slug: mcp-client
+    area: interfaces
+    gloss: >-
+      The connection a host creates per server it talks to.
     attestedBy: []
     status: pending
