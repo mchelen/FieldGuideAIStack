@@ -9,11 +9,13 @@
     "preview": "astro preview",
     "check": "astro check",
     "validate": "node scripts/validate-graph.mjs",
+    "check:output": "node scripts/check-output.mjs",
     "check:links": "node scripts/check-links.mjs",
     "check:freshness": "node scripts/check-freshness.mjs"
   },
   "dependencies": {
-    "astro": "^5.14.1",
+    "@astrojs/markdown-remark": "^7.2.1",
+    "astro": "^7.1.1",
     "cytoscape": "^3.33.1",
     "unist-util-visit": "^5.1.0"
   },

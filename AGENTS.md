@@ -40,6 +40,22 @@ any new development work.
   - Hold auto-merge when a human has asked to read the pull request first, or
     when it touches a code-owned file. Say so in the description when you do.
 
+## Dependency updates
+- A bot pull request whose checks are green is safe to merge. Confirm the checks
+  actually ran and passed, then merge it.
+- A bot pull request whose checks fail is work to do, not a reason to close it.
+  Find out what broke, fix it, and land the update. Declining a security update
+  because the upgrade needs code changes is not an option.
+- When the fix needs code changes, do the upgrade yourself in one pull request
+  rather than pushing to the bot's branch. Close the bot's pull requests once
+  the version they wanted is on `main`.
+- **Green is only worth what CI covers.** Before trusting a green check on a
+  major bump, ask what the build would still pass while quietly breaking. If
+  nothing asserts it, add the assertion in the same pull request. Astro 5 -> 7
+  is the worked example: `astro build` succeeded with the cross-link rewriting
+  plugin disabled, and every prose link on the site would have shipped broken.
+  `npm run check:output` exists because of it.
+
 ## Repository configuration
 - Repository settings are code. `.github/settings.yml` is the source of truth,
   and the repository-settings app applies it. Change a setting by editing that
