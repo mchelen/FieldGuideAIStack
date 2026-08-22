@@ -73,8 +73,7 @@ as well as limited reasoning ability."[[cite:judge-paper]] Each has a practical
 consequence:
 
 - **Position** — which candidate appears first affects which wins. Swap the
-  order and average, or the score partly measures your [prompt template](prompt-
-  template).
+  order and average, or the score partly measures your [prompt template](prompt-template).
 - **Verbosity** — longer answers score better, whether or not they say more. The
   same bias [RLHF](reinforcement-learning-from-human-feedback) picks up from
   human raters, for the same reason.

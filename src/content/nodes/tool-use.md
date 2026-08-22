@@ -15,7 +15,7 @@ relations:
     note: Tool schemas are a field on the request; tool calls are a response type.
 sources:
   - id: mcp-model-context
-    url: https://modelcontextprotocol.io/docs/learn/architecture
+    url: https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture
     title: Model Context Protocol — Architecture overview
     verifiedOn: 2026-08-22
   - id: anthropic-claude-api

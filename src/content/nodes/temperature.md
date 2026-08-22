@@ -76,8 +76,8 @@ its work.
 ## What the settings actually buy
 
 - **0** — always the top token. Nearly deterministic, and the right default for
-  extraction, classification and structured output. Not more truthful; just more
-  consistent, including consistently wrong.
+  extraction, classification and [structured output](structured-output). Not
+  more truthful; just more consistent, including consistently wrong.
 - **Around 1** — the model's own distribution, unmodified. The usual default for
   conversation.
 - **Above 1** — increasingly untethered. Occasionally useful for idea

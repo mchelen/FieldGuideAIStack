@@ -39,8 +39,7 @@ model calls happen between one human input and the next.
 | One to a handful | Assisted workflow, "copilot" |
 | One to dozens or hundreds | Agent |
 
-The interesting engineering problems — [context management](context-
-engineering), permissioning, error recovery, cost control — all appear as you
+The interesting engineering problems — [context management](context-engineering), permissioning, error recovery, cost control — all appear as you
 move down that table, and they are all [harness](harness) problems.
 
 ## Multi-agent

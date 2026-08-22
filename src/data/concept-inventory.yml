@@ -492,7 +492,7 @@ concepts:
     gloss: >-
       The API shape letting a model request a named function with arguments.
     attestedBy: []
-    status: pending
+    status: written
   - term: Structured output
     slug: structured-output
     aka: [JSON mode, constrained decoding]
@@ -500,7 +500,7 @@ concepts:
     gloss: >-
       Forcing model output to conform to a schema.
     attestedBy: []
-    status: pending
+    status: written
   - term: Agent-to-agent protocol
     slug: agent-to-agent-protocol
     aka: [A2A]
@@ -508,14 +508,14 @@ concepts:
     gloss: >-
       An open protocol for agents to discover and delegate to each other.
     attestedBy: []
-    status: pending
+    status: written
   - term: Agent card
     slug: agent-card
     area: interfaces
     gloss: >-
       A machine-readable declaration of an agent's identity and capabilities.
     attestedBy: []
-    status: pending
+    status: written
   - term: Software development kit
     slug: software-development-kit
     aka: [SDK, client library]
@@ -523,7 +523,7 @@ concepts:
     gloss: >-
       The vendor library wrapping an inference API.
     attestedBy: []
-    status: pending
+    status: written
   - term: Orchestration
     slug: orchestration
     aka: [control flow]
@@ -1201,18 +1201,18 @@ concepts:
     gloss: >-
       An endpoint shaped for completion inside existing text, not after it.
     attestedBy: []
-    status: pending
+    status: written
   - term: MCP server
     slug: mcp-server
     area: interfaces
     gloss: >-
       The program that serves tools, resources and prompts to an MCP client.
     attestedBy: []
-    status: pending
+    status: written
   - term: MCP client
     slug: mcp-client
     area: interfaces
     gloss: >-
       The connection a host creates per server it talks to.
     attestedBy: []
-    status: pending
+    status: written
