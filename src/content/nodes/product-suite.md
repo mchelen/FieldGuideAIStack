@@ -35,10 +35,12 @@ relations:
     target: surface
     note: A surface is one way into a product; a suite is several products around one engine.
 sources:
-  - url: https://claude.com/docs/cowork/overview
+  - id: anthropic-cowork-overview
+    url: https://claude.com/docs/cowork/overview
     title: Cowork overview — Anthropic
     verifiedOn: 2026-08-22
-  - url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
+  - id: openai-chatgpt-work
+    url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
     title: ChatGPT Work overview — OpenAI
     verifiedOn: 2026-08-22
 ---

@@ -23,10 +23,12 @@ examples:
       OpenAI, and xAI, integrated with AWS billing and IAM.
     verifiedOn: 2026-08-22
 sources:
-  - url: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html
+  - id: aws-what-is
+    url: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html
     title: What is Amazon Bedrock? — AWS documentation
     verifiedOn: 2026-08-22
-  - url: https://platform.claude.com/docs/en/api/overview
+  - id: anthropic-claude-api
+    url: https://platform.claude.com/docs/en/api/overview
     title: Claude API overview — Anthropic (cloud platform comparison)
     verifiedOn: 2026-08-22
 ---

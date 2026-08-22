@@ -345,3 +345,19 @@ section h2 { display: flex; align-items: center; gap: 0.4rem; }
 .lp-kind.is-suite { color: var(--mark); background: var(--mark-soft); }
 .lp-summary { margin: 0; font-size: 0.88rem; line-height: 1.45; color: var(--ink-soft); }
 .card.is-suite { border-left: 3px solid var(--mark); }
+
+/* --- Inline citations --------------------------------------------------- */
+sup.cite { line-height: 0; font-size: 0.68em; margin-left: 0.08em; }
+sup.cite a {
+  text-decoration: none;
+  color: var(--accent);
+  padding: 0 0.12em;
+  border-radius: 2px;
+}
+sup.cite a::before { content: '['; }
+sup.cite a::after { content: ']'; }
+sup.cite a:hover { background: var(--accent-soft); }
+
+ol.sources { counter-reset: none; padding-left: 1.4rem; }
+ol.sources li { padding-left: 0.2rem; }
+ol.sources li:target { background: var(--accent-soft); border-radius: 5px; }

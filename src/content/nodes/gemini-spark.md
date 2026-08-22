@@ -35,7 +35,8 @@ examples:
       prompt-injection protections and requires approval for payments.
     verifiedOn: 2026-08-22
 sources:
-  - url: https://blog.google/innovation-and-ai/products/gemini-app/gemini-spark-updates-july-2026/
+  - id: google-gemini-spark
+    url: https://blog.google/innovation-and-ai/products/gemini-app/gemini-spark-updates-july-2026/
     title: Gemini Spark, new Chrome browsing integration — Google
     verifiedOn: 2026-08-22
 ---

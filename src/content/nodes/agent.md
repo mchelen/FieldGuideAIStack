@@ -16,7 +16,8 @@ relations:
   - type: contains
     target: tool-use
 sources:
-  - url: https://code.claude.com/docs/en/overview
+  - id: anthropic-claude-code
+    url: https://code.claude.com/docs/en/overview
     title: Claude Code overview — Anthropic
     verifiedOn: 2026-08-22
 ---

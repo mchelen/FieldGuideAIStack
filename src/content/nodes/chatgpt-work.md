@@ -43,7 +43,8 @@ examples:
       execution, isolation and permission mechanisms with Codex.
     verifiedOn: 2026-08-22
 sources:
-  - url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
+  - id: openai-chatgpt-work
+    url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
     title: ChatGPT Work overview — OpenAI
     verifiedOn: 2026-08-22
 ---

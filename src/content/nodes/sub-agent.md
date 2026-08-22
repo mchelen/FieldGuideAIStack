@@ -14,10 +14,12 @@ relations:
     target: harness
     note: Delegation is a harness architecture, not a model capability.
 sources:
-  - url: https://claude.com/docs/cowork/overview
+  - id: anthropic-cowork-overview
+    url: https://claude.com/docs/cowork/overview
     title: Cowork overview — Anthropic
     verifiedOn: 2026-08-22
-  - url: https://code.claude.com/docs/en/overview
+  - id: anthropic-claude-code
+    url: https://code.claude.com/docs/en/overview
     title: Claude Code overview — Anthropic
     verifiedOn: 2026-08-22
 ---

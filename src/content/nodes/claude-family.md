@@ -19,13 +19,16 @@ relations:
   - type: kind-of
     target: product-suite
 sources:
-  - url: https://claude.com/docs/cowork/overview
+  - id: anthropic-cowork-overview
+    url: https://claude.com/docs/cowork/overview
     title: Cowork overview — Anthropic
     verifiedOn: 2026-08-22
-  - url: https://code.claude.com/docs/en/overview
+  - id: anthropic-claude-code
+    url: https://code.claude.com/docs/en/overview
     title: Claude Code overview — Anthropic
     verifiedOn: 2026-08-22
-  - url: https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork
+  - id: anthropic-get-started
+    url: https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork
     title: Get started with Claude Cowork — Anthropic Help Center
     verifiedOn: 2026-08-22
 ---

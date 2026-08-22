@@ -79,13 +79,16 @@ examples:
       community ones.
     verifiedOn: 2026-08-22
 sources:
-  - url: https://claude.com/docs/connectors/overview
+  - id: anthropic-connectors-overview
+    url: https://claude.com/docs/connectors/overview
     title: Connectors overview — Anthropic
     verifiedOn: 2026-08-22
-  - url: https://support.google.com/gemini/answer/13695044
+  - id: google-use-manage
+    url: https://support.google.com/gemini/answer/13695044
     title: Use & manage Connected Apps in Gemini — Google
     verifiedOn: 2026-08-22
-  - url: https://help.openai.com/en/articles/11487775-connectors-in-chatgpt
+  - id: openai-apps-in
+    url: https://help.openai.com/en/articles/11487775-connectors-in-chatgpt
     title: Apps in ChatGPT — OpenAI Help Center
     verifiedOn: 2026-08-22
     note: >-
@@ -93,13 +96,16 @@ sources:
       including a browser user-agent, so the rename from "connectors" to "apps"
       is taken from the search index summary of this page rather than from the
       page itself. Worth a human confirming.
-  - url: https://modelcontextprotocol.io/docs/learn/architecture
+  - id: mcp-model-context
+    url: https://modelcontextprotocol.io/docs/learn/architecture
     title: Model Context Protocol — Architecture overview
     verifiedOn: 2026-08-22
-  - url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
+  - id: openai-chatgpt-work
+    url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
     title: ChatGPT Work overview — OpenAI
     verifiedOn: 2026-08-22
-  - url: https://gemini.google/overview/
+  - id: google-gemini-app
+    url: https://gemini.google/overview/
     title: Gemini app overview — Google
     verifiedOn: 2026-08-22
 ---
@@ -110,9 +116,9 @@ exist, authenticated, without you writing code.
 
 Cowork's documentation describes connecting Claude to tools and data sources
 "using MCP", alongside skills and plugins, managed from a Customize panel and
-synced from your account at session start. [ChatGPT Work](chatgpt-work) describes connected
-apps under admin-controlled permissions. Gemini describes extensions into
-Workspace, Maps, YouTube and others.
+synced from your account at session start.[[cite:anthropic-connectors-overview]] [ChatGPT Work](chatgpt-work) describes connected
+apps under admin-controlled permissions.[[cite:openai-chatgpt-work]] Gemini describes extensions into
+Workspace, Maps, YouTube and others.[[cite:google-gemini-app]]
 
 The same shape, three vocabularies.
 
@@ -123,7 +129,7 @@ sharper than it looks. Anthropic's documentation notes that Cowork loads the
 connectors, skills and plugins enabled for your claude.ai account and
 deliberately does **not** read the [Claude Code](claude-code) CLI's `~/.claude` directory —
 so a skill that exists only on your machine is invisible to Cowork until you
-add it in Customize.
+add it in Customize.[[cite:anthropic-connectors-overview]]
 
 Two products from one vendor, sharing an engine, with different extension
 scopes. That is exactly the kind of detail a spec sheet flattens and a field

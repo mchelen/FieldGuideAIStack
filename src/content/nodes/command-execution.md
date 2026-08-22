@@ -15,13 +15,16 @@ relations:
     target: local-file-access
     note: Editing a file and running the file are separate powers, granted separately.
 sources:
-  - url: https://code.claude.com/docs/en/overview
+  - id: anthropic-claude-code
+    url: https://code.claude.com/docs/en/overview
     title: Claude Code overview — Anthropic
     verifiedOn: 2026-08-22
-  - url: https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork
+  - id: anthropic-get-started
+    url: https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork
     title: Get started with Claude Cowork — Anthropic Help Center
     verifiedOn: 2026-08-22
-  - url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
+  - id: openai-chatgpt-work
+    url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
     title: ChatGPT Work overview — OpenAI
     verifiedOn: 2026-08-22
 ---

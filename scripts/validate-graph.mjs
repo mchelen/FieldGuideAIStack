@@ -169,6 +169,51 @@ if (missingUseCase.length) {
   warnings.push(`no use case recorded yet (${missingUseCase.length}): ${missingUseCase.join(', ')}`);
 }
 
+// 3c-bis. Inline citations. A citation that points nowhere is worse than no
+//     citation, because it looks like evidence.
+const citedTotals = { pages: 0, cited: 0 };
+for (const n of nodes) {
+  const sources = n.data.sources ?? [];
+  const ids = sources.map((s) => s.id);
+
+  for (const [i, id] of ids.entries()) {
+    if (!id) problems.push(`${n.file}: source ${i + 1} has no id`);
+    else if (ids.indexOf(id) !== i) problems.push(`${n.file}: duplicate source id "${id}"`);
+  }
+
+  const used = new Set(
+    [...n.content.matchAll(/\[\[cite:([a-z0-9][a-z0-9-]*)\]\]/g)].map((m) => m[1]),
+  );
+  for (const id of used) {
+    if (!ids.includes(id)) {
+      problems.push(`${n.file}: cites "${id}", which is not one of its sources`);
+    }
+  }
+
+  // A source can legitimately support a structured field rather than prose --
+  // the canonical block, a vendor naming claim, an example -- and those already
+  // render their own link. Only a source nothing references at all is a
+  // problem, so those URLs count as uses.
+  const referencedUrls = new Set(
+    [
+      n.data.canonical?.url,
+      ...(n.data.aka ?? []).map((a) => (typeof a === 'string' ? null : a.url)),
+      ...(n.data.examples ?? []).map((e) => e.url),
+    ].filter(Boolean),
+  );
+
+  // Only pages that have adopted citations are held to referencing everything.
+  // Otherwise every un-migrated page would warn, and the list would be ignored.
+  if (used.size > 0) {
+    citedTotals.pages += 1;
+    for (const s of sources) {
+      if (used.has(s.id) || referencedUrls.has(s.url)) continue;
+      warnings.push(`${n.file}: source "${s.id}" is referenced nowhere — cite it or drop it`);
+    }
+  }
+  if (sources.length) citedTotals.cited += used.size > 0 ? 1 : 0;
+}
+
 // 3d. Wiki-style cross-linking. A term that has its own page should be linked
 //     the first time another page uses it -- an unlinked mention is a dead end
 //     for a reader who does not already know the word.

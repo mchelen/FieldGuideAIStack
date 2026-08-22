@@ -39,7 +39,8 @@ relations:
     target: context-window
     note: The window is a per-call ceiling; memory is what survives between calls.
 sources:
-  - url: https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/
+  - id: owasp-agentic-ai
+    url: https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/
     title: Agentic AI — Threats and Mitigations v1.1 — OWASP GenAI Security Project
     verifiedOn: 2026-08-22
     note: >-
@@ -47,7 +48,8 @@ sources:
       one of three core agentic capabilities, alongside Planning & Reasoning and
       Action and Tool Use, and distinguishes session-based short-term from
       persistent long-term memory.
-  - url: https://code.claude.com/docs/en/overview
+  - id: anthropic-claude-code
+    url: https://code.claude.com/docs/en/overview
     title: Claude Code overview — Anthropic
     verifiedOn: 2026-08-22
 ---
@@ -60,7 +62,7 @@ decided to write something down and put it back in later.
 OWASP's agentic taxonomy names this as one of three core capabilities, and
 splits it the way the implementations do: **session-based short-term** memory,
 holding the reasoning and tool results of the current run, and **persistent
-long-term** memory that survives across runs.
+long-term** memory that survives across runs.[[cite:owasp-agentic-ai]]
 
 ## Why it is not the [context window](context-window)
 
@@ -78,13 +80,13 @@ recalling — and both decisions are made by software, not by the model.
 - **Where it lives.** A file in your repository, a vendor-side profile, or a
   vector store. Anthropic's [Claude Code](claude-code) documents `CLAUDE.md` files read at the
   start of every session, plus auto memory that saves learnings across sessions
-  without being asked.
+  without being asked.[[cite:anthropic-claude-code]]
 - **Who can see it.** Personal, project, or organisation scope — which turns
   memory into an access-control question the moment more than one person is
   involved.
 - **How it goes wrong.** OWASP lists memory and context poisoning among its top
   agentic risks, because state an attacker can write is state the agent will
-  later trust.
+  later trust.[[cite:owasp-agentic-ai]]
 
 ## The failure nobody designs for
 

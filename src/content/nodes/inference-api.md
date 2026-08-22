@@ -21,7 +21,8 @@ examples:
       header. Request size limit 32 MB.
     verifiedOn: 2026-08-22
 sources:
-  - url: https://platform.claude.com/docs/en/api/overview
+  - id: anthropic-claude-api
+    url: https://platform.claude.com/docs/en/api/overview
     title: Claude API overview — Anthropic
     verifiedOn: 2026-08-22
 ---

@@ -17,7 +17,8 @@ relations:
     target: model-provider
     note: Claude is a model. Anthropic is the provider that trained it.
 sources:
-  - url: https://platform.claude.com/docs/en/api/overview
+  - id: anthropic-claude-api
+    url: https://platform.claude.com/docs/en/api/overview
     title: Claude API overview — Anthropic
     verifiedOn: 2026-08-22
 ---
