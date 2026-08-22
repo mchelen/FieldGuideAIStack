@@ -9,6 +9,8 @@ export interface Edge {
   type: RelationType;
   label: string;
   note?: string;
+  /** 'partial' means the claim holds only under a stated limit; see `note`. */
+  support: 'full' | 'partial';
   /** True when this edge was derived from the inverse declared on the other node. */
   derived: boolean;
 }
@@ -19,6 +21,8 @@ export interface GraphNode {
   summary: string;
   tags: string[];
   zoom: 1 | 2 | 3;
+  kind: 'concept' | 'product';
+  vendor?: string;
   degree: number;
 }
 
@@ -55,6 +59,7 @@ export async function loadGraph(): Promise<Graph> {
         type: rel.type,
         label: RELATION_TYPES[rel.type].label,
         note: rel.note,
+        support: rel.support,
         derived: false,
       };
       edges.set(edgeKey(forward), forward);
@@ -66,6 +71,7 @@ export async function loadGraph(): Promise<Graph> {
         type: inverseType,
         label: RELATION_TYPES[inverseType].label,
         note: rel.note,
+        support: rel.support,
         derived: true,
       };
       // An authored edge always wins over a derived one with the same key.
@@ -88,6 +94,8 @@ export async function loadGraph(): Promise<Graph> {
     summary: e.data.summary,
     tags: e.data.tags,
     zoom: e.data.zoom,
+    kind: e.data.kind,
+    vendor: e.data.vendor,
     degree: degree.get(e.id) ?? 0,
   }));
 
@@ -97,6 +105,35 @@ export async function loadGraph(): Promise<Graph> {
     byId,
     neighborsOf: (id) => allEdges.filter((e) => e.from === id),
   };
+}
+
+/**
+ * The comparison matrix: every product, and which capabilities each bundles.
+ *
+ * Columns are derived from what the products actually declare rather than from
+ * a hand-kept list, so adding a `bundles` edge to any product widens the table
+ * automatically and a capability nobody ships simply never appears.
+ */
+export function comparison(graph: Graph) {
+  const products = graph.nodes
+    .filter((n) => n.kind === 'product')
+    .sort(
+      (a, b) =>
+        (a.vendor ?? '').localeCompare(b.vendor ?? '') || a.title.localeCompare(b.title),
+    );
+
+  const bundles = graph.edges.filter((e) => e.type === 'bundles' && !e.derived);
+
+  const capabilityIds = [...new Set(bundles.map((e) => e.to))];
+  const capabilities = capabilityIds
+    .map((id) => graph.nodes.find((n) => n.id === id)!)
+    .filter(Boolean)
+    .sort((a, b) => a.title.localeCompare(b.title));
+
+  const cell = (productId: string, capId: string) =>
+    bundles.find((e) => e.from === productId && e.to === capId);
+
+  return { products, capabilities, cell };
 }
 
 /** Distinct tags across the graph, most used first. */

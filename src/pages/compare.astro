@@ -1,0 +1,122 @@
+---
+import Base from '../layouts/Base.astro';
+import { comparison, loadGraph } from '../lib/graph';
+
+const graph = await loadGraph();
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const { products, capabilities, cell } = comparison(graph);
+
+const vendors = [...new Set(products.map((p) => p.vendor ?? '—'))];
+---
+
+<Base
+  title="Compare the products — Field Guide to the AI Stack"
+  description="Which capabilities each AI product actually bundles, with a dated source behind every claim."
+>
+  <div class="wrap" style="padding-block:2.5rem 0">
+    <div class="narrow">
+      <h1>What is actually in the box</h1>
+      <p class="lede">
+        Products are marketed by name and compared by benchmark. Neither tells
+        you what they ship. This table decomposes each one into the capabilities
+        it bundles, so the differences between vendors become differences you
+        can point at.
+      </p>
+      <p class="lede" style="font-size:1rem">
+        {products.length} products from {vendors.length} vendors · {capabilities.length} capabilities ·
+        every claim carries a source and the date it was read
+      </p>
+    </div>
+
+    <div class="table-scroll">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th scope="col">Capability</th>
+            {
+              products.map((p) => (
+                <th scope="col">
+                  <a href={`${base}/nodes/${p.id}/`}>{p.title}</a>
+                  <span class="vendor">{p.vendor}</span>
+                </th>
+              ))
+            }
+          </tr>
+        </thead>
+        <tbody>
+          {
+            capabilities.map((cap) => (
+              <tr>
+                <th scope="row">
+                  <a href={`${base}/nodes/${cap.id}/`}>{cap.title}</a>
+                </th>
+                {products.map((p) => {
+                  const edge = cell(p.id, cap.id);
+                  if (!edge) {
+                    return (
+                      <td class="no" title="Not documented">
+                        <span aria-label="no">–</span>
+                      </td>
+                    );
+                  }
+                  const partial = edge.support === 'partial';
+                  return (
+                    <td class={partial ? 'partial' : 'yes'} title={edge.note ?? 'Documented'}>
+                      <span aria-label={partial ? 'partial' : 'yes'}>
+                        {partial ? '◐' : '●'}
+                      </span>
+                      {edge.note && <span class="cell-note">{edge.note}</span>}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <p class="legend">
+      <span class="yes">●</span> documented ·
+      <span class="partial">◐</span> documented with a stated limit, shown under the mark ·
+      <span class="no">–</span> not documented. Absence of a mark means the
+      vendor's documentation does not claim it, which is not the same as the
+      product being unable to do it.
+    </p>
+
+    <div class="narrow" style="margin-top:2.5rem">
+      <h2>How to read this</h2>
+      <p>
+        The rows are the interesting part. A capability that every product has is
+        table stakes; one that splits the field is where the vendors actually
+        disagree about what an agent should be allowed to do.
+      </p>
+      <p>
+        <a href={`${base}/nodes/browser-automation/`}>Browser automation</a> is
+        the clearest example. Three products have it and mean different things by
+        it, which is visible here as three cells that all say yes.
+      </p>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .matrix { border-collapse: collapse; width: 100%; min-width: 46rem; }
+  .matrix th,
+  .matrix td { border: 1px solid var(--rule); padding: 0.6rem 0.7rem; vertical-align: top; }
+  .matrix thead th { background: var(--bg-sunken); text-align: left; font-size: 0.85rem; text-transform: none; letter-spacing: 0; }
+  .matrix thead th a { color: var(--ink); text-decoration: none; font-weight: 640; display: block; }
+  .matrix thead th a:hover { color: var(--accent); }
+  .matrix .vendor { display: block; font-size: 0.72rem; color: var(--ink-faint); font-weight: 400; margin-top: 0.1rem; }
+  .matrix tbody th { text-align: left; font-weight: 500; font-size: 0.92rem; text-transform: none; letter-spacing: 0; color: var(--ink); }
+  .matrix tbody th a { color: var(--ink); text-decoration: none; }
+  .matrix tbody th a:hover { color: var(--accent); text-decoration: underline; }
+  .matrix td { text-align: center; width: 11rem; }
+  .matrix td span[aria-label] { font-size: 1.05rem; line-height: 1.2; display: block; }
+  .yes { color: var(--mark); }
+  .partial { color: var(--accent); }
+  .no { color: var(--ink-faint); }
+  .cell-note { display: block; font-size: 0.74rem; line-height: 1.35; color: var(--ink-soft); margin-top: 0.3rem; text-align: left; }
+  .legend { font-size: 0.85rem; color: var(--ink-soft); margin-top: 1rem; }
+  .legend span { font-weight: 700; }
+</style>
