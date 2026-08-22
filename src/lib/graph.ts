@@ -21,7 +21,7 @@ export interface GraphNode {
   summary: string;
   tags: string[];
   zoom: 1 | 2 | 3;
-  kind: 'concept' | 'product';
+  kind: 'concept' | 'product' | 'suite';
   vendor?: string;
   degree: number;
 }
