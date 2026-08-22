@@ -44,8 +44,10 @@ and the permission prompt.
 ## What varies between models
 
 - **Parameter count and architecture** — capacity and shape.
-- **[Context window](context-window)** — how much input it can attend to at once.
-- **Training cutoff** — the date after which it knows nothing first-hand.
+- **[Context window](context-window)** — how much input it can attend to at
+  once.
+- **[Training cutoff](knowledge-cutoff)** — the date after which it knows
+  nothing first-hand.
 - **Modality** — text, images, audio in and out.
 - **Release terms** — whether you can download the weights at all, and under
   what license. See [open weights](open-weights).

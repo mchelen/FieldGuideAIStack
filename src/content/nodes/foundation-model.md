@@ -89,10 +89,10 @@ tasks … We call these models foundation models to underscore their critically
 central yet incomplete character."[[cite:crfm-report]] The word was chosen to
 carry both halves — central, and incomplete.
 
-Google's glossary gives the working definition: "a very large pre-trained model
-trained on an enormous and diverse training set", able to "respond well to a
-wide range of requests" and to "serve as a base model for additional fine-tuning
-or other customization."[[cite:google-glossary]]
+Google's glossary gives the working definition: "a very large [pre-trained
+model](pretrained-model) trained on an enormous and diverse training set", able
+to "respond well to a wide range of requests" and to "serve as a base model for
+additional fine-tuning or other customization."[[cite:google-glossary]]
 
 ## Why the category needed a name
 

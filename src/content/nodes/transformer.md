@@ -98,11 +98,9 @@ sizes of the following decade followed.
 ## Encoders, decoders, or both
 
 Google's glossary describes a transformer as possibly including "an encoder, a
-decoder, [or] both an encoder and decoder."[[cite:google-glossary]] The original
-paper used both, for translation. The [generative models](generative-ai) this
-guide is mostly
-about are decoder-only: they consume a sequence and extend it, one
-[token](token) at a time.
+decoder, [or] both an [encoder and decoder](encoder-and-decoder)."[[cite:google-glossary]] The original paper used both, for translation. The [generative
+models](generative-ai) this guide is mostly about are decoder-only: they consume
+a sequence and extend it, one [token](token) at a time.
 
 ## What it costs
 

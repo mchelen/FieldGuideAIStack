@@ -84,8 +84,8 @@ customer, per task or per experiment means one full copy of the weights each.
 
 ## How LoRA does it
 
-It "freezes the pre-trained model weights and injects trainable rank
-decomposition matrices into each layer of the
+It "freezes the [pre-trained model](pretrained-model) weights and injects
+trainable rank decomposition matrices into each layer of the
 [Transformer](transformer) architecture."[[cite:lora-paper]] The original
 [parameters](parameter) never move. The adaptation lives in small added
 matrices, trained alongside them.

@@ -100,8 +100,8 @@ underrepresented."[[cite:helm-paper]]
 
 ## How to read a benchmark number
 
-- **Against the training cutoff.** A benchmark older than the model is a
-  benchmark the model may have seen.
+- **Against the [training cutoff](knowledge-cutoff).** A benchmark older than
+  the model is a benchmark the model may have seen.
 - **With the distribution in mind.** Coding benchmarks predict coding; they do
   not predict summarising your documents.
 - **Disaggregated if possible.** The average is the least informative statistic

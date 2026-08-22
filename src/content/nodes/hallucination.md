@@ -106,8 +106,8 @@ might.
 - **APIs and library functions** — plausible names for functions that do not
   exist.
 - **Numbers about the real world** — dates, prices, populations, versions.
-- **Anything after the training cutoff** — the model has no representation of
-  its own ignorance to consult.
+- **Anything after the [training cutoff](knowledge-cutoff)** — the model has no
+  representation of its own ignorance to consult.
 
 ## What actually reduces it
 

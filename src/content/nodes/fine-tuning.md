@@ -55,11 +55,10 @@ sources:
     title: Training language models to follow instructions with human feedback — Ouyang et al.
     verifiedOn: 2026-08-22
 ---
-
-Fine-tuning is "a second, task-specific training pass performed on a pre-trained
-model to refine its parameters for a specific use case," and it "typically
-involves hundreds or thousands of examples focused on the specific
-task."[[cite:google-glossary]]
+Fine-tuning is "a second, task-specific training pass performed on a [pre-
+trained model](pretrained-model) to refine its parameters for a specific use
+case," and it "typically involves hundreds or thousands of examples focused on
+the specific task."[[cite:google-glossary]]
 
 The ratio is the point. [Pretraining](pretraining) needs trillions of
 [tokens](token); fine-tuning needs a spreadsheet. Everything general was already
