@@ -1,10 +1,12 @@
 # Repository settings as code, applied by the repository-settings app
-# (https://github.com/repository-settings/app) on every push to `main`.
+# (https://github.com/repository-settings/app).
+#
+# The app syncs when a push to `main` adds or modifies THIS FILE — not on any
+# other push, and not on install. A settings change therefore applies when its
+# own pull request merges; merging anything else will not apply it for you.
 #
 # This file is the source of truth. A setting changed in the GitHub UI holds
 # only until the next sync, then reverts. Change it here instead.
-#
-# The app must be installed on this repository for any of this to take effect.
 
 repository:
   name: FieldGuideAIStack
