@@ -45,7 +45,7 @@ relations:
 examples:
   - name: Prompt engineering guide
     vendor: Anthropic
-    url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/system-prompts
+    url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
     note: Vendor guidance on clarity, examples, XML structuring and agentic prompts.
     verifiedOn: 2026-08-22
   - name: Prompt Engineering Guide
@@ -58,8 +58,8 @@ sources:
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
   - id: anthropic-prompting
-    url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/system-prompts
-    title: Prompt engineering — Claude Platform documentation
+    url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    title: Prompting best practices — Claude Platform documentation
     verifiedOn: 2026-08-22
   - id: promptguide-chaining
     url: https://www.promptingguide.ai/techniques/prompt_chaining

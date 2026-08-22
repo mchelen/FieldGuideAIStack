@@ -78,9 +78,10 @@ recalling — and both decisions are made by software, not by the model.
 ## What varies between products
 
 - **Where it lives.** A file in your repository, a vendor-side profile, or a
-  vector store. Anthropic's [Claude Code](claude-code) documents `CLAUDE.md` files read at the
-  start of every session, plus auto memory that saves learnings across sessions
-  without being asked.[[cite:anthropic-claude-code]]
+  [vector store](vector-database). Anthropic's [Claude Code](claude-code)
+  documents `CLAUDE.md` files read at the start of every session, plus auto
+  memory that saves learnings across sessions without being
+  asked.[[cite:anthropic-claude-code]]
 - **Who can see it.** Personal, project, or organisation scope — which turns
   memory into an access-control question the moment more than one person is
   involved.
