@@ -150,6 +150,15 @@ any new development work.
   something none of them covers. Command execution was missed on the first pass
   exactly this way: it was described in prose on four product pages while being
   invisible in the comparison.
+- `npm run check:gaps` does the checking that used to depend on someone
+  noticing. It reads the capability concepts as its lexicon, so it widens as
+  the guide does, and flags any product page whose prose describes a capability
+  it declares no `bundles` edge to. Removing the command execution edge from
+  Claude Code reproduces the original miss and the check catches it.
+- It suppresses sentences containing a negation, because a page saying a
+  product *cannot* do something is evidence the empty cell is deliberate.
+  Without that suppression the Claude page alone raises three false positives,
+  since its prose lists precisely what Claude lacks.
 - Capabilities are worth splitting when products differ on them independently.
   Reading files and running commands travel together in marketing and apart in
   practice, which is why they are two nodes rather than one.
