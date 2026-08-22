@@ -46,7 +46,7 @@ history, which is why:
 
 - long conversations cost more per turn than short ones,
 - the [context window](context-window) is a hard ceiling on conversation length,
-- prompt caching exists as a distinct billed feature,
+- [prompt caching](prompt-caching) exists as a distinct billed feature,
 - "memory" is always a [harness](harness) feature, never a model one.
 
 ## Beyond raw inference
