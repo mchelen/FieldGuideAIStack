@@ -79,10 +79,11 @@ This is the constraint everything else follows from. Caching resumes from a
 point; it cannot skip a changed region and pick up after it, because the state
 at every position depends on everything before it.
 
-So prompt layout becomes a cost decision. Stable content — system prompt, tool
-schemas, the document under discussion — goes at the top. Anything that varies
-goes at the bottom. A timestamp or a session id near the front of a long prompt
-invalidates the entire cache on every call, and does so silently.
+So prompt layout becomes a cost decision. Stable content — [system
+prompt](system-prompt), tool schemas, the document under discussion — goes at
+the top. Anything that varies goes at the bottom. A timestamp or a session id
+near the front of a long prompt invalidates the entire cache on every call, and
+does so silently.
 
 ## What it costs and saves
 

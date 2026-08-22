@@ -76,12 +76,12 @@ for years. This is a second one.
 
 ## The prompting result that became a training target
 
-Chain-of-thought prompting showed that "generating a chain of thought — a series
-of intermediate reasoning steps — significantly improves the ability of large
-language models to perform complex reasoning", elicited by putting a few worked
-examples in the prompt.[[cite:cot-paper]] Google's glossary describes the same
-technique as encouraging a model "to explain its reasoning, step by
-step."[[cite:google-glossary]]
+[Chain-of-thought prompting](chain-of-thought-prompting) showed that "generating
+a chain of thought — a series of intermediate reasoning steps — significantly
+improves the ability of large language models to perform complex reasoning",
+elicited by putting a few worked examples in the prompt.[[cite:cot-paper]]
+Google's glossary describes the same technique as encouraging a model "to
+explain its reasoning, step by step."[[cite:google-glossary]]
 
 A reasoning model is what happens when that behaviour is trained in rather than
 requested. The scratch space is not an instruction you supply; it is what the

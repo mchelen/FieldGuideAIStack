@@ -31,7 +31,7 @@ of figure that is accurate on the date it was read and worth nothing undated.
 
 ## What the window is spent on
 
-1. System prompt and tool schemas — paid on every single call.
+1. [System prompt](system-prompt) and tool schemas — paid on every single call.
 2. Conversation history — grows monotonically without intervention.
 3. Tool results — usually the largest and least predictable consumer.
 4. The model's own output — reserved from the same budget.
