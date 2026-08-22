@@ -59,7 +59,8 @@ sources:
 ---
 
 Instruction tuning is "a form of [fine-tuning](fine-tuning) that improves a
-generative AI model's ability to follow instructions," by "training a model on a
+[generative AI](generative-ai) model's ability to follow instructions," by
+"training a model on a
 series of instruction prompts, typically covering a wide variety of
 tasks."[[cite:google-glossary]]
 

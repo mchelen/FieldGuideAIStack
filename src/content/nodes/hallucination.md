@@ -76,7 +76,8 @@ sources:
 ---
 
 Hallucination is "the production of plausible-seeming but factually incorrect
-output by a generative AI model that purports to be making an assertion about
+output by a [generative AI](generative-ai) model that purports to be making an
+assertion about
 the real world."[[cite:google-glossary]] The load-bearing word is
 *plausible-seeming*: the failure is invisible from inside the output.
 

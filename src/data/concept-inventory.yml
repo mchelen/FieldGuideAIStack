@@ -203,7 +203,7 @@ concepts:
     gloss: >-
       A model small enough to run cheaply or locally, often under ten billion parameters.
     attestedBy: []
-    status: pending
+    status: written
   - term: Mixture of experts
     slug: mixture-of-experts
     aka: [MoE]
@@ -211,7 +211,7 @@ concepts:
     gloss: >-
       An architecture routing each token to a subset of specialised sub-networks.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Transformer
     slug: transformer
     area: models
@@ -256,7 +256,7 @@ concepts:
     gloss: >-
       A numeric vector standing in for meaning, so similarity becomes arithmetic.
     attestedBy: []
-    status: pending
+    status: written
   - term: Pretraining
     slug: pretraining
     area: models
@@ -323,7 +323,7 @@ concepts:
     gloss: >-
       A structured disclosure document describing a model's design, data and limits.
     attestedBy: []
-    status: pending
+    status: written
   - term: Instruction tuning
     slug: instruction-tuning
     aka: [instruct model]
@@ -338,7 +338,7 @@ concepts:
     gloss: >-
       A model taking or producing more than one modality.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Reasoning model
     slug: reasoning-model
     aka: [thinking model]
@@ -346,7 +346,7 @@ concepts:
     gloss: >-
       A model trained to spend inference compute on intermediate reasoning.
     attestedBy: [wikipedia]
-    status: pending
+    status: written
   - term: Test-time compute
     slug: test-time-compute
     aka: [inference-time scaling]
@@ -354,7 +354,7 @@ concepts:
     gloss: >-
       Spending more compute per request to get better answers.
     attestedBy: []
-    status: pending
+    status: written
   - term: Knowledge cutoff
     slug: knowledge-cutoff
     aka: [training cutoff]
@@ -384,7 +384,7 @@ concepts:
     gloss: >-
       The empirical relationships between compute, data, size and loss.
     attestedBy: []
-    status: pending
+    status: written
   - term: Synthetic data
     slug: synthetic-data
     area: models
@@ -1104,7 +1104,7 @@ concepts:
     gloss: >-
       Models that produce new content rather than only classifying existing content.
     attestedBy: [google-ml, wikipedia]
-    status: pending
+    status: written
   - term: Autoregressive model
     slug: autoregressive-model
     area: models
