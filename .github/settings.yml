@@ -1,0 +1,73 @@
+# Repository settings as code, applied by the repository-settings app
+# (https://github.com/repository-settings/app) on every push to `main`.
+#
+# This file is the source of truth. A setting changed in the GitHub UI holds
+# only until the next sync, then reverts. Change it here instead.
+#
+# The app must be installed on this repository for any of this to take effect.
+
+repository:
+  name: FieldGuideAIStack
+  description: >-
+    A field guide for the modern AI stack: one page per concept, a diagram of
+    what it touches, and a dated source for every claim.
+  homepage: https://mchelen.github.io/FieldGuideAIStack/
+  topics: ai, field-guide, knowledge-graph, astro, documentation
+  private: false
+
+  # The weekly source check opens issues. Disabling these would break it.
+  has_issues: true
+  has_projects: false
+  has_wiki: false
+  has_downloads: false
+
+  default_branch: main
+
+  # One squashed commit per pull request keeps main readable and satisfies the
+  # linear-history requirement below.
+  allow_squash_merge: true
+  allow_merge_commit: false
+  allow_rebase_merge: false
+
+  # Both required by the auto-merge rule in AGENTS.md.
+  allow_auto_merge: true
+  delete_branch_on_merge: true
+
+  enable_automated_security_fixes: true
+  enable_vulnerability_alerts: true
+
+labels:
+  - name: sources
+    color: '#7a4a1e'
+    description: A cited URL needs re-reading. Opened by the weekly source check.
+  - name: content
+    color: '#2f5d3f'
+    description: A concept node, its prose, or its citations.
+  - name: tooling
+    color: '#4a5568'
+    description: Build, validation scripts, CI, or deploy.
+
+branches:
+  - name: main
+    protection:
+      # Zero approvals by default, so ordinary content and code pull requests
+      # auto-merge on green. require_code_owner_reviews still gates the files
+      # listed in .github/CODEOWNERS, which is the split we actually want.
+      required_pull_request_reviews:
+        required_approving_review_count: 0
+        require_code_owner_reviews: true
+        dismiss_stale_reviews: true
+      # This is what auto-merge waits on. With no required check, GitHub treats
+      # every passing pull request as already mergeable and refuses to arm
+      # auto-merge at all.
+      required_status_checks:
+        strict: false
+        contexts:
+          - build
+      # False on purpose. A solo owner cannot approve their own pull request, so
+      # enforcing protection on admins would deadlock every code-owned change.
+      enforce_admins: false
+      required_linear_history: true
+      # User and team restrictions are organization-only; this is a personal
+      # repository.
+      restrictions: null

@@ -1,0 +1,11 @@
+# Files that can change what the automation is allowed to do. A pull request
+# touching any of these needs the code owner's approval before it merges, even
+# when every check is green. See AGENTS.md.
+#
+# Everything not listed here is deliberately unowned, so ordinary content and
+# code pull requests still auto-merge on green without waiting on a human.
+
+/.github/settings.yml    @mchelen
+/.github/CODEOWNERS      @mchelen
+/.github/workflows/      @mchelen
+/CHARTER.md              @mchelen
