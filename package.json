@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "validate": "node scripts/validate-graph.mjs",
+    "check:gaps": "node scripts/capability-gaps.mjs",
     "check:output": "node scripts/check-output.mjs",
     "backlog": "node scripts/backlog.mjs",
     "check:links": "node scripts/check-links.mjs",

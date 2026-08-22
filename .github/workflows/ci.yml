@@ -23,6 +23,17 @@ jobs:
       - name: Validate graph
         run: npm run validate
 
+      # Capabilities a product page describes but never declares. Command
+      # execution and memory both went missing this way, found by a person
+      # noticing rather than by anything checking.
+      - name: Check capability coverage
+        run: npm run check:gaps
+
+      # Coverage against the concept inventory. Informational, but it belongs in
+      # the log so the number is visible rather than only on request.
+      - name: Concept coverage
+        run: npm run backlog
+
       # The content schema is enforced by the build itself -- a bad frontmatter
       # field or a relation pointing at a node that does not exist fails here.
       - name: Type check
