@@ -406,7 +406,7 @@ concepts:
     gloss: >-
       Processing many requests together, cheaper and slower than interactive.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Streaming
     slug: streaming
     aka: [server-sent events]
@@ -414,7 +414,7 @@ concepts:
     gloss: >-
       Returning tokens as they are produced rather than at the end.
     attestedBy: []
-    status: pending
+    status: written
   - term: Time to first token
     slug: time-to-first-token
     aka: [TTFT]
@@ -422,7 +422,7 @@ concepts:
     gloss: >-
       How long before output starts, which dominates perceived speed.
     attestedBy: []
-    status: pending
+    status: written
   - term: Throughput
     slug: throughput
     aka: [tokens per second]
@@ -430,21 +430,21 @@ concepts:
     gloss: >-
       How fast tokens come out once they start.
     attestedBy: []
-    status: pending
+    status: written
   - term: KV cache
     slug: kv-cache
     area: serving
     gloss: >-
       Cached attention state that makes generating each next token cheap.
     attestedBy: []
-    status: pending
+    status: written
   - term: Prompt caching
     slug: prompt-caching
     area: serving
     gloss: >-
       Billing and latency relief for prompt prefixes sent repeatedly.
     attestedBy: []
-    status: pending
+    status: written
   - term: Accelerator
     slug: accelerator
     aka: [GPU, TPU]
@@ -452,7 +452,7 @@ concepts:
     gloss: >-
       The specialised hardware inference and training actually run on.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Rate limit
     slug: rate-limit
     aka: [quota]
@@ -460,7 +460,7 @@ concepts:
     gloss: >-
       The cap on how much you may call an API in a window.
     attestedBy: []
-    status: pending
+    status: written
   - term: Self-hosting
     slug: self-hosting
     aka: [on-premises inference]
@@ -1185,7 +1185,7 @@ concepts:
     gloss: >-
       How long a request takes, split into time to first token and throughput.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Token billing
     slug: token-billing
     aka: [pay-as-you-go]
