@@ -17,9 +17,14 @@ const BARE_LINK = /\]\(([a-z0-9][a-z0-9-]*)\)/g;
  */
 const SYMMETRIC = new Set(['distinguished-from']);
 
-const nodes = await loadNodes();
+const allNodes = await loadNodes();
+
+// Unparseable frontmatter is reported and then excluded, so one bad file does
+// not cascade into dozens of misleading downstream errors.
+const broken = allNodes.filter((n) => n.parseError);
+const nodes = allNodes.filter((n) => !n.parseError);
 const ids = new Set(nodes.map((n) => n.id));
-const problems = [];
+const problems = broken.map((n) => `${n.file}: frontmatter does not parse — ${n.parseError}`);
 const warnings = [];
 
 const degree = new Map();
@@ -62,6 +67,34 @@ for (const n of nodes) {
   }
   if ((n.data.examples ?? []).length > 0 && (n.data.sources ?? []).length === 0) {
     problems.push(`${n.file}: names real products but lists no sources`);
+  }
+}
+
+// 3b. Product-specific rules. A product page makes claims about something you
+//     can buy, so it carries a higher evidentiary bar than a concept page.
+for (const n of nodes) {
+  const isProduct = n.data.kind === 'product';
+  if (isProduct) {
+    if (!n.data.vendor) problems.push(`${n.file}: product has no vendor`);
+    if ((n.data.sources ?? []).length === 0) {
+      problems.push(`${n.file}: product with no sources`);
+    }
+    const bundles = (n.data.relations ?? []).filter((r) => r.type === 'bundles');
+    if (bundles.length === 0) {
+      warnings.push(`${n.file}: product bundles no capabilities, so it cannot be compared`);
+    }
+  } else if (n.data.vendor) {
+    problems.push(`${n.file}: vendor is set on a concept`);
+  }
+
+  // A partial claim without a note is worse than no claim -- the comparison
+  // table shows a qualified mark with nothing to qualify it.
+  for (const rel of n.data.relations ?? []) {
+    if (rel.support === 'partial' && !rel.note) {
+      problems.push(
+        `${n.file}: relation "${rel.type} ${rel.target}" is partial but says nothing about the limit`,
+      );
+    }
   }
 }
 

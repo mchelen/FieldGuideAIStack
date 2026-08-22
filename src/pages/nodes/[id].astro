@@ -28,6 +28,14 @@ const derived = relations.filter((r) => r.derived);
   <div class="wrap narrow" style="padding-block: 2.5rem 1rem">
     <h1>{entry.data.title}</h1>
     {
+      entry.data.kind === 'product' && (
+        <p style="margin:0 0 0.5rem;color:var(--ink-faint);font-size:0.9rem">
+          Product{entry.data.vendor && ` · ${entry.data.vendor}`} ·{' '}
+          <a href={`${base}/compare`}>compare with the others</a>
+        </p>
+      )
+    }
+    {
       entry.data.aka.length > 0 && (
         <p class="lede" style="font-size:0.95rem;margin-bottom:0.8rem">
           Also called: {entry.data.aka.join(', ')}
@@ -65,6 +73,7 @@ const derived = relations.filter((r) => r.derived);
         <li>
           <span class="rel-verb">{r.label}</span>
           <a href={`${base}/nodes/${r.to}/`}>{graph.byId.get(r.to)!.data.title}</a>
+          {r.support === 'partial' && <span class="partial-flag">partial</span>}
           {r.note && <span class="rel-note">{r.note}</span>}
         </li>
       ))}

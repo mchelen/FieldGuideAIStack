@@ -6,9 +6,21 @@ const graph = await loadGraph();
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const tags = tagIndex(graph);
 
+const concepts = graph.nodes.filter((n) => n.kind === 'concept');
+const products = graph.nodes.filter((n) => n.kind === 'product');
+
+const byVendor = [...new Set(products.map((p) => p.vendor ?? '—'))]
+  .sort()
+  .map((vendor) => ({
+    vendor,
+    nodes: products
+      .filter((p) => (p.vendor ?? '—') === vendor)
+      .sort((a, b) => a.title.localeCompare(b.title)),
+  }));
+
 const byZoom = [1, 2, 3].map((z) => ({
   zoom: z,
-  nodes: graph.nodes
+  nodes: concepts
     .filter((n) => n.zoom === z)
     .sort((a, b) => b.degree - a.degree || a.title.localeCompare(b.title)),
 }));
@@ -32,12 +44,37 @@ const zoomBlurb: Record<number, string> = {
       touches, and a dated source for every claim about a real product.
     </p>
     <p class="lede" style="font-size:1rem">
-      {graph.nodes.length} concepts · {graph.edges.filter((e) => !e.derived).length} relations ·
+      {concepts.length} concepts · {products.length} products ·
+      {graph.edges.filter((e) => !e.derived).length} relations ·
+      <a href={`${base}/compare`}>compare the products</a> ·
       <a href={`${base}/graph`}>see the whole graph</a>
     </p>
   </div>
 
   <div class="wrap">
+    <section style="margin-top:2.6rem">
+      <h2 style="margin-bottom:0.2rem">Products</h2>
+      <p style="color:var(--ink-soft);margin:0">
+        The things you can actually buy or install, decomposed into the
+        capabilities they ship. <a href={`${base}/compare`}>See them side by side.</a>
+      </p>
+      {
+        byVendor.map((group) => (
+          <>
+            <h3 style="margin-bottom:0.2rem">{group.vendor}</h3>
+            <ul class="cards">
+              {group.nodes.map((n) => (
+                <li class="card">
+                  <a class="title" href={`${base}/nodes/${n.id}/`}>{n.title}</a>
+                  <p>{n.summary}</p>
+                </li>
+              ))}
+            </ul>
+          </>
+        ))
+      }
+    </section>
+
     {
       byZoom.map(
         (group) =>

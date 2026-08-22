@@ -34,6 +34,13 @@ export const RELATION_TYPES = {
   'has-kind': { label: 'has kind', inverse: 'kind-of' },
   'runs-on': { label: 'runs on', inverse: 'hosts' },
   hosts: { label: 'hosts', inverse: 'runs-on' },
+  // Product -> concept. The spine of the comparison view: what a product
+  // actually ships, as opposed to what it is marketed as.
+  bundles: { label: 'bundles', inverse: 'bundled-by' },
+  'bundled-by': { label: 'is bundled by', inverse: 'bundles' },
+  // Product -> product, for a shared engine under different packaging.
+  'variant-of': { label: 'is a variant of', inverse: 'has-variant' },
+  'has-variant': { label: 'has variant', inverse: 'variant-of' },
 } as const;
 
 export type RelationType = keyof typeof RELATION_TYPES;
@@ -55,6 +62,14 @@ const nodes = defineCollection({
   loader: glob({ base: './src/content/nodes', pattern: '**/*.md' }),
   schema: z.object({
     title: z.string().min(1),
+    /**
+     * Concepts are ideas; products are things you can buy or install. Both live
+     * in one graph so a product can point straight at the concepts it ships,
+     * which is what makes two products comparable without a separate taxonomy.
+     */
+    kind: z.enum(['concept', 'product']).default('concept'),
+    /** Products only: who sells it. */
+    vendor: z.string().optional(),
     aka: z.array(z.string()).default([]),
     tags: z.array(z.string()).min(1),
     zoom: zoom.default(2),
@@ -70,6 +85,13 @@ const nodes = defineCollection({
           // reference() makes a dangling edge a build failure, not a review catch.
           target: reference('nodes'),
           note: z.string().optional(),
+          /**
+           * How completely this holds. "yes" and "yes, but only on the desktop
+           * app" are different answers, and flattening them is how comparison
+           * tables end up lying. Partial edges must carry a `note` saying what
+           * the limit is -- enforced by scripts/validate-graph.mjs.
+           */
+          support: z.enum(['full', 'partial']).default('full'),
         }),
       )
       .default([]),
