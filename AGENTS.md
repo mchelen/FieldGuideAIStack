@@ -14,6 +14,9 @@ any new development work.
   here.
 - Keep entries imperative and specific enough to act on without asking. If a
   rule needs a caveat, state the caveat rather than softening the rule.
+- A rule here is only worth as much as its accuracy. When one turns out to be
+  wrong, correct it in its own change and say what the observed behaviour was,
+  rather than leaving a plausible-sounding rule in place.
 
 ## Workflow
 - Develop on a branch, never on `main`, and never commit direct to `main`.
@@ -42,14 +45,17 @@ any new development work.
   and the repository-settings app applies it. Change a setting by editing that
   file in a pull request — a change made in the GitHub UI holds only until the
   next sync, then reverts.
-- **The sync runs on a push to `main`, and only then.** Installing the app
-  applies nothing by itself. Neither does merging the pull request that adds
-  `settings.yml`, if the app was installed after that merge landed. The next
-  push to `main` is what applies the file.
-- That failure is silent — nothing errors, the settings simply stay unapplied.
-  So verify against the live repository rather than trusting a green merge: a
+- **The sync fires only on a push to `main` whose commits add or modify
+  `.github/settings.yml`.** Not on install, and not on an unrelated push — the
+  app's `push` handler returns early otherwise. A settings change therefore
+  applies when its own pull request merges, and nothing you do to another file
+  will apply it for you.
+- Because `settings.yml` is code-owned, applying repository settings always
+  takes a human approval. That is the design, not an obstacle to route around.
+- Verify against the live repository rather than trusting a green merge: a
   declared label should exist, and `main` should report as protected. If they
-  do not, check the app is installed, then push again. Debug the YAML last.
+  do not, check that the app is installed and that the merged commit actually
+  touched `settings.yml`. Debug the YAML last.
 - Every top-level key under `protection` must be present; set the ones you do
   not want to `null`. Omitting one makes the app skip the entire block without
   reporting an error.
