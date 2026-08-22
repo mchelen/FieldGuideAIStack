@@ -1,6 +1,24 @@
 ---
 title: Model Context Protocol (MCP)
 aka: [MCP]
+canonical:
+  status: standard
+  term: Model Context Protocol
+  body: specified at modelcontextprotocol.io, created by Anthropic and published as an open standard
+  url: https://modelcontextprotocol.io/docs/learn/architecture
+  title: Model Context Protocol — Architecture overview
+  verifiedOn: 2026-08-22
+useCase:
+  scenario: >-
+    You write one integration for your issue tracker and it works in Claude, in
+    ChatGPT, in VS Code and in Cursor without being rewritten for each.
+  detail: >-
+    Before a shared protocol, every AI application needed its own plugin format,
+    so an integration was written once per client and maintained N times. MCP
+    turns that into one server speaking a documented protocol, which any client
+    can discover through `tools/list` and call through `tools/call`. The
+    protocol's own documentation makes the analogy explicit: a USB-C port for
+    AI applications.
 tags: [protocol, interface, standard]
 zoom: 2
 summary: An open standard for connecting AI applications to external tools and

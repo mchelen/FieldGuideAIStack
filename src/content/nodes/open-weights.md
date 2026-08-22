@@ -1,6 +1,31 @@
 ---
 title: Open Weights
 aka: [weights-available, open-weight model]
+canonical:
+  status: contested
+  note: >-
+    No standards body defines "open weights", and the Open Source Initiative
+    argues the surrounding vocabulary is routinely misapplied. OSAID 1.0 settles
+    the adjacent question rather than this one: it states that Open Source
+    models and Open Source weights must include the data information and code
+    used to derive those parameters, which means a weights-only release is not
+    Open Source AI whatever its download page says. The term "open weights"
+    survives precisely because it describes what those releases actually are.
+  url: https://opensource.org/ai/open-source-ai-definition
+  title: The Open Source AI Definition – 1.0 — Open Source Initiative
+  verifiedOn: 2026-08-22
+useCase:
+  scenario: >-
+    You want to run a model on your own hardware, with no data leaving your
+    network, and a vendor's blog post says the model is open.
+  detail: >-
+    Downloadable weights are exactly what that requirement needs, so the release
+    may well suit you — the trap is assuming "open" also means unrestricted.
+    Meta's Llama 4 Community Licence, for instance, permits self-hosting while
+    requiring "Built with Llama" attribution, prefixing derivative model names
+    with "Llama", and a separate licence above 700 million monthly active users.
+    Self-hosting and licence freedom are two questions; open weights answers
+    only the first.
 tags: [licensing, openness, artifact]
 zoom: 2
 summary: A model whose parameters you can download and run yourself — which
