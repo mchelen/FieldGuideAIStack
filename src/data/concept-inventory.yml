@@ -563,7 +563,7 @@ concepts:
     gloss: >-
       What an agent retains between steps or between sessions.
     attestedBy: []
-    status: pending
+    status: written
   - term: Short-term memory
     slug: short-term-memory
     aka: [session memory]
@@ -771,21 +771,21 @@ concepts:
     gloss: >-
       Untrusted input that the model treats as instructions.
     attestedBy: []
-    status: pending
+    status: written
   - term: Indirect prompt injection
     slug: indirect-prompt-injection
     area: safety
     gloss: >-
       Injection arriving through content the agent reads, not through the user.
     attestedBy: []
-    status: pending
+    status: written
   - term: Jailbreak
     slug: jailbreak
     area: safety
     gloss: >-
       Getting a model to bypass its own safety training.
     attestedBy: []
-    status: pending
+    status: written
   - term: Guardrails
     slug: guardrails
     aka: [safety filter]
@@ -800,14 +800,14 @@ concepts:
     gloss: >-
       An agent holding more permission or autonomy than its task needs.
     attestedBy: []
-    status: pending
+    status: written
   - term: Tool misuse
     slug: tool-misuse
     area: safety
     gloss: >-
       An agent using a legitimate tool to do something harmful.
     attestedBy: []
-    status: pending
+    status: written
   - term: Memory poisoning
     slug: memory-poisoning
     aka: [context poisoning]
@@ -815,14 +815,14 @@ concepts:
     gloss: >-
       Corrupting an agent's stored state so later runs go wrong.
     attestedBy: []
-    status: pending
+    status: written
   - term: Rogue agent
     slug: rogue-agent
     area: safety
     gloss: >-
       An agent operating outside its intended scope or control.
     attestedBy: []
-    status: pending
+    status: written
   - term: Non-human identity
     slug: non-human-identity
     aka: [machine identity, agent identity]
@@ -947,7 +947,7 @@ concepts:
     gloss: >-
       Several products sharing an engine, account and extensions.
     attestedBy: []
-    status: pending
+    status: written
   - term: Compaction
     slug: compaction
     aka: [context compaction, summarisation]
