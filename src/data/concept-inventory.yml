@@ -719,14 +719,14 @@ concepts:
     gloss: >-
       A repeatable test of model or system behaviour.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Benchmark
     slug: benchmark
     area: evaluation
     gloss: >-
       A shared eval used to compare models, with all the gaming that invites.
     attestedBy: []
-    status: pending
+    status: written
   - term: LLM as a judge
     slug: llm-as-a-judge
     aka: [model-graded eval]
@@ -734,14 +734,14 @@ concepts:
     gloss: >-
       Using a model to score another model's output.
     attestedBy: []
-    status: pending
+    status: written
   - term: Red teaming
     slug: red-teaming
     area: evaluation
     gloss: >-
       Adversarial testing to find failures before users do.
     attestedBy: []
-    status: pending
+    status: written
   - term: Tracing
     slug: tracing
     aka: [observability]
@@ -749,7 +749,7 @@ concepts:
     gloss: >-
       Recording what an agent did, step by step, for later inspection.
     attestedBy: []
-    status: pending
+    status: written
   - term: Leaderboard
     slug: leaderboard
     aka: [arena]
@@ -757,14 +757,14 @@ concepts:
     gloss: >-
       A public ranking of models, and a target that stops being a good measure.
     attestedBy: []
-    status: pending
+    status: written
   - term: Regression testing
     slug: regression-testing
     area: evaluation
     gloss: >-
       Checking that a change did not break what previously worked.
     attestedBy: []
-    status: pending
+    status: written
   - term: Prompt injection
     slug: prompt-injection
     area: safety
@@ -1156,14 +1156,14 @@ concepts:
     gloss: >-
       Whether output is actually true, as distinct from whether it sounds right.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Citation precision and recall
     slug: citation-precision-and-recall
     area: evaluation
     gloss: >-
       Whether cited sources support the claim, and whether claims are cited.
     attestedBy: []
-    status: pending
+    status: written
   - term: Autorater evaluation
     slug: autorater-evaluation
     aka: [model-graded]
@@ -1171,7 +1171,7 @@ concepts:
     gloss: >-
       Automated scoring by a model rather than by a human.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: AI slop
     slug: ai-slop
     area: safety
