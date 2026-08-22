@@ -1,0 +1,228 @@
+---
+import Base from '../layouts/Base.astro';
+import { loadGraph, tagIndex } from '../lib/graph';
+
+const graph = await loadGraph();
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const tags = tagIndex(graph);
+
+// Only authored edges go to the explorer -- drawing both directions of every
+// relation would double every line for no added information.
+const payload = {
+  base,
+  nodes: graph.nodes.map((n) => ({
+    id: n.id,
+    title: n.title,
+    zoom: n.zoom,
+    tags: n.tags,
+    degree: n.degree,
+  })),
+  edges: graph.edges
+    .filter((e) => !e.derived)
+    .map((e) => ({ source: e.from, target: e.to, label: e.label })),
+};
+---
+
+<Base
+  title="The whole graph — Field Guide to the AI Stack"
+  description="Every concept in the field guide and how they relate, as one explorable graph."
+>
+  <div class="wrap" style="padding-block:2.5rem 0">
+    <h1>The whole graph</h1>
+    <p class="lede">
+      Drag to pan, scroll to zoom, click a node to open its page. Filter down to
+      zoom level 1 for the terms everything else is defined against.
+    </p>
+
+    <div class="controls">
+      <label>
+        Zoom level
+        <select id="zoom-filter">
+          <option value="3">all</option>
+          <option value="2">1 and 2</option>
+          <option value="1">1 only</option>
+        </select>
+      </label>
+      <label>
+        Tag
+        <select id="tag-filter">
+          <option value="">all</option>
+          {tags.map((t) => <option value={t.tag}>{t.tag} ({t.count})</option>)}
+        </select>
+      </label>
+      <button id="reset-view" type="button">Fit</button>
+    </div>
+
+    <div id="explorer"></div>
+
+    <noscript>
+      <div class="noscript">
+        The explorer needs JavaScript. Every node page carries a static diagram
+        of its own neighbourhood that does not — start from the
+        <a href={`${base}/`}>index</a>.
+      </div>
+    </noscript>
+
+    <script id="graph-data" type="application/json" is:inline set:html={JSON.stringify(payload)} />
+  </div>
+</Base>
+
+<script>
+  import cytoscape from 'cytoscape';
+
+  const dataEl = document.getElementById('graph-data');
+  const explorer = document.getElementById('explorer');
+  if (dataEl && explorer) {
+    const data = JSON.parse(dataEl.textContent || '{}');
+
+    const css = getComputedStyle(document.documentElement);
+    const v = (name: string, fallback: string) =>
+      css.getPropertyValue(name).trim() || fallback;
+
+    const cy = cytoscape({
+      container: explorer,
+      elements: [
+        ...data.nodes.map((n: any) => ({
+          data: { ...n, label: n.title, size: 22 + Math.min(n.degree, 8) * 3 },
+        })),
+        ...data.edges.map((e: any, i: number) => ({
+          data: { id: `e${i}`, ...e },
+        })),
+      ],
+      style: [
+        {
+          selector: 'node',
+          style: {
+            'background-color': v('--bg-raised', '#fff'),
+            'border-color': v('--rule-strong', '#c8c1b5'),
+            'border-width': 1.5,
+            shape: 'round-rectangle',
+            label: 'data(label)',
+            color: v('--ink', '#1c1a17'),
+            'font-size': 12,
+            'font-family': 'ui-sans-serif, system-ui, sans-serif',
+            'text-valign': 'center',
+            'text-halign': 'center',
+            padding: '10px',
+            width: 'label',
+            height: 'label',
+          },
+        },
+        {
+          selector: 'node[zoom = 1]',
+          style: {
+            'background-color': v('--accent-soft', '#f0e6d9'),
+            'border-color': v('--accent', '#7a4a1e'),
+            'font-weight': 600,
+          },
+        },
+        {
+          selector: 'edge',
+          style: {
+            'curve-style': 'bezier',
+            width: 1.2,
+            'line-color': v('--rule-strong', '#c8c1b5'),
+            'target-arrow-color': v('--rule-strong', '#c8c1b5'),
+            'target-arrow-shape': 'triangle',
+            'arrow-scale': 0.8,
+            // Labels on every edge at once is unreadable at this density.
+            // They appear on hover instead; see the mouseover handler below.
+            'text-opacity': 0,
+            label: 'data(label)',
+            'font-size': 10,
+            'font-family': 'ui-monospace, monospace',
+            color: v('--ink-faint', '#85807a'),
+            'text-background-color': v('--bg', '#fbfaf7'),
+            'text-background-opacity': 1,
+            'text-background-padding': '2px',
+          },
+        },
+        {
+          selector: 'edge.focus',
+          style: {
+            'text-opacity': 1,
+            width: 2,
+            'line-color': v('--accent', '#7a4a1e'),
+            'target-arrow-color': v('--accent', '#7a4a1e'),
+            'z-index': 10,
+          },
+        },
+        { selector: 'node.focus', style: { 'border-color': v('--accent', '#7a4a1e'), 'border-width': 2.5 } },
+        { selector: '.dimmed', style: { opacity: 0.12 } },
+      ],
+      wheelSensitivity: 0.25,
+    });
+
+    // Laying out inside the container's own box keeps the graph using the full
+    // width instead of collapsing into a tall column that fits to height.
+    const runLayout = () => {
+      const { clientWidth: w, clientHeight: h } = explorer;
+      cy.layout({
+        name: 'cose',
+        animate: false,
+        randomize: false,
+        boundingBox: { x1: 0, y1: 0, w: Math.max(w, 320), h: Math.max(h, 320) },
+        padding: 60,
+        nodeRepulsion: 260_000,
+        idealEdgeLength: 130,
+        nodeOverlap: 60,
+        componentSpacing: 140,
+        gravity: 10,
+      }).run();
+      cy.fit(undefined, 48);
+      // Fitting a sparse graph can zoom out far enough to make labels
+      // unreadable; cap it and let the user pan instead.
+      if (cy.zoom() < 0.8) {
+        cy.zoom({ level: 0.8, renderedPosition: { x: w / 2, y: h / 2 } });
+        cy.center();
+      }
+    };
+
+    cy.ready(runLayout);
+    window.addEventListener('resize', () => cy.fit(undefined, 48));
+
+    cy.on('tap', 'node', (evt) => {
+      window.location.href = `${data.base}/nodes/${evt.target.id()}/`;
+    });
+
+    // Hovering a node reveals just its relation labels.
+    cy.on('mouseover', 'node', (evt) => {
+      const n = evt.target;
+      n.addClass('focus');
+      n.connectedEdges().addClass('focus');
+      explorer.style.cursor = 'pointer';
+    });
+    cy.on('mouseout', 'node', (evt) => {
+      evt.target.removeClass('focus');
+      evt.target.connectedEdges().removeClass('focus');
+      explorer.style.cursor = '';
+    });
+
+    const zoomFilter = document.getElementById('zoom-filter') as HTMLSelectElement;
+    const tagFilter = document.getElementById('tag-filter') as HTMLSelectElement;
+
+    const apply = () => {
+      const maxZoom = Number(zoomFilter.value);
+      const tag = tagFilter.value;
+      cy.batch(() => {
+        cy.nodes().forEach((n) => {
+          const keep =
+            n.data('zoom') <= maxZoom && (!tag || n.data('tags').includes(tag));
+          n.toggleClass('dimmed', !keep);
+        });
+        cy.edges().forEach((e) => {
+          e.toggleClass(
+            'dimmed',
+            e.source().hasClass('dimmed') || e.target().hasClass('dimmed'),
+          );
+        });
+      });
+    };
+
+    zoomFilter.addEventListener('change', apply);
+    tagFilter.addEventListener('change', apply);
+    document
+      .getElementById('reset-view')
+      ?.addEventListener('click', runLayout);
+  }
+</script>

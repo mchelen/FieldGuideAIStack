@@ -1,0 +1,69 @@
+name: Verify sources
+
+# Content rot is a background process, so checking is too. Runs weekly and on
+# demand; opens a single issue listing everything that needs a human.
+on:
+  schedule:
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      - name: Check links
+        id: links
+        continue-on-error: true
+        run: |
+          {
+            echo 'report<<REPORT'
+            npm run --silent check:links 2>&1
+            echo REPORT
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Check freshness
+        id: freshness
+        continue-on-error: true
+        run: |
+          {
+            echo 'report<<REPORT'
+            npm run --silent check:freshness -- --max-age 180 --strict 2>&1
+            echo REPORT
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Open issue when something needs a human
+        if: steps.links.outcome == 'failure' || steps.freshness.outcome == 'failure'
+        uses: actions/github-script@v7
+        env:
+          LINKS: ${{ steps.links.outputs.report }}
+          FRESHNESS: ${{ steps.freshness.outputs.report }}
+        with:
+          script: |
+            const body = [
+              'The weekly source check found citations that need a human to re-open and confirm.',
+              '',
+              '### Link check', '```', process.env.LINKS ?? '(no output)', '```',
+              '', '### Freshness', '```', process.env.FRESHNESS ?? '(no output)', '```',
+              '',
+              'Re-read each URL, update the claim if it changed, and bump `verifiedOn`.',
+              'Never bump a date without reopening the page.',
+            ].join('\n');
+            const title = `Source check: citations need re-verification (${new Date().toISOString().slice(0, 10)})`;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title,
+              body,
+              labels: ['sources'],
+            });

@@ -1,0 +1,138 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Neighborhood from '../../components/Neighborhood.astro';
+import { loadGraph } from '../../lib/graph';
+
+export async function getStaticPaths() {
+  const graph = await loadGraph();
+  return graph.nodes.map((n) => ({
+    params: { id: n.id },
+    props: { id: n.id },
+  }));
+}
+
+const { id } = Astro.props;
+const graph = await loadGraph();
+const entry = graph.byId.get(id)!;
+const { Content } = await render(entry);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
+const relations = graph.neighborsOf(id);
+const authored = relations.filter((r) => !r.derived);
+const derived = relations.filter((r) => r.derived);
+---
+
+<Base title={`${entry.data.title} — Field Guide to the AI Stack`} description={entry.data.summary}>
+  <div class="wrap narrow" style="padding-block: 2.5rem 1rem">
+    <h1>{entry.data.title}</h1>
+    {
+      entry.data.aka.length > 0 && (
+        <p class="lede" style="font-size:0.95rem;margin-bottom:0.8rem">
+          Also called: {entry.data.aka.join(', ')}
+        </p>
+      )
+    }
+    <p class="lede">{entry.data.summary}</p>
+    <ul class="chips">
+      {entry.data.tags.map((t) => (
+        <li><a class="chip" href={`${base}/#tag-${t}`}>{t}</a></li>
+      ))}
+      <li><span class="chip">zoom {entry.data.zoom}</span></li>
+    </ul>
+
+    {
+      entry.data.fieldMark && (
+        <div class="fieldmark">
+          <strong>Field mark</strong>
+          {entry.data.fieldMark}
+        </div>
+      )
+    }
+  </div>
+
+  <div class="wrap" style="max-width:52rem">
+    <Neighborhood graph={graph} id={id} />
+  </div>
+
+  <div class="wrap narrow prose">
+    <Content />
+
+    <h2>Relations</h2>
+    <ul class="rel-list">
+      {authored.map((r) => (
+        <li>
+          <span class="rel-verb">{r.label}</span>
+          <a href={`${base}/nodes/${r.to}/`}>{graph.byId.get(r.to)!.data.title}</a>
+          {r.note && <span class="rel-note">{r.note}</span>}
+        </li>
+      ))}
+    </ul>
+    {
+      derived.length > 0 && (
+        <>
+          <h3>Referenced by</h3>
+          <ul class="rel-list">
+            {derived.map((r) => (
+              <li>
+                <span class="rel-verb">{r.label}</span>
+                <a href={`${base}/nodes/${r.to}/`}>{graph.byId.get(r.to)!.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
+
+    {
+      entry.data.examples.length > 0 && (
+        <>
+          <h2>In the wild</h2>
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>What</th>
+                  <th>Why it is an example</th>
+                  <th>Checked</th>
+                </tr>
+              </thead>
+              <tbody>
+                {entry.data.examples.map((ex) => (
+                  <tr>
+                    <td>
+                      <a href={ex.url}>{ex.name}</a>
+                      {ex.vendor && <div style="color:var(--ink-faint);font-size:0.85em">{ex.vendor}</div>}
+                    </td>
+                    <td>{ex.note}</td>
+                    <td class="when" style="font-family:var(--font-mono);font-size:0.8rem;white-space:nowrap">
+                      {fmt(ex.verifiedOn)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )
+    }
+
+    {
+      entry.data.sources.length > 0 && (
+        <>
+          <h2>Sources</h2>
+          <ul class="sources">
+            {entry.data.sources.map((s) => (
+              <li>
+                <a href={s.url}>{s.title}</a>
+                <span class="when"> — read {fmt(s.verifiedOn)}</span>
+                {s.note && <div class="caveat">{s.note}</div>}
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
+  </div>
+</Base>
