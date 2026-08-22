@@ -31,6 +31,13 @@ jobs:
       - name: Build
         run: npm run build
 
+      # A green build only proves nothing threw. This asserts the build-time
+      # transforms actually ran -- cross-links rewritten, diagrams generated,
+      # graph payload emitted -- so a dependency bump cannot quietly remove
+      # them while CI stays green.
+      - name: Check built output
+        run: npm run check:output
+
       # Advisory on PRs. The scheduled job is the one that escalates.
       - name: Freshness
         run: npm run check:freshness
