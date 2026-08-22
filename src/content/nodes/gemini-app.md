@@ -52,4 +52,4 @@ separate tier rather than a mode you toggle.
 
 That makes Google's packaging a third variant. Anthropic sells separate named
 products; OpenAI sells modes inside one product; Google gates the agent behind a
-subscription tier.
+[subscription tier](subscription-tier).

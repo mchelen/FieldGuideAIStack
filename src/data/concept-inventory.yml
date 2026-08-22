@@ -468,7 +468,7 @@ concepts:
     gloss: >-
       Running the model on infrastructure you control.
     attestedBy: []
-    status: pending
+    status: written
   - term: On-device inference
     slug: on-device-inference
     aka: [edge inference, local inference]
@@ -476,7 +476,7 @@ concepts:
     gloss: >-
       Running a model on the user's own hardware.
     attestedBy: []
-    status: pending
+    status: written
   - term: Provisioned throughput
     slug: provisioned-throughput
     aka: [reserved capacity]
@@ -484,7 +484,7 @@ concepts:
     gloss: >-
       Paying for guaranteed capacity rather than per token.
     attestedBy: []
-    status: pending
+    status: written
   - term: Function calling
     slug: function-calling
     aka: [tool calling]
@@ -900,7 +900,7 @@ concepts:
     gloss: >-
       Charging by input and output tokens, usually at different rates.
     attestedBy: []
-    status: pending
+    status: written
   - term: Cost per task
     slug: cost-per-task
     aka: [unit economics]
@@ -908,7 +908,7 @@ concepts:
     gloss: >-
       What one completed job costs once retries and tools are counted.
     attestedBy: []
-    status: pending
+    status: written
   - term: Usage limit
     slug: usage-limit
     aka: [cap]
@@ -916,7 +916,7 @@ concepts:
     gloss: >-
       The ceiling a plan places on consumption.
     attestedBy: []
-    status: pending
+    status: written
   - term: Subscription tier
     slug: subscription-tier
     aka: [plan]
@@ -924,14 +924,14 @@ concepts:
     gloss: >-
       The packaging that decides which capabilities you get at all.
     attestedBy: []
-    status: pending
+    status: written
   - term: Frontier lab
     slug: frontier-lab
     area: orgs
     gloss: >-
       An organisation training models at the leading edge of scale.
     attestedBy: []
-    status: pending
+    status: written
   - term: Hyperscaler
     slug: hyperscaler
     aka: [cloud provider]
@@ -939,7 +939,7 @@ concepts:
     gloss: >-
       A cloud platform large enough to host models at scale for others.
     attestedBy: []
-    status: pending
+    status: written
   - term: Product suite
     slug: product-suite
     aka: [product family, ecosystem]
@@ -1193,7 +1193,7 @@ concepts:
     gloss: >-
       Charging by consumption rather than by seat or licence.
     attestedBy: []
-    status: pending
+    status: written
   - term: Fill-in-the-middle API
     slug: fill-in-the-middle-api
     aka: [FIM API]
