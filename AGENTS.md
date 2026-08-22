@@ -27,10 +27,16 @@ any new development work.
 - Enable auto-merge on the pull request when you open it, and delete the branch
   on merge. Green checks merge it; nothing waits on a human unless a reviewer
   asks for changes.
-  - This needs "Allow auto-merge" and "Automatically delete head branches"
-    enabled in repository settings, and branch protection on `main` requiring
-    the CI checks — without required checks, auto-merge lands the PR
-    immediately instead of waiting for green.
+  - Three repository settings make this work. "Allow auto-merge" and
+    "Automatically delete head branches" under Settings → General → Pull
+    Requests, plus branch protection on `main` requiring the `build` check.
+  - The required check is not optional hardening — it is what auto-merge waits
+    on. Without it GitHub treats every passing PR as already mergeable and
+    refuses to arm auto-merge at all: *"the pull request is already in clean
+    status (all checks passed) — you can merge directly."*
+  - If auto-merge cannot be armed, confirm the checks are green and merge
+    directly rather than leaving the PR open. Say in the PR that auto-merge was
+    refused and why.
   - Hold auto-merge only when a human has asked to read the PR first. Say so in
     the PR description when you do.
 
