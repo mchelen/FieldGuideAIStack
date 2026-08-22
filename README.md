@@ -89,8 +89,11 @@ made in the GitHub UI holds only until the next sync, then reverts.
 
 Two things about that sync are worth knowing before you debug it:
 
-- **It runs on a push to `main`, not on install.** Installing the app applies
-  nothing by itself. The next merge to `main` is what triggers the first sync.
+- **It fires only on a push to `main` that changes `settings.yml` itself.** Not
+  on install, and not on an unrelated merge — the app's push handler returns
+  early unless a commit in the push added or modified the file. So a settings
+  change applies when its own pull request merges, and merging something else
+  will not apply it for you.
 - **Every key under `protection` must be present.** Set the ones you do not
   want to `null`. Omitting one makes the app skip the whole block without
   reporting an error.
@@ -99,7 +102,9 @@ Two things about that sync are worth knowing before you debug it:
 the automation is allowed to do — `settings.yml`, `CODEOWNERS` itself, the
 workflows, and `CHARTER.md`. Branch protection requires zero approvals in
 general but code owner approval on those, so ordinary content pull requests
-auto-merge on green while changes to the guardrails wait for a human.
+auto-merge on green while changes to the guardrails wait for a human. Since the
+sync only fires on a `settings.yml` change, that also means every repository
+settings change passes through a human approval by construction.
 
 Note that `enforce_admins` is `false`, which it has to be: nobody can approve
 their own pull request, so enforcing protection on admins would deadlock a solo
