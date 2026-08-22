@@ -193,8 +193,16 @@ any new development work.
   citation imply a confidence the retrieval does not support.
 - Content lives in the graph. Adding a concept is one new node file, never
   a new hand-written page.
+- **`attestedBy` in the inventory is a hint, not evidence.** It is computed from
+  a term-name match across the surveyed glossaries and misses entries whose
+  heading is worded differently. Before recording `canonical.status: none` on
+  the grounds that nothing carries a term, open the glossaries and look. #31
+  shipped two wrong entries this way: the Claude Code glossary — one of the
+  eight surveyed — defines both "Verification loop" and "Sandboxing", and the
+  pages claimed no surveyed glossary carried either.
 - **A YAML plain scalar cannot contain a colon followed by a space.** `fieldMark:
   Ask what it costs: tokens.` does not parse, and the error names a line number
   rather than the problem. Use a block scalar (`fieldMark: >-`) whenever the
-  text might contain `: `. This has broken three separate pages; `npm run
-  validate` catches it, which is why it runs before anything else.
+  text might contain `: `. This has broken four separate pages; `npm run
+  validate` catches it, and now names the offending key rather than relaying
+  the parser's line and column.

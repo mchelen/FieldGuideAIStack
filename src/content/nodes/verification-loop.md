@@ -5,13 +5,19 @@ aka:
   - self-verification
   - run-and-fix
 canonical:
-  status: none
+  status: de-facto
+  term: Verification loop
+  body: Anthropic, in the Claude Code glossary
+  url: https://code.claude.com/docs/en/glossary
+  title: Glossary — Claude Code documentation
+  verifiedOn: 2026-08-22
   note: >-
-    No surveyed glossary carries it and no vendor names it as such. The
-    practice is universal in agentic coding and is usually described rather
-    than named — "let the agent run the tests". Anthropic's evaluator-optimizer
-    is the nearest documented pattern, with the evaluator replaced by a real
-    executor.
+    This page originally recorded the term as `none`, on the claim that no
+    surveyed glossary carried it. That was wrong: the Claude Code glossary is
+    one of the eight glossaries this guide surveys, and it has an entry.
+    Corrected after reading the glossary directly rather than trusting the
+    inventory's `attestedBy` field, which is computed from a term-name match
+    and had missed it.
 tags: [agentic, technique]
 zoom: 2
 summary: An agent checking its own work by actually running it, then fixing
@@ -48,11 +54,20 @@ examples:
       loop — here with execution as the evaluator.
     verifiedOn: 2026-08-22
 sources:
+  - id: claude-code-glossary
+    url: https://code.claude.com/docs/en/glossary
+    title: Glossary — Claude Code documentation
+    verifiedOn: 2026-08-22
   - id: anthropic-agents
     url: https://www.anthropic.com/engineering/building-effective-agents
     title: Building effective agents — Anthropic
     verifiedOn: 2026-08-22
 ---
+Anthropic's [Claude Code](claude-code) glossary puts the purpose first: a
+verification loop is "how a session knows the work is actually done rather than
+just plausible. You give Claude a check it can run, such as a test suite, a
+build, or a screenshot comparison, and Claude iterates until the check passes
+instead of stopping after one attempt."[[cite:claude-code-glossary]]
 
 An agent that writes code and stops has produced a guess. An agent that runs it,
 reads the failure and fixes it has produced something checked.
@@ -92,7 +107,11 @@ design is sound, whether the requirement was understood correctly — none of it
 runs, so none of it can be verified this way.
 
 For those, [reflection](reflection) and a
-[human in the loop](human-in-the-loop) are what remain, and they are weaker.
+[human in the loop](human-in-the-loop) are what remain, and they are weaker. The
+glossary makes the same point from the other side: a verification loop is "the
+prerequisite for … unattended runs", because "without one, the only thing
+deciding the agent is finished is the agent
+itself."[[cite:claude-code-glossary]]
 Recognising which half of a task has a verification signal, and which half does
 not, is most of what makes agent output trustworthy in one domain and unreliable
 in another.

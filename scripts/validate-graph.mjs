@@ -24,7 +24,34 @@ const allNodes = await loadNodes();
 const broken = allNodes.filter((n) => n.parseError);
 const nodes = allNodes.filter((n) => !n.parseError);
 const ids = new Set(nodes.map((n) => n.id));
-const problems = broken.map((n) => `${n.file}: frontmatter does not parse — ${n.parseError}`);
+// The overwhelmingly common cause is a plain scalar containing ": " -- YAML
+// reads the colon as a second key. The parser's own message names a line and
+// column and not the problem, so name it here: this has broken four pages.
+const colonHint = (n) => {
+  const fm = (n.raw ?? '').split(/^---$/m)[1] ?? '';
+  const lines = fm.split('\n');
+  for (let i = 0; i < lines.length; i += 1) {
+    // A plain (unquoted, non-block) scalar: `key: some text`.
+    const m = /^(\s*)([\w-]+):\s+(?![>|"'&*#-])(.+)$/.exec(lines[i]);
+    if (!m) continue;
+    const [, indent, key] = m;
+    let text = m[3];
+    // Plus its continuation lines, which are indented further and are where the
+    // stray colon usually hides.
+    for (let j = i + 1; j < lines.length; j += 1) {
+      const cont = /^(\s*)(\S.*)$/.exec(lines[j]);
+      if (!cont || cont[1].length <= indent.length) break;
+      text += ` ${cont[2]}`;
+    }
+    if (/\S:\s/.test(text)) {
+      return ` — likely \`${key}\`: a plain scalar cannot contain ": " (YAML reads it as a second key). Use a block scalar: \`${key}: >-\``;
+    }
+  }
+  return '';
+};
+const problems = broken.map(
+  (n) => `${n.file}: frontmatter does not parse — ${n.parseError}${colonHint(n)}`,
+);
 const warnings = [];
 
 const degree = new Map();
