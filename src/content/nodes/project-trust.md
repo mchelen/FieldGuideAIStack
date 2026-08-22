@@ -58,8 +58,7 @@ sources:
     title: Security — Claude Code documentation
     verifiedOn: 2026-08-22
 ---
-Project trust is "a dialog accepting a directory before [Claude Code](claude-
-code) loads its configuration."[[cite:claude-code-glossary]] The word
+Project trust is "a dialog accepting a directory before [Claude Code](claude-code) loads its configuration."[[cite:claude-code-glossary]] The word
 *configuration* is the whole point.
 
 Until a directory is trusted, the harness "holds back some of the content its

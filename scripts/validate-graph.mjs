@@ -208,6 +208,17 @@ for (const n of nodes) {
     else if (ids.indexOf(id) !== i) problems.push(`${n.file}: duplicate source id "${id}"`);
   }
 
+  // A link whose target is split by a line break is not a link at all --
+  // markdown renders it as literal text, and check-output cannot see the
+  // absence of something that was never emitted. Hard wrapping is how it
+  // happens, and the cross-link warning misses it whenever the same term is
+  // linked correctly somewhere else on the page.
+  for (const m of n.content.matchAll(/\]\(([a-z0-9/#.:-]*)\n\s*([a-z0-9/#.:-]*)\)/g)) {
+    problems.push(
+      `${n.file}: link target split across lines — \`](${m[1]}${m[2]})\` renders as text, not a link`,
+    );
+  }
+
   // A marker broken across a line break stops matching and ships as literal
   // text. `npm run check:output` catches it in dist/, but only after a build;
   // catching it here names the file before anything is rendered. Hard wrapping

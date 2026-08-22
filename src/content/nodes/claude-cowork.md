@@ -55,8 +55,7 @@ sources:
 ---
 Cowork is the clearest illustration in this guide of why [surface](surface) is
 worth separating from engine. Anthropic's documentation states it plainly:
-Cowork "uses the same agentic architecture that powers [Claude Code](claude-
-code), accessible within Claude Desktop without opening the
+Cowork "uses the same agentic architecture that powers [Claude Code](claude-code), accessible within Claude Desktop without opening the
 terminal."[[cite:anthropic-cowork-overview]]
 
 The engine did not change. The audience did.

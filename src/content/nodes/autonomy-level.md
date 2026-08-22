@@ -90,8 +90,7 @@ pair, not of the agent.
 ## The unattended question
 
 Level usually changes when nobody is watching. An agent running under
-[background execution](background-execution) or a [scheduled task](scheduled-
-task) cannot fall back to [a human in the loop](human-in-the-loop), so either
+[background execution](background-execution) or a [scheduled task](scheduled-task) cannot fall back to [a human in the loop](human-in-the-loop), so either
 its permissions narrow or its gates become notifications after the fact.
 
 Products differ on this and rarely say so on the page that describes their

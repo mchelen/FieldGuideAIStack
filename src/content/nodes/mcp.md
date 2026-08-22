@@ -5,7 +5,7 @@ canonical:
   status: standard
   term: Model Context Protocol
   body: specified at modelcontextprotocol.io, created by Anthropic and published as an open standard
-  url: https://modelcontextprotocol.io/docs/learn/architecture
+  url: https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture
   title: Model Context Protocol — Architecture overview
   verifiedOn: 2026-08-22
 useCase:
@@ -33,7 +33,7 @@ relations:
     target: harness
 examples:
   - name: Model Context Protocol
-    url: https://modelcontextprotocol.io/docs/getting-started/intro
+    url: https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro
     note: >-
       Open-source standard for connecting AI applications to data sources,
       tools, and workflows; documented as supported across clients including
@@ -41,11 +41,11 @@ examples:
     verifiedOn: 2026-08-22
 sources:
   - id: mcp-what-is
-    url: https://modelcontextprotocol.io/docs/getting-started/intro
+    url: https://modelcontextprotocol.io/docs/2026-07-28/getting-started/intro
     title: What is the Model Context Protocol (MCP)? — modelcontextprotocol.io
     verifiedOn: 2026-08-22
   - id: mcp-model-context
-    url: https://modelcontextprotocol.io/docs/learn/architecture
+    url: https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture
     title: Model Context Protocol — Architecture overview
     verifiedOn: 2026-08-22
 ---
@@ -56,11 +56,11 @@ works everywhere instead of once per product.
 
 ## Three participants, and the one everyone mixes up
 
-- **MCP Host** — the AI application (a [harness](harness) like [Claude Code](claude-code), or
-  an IDE) that coordinates connections.
-- **MCP Client** — a connection manager. The host creates *one client per
-  server*.
-- **MCP Server** — the program that actually provides context.
+- **MCP Host** — the AI application (a [harness](harness) like [Claude
+  Code](claude-code), or an IDE) that coordinates connections.
+- **[MCP Client](mcp-client)** — a connection manager. The host creates *one
+  client per server*.
+- **[MCP Server](mcp-server)** — the program that actually provides context.
 
 The trap is the word "server". An MCP server is not necessarily remote: the
 documentation is explicit that "MCP server" means the program serving context

@@ -188,6 +188,12 @@ any new development work.
   one. Attach the reference inline to the sentence making the claim.
 - A source nobody cites inline is either unused or the prose around it is
   under-cited. Both are worth noticing rather than leaving.
+- **Never let a line break fall inside a link target either.**
+  `[context management](context-\nengineering)` is not a link — markdown renders
+  it as literal text, and `check:output` cannot see the absence of something
+  that was never emitted. Eight of these had accumulated before the validator
+  learned to catch them; the cross-link warning had missed seven, because it
+  goes quiet as soon as the same term is linked correctly elsewhere on the page.
 - **Never let a line break fall inside a `[[cite:id]]` marker.** A split marker
   stops matching, ships as literal text, and looks fine in the source. Hard
   wrapping a paragraph is how it happens. `npm run validate` now names the file

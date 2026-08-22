@@ -10,7 +10,7 @@ canonical:
     standardised part is the mechanism underneath, not the label — the Model
     Context Protocol specifies how a client and a server exchange tools and
     data, and Anthropic's connectors are documented as built on it.
-  url: https://modelcontextprotocol.io/docs/learn/architecture
+  url: https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture
   title: Model Context Protocol — Architecture overview
   verifiedOn: 2026-08-22
 aka:
@@ -97,7 +97,7 @@ sources:
       is taken from the search index summary of this page rather than from the
       page itself. Worth a human confirming.
   - id: mcp-model-context
-    url: https://modelcontextprotocol.io/docs/learn/architecture
+    url: https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture
     title: Model Context Protocol — Architecture overview
     verifiedOn: 2026-08-22
   - id: openai-chatgpt-work

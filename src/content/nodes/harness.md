@@ -60,8 +60,7 @@ how sub-agents are spawned.
 ## Why the distinction matters commercially
 
 The same model behind two harnesses produces markedly different results, and the
-same harness can often be pointed at a different model. [Claude Code](claude-
-code) and [OpenAI Codex](openai-codex) both document running against models
+same harness can often be pointed at a different model. [Claude Code](claude-code) and [OpenAI Codex](openai-codex) both document running against models
 other than their vendor's default. Harness and model are separately swappable
 parts — which is exactly why treating them as one thing leads people astray when
 comparing products.

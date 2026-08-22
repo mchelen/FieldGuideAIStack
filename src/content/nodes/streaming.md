@@ -75,11 +75,11 @@ that were simple stop being simple:
   construct a continuation request that asks the model to resume from
   it.[[cite:anthropic-streaming]]
 - **Structure arrives incrementally.** JSON is not parseable until it is
-  complete, so anything rendering structured output has to buffer or parse
-  speculatively.
+  complete, so anything rendering [structured output](structured-output) has to
+  buffer or parse speculatively.
 - **Content blocks are not uniform.** Messages "can contain multiple content
-  blocks (`text`, `tool_use`, `thinking`)", and Anthropic notes that
-  [tool use](tool-use) and extended thinking blocks "cannot be partially
+  blocks (`text`, `tool_use`, `thinking`)", and Anthropic notes that [tool
+  use](tool-use) and extended thinking blocks "cannot be partially
   recovered."[[cite:anthropic-streaming]]
 
 ## When not to stream
