@@ -39,12 +39,12 @@ model calls happen between one human input and the next.
 | One to a handful | Assisted workflow, "copilot" |
 | One to dozens or hundreds | Agent |
 
-The interesting engineering problems — context management, permissioning, error
-recovery, cost control — all appear as you move down that table, and they are
-all [harness](harness) problems.
+The interesting engineering problems — [context management](context-
+engineering), permissioning, error recovery, cost control — all appear as you
+move down that table, and they are all [harness](harness) problems.
 
 ## Multi-agent
 
 A "multi-agent system" is normally one harness spawning sub-loops, each with its
-own [context window](context-window) and tool set, coordinated by a parent. It is a harness
-architecture, not a different kind of model.
+own [context window](context-window) and tool set, coordinated by a parent. It
+is a harness architecture, not a different kind of model.

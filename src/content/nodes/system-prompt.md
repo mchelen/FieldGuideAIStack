@@ -9,8 +9,8 @@ canonical:
   status: de-facto
   term: System prompt
   body: Anthropic, in the Claude Platform documentation, where it is the `system` parameter of the Messages API
-  url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/system-prompts
-  title: Prompt engineering — Claude Platform documentation
+  url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+  title: Prompting best practices — Claude Platform documentation
   verifiedOn: 2026-08-22
   note: >-
     No surveyed glossary carries the term; it is an API convention rather than
@@ -45,15 +45,15 @@ relations:
 examples:
   - name: The `system` parameter
     vendor: Anthropic
-    url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/system-prompts
+    url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
     note: >-
       A top-level request field rather than a message. "Setting a role in the
       system prompt focuses Claude's behavior and tone for your use case."
     verifiedOn: 2026-08-22
 sources:
   - id: anthropic-prompting
-    url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/system-prompts
-    title: Prompt engineering — Claude Platform documentation
+    url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    title: Prompting best practices — Claude Platform documentation
     verifiedOn: 2026-08-22
   - id: anthropic-caching
     url: https://platform.claude.com/docs/en/build-with-claude/prompt-caching

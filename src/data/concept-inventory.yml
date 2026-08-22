@@ -643,7 +643,7 @@ concepts:
     gloss: >-
       Deciding what goes into the window and what gets dropped.
     attestedBy: []
-    status: pending
+    status: written
   - term: System prompt
     slug: system-prompt
     aka: [system message]
@@ -658,7 +658,7 @@ concepts:
     gloss: >-
       A reusable prompt with slots for variable content.
     attestedBy: []
-    status: pending
+    status: written
   - term: Few-shot prompting
     slug: few-shot-prompting
     aka: [in-context learning]
@@ -674,7 +674,7 @@ concepts:
     gloss: >-
       Fetching relevant documents and putting them in the prompt.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Vector database
     slug: vector-database
     aka: [vector store]
@@ -682,28 +682,28 @@ concepts:
     gloss: >-
       A store indexed by embedding, queried by similarity.
     attestedBy: []
-    status: pending
+    status: written
   - term: Chunking
     slug: chunking
     area: context
     gloss: >-
       Splitting documents into retrievable pieces, and the losses that causes.
     attestedBy: []
-    status: pending
+    status: written
   - term: Reranking
     slug: reranking
     area: context
     gloss: >-
       A second pass that reorders retrieved candidates by relevance.
     attestedBy: []
-    status: pending
+    status: written
   - term: Grounding
     slug: grounding
     area: context
     gloss: >-
       Tying output to supplied sources rather than model memory.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Semantic search
     slug: semantic-search
     aka: [similarity search]
@@ -711,7 +711,7 @@ concepts:
     gloss: >-
       Search by meaning rather than by keyword.
     attestedBy: []
-    status: pending
+    status: written
   - term: Evaluation
     slug: evaluation
     aka: [eval]
@@ -955,7 +955,7 @@ concepts:
     gloss: >-
       Squeezing earlier turns into a summary so a long run fits the window.
     attestedBy: []
-    status: pending
+    status: written
   - term: Prompt engineering
     slug: prompt-engineering
     area: context

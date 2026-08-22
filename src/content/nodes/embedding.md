@@ -74,7 +74,8 @@ characters, and no amount of string comparison brings them together.
 
 Positions in a continuous space can be compared by distance, and distance turns
 out to track similarity of meaning closely enough to build on. That is the whole
-basis of semantic search, clustering, deduplication and recommendation.
+basis of [semantic search](semantic-search), clustering, deduplication and
+recommendation.
 
 ## Inside the model and beside it
 

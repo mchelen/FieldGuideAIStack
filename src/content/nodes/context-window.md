@@ -36,7 +36,7 @@ of figure that is accurate on the date it was read and worth nothing undated.
 3. Tool results — usually the largest and least predictable consumer.
 4. The model's own output — reserved from the same budget.
 
-## Why "context engineering" is a harness discipline
+## Why "[context engineering](context-engineering)" is a harness discipline
 
 Since 3 dominates and 2 never shrinks on its own, the [harness](harness) has to
 decide what to drop, summarize, or re-fetch. That work — not the model's raw
