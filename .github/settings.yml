@@ -10,7 +10,7 @@ repository:
   name: FieldGuideAIStack
   description: >-
     A field guide for the modern AI stack: one page per concept, a diagram of
-    what it touches, and a dated source for every claim. TEST123
+    what it touches, and a dated source for every claim.
   homepage: https://mchelen.github.io/FieldGuideAIStack/
   topics: ai, field-guide, knowledge-graph, astro, documentation
   private: false
