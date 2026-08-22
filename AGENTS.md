@@ -49,6 +49,13 @@ any new development work.
 - When the fix needs code changes, do the upgrade yourself in one pull request
   rather than pushing to the bot's branch. Close the bot's pull requests once
   the version they wanted is on `main`.
+- Deprecation notices in CI output are updates waiting to happen. When a run
+  warns that an action, runtime, or tool version is deprecated or superseded,
+  open a pull request with the recommended version and get it to green. Do not
+  leave the warning sitting in the log.
+- Check what the current major actually is rather than assuming the next number
+  up. This repository's Node 20 deprecation needed `actions/checkout` and
+  `actions/setup-node` at **v7**, not v5.
 - **Green is only worth what CI covers.** Before trusting a green check on a
   major bump, ask what the build would still pass while quietly breaking. If
   nothing asserts it, add the assertion in the same pull request. Astro 5 -> 7
