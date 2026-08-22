@@ -39,11 +39,17 @@ any new development work.
 
 ## Repository configuration
 - Repository settings are code. `.github/settings.yml` is the source of truth,
-  and the repository-settings app applies it on every push to `main`. Change a
-  setting by editing that file in a pull request — a change made in the GitHub
-  UI holds only until the next sync, then reverts.
-- The app must stay installed for the file to do anything at all. If a setting
-  will not take, check the installation before debugging the YAML.
+  and the repository-settings app applies it. Change a setting by editing that
+  file in a pull request — a change made in the GitHub UI holds only until the
+  next sync, then reverts.
+- **The sync runs on a push to `main`, and only then.** Installing the app
+  applies nothing by itself. Neither does merging the pull request that adds
+  `settings.yml`, if the app was installed after that merge landed. The next
+  push to `main` is what applies the file.
+- That failure is silent — nothing errors, the settings simply stay unapplied.
+  So verify against the live repository rather than trusting a green merge: a
+  declared label should exist, and `main` should report as protected. If they
+  do not, check the app is installed, then push again. Debug the YAML last.
 - Every top-level key under `protection` must be present; set the ones you do
   not want to `null`. Omitting one makes the app skip the entire block without
   reporting an error.
