@@ -12,9 +12,12 @@ canonical:
   title: Building effective agents — Anthropic
   verifiedOn: 2026-08-22
   note: >-
-    Not carried by the surveyed AI glossaries. The security meaning — a bounded
-    environment where untrusted code runs without reaching what matters —
-    transfers without modification, which is why nobody bothered to redefine it.
+    The security meaning — a bounded environment where untrusted code runs
+    without reaching what matters — transfers without modification, which is why
+    nobody redefined it. Anthropic's Claude Code glossary carries it as
+    "Sandboxing", scoped to one tool: "OS-level filesystem and network isolation
+    for the Bash tool". This page originally said no surveyed glossary carried
+    it, which was wrong.
 tags: [agentic, safety]
 zoom: 2
 summary: The bounded environment an agent's commands and code run inside, so
@@ -51,6 +54,10 @@ examples:
       appropriate guardrails" for autonomous agents.
     verifiedOn: 2026-08-22
 sources:
+  - id: claude-code-glossary
+    url: https://code.claude.com/docs/en/glossary
+    title: Glossary — Claude Code documentation
+    verifiedOn: 2026-08-22
   - id: anthropic-agents
     url: https://www.anthropic.com/engineering/building-effective-agents
     title: Building effective agents — Anthropic
@@ -91,6 +98,13 @@ That is what makes it the load-bearing layer of a
   between a runaway loop and an outage.
 - **Lifetime** — disposable is the point. A sandbox reused across tasks
   accumulates state and stops being a clean boundary.
+
+A sandbox is also a way to *reduce* friction rather than add it. Anthropic
+describes its purpose as letting commands "run inside a boundary you define
+upfront, so Claude can work freely within it without per-command approval
+prompts", and notes that it is "a separate layer from permission
+rules."[[cite:claude-code-glossary]] Drawing the boundary once is what makes a
+wide [autonomy level](autonomy-level) safe to grant.
 
 ## The specific thing it defends against
 

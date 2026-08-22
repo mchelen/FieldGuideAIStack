@@ -571,7 +571,7 @@ concepts:
     gloss: >-
       State that lasts only for the current run.
     attestedBy: []
-    status: pending
+    status: written
   - term: Long-term memory
     slug: long-term-memory
     aka: [persistent memory]
@@ -579,7 +579,7 @@ concepts:
     gloss: >-
       State that survives across sessions.
     attestedBy: []
-    status: pending
+    status: written
   - term: Autonomy level
     slug: autonomy-level
     aka: [levels of autonomy]
@@ -619,7 +619,7 @@ concepts:
     gloss: >-
       Agent work that runs on a timetable rather than on request.
     attestedBy: []
-    status: pending
+    status: written
   - term: Computer use
     slug: computer-use
     aka: [desktop control]
@@ -627,7 +627,7 @@ concepts:
     gloss: >-
       An agent driving a whole computer rather than a single app.
     attestedBy: []
-    status: pending
+    status: written
   - term: Workflow
     slug: workflow
     aka: [pipeline]
@@ -1013,7 +1013,7 @@ concepts:
     gloss: >-
       Using an agent to write, run and fix code rather than to suggest it.
     attestedBy: []
-    status: pending
+    status: written
   - term: Agentic loop
     slug: agentic-loop
     aka: [reasoning loop]
@@ -1035,21 +1035,21 @@ concepts:
     gloss: >-
       One continuous run of an agent, and the state scoped to it.
     attestedBy: []
-    status: pending
+    status: written
   - term: Turn
     slug: turn
     area: agentic
     gloss: >-
       One exchange within a session, which is the unit autonomy is measured in.
     attestedBy: []
-    status: pending
+    status: written
   - term: Hook
     slug: hook
     area: agentic
     gloss: >-
       A user-defined command the harness runs before or after its actions.
     attestedBy: []
-    status: pending
+    status: written
   - term: Skill
     slug: skill
     aka: [reusable instructions]
@@ -1057,7 +1057,7 @@ concepts:
     gloss: >-
       Packaged instructions that teach an agent a repeatable workflow.
     attestedBy: []
-    status: pending
+    status: written
   - term: Checkpoint and rollback
     slug: checkpoint-and-rollback
     aka: [undo]
@@ -1065,7 +1065,7 @@ concepts:
     gloss: >-
       Restoring an agent's work to an earlier point after a bad step.
     attestedBy: []
-    status: pending
+    status: written
   - term: Effort level
     slug: effort-level
     aka: [reasoning effort, extended thinking]
@@ -1073,7 +1073,7 @@ concepts:
     gloss: >-
       How much inference compute a request is allowed to spend on reasoning.
     attestedBy: []
-    status: pending
+    status: written
   - term: Multi-agent system
     slug: multi-agent-system
     aka: [agent teams]
@@ -1096,7 +1096,7 @@ concepts:
     gloss: >-
       Whether an agent may act on a codebase it has not been vetted against.
     attestedBy: []
-    status: pending
+    status: written
   - term: Generative AI
     slug: generative-ai
     aka: [GenAI]

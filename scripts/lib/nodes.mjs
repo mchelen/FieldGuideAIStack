@@ -20,7 +20,9 @@ export async function loadNodes() {
       } catch (err) {
         // Malformed frontmatter should read as a validation failure with a
         // filename, not as a YAML library stack trace.
-        return { id: file.replace(/\.md$/, ''), file, data: null, content: '', parseError: String(err.message ?? err).split('\n')[0] };
+        // `raw` comes back with the error so a caller can point at the offending
+        // line rather than only relaying the parser's line/column.
+        return { id: file.replace(/\.md$/, ''), file, data: null, content: '', raw, parseError: String(err.message ?? err).split('\n')[0] };
       }
     }),
   );
