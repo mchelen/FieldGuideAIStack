@@ -28,6 +28,9 @@ relations:
     note: Hooks run shell commands before or after actions, gating them.
   - type: bundles
     target: connector
+  - type: bundles
+    target: memory
+    note: CLAUDE.md files read at session start, plus auto memory across sessions.
   - type: kind-of
     target: harness
 examples:
