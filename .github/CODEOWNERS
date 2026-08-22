@@ -4,8 +4,14 @@
 #
 # Everything not listed here is deliberately unowned, so ordinary content and
 # code pull requests still auto-merge on green without waiting on a human.
+#
+# Directory rules are written twice, as `dir/` and `dir/**`. GitHub documents
+# the trailing-slash form as owning the directory and its subdirectories; the
+# `**` form is belt and braces. Last matching rule wins, and both name the same
+# owner, so the duplication is harmless.
 
-/.github/settings.yml    @mchelen
-/.github/CODEOWNERS      @mchelen
-/.github/workflows/      @mchelen
-/CHARTER.md              @mchelen
+/.github/settings.yml      @mchelen
+/.github/CODEOWNERS        @mchelen
+/.github/workflows/        @mchelen
+/.github/workflows/**      @mchelen
+/CHARTER.md                @mchelen
