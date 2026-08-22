@@ -97,7 +97,7 @@ synchronising it.
 "All limits described here represent maximum allowed usage, not guaranteed
 minimums."[[cite:anthropic-rate-limits]] A ceiling, not a reservation — nothing
 promises you can reach it under contention. Guaranteed capacity is a different
-product, sold as provisioned throughput.
+product, sold as [provisioned throughput](provisioned-throughput).
 
 ## Working within them
 

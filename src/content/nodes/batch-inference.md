@@ -91,10 +91,10 @@ That is a large discount for an identical model producing identical output, and
 it is worth understanding why it exists.
 
 Serving interactive traffic means holding capacity in reserve for peaks, and
-reserved capacity is idle capacity most of the time. A workload with no deadline
-can be scheduled into those gaps. The discount is the provider sharing what it
-saves by filling them — which is why it is a fixed rate rather than a volume
-tier.
+[reserved capacity](provisioned-throughput) is idle capacity most of the time. A
+workload with no deadline can be scheduled into those gaps. The discount is the
+provider sharing what it saves by filling them — which is why it is a fixed rate
+rather than a volume tier.
 
 ## The terms that come with it
 

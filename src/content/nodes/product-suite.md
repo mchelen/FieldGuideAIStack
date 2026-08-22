@@ -75,9 +75,9 @@ market.
 
 The interesting difference is not capability but how the family is *sold*.
 Anthropic sells separately named products. OpenAI sells modes inside one
-product. Google gates the agent behind a subscription tier. Same underlying
-split, three commercial answers — and the packaging decides what a buyer thinks
-they are choosing between.
+product. Google gates the agent behind a [subscription tier](subscription-tier).
+Same underlying split, three commercial answers — and the packaging decides what
+a buyer thinks they are choosing between.
 
 ## Suites are less unified than they look
 
