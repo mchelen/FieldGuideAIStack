@@ -187,7 +187,7 @@ concepts:
     gloss: >-
       A large model trained broadly enough to be adapted to many downstream tasks.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Large language model
     slug: large-language-model
     aka: [LLM]
@@ -195,7 +195,7 @@ concepts:
     gloss: >-
       A model trained on text at a scale where general language ability emerges.
     attestedBy: [google-ml, wikipedia]
-    status: pending
+    status: written
   - term: Small language model
     slug: small-language-model
     aka: [SLM]
@@ -218,7 +218,7 @@ concepts:
     gloss: >-
       The attention-based architecture nearly all current language models are built on.
     attestedBy: [google-ml, hf, wikipedia]
-    status: pending
+    status: written
   - term: Attention
     slug: attention
     aka: [self-attention]
@@ -226,7 +226,7 @@ concepts:
     gloss: >-
       The mechanism letting a model weigh every token against every other.
     attestedBy: [google-ml, hf]
-    status: pending
+    status: written
   - term: Parameter
     slug: parameter
     aka: [weights]
@@ -234,21 +234,21 @@ concepts:
     gloss: >-
       A learned number inside the model; the count is the usual size headline.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Tokenizer
     slug: tokenizer
     area: models
     gloss: >-
       The component splitting text into the units a model actually consumes.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Token
     slug: token
     area: models
     gloss: >-
       The unit a model reads and writes, and the unit you are billed in.
     attestedBy: [google-ml, hf]
-    status: pending
+    status: written
   - term: Embedding
     slug: embedding
     aka: [vector representation]
@@ -370,14 +370,14 @@ concepts:
     gloss: >-
       Fluent output asserting things that are not true.
     attestedBy: [google-ml, wikipedia]
-    status: pending
+    status: written
   - term: Temperature
     slug: temperature
     area: models
     gloss: >-
       The sampling parameter trading determinism against variety.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Scaling laws
     slug: scaling-laws
     area: models
