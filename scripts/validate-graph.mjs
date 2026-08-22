@@ -248,13 +248,28 @@ for (const n of nodes) {
   const linked = new Set([...prose.matchAll(/\]\(([a-z0-9-]+)\)/g)].map((m) => m[1]));
   const self = lexicon.find((l) => l.id === n.id);
 
+  // Spans already inside a markdown link's text. "Prompt injection" sits inside
+  // "[indirect prompt injection](...)", and flagging that as an unlinked mention
+  // sends you to add a link where one is already doing the job.
+  const linkTextSpans = [...prose.matchAll(/\[([^\]]*)\]\([a-z0-9-]+\)/g)].map((m) => [
+    m.index + 1,
+    m.index + 1 + m[1].length,
+  ]);
+  const insideLink = (i) => linkTextSpans.some(([a, b]) => i >= a && i < b);
+
   for (const entry of lexicon) {
     if (entry.id === n.id || linked.has(entry.id)) continue;
     for (const { term, exact } of entry.terms) {
       if (self?.own.has(term.toLowerCase())) continue;
-      const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const re = new RegExp(`(?<!\\[)\\b${escaped}\\b`, exact ? '' : 'i');
-      if (re.test(prose)) {
+      // Spaces in the term match any run of whitespace, because prose is hard
+      // wrapped and a term split across two lines is still a mention. Before
+      // this, re-wrapping a paragraph could hide an unlinked term or reveal it.
+      const escaped = term
+        .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+        .replace(/\s+/g, '\\s+');
+      const re = new RegExp(`(?<!\\[)\\b${escaped}\\b`, exact ? 'g' : 'gi');
+      const hit = [...prose.matchAll(re)].some((m) => !insideLink(m.index));
+      if (hit) {
         warnings.push(
           `${n.file}: mentions “${term}” without linking it — write [${term}](${entry.id})`,
         );

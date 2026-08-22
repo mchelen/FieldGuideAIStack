@@ -135,6 +135,12 @@ any new development work.
 - The validator warns about unlinked mentions, but only for terms of two or
   more words. Single common words — model, agent, surface, Claude — appear as
   ordinary prose constantly, and flagging them would bury the signal.
+- Spaces in a term match any run of whitespace, and a mention inside another
+  link's text does not count. Both were wrong before: re-wrapping a paragraph
+  could hide `Claude Code` by splitting it across lines, and `[indirect prompt
+  injection](...)` was reported as an unlinked mention of `prompt injection`.
+  Fixing the first surfaced seven real unlinked mentions that hard wrapping had
+  been concealing.
 - Vendor-attributed terms are matched case sensitively, because the lowercase
   form is often an ordinary phrase. Google's "Connected Apps" is a product
   name; "connected apps" is what you call apps that are connected.
@@ -187,3 +193,8 @@ any new development work.
   citation imply a confidence the retrieval does not support.
 - Content lives in the graph. Adding a concept is one new node file, never
   a new hand-written page.
+- **A YAML plain scalar cannot contain a colon followed by a space.** `fieldMark:
+  Ask what it costs: tokens.` does not parse, and the error names a line number
+  rather than the problem. Use a block scalar (`fieldMark: >-`) whenever the
+  text might contain `: `. This has broken three separate pages; `npm run
+  validate` catches it, which is why it runs before anything else.

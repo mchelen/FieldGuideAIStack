@@ -46,7 +46,7 @@ impressive about coding agents is that loop, not the writing.
 | | Where the command runs |
 | --- | --- |
 | [Claude Code](claude-code) | Your machine, in your working directory |
-| [Claude Cowork](claude-cowork) | An isolated environment on Anthropic's servers |
+| [Claude Cowork](claude-cowork) | An [isolated environment](sandbox) on Anthropic's servers |
 | [ChatGPT Work](chatgpt-work) | An isolated cloud environment, with configurable network access |
 | [OpenAI Codex](openai-codex) | Locally via the CLI, remotely via Codex cloud |
 

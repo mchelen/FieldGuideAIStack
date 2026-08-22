@@ -53,11 +53,11 @@ sources:
     title: Get started with Claude Cowork — Anthropic Help Center
     verifiedOn: 2026-08-22
 ---
-
 Cowork is the clearest illustration in this guide of why [surface](surface) is
 worth separating from engine. Anthropic's documentation states it plainly:
-Cowork "uses the same agentic architecture that powers [Claude Code](claude-code), accessible
-within Claude Desktop without opening the terminal."[[cite:anthropic-cowork-overview]]
+Cowork "uses the same agentic architecture that powers [Claude Code](claude-
+code), accessible within Claude Desktop without opening the
+terminal."[[cite:anthropic-cowork-overview]]
 
 The engine did not change. The audience did.
 
@@ -79,10 +79,11 @@ macOS or Windows.[[cite:anthropic-get-started]]
 ## The detail most comparisons miss
 
 Cowork loads the connectors, skills and plugins enabled for your **claude.ai
-account**, and explicitly does not read the Claude Code CLI's `~/.claude`
-directory. Same engine, same vendor, different extension scope — so a skill you
-wrote for the CLI does not simply appear here.
+account**, and explicitly does not read the [Claude Code](claude-code) CLI's
+`~/.claude` directory. Same engine, same vendor, different extension scope — so
+a skill you wrote for the CLI does not simply appear here.
 
-Execution is also not local: code and commands run in an isolated environment on
-Anthropic's servers, with your granted folders as the input.[[cite:anthropic-get-started]] "Works on my files"
-and "runs code on my machine" are separate claims, and only the first one holds.
+Execution is also not local: code and commands run in an [isolated
+environment](sandbox) on Anthropic's servers, with your granted folders as the
+input.[[cite:anthropic-get-started]] "Works on my files" and "runs code on my
+machine" are separate claims, and only the first one holds.

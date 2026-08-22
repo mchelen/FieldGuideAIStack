@@ -1,6 +1,6 @@
 ---
 title: Approval Mode
-aka: [permission mode, human in the loop, confirmation prompt]
+aka: [permission mode, confirmation prompt]
 tags: [capability, safety, product-anatomy]
 zoom: 2
 summary: The policy deciding which agent actions need your say-so — every one,
@@ -38,7 +38,8 @@ That detail is worth dwelling on. Checking is not free, which means "safe by
 default" has a running cost, which means there will always be pressure to turn
 it off.
 
-## Approval and [background execution](background-execution) pull against each other
+## Approval and [background execution](background-execution) pull against each
+other
 
 Confirm-everything is coherent while you are watching. It is useless for a task
 running while you sleep — the agent stops at the first prompt and waits for
