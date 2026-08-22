@@ -188,6 +188,11 @@ any new development work.
   one. Attach the reference inline to the sentence making the claim.
 - A source nobody cites inline is either unused or the prose around it is
   under-cited. Both are worth noticing rather than leaving.
+- **Never let a line break fall inside a `[[cite:id]]` marker.** A split marker
+  stops matching, ships as literal text, and looks fine in the source. Hard
+  wrapping a paragraph is how it happens. `npm run validate` now names the file
+  and the broken marker; `npm run check:output` catches it in `dist/` as a
+  second line of defence.
 - Where a source could not be read directly — a publisher blocking automated
   clients, a paywall — say so on the source itself rather than letting a
   citation imply a confidence the retrieval does not support.

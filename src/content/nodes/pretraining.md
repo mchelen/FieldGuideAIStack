@@ -99,7 +99,7 @@ very large number adapt. When a [foundation model](foundation-model) is released
 with [open weights](open-weights), what is being given away is the pretraining
 run.[[cite:hf-mistral]]
 
-## What a pretrained model is like
+## What a [pretrained model](pretrained-model) is like
 
 Not a chatbot. A raw pretrained model continues text rather than answering it —
 ask it a question and a plausible continuation is another question, because

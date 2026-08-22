@@ -208,6 +208,16 @@ for (const n of nodes) {
     else if (ids.indexOf(id) !== i) problems.push(`${n.file}: duplicate source id "${id}"`);
   }
 
+  // A marker broken across a line break stops matching and ships as literal
+  // text. `npm run check:output` catches it in dist/, but only after a build;
+  // catching it here names the file before anything is rendered. Hard wrapping
+  // a paragraph is how it happens.
+  for (const m of n.content.matchAll(/\[\[cite:[a-z0-9-]*\s+[a-z0-9-]*\]\]/g)) {
+    problems.push(
+      `${n.file}: citation marker split across lines — \`${m[0].replace(/\s+/g, ' ')}\` will not resolve`,
+    );
+  }
+
   const used = new Set(
     [...n.content.matchAll(/\[\[cite:([a-z0-9][a-z0-9-]*)\]\]/g)].map((m) => m[1]),
   );
