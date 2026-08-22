@@ -263,7 +263,7 @@ concepts:
     gloss: >-
       The first and most expensive training stage, on broad unlabelled data.
     attestedBy: []
-    status: pending
+    status: written
   - term: Post-training
     slug: post-training
     aka: [alignment training]
@@ -271,14 +271,14 @@ concepts:
     gloss: >-
       Everything done after pretraining to make a model useful and safe.
     attestedBy: []
-    status: pending
+    status: written
   - term: Fine-tuning
     slug: fine-tuning
     area: models
     gloss: >-
       Further training of an existing model on narrower data.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Parameter-efficient fine-tuning
     slug: parameter-efficient-fine-tuning
     aka: [LoRA, PEFT]
@@ -286,7 +286,7 @@ concepts:
     gloss: >-
       Adapting a model by training a small number of extra weights.
     attestedBy: [google-ml, wikipedia]
-    status: pending
+    status: written
   - term: Reinforcement learning from human feedback
     slug: reinforcement-learning-from-human-feedback
     aka: [RLHF]
@@ -294,7 +294,7 @@ concepts:
     gloss: >-
       Post-training against human preference judgements.
     attestedBy: [google-ml, wikipedia]
-    status: pending
+    status: written
   - term: Distillation
     slug: distillation
     aka: [model distillation]
@@ -302,21 +302,21 @@ concepts:
     gloss: >-
       Training a smaller model to imitate a larger one.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Quantization
     slug: quantization
     area: models
     gloss: >-
       Storing weights at lower precision to cut memory and cost.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Checkpoint
     slug: checkpoint
     area: models
     gloss: >-
       A saved snapshot of weights at a point in training.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Model card
     slug: model-card
     area: models
@@ -331,7 +331,7 @@ concepts:
     gloss: >-
       Post-training that makes a base model follow instructions.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Multimodal model
     slug: multimodal-model
     area: models
