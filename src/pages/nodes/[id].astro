@@ -53,6 +53,12 @@ const sections = [
   },
 ].filter(Boolean) as { id: string; label: string; icon: string }[];
 
+const kindLabel: Record<string, string> = {
+  concept: 'Concept',
+  product: 'Product',
+  suite: 'Product family',
+};
+
 const canonicalLabel: Record<string, string> = {
   standard: 'Defined by a standard',
   'de-facto': 'De facto standard term',
@@ -72,11 +78,11 @@ const derived = relations.filter((r) => r.derived);
     <p class="kindline">
       <span class={`kind-badge is-${entry.data.kind}`}>
         <Icon name={entry.data.kind} size={13} />
-        {entry.data.kind === 'product' ? 'Product' : 'Concept'}
+        {kindLabel[entry.data.kind]}
       </span>
       {entry.data.vendor && <span class="vendor-name">{entry.data.vendor}</span>}
       {
-        entry.data.kind === 'product' && (
+        (entry.data.kind === 'product' || entry.data.kind === 'suite') && (
           <a href={`${base}/compare`}>compare with the others</a>
         )
       }

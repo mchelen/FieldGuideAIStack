@@ -37,7 +37,8 @@ const files = (await readdir(NODES)).filter((f) => f.endsWith('.md'));
 const kinds = new Map();
 for (const f of files) {
   const body = await readFile(NODES + f, 'utf8');
-  kinds.set(f.replace(/\.md$/, ''), /^kind:\s*product/m.test(body) ? 'product' : 'concept');
+  const m = body.match(/^kind:\s*(\w+)/m);
+  kinds.set(f.replace(/\.md$/, ''), m ? m[1] : 'concept');
 }
 const existing = new Set([...kinds].filter(([, k]) => k === 'concept').map(([id]) => id));
 

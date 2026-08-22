@@ -35,7 +35,7 @@ sources:
 
 ChatGPT is best read as a container rather than a capability. OpenAI's
 documentation presents Chat, Work and Codex as modes and surfaces within one
-product family, which means the honest answer to "what can ChatGPT do" is
+[product family](product-suite), which means the honest answer to "what can ChatGPT do" is
 "which mode?"
 
 That packaging choice is the single biggest difference from Anthropic's, where

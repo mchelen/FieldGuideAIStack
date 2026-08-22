@@ -104,11 +104,13 @@ const nodes = defineCollection({
   schema: z.object({
     title: z.string().min(1),
     /**
-     * Concepts are ideas; products are things you can buy or install. Both live
-     * in one graph so a product can point straight at the concepts it ships,
-     * which is what makes two products comparable without a separate taxonomy.
+     * Concepts are ideas; products are things you can buy or install; suites are
+     * the families products are sold in. All three live in one graph so a
+     * product can point straight at the concepts it ships and the family it
+     * belongs to, which is what makes two products comparable without a
+     * separate taxonomy.
      */
-    kind: z.enum(['concept', 'product']).default('concept'),
+    kind: z.enum(['concept', 'product', 'suite']).default('concept'),
     /** Products only: who sells it. */
     vendor: z.string().optional(),
     aka: z.array(alias).default([]),
