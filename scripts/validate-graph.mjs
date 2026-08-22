@@ -8,7 +8,7 @@
  */
 import { loadNodes, report } from './lib/nodes.mjs';
 
-const BARE_LINK = /\]\(([a-z0-9][a-z0-9-]*)\)/g;
+const BARE_LINK = /\]\((?!\/)([a-z0-9][a-z0-9-]*)\)/g;
 
 /**
  * Relation types that are their own inverse. Declaring one on both nodes is
@@ -74,7 +74,26 @@ for (const n of nodes) {
 //     can buy, so it carries a higher evidentiary bar than a concept page.
 for (const n of nodes) {
   const isProduct = n.data.kind === 'product';
-  if (isProduct) {
+  const isSuite = n.data.kind === 'suite';
+
+  if (isSuite) {
+    if (!n.data.vendor) problems.push(`${n.file}: suite has no vendor`);
+    if ((n.data.sources ?? []).length === 0) {
+      problems.push(`${n.file}: suite with no sources`);
+    }
+    // A family of one is a product. The whole point of the node is the
+    // relationship between siblings.
+    const members = (n.data.relations ?? []).filter((r) => r.type === 'contains');
+    if (members.length < 2) {
+      problems.push(`${n.file}: suite contains ${members.length} product(s); a suite needs at least two`);
+    }
+    for (const m of members) {
+      const target = nodes.find((x) => x.id === m.target);
+      if (target && target.data.kind !== 'product') {
+        problems.push(`${n.file}: suite contains "${m.target}", which is not a product`);
+      }
+    }
+  } else if (isProduct) {
     if (!n.data.vendor) problems.push(`${n.file}: product has no vendor`);
     if ((n.data.sources ?? []).length === 0) {
       problems.push(`${n.file}: product with no sources`);
@@ -106,7 +125,7 @@ const missingCanonical = [];
 const missingUseCase = [];
 
 for (const n of nodes) {
-  if (n.data.kind === 'product') continue;
+  if (n.data.kind === 'product' || n.data.kind === 'suite') continue;
 
   const c = n.data.canonical;
   if (!c) {

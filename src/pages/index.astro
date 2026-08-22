@@ -9,6 +9,9 @@ const tags = tagIndex(graph);
 
 const concepts = graph.nodes.filter((n) => n.kind === 'concept');
 const products = graph.nodes.filter((n) => n.kind === 'product');
+const suites = graph.nodes
+  .filter((n) => n.kind === 'suite')
+  .sort((a, b) => (a.vendor ?? '').localeCompare(b.vendor ?? ''));
 
 const byVendor = [...new Set(products.map((p) => p.vendor ?? '—'))]
   .sort()
@@ -53,6 +56,22 @@ const zoomBlurb: Record<number, string> = {
   </div>
 
   <div class="wrap">
+    <section style="margin-top:2.6rem">
+      <h2 style="margin-bottom:0.2rem"><Icon name="product" /> Product families</h2>
+      <p style="color:var(--ink-soft);margin:0">
+        Every vendor here sells several products off one engine. Start with the
+        family to see what is shared before comparing the members.
+      </p>
+      <ul class="cards">
+        {suites.map((n) => (
+          <li class="card is-suite">
+            <a class="title" href={`${base}/nodes/${n.id}/`}>{n.title}</a>
+            <p>{n.summary}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
     <section style="margin-top:2.6rem">
       <h2 style="margin-bottom:0.2rem"><Icon name="product" /> Products</h2>
       <p style="color:var(--ink-soft);margin:0">

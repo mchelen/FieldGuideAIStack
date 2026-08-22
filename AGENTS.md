@@ -56,6 +56,12 @@ any new development work.
 - Check what the current major actually is rather than assuming the next number
   up. This repository's Node 20 deprecation needed `actions/checkout` and
   `actions/setup-node` at **v7**, not v5.
+- **Verify by exit code, never by grepping output.** A grep that finds nothing
+  looks identical to a grep that found no problems, so an empty result reads as
+  success when it may mean the pattern was wrong. #21 shipped two TypeScript
+  errors this way: the check was `grep -E "error TS"`, Astro prints
+  `error ts(2322)` in lowercase, and CI caught what the local check had
+  silently passed. Run the command, read `$?`, and print the tail.
 - **Green is only worth what CI covers.** Before trusting a green check on a
   major bump, ask what the build would still pass while quietly breaking. If
   nothing asserts it, add the assertion in the same pull request. Astro 5 -> 7
