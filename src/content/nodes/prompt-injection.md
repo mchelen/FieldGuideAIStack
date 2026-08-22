@@ -58,7 +58,7 @@ A [model](model) receives a single stream of text. Some of it came from the
 operator, some from the user, some from a web page the agent fetched two steps
 ago. The stream carries no reliable marker of origin, so an instruction written
 into a document is, to the model, the same kind of thing as an instruction
-written into the system prompt.
+written into the [system prompt](system-prompt).
 
 ## Why agents raise the stakes rather than the odds
 

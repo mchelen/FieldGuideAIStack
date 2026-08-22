@@ -651,7 +651,7 @@ concepts:
     gloss: >-
       Standing instructions prepended to every request.
     attestedBy: []
-    status: pending
+    status: written
   - term: Prompt template
     slug: prompt-template
     area: context
@@ -666,7 +666,7 @@ concepts:
     gloss: >-
       Teaching by examples inside the prompt rather than by training.
     attestedBy: [google-ml, promptguide]
-    status: pending
+    status: written
   - term: Retrieval-augmented generation
     slug: retrieval-augmented-generation
     aka: [RAG]
@@ -962,7 +962,7 @@ concepts:
     gloss: >-
       Shaping the prompt to change behaviour, without touching the model.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Chain-of-thought prompting
     slug: chain-of-thought-prompting
     aka: [CoT]
@@ -970,28 +970,28 @@ concepts:
     gloss: >-
       Asking for intermediate reasoning steps rather than only an answer.
     attestedBy: [google-ml, promptguide]
-    status: pending
+    status: written
   - term: Zero-shot prompting
     slug: zero-shot-prompting
     area: context
     gloss: >-
       Asking with no examples, relying on what training already instilled.
     attestedBy: [google-ml, promptguide]
-    status: pending
+    status: written
   - term: Prompt chaining
     slug: prompt-chaining
     area: context
     gloss: >-
       Feeding one prompt's output into the next as an explicit pipeline.
     attestedBy: [google-ml, promptguide]
-    status: pending
+    status: written
   - term: Self-consistency
     slug: self-consistency
     area: context
     gloss: >-
       Sampling several reasoning paths and taking the majority answer.
     attestedBy: [promptguide]
-    status: pending
+    status: written
   - term: Tree of thoughts
     slug: tree-of-thoughts
     aka: [ToT]
@@ -999,14 +999,14 @@ concepts:
     gloss: >-
       Exploring branching reasoning paths rather than one linear chain.
     attestedBy: [promptguide]
-    status: pending
+    status: written
   - term: Meta prompting
     slug: meta-prompting
     area: context
     gloss: >-
       Using a model to write or improve the prompt given to a model.
     attestedBy: [promptguide]
-    status: pending
+    status: written
   - term: Agentic coding
     slug: agentic-coding
     area: agentic

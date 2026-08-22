@@ -105,8 +105,8 @@ happens to be true.
 
 ## LLM, chatbot, and assistant are three different things
 
-The [model](model) predicts tokens. A chat product adds a
-[harness](harness) that keeps conversation state, renders markdown, and calls
-tools. An assistant adds a system prompt, a persona and a policy. All three get
+The [model](model) predicts tokens. A chat product adds a [harness](harness)
+that keeps conversation state, renders markdown, and calls tools. An assistant
+adds a [system prompt](system-prompt), a persona and a policy. All three get
 called "an LLM" in casual use, which is where most confusion about what these
 systems can do begins.[[cite:wikipedia-llm]]

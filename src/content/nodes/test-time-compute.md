@@ -74,10 +74,10 @@ immediately means the first token is emitted before any of the problem has been
 worked through, and everything after it is a continuation of that commitment.
 
 Generating intermediate steps first gives the model something to condition on
-that it did not have. Chain-of-thought prompting demonstrated the effect and its
-limits: it "significantly improves the ability of large language models to
-perform complex reasoning", and the gains arrive with
-scale.[[cite:cot-paper]]
+that it did not have. [Chain-of-thought prompting](chain-of-thought-prompting)
+demonstrated the effect and its limits: it "significantly improves the ability
+of large language models to perform complex reasoning", and the gains arrive
+with scale.[[cite:cot-paper]]
 
 ## What it changes about buying models
 
