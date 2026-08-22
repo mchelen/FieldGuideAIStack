@@ -101,10 +101,18 @@ Two things about that sync are worth knowing before you debug it:
 [`.github/CODEOWNERS`](.github/CODEOWNERS) covers the files that can change what
 the automation is allowed to do — `settings.yml`, `CODEOWNERS` itself, the
 workflows, and `CHARTER.md`. Branch protection requires zero approvals in
-general but code owner approval on those, so ordinary content pull requests
-auto-merge on green while changes to the guardrails wait for a human. Since the
-sync only fires on a `settings.yml` change, that also means every repository
-settings change passes through a human approval by construction.
+general and code owner approval on those, so ordinary content pull requests
+auto-merge on green.
+
+**Be clear about what that does and does not enforce.** On a single-owner
+repository it enforces nothing. An agent pushing with the owner's credentials
+authors pull requests as the owner, GitHub never requires authors to approve
+their own pull requests, and so the code owner requirement has nobody to
+satisfy it — a pull request editing `CODEOWNERS` itself still reports as
+cleanly mergeable. Giving the agent its own identity, via a GitHub App or bot
+account, is what would make the requirement bind. Until then the list is a
+statement of intent that `AGENTS.md` obliges the agent to honour, and worth
+keeping for exactly that reason.
 
 Note that `enforce_admins` is `false`, which it has to be: nobody can approve
 their own pull request, so enforcing protection on admins would deadlock a solo
