@@ -45,6 +45,7 @@ move down that table, and they are all [harness](harness) problems.
 
 ## Multi-agent
 
-A "multi-agent system" is normally one harness spawning sub-loops, each with its
-own [context window](context-window) and tool set, coordinated by a parent. It
-is a harness architecture, not a different kind of model.
+A "[multi-agent system](multi-agent-system)" is normally one harness spawning
+sub-loops, each with its own [context window](context-window) and tool set,
+coordinated by a parent. It is a harness architecture, not a different kind of
+model.

@@ -65,9 +65,10 @@ Everything [Cowork](claude-cowork) has, plus the things a codebase demands:
 operations, CI integration, and [MCP](mcp) servers configured per project.
 
 The execution detail is where it separates from Cowork most sharply. Both can
-run commands; Claude Code runs them on **your machine**, against your
-toolchain and your working tree, while Cowork runs them in an isolated
-environment on Anthropic's servers. Same engine, different blast radius.
+run commands; Claude Code runs them on **your machine**, against your toolchain
+and your working tree, while Cowork runs them in an [isolated
+environment](sandbox) on Anthropic's servers. Same engine, different blast
+radius.
 
 The [browser automation](browser-automation) is narrower than Cowork's — a
 Chrome integration aimed at debugging live web applications rather than general

@@ -102,8 +102,8 @@ were trained on undifferentiated text and turned out to be usable for work
 nobody trained them for, which the GPT-3 paper had demonstrated the year
 before.[[cite:gpt3-paper]]
 
-That is a genuinely different kind of artefact, and calling it "a language
-model" undersold what had changed.
+That is a genuinely different kind of artefact, and calling it "a [language
+model](large-language-model)" undersold what had changed.
 
 ## Homogenisation: the argument the name was making
 

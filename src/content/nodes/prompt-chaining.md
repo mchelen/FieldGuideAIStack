@@ -54,12 +54,11 @@ sources:
     title: Prompt Chaining — Prompt Engineering Guide
     verifiedOn: 2026-08-22
 ---
-
-"To improve the reliability and performance of LLMs, one of the important prompt
-engineering techniques is to break tasks into its subtasks. Once those subtasks
-have been identified, the LLM is prompted with a subtask and then its response
-is used as input to another prompt. This is what's referred to as prompt
-chaining."[[cite:promptguide-chaining]]
+"To improve the reliability and performance of LLMs, one of the important
+[prompt engineering](prompt-engineering) techniques is to break tasks into its
+subtasks. Once those subtasks have been identified, the LLM is prompted with a
+subtask and then its response is used as input to another prompt. This is what's
+referred to as prompt chaining."[[cite:promptguide-chaining]]
 
 It is a pipeline. The novelty is only that the stages are model calls.
 

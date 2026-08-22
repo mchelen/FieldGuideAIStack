@@ -95,9 +95,9 @@ alongside it, is not something the mechanism settles — and the visible trace i
 not evidence either way, because producing convincing text is exactly what these
 systems do.
 
-Vendors hedge with their own words: thinking, extended thinking, reasoning
-effort. This guide uses the term the field uses and notes that it carries a
-claim the evidence does not.
+Vendors hedge with their own words: thinking, extended thinking, [reasoning
+effort](test-time-compute). This guide uses the term the field uses and notes
+that it carries a claim the evidence does not.
 
 ## What it costs
 

@@ -531,7 +531,7 @@ concepts:
     gloss: >-
       How a system decides which step, model or agent runs next.
     attestedBy: []
-    status: pending
+    status: written
   - term: Planning
     slug: planning
     aka: [task decomposition]
@@ -539,7 +539,7 @@ concepts:
     gloss: >-
       An agent working out the steps before taking them.
     attestedBy: [google-ml, outline]
-    status: pending
+    status: written
   - term: ReAct
     slug: react
     aka: [reason and act]
@@ -547,7 +547,7 @@ concepts:
     gloss: >-
       The interleaving of reasoning and tool calls in a loop.
     attestedBy: [promptguide]
-    status: pending
+    status: written
   - term: Reflection
     slug: reflection
     aka: [self-critique]
@@ -555,7 +555,7 @@ concepts:
     gloss: >-
       An agent evaluating its own output to decide what to do next.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Memory
     slug: memory
     aka: [statefulness]
@@ -587,7 +587,7 @@ concepts:
     gloss: >-
       How much an agent decides without a human in the loop.
     attestedBy: []
-    status: pending
+    status: written
   - term: Human in the loop
     slug: human-in-the-loop
     aka: [HITL]
@@ -595,7 +595,7 @@ concepts:
     gloss: >-
       A person required in the decision path before an action lands.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Sandbox
     slug: sandbox
     aka: [isolated environment]
@@ -603,7 +603,7 @@ concepts:
     gloss: >-
       The bounded environment an agent's code and commands run inside.
     attestedBy: []
-    status: pending
+    status: written
   - term: Permission model
     slug: permission-model
     aka: [scopes]
@@ -611,7 +611,7 @@ concepts:
     gloss: >-
       What an agent is allowed to do, and who decided.
     attestedBy: []
-    status: pending
+    status: written
   - term: Scheduled task
     slug: scheduled-task
     aka: [cron, routine]
@@ -635,7 +635,7 @@ concepts:
     gloss: >-
       A fixed sequence of steps, as opposed to a model-decided one.
     attestedBy: [google-ml, hf]
-    status: pending
+    status: written
   - term: Context engineering
     slug: context-engineering
     aka: [context management]
@@ -1021,14 +1021,14 @@ concepts:
     gloss: >-
       The cycle of context, model call, tool execution, repeat.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Verification loop
     slug: verification-loop
     area: agentic
     gloss: >-
       An agent checking its own work by running it, then fixing what failed.
     attestedBy: []
-    status: pending
+    status: written
   - term: Session
     slug: session
     area: agentic
@@ -1081,14 +1081,14 @@ concepts:
     gloss: >-
       Several agents coordinating, with the delegation problems that brings.
     attestedBy: [wikipedia]
-    status: pending
+    status: written
   - term: Autonomous agent
     slug: autonomous-agent
     area: agentic
     gloss: >-
       An agent operating without step-by-step human direction.
     attestedBy: [google-ml]
-    status: pending
+    status: written
   - term: Project trust
     slug: project-trust
     aka: [workspace trust]

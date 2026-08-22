@@ -27,12 +27,12 @@ sources:
 This is the sharpest dividing line between a chat product and an agentic one,
 and it splits along surface rather than brand.
 
-Cowork's documentation describes Claude reading and writing local files
-"without requiring manual uploads or downloads." [ChatGPT Work](chatgpt-work)'s documentation
-describes the opposite arrangement on the web: it "operates in isolated cloud
-environments and cannot directly access local files or apps," so "users must
-upload files or use connected applications" — while the desktop app version can
-reach local resources.
+Cowork's documentation describes Claude reading and writing local files "without
+requiring manual uploads or downloads." [ChatGPT Work](chatgpt-work)'s
+documentation describes the opposite arrangement on the web: it "operates in
+isolated cloud environments and cannot directly access local files or apps," so
+"users must upload files or use connected applications" — while the desktop app
+version can reach local resources.
 
 Both vendors therefore ship both models. Which one you get depends on which
 [surface](surface) you opened.
@@ -41,7 +41,7 @@ Both vendors therefore ship both models. Which one you get depends on which
 
 Local access is not all-or-nothing. Anthropic's Cowork support documentation
 describes access limited to folders you explicitly grant through the desktop
-app, with code and commands running inside an isolated environment on
+app, with code and commands running inside an [isolated environment](sandbox) on
 Anthropic's servers rather than directly on your machine.
 
 That combination — local files in, execution elsewhere — is a common shape, and
