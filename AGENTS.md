@@ -3,9 +3,36 @@
 A field guide to the AI stack. Full brief: `CHARTER.md` — read it before
 any new development work.
 
+## Standing instructions live here
+- When someone says to *always* or *never* do something, write it into this
+  file as part of the same piece of work. An instruction that only exists in a
+  chat transcript is not a rule — the next session will not see it.
+- This file is for how work gets done: workflow, tooling, conventions.
+  `CHARTER.md` is for what the project is and why; it changes only by human
+  decision or explicit direction. If a standing instruction changes the goals
+  rather than the method, flag it as a charter decision instead of writing it
+  here.
+- Keep entries imperative and specific enough to act on without asking. If a
+  rule needs a caveat, state the caveat rather than softening the rule.
+
 ## Workflow
-- Always open a pull request; merge automatically once CI and review checks pass.
-- Never commit direct to main.
+- Develop on a branch, never on `main`, and never commit direct to `main`.
+- Name branches `<type>/<short-kebab-description>` — for example
+  `feat/graph-explorer-filters`, `content/vector-database-node`,
+  `fix/link-checker-head-fallback`. Types: `feat`, `fix`, `content`, `docs`,
+  `refactor`, `chore`, `test`. Exception: when a task harness assigns a branch
+  name, use the assigned name as-is.
+- Always open a pull request. Any new code, content, or configuration reaches
+  `main` through one.
+- Enable auto-merge on the pull request when you open it, and delete the branch
+  on merge. Green checks merge it; nothing waits on a human unless a reviewer
+  asks for changes.
+  - This needs "Allow auto-merge" and "Automatically delete head branches"
+    enabled in repository settings, and branch protection on `main` requiring
+    the CI checks — without required checks, auto-merge lands the PR
+    immediately instead of waiting for green.
+  - Hold auto-merge only when a human has asked to read the PR first. Say so in
+    the PR description when you do.
 
 ## Processing
 - Push significant processing into tools and CI jobs, not tokens. Link checking,
