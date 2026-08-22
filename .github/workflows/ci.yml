@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      # Graph integrity: dangling prose links, orphans, uncited products.
+      - name: Validate graph
+        run: npm run validate
+
+      # The content schema is enforced by the build itself -- a bad frontmatter
+      # field or a relation pointing at a node that does not exist fails here.
+      - name: Type check
+        run: npm run check
+
+      - name: Build
+        run: npm run build
+
+      # Advisory on PRs. The scheduled job is the one that escalates.
+      - name: Freshness
+        run: npm run check:freshness

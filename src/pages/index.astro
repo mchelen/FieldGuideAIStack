@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+import { loadGraph, tagIndex } from '../lib/graph';
+
+const graph = await loadGraph();
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const tags = tagIndex(graph);
+
+const byZoom = [1, 2, 3].map((z) => ({
+  zoom: z,
+  nodes: graph.nodes
+    .filter((n) => n.zoom === z)
+    .sort((a, b) => b.degree - a.degree || a.title.localeCompare(b.title)),
+}));
+
+const zoomBlurb: Record<number, string> = {
+  1: 'The handful of terms that everything else is defined against. Start here.',
+  2: 'The working vocabulary — what you need to read a release note without guessing.',
+  3: 'Detail you look up when you actually hit it.',
+};
+---
+
+<Base
+  title="Field Guide to the AI Stack"
+  description="A field guide to the terms in the modern AI stack — what each one means, how they relate, and how to tell them apart in the wild."
+>
+  <div class="wrap narrow" style="padding-block: 3rem 0">
+    <h1>A field guide to the AI stack</h1>
+    <p class="lede">
+      A model is not a harness. A provider is not a host. Open weights are not
+      open source. This guide gives each term one page, one diagram of what it
+      touches, and a dated source for every claim about a real product.
+    </p>
+    <p class="lede" style="font-size:1rem">
+      {graph.nodes.length} concepts · {graph.edges.filter((e) => !e.derived).length} relations ·
+      <a href={`${base}/graph`}>see the whole graph</a>
+    </p>
+  </div>
+
+  <div class="wrap">
+    {
+      byZoom.map(
+        (group) =>
+          group.nodes.length > 0 && (
+            <section style="margin-top:2.6rem">
+              <h2 style="margin-bottom:0.2rem">Zoom {group.zoom}</h2>
+              <p style="color:var(--ink-soft);margin:0">{zoomBlurb[group.zoom]}</p>
+              <ul class="cards">
+                {group.nodes.map((n) => (
+                  <li class="card">
+                    <a class="title" href={`${base}/nodes/${n.id}/`}>{n.title}</a>
+                    <p>{n.summary}</p>
+                    <ul class="chips" style="margin-top:auto;padding-top:0.4rem">
+                      {n.tags.map((t) => <li><span class="chip">{t}</span></li>)}
+                    </ul>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ),
+      )
+    }
+
+    <section style="margin-top:3rem">
+      <h2>By tag</h2>
+      <ul class="cards">
+        {
+          tags.map((t) => (
+            <li class="card" id={`tag-${t.tag}`}>
+              <span class="title">{t.tag} <span style="color:var(--ink-faint);font-weight:400">· {t.count}</span></span>
+              <ul class="chips">
+                {graph.nodes
+                  .filter((n) => n.tags.includes(t.tag))
+                  .map((n) => (
+                    <li><a class="chip" href={`${base}/nodes/${n.id}/`}>{n.title}</a></li>
+                  ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</Base>

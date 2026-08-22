@@ -1,0 +1,79 @@
+---
+import { anchor, neighborhood } from '../lib/layout';
+import type { Graph } from '../lib/graph';
+
+interface Props {
+  graph: Graph;
+  id: string;
+}
+const { graph, id } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const d = neighborhood(graph, id);
+const derivedCount = d.edges.filter((e) => e.derived).length;
+---
+
+<figure class="diagram">
+  <svg
+    viewBox={`0 0 ${d.width} ${d.height}`}
+    role="img"
+    aria-label={`Concepts directly related to ${d.nodes[0].title}`}
+  >
+    {
+      d.edges.map((e) => {
+        const a = anchor(e.to, e.from);
+        const b = anchor(e.from, e.to);
+        return (
+          <g>
+            <line
+              class={`link${e.derived ? ' is-derived' : ''}`}
+              x1={a.x}
+              y1={a.y}
+              x2={b.x}
+              y2={b.y}
+            />
+            <rect
+              class="link-label-bg"
+              x={e.lx - e.label.length * 3.1 - 3}
+              y={e.ly - 8}
+              width={e.label.length * 6.2 + 6}
+              height={14}
+              rx={3}
+            />
+            <text class="link-label" x={e.lx} y={e.ly + 2.5} text-anchor="middle">
+              {e.label}
+            </text>
+          </g>
+        );
+      })
+    }
+    {
+      d.nodes.map((n) => (
+        <a href={n.center ? undefined : `${base}/nodes/${n.id}/`}>
+          <rect
+            class={`box${n.center ? ' is-center' : ''}`}
+            x={n.x - n.w / 2}
+            y={n.y - n.h / 2}
+            width={n.w}
+            height={n.h}
+            rx={7}
+          />
+          <text
+            class="box-label"
+            x={n.x}
+            y={n.y + 4.5}
+            text-anchor="middle"
+            font-weight={n.center ? 640 : 480}
+          >
+            {n.title}
+          </text>
+        </a>
+      ))
+    }
+  </svg>
+  <figcaption>
+    One hop from <strong>{d.nodes[0].title}</strong>. Generated from the node
+    graph at build time.{
+      derivedCount > 0 && ' Dashed lines are relations declared on the other node.'
+    }
+  </figcaption>
+</figure>
