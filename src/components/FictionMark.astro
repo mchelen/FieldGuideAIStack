@@ -1,0 +1,33 @@
+---
+/**
+ * The line that separates invented material from sourced material.
+ *
+ * Everything under `src/content/nodes/` carries a dated source and can be
+ * checked. Everything under `src/content/scenarios/` is made up. That is a
+ * useful thing to have and a dangerous thing to blur, so the mark appears on
+ * every page and every card that shows fictional content -- not once in a
+ * footer where a reader arriving from a search result would never see it.
+ *
+ * `scripts/check-output.mjs` asserts it is present on every scenario page.
+ */
+interface Props {
+  /** 'full' on a scenario page, 'inline' where a node page links to one. */
+  variant?: 'full' | 'inline';
+}
+const { variant = 'full' } = Astro.props;
+---
+
+{
+  variant === 'full' ? (
+    <p class="fiction-mark" data-fiction>
+      <strong>Fieldwork — invented.</strong> Halcyon Ferries is a fictional
+      organisation, and nothing on this page is a source. The concepts it
+      illustrates are real and each links to a page that cites one.
+    </p>
+  ) : (
+    <p class="fiction-mark is-inline" data-fiction>
+      <strong>Fieldwork is invented.</strong> These episodes show the concept in
+      a situation. They are not evidence of anything.
+    </p>
+  )
+}

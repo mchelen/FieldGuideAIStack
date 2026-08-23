@@ -1,0 +1,94 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import PageNav from '../../components/PageNav.astro';
+import FictionMark from '../../components/FictionMark.astro';
+import { loadScenarios } from '../../lib/fieldwork';
+import { loadGraph } from '../../lib/graph';
+
+export async function getStaticPaths() {
+  const scenarios = await loadScenarios();
+  return scenarios.map((s) => ({ params: { id: s.id }, props: { id: s.id } }));
+}
+
+const { id } = Astro.props;
+const scenarios = await loadScenarios();
+const entry = scenarios.find((s) => s.id === id)!;
+const graph = await loadGraph();
+const { Content, headings } = await render(entry);
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const idx = scenarios.findIndex((s) => s.id === id);
+const prev = scenarios[idx - 1];
+const next = scenarios[idx + 1];
+
+const sections = [
+  ...headings.filter((h) => h.depth === 2).map((h) => ({ id: h.slug, label: h.text, icon: 'concept' })),
+  { id: 'concepts', label: 'Concepts in play', icon: 'relations' },
+  { id: 'outcome', label: 'What changed', icon: 'usecase' },
+];
+---
+
+<Base
+  title={`${entry.data.title} — Fieldwork — Field Guide to the AI Stack`}
+  description={entry.data.summary}
+>
+  <div class="wrap node-shell">
+    <div class="node-main">
+      <div style="padding-block:2.5rem 1rem">
+        <p class="kindline">
+          <a href={`${base}/fieldwork/`} class="kind-badge is-fieldwork">
+            <Icon name="fieldwork" size={13} />
+            Fieldwork {String(entry.data.order).padStart(2, '0')}
+          </a>
+        </p>
+        <h1>{entry.data.title}</h1>
+        <p class="lede">{entry.data.summary}</p>
+        <ul class="chips">
+          {entry.data.cast.map((c) => (
+            <li><span class="chip">{c.name} — {c.role}</span></li>
+          ))}
+        </ul>
+
+        <FictionMark />
+      </div>
+
+      <div class="prose">
+        <Content />
+
+        <h2 id="concepts"><Icon name="relations" /> Concepts in play</h2>
+        <p style="color:var(--ink-soft);font-size:0.95rem">
+          Each of these has a page that defines it and cites a source. This
+          episode is what one of them looks like happening.
+        </p>
+        <ul class="rel-list">
+          {entry.data.concepts.map((c) => {
+            const node = graph.byId.get(c.id)!;
+            return (
+              <li>
+                <a href={`${base}/nodes/${c.id}/`}>{node.data.title}</a>
+                <span class="rel-note">{node.data.summary}</span>
+              </li>
+            );
+          })}
+        </ul>
+
+        <h2 id="outcome"><Icon name="usecase" /> What changed</h2>
+        <div class="usecase">
+          <p class="detail">{entry.data.outcome}</p>
+        </div>
+
+        <nav class="scenario-nav">
+          {prev ? (
+            <a href={`${base}/fieldwork/${prev.id}/`}>← {prev.data.title}</a>
+          ) : (
+            <span />
+          )}
+          {next && <a href={`${base}/fieldwork/${next.id}/`}>{next.data.title} →</a>}
+        </nav>
+      </div>
+    </div>
+    <PageNav sections={sections} />
+  </div>
+</Base>

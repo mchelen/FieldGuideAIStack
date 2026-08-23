@@ -97,6 +97,55 @@ if (!graph.includes('id="graph-data"')) {
     problems.push('graph data is not valid JSON');
   }
 }
+// Fieldwork is invented, and the mark saying so is the only thing separating it
+// from the sourced pages for a reader arriving from a search result. A styling
+// change that dropped it would leave the site looking identical and claiming
+// something it should not, so it is asserted in the output rather than trusted
+// to a component.
+const SCENARIOS_SRC = new URL('../src/content/scenarios/', import.meta.url).pathname;
+const scenarioIds = (await readdir(SCENARIOS_SRC))
+  .filter((f) => f.endsWith('.md'))
+  .map((f) => f.replace(/\.md$/, ''));
+
+let unmarked = 0;
+for (const id of scenarioIds) {
+  const file = join(DIST, 'fieldwork', id, 'index.html');
+  if (!existsSync(file)) {
+    problems.push(`fieldwork page missing for "${id}"`);
+    continue;
+  }
+  const html = await readFile(file, 'utf8');
+  if (!html.includes('data-fiction')) {
+    problems.push(`fieldwork/${id} is missing the fiction mark`);
+    unmarked += 1;
+  }
+}
+if (unmarked === 0 && scenarioIds.length > 0) {
+  ok(`${scenarioIds.length} fieldwork pages present, all marked as invented`);
+}
+
+// Node pages that link out to fieldwork must carry the mark too -- that is the
+// route most readers will take, and an unmarked list of invented episodes
+// sitting under a page full of dated citations is the failure worth preventing.
+let linked = 0;
+let linkedUnmarked = 0;
+for (const id of ids) {
+  const out = join(DIST, 'nodes', id, 'index.html');
+  if (!existsSync(out)) continue;
+  const html = await readFile(out, 'utf8');
+  // The section heading, not any occurrence of the path -- every page carries a
+  // /fieldwork/ link in the site nav, which is not what this is asking about.
+  if (!html.includes('id="fieldwork"')) continue;
+  linked += 1;
+  if (!html.includes('data-fiction')) {
+    problems.push(`nodes/${id} links to fieldwork without the fiction mark`);
+    linkedUnmarked += 1;
+  }
+}
+if (linkedUnmarked === 0 && linked > 0) {
+  ok(`${linked} node pages link to fieldwork, all marked`);
+}
+
 const bundles = (await readdir(join(DIST, '_astro'))).filter((f) => f.endsWith('.js'));
 if (bundles.length === 0) problems.push('no client bundle emitted for the graph explorer');
 else ok(`${bundles.length} client bundle(s) emitted`);
