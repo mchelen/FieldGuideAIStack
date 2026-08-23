@@ -155,36 +155,56 @@ any new development work.
   inverting each scenario's `concepts` list, so the sourced half of the site
   stays independent of the invented half.
 
-## The quick reference
-- One source, three outputs. `scripts/lib/quick-reference-view.mjs` holds the
-  diagram as HTML and CSS; `npm run quick-ref` writes
-  `src/generated/quick-reference.html` (which the page inlines) and renders it
-  through Chromium to `public/quick-reference.png` and `.pdf`. All three are
-  committed, because CI never runs the generator.
+## The quick reference cards
+- Three files per card, one source. Content is
+  `scripts/lib/quick-reference-cards.mjs` (data only, no layout); layout is
+  `scripts/lib/quick-reference-view.mjs`. `npm run quick-ref` writes
+  `src/generated/<slug>.html` for the page to inline and renders each through
+  Chromium to `public/<slug>.png` and `.pdf`. **All of it is committed**,
+  because CI never runs the generator.
+- **To add a card, add an entry to the cards file.** The generator, the page's
+  contents list, the concept count in its prose and `check:output` all read that
+  array, so nothing else needs editing. Give it a `kind`:
+  - `stack` — ordered rows, optional bracket on the left and return arrow on the
+    right. Read as depth on the stack card and as time on the loop card; use it
+    wherever the order *is* the content.
+  - `pairs` — a mapping, two labelled columns with an arrow between.
+  Slugs are filenames, so the first card keeps the bare `quick-reference` name:
+  that PNG is the site's Open Graph card and may already be linked elsewhere.
 - **Do not hand-compute layout.** This was an SVG assembled by adding
   coordinates together, and the arithmetic was wrong twice — a footer under a
   band, a loop arrow floating clear of the boxes it connected. It is HTML and
   CSS so the browser does the layout. Add a box; do not add a number.
-- The diagram's captions are written for a diagram — shorter than the page
-  summaries — but **every concept it names must be a real node**, and the
-  generator exits non-zero if one is not. A quick reference that had drifted
-  from the guide it summarises would be worse than none.
-- The generator renders, then asks the page whether anything sits past the
-  frame, and fails the build if so. Note what that check needs: `scrollHeight`
-  alone reported 900px of 900px while a grid overflowed its flex parent and
-  painted straight over the footer. It takes a per-element sweep of bottom
-  edges. **Still rasterise and look at it** — the gate sees overflow, not
+- The captions are written for a diagram — shorter and blunter than the page
+  summaries — but **every concept a card names must be a real node**, and the
+  generator exits non-zero if one is not. Where a caption is sharper than the
+  summary it is usually lifted from that page's field mark; it must still say
+  what the page says.
+- The generator renders each card, then asks the page whether it fits, and fails
+  the build if not. Note how much that check needs, because each layer of it was
+  added after the previous one shipped a visible bug:
+  - `scrollHeight` — catches the frame growing. On its own it reported *900px of
+    900px* while a grid overflowed its flex parent.
+  - a per-element sweep of bottom edges — catches that, with the overshoot in px
+    so it is clear how much to trim.
+  - a sibling sweep — catches a band painted over by the block above it, which
+    is *inside* the frame and so invisible to both of the above.
+  Overflow is also a CSS bug worth fixing at the source: `flex: 1 1 auto` with
+  `min-height: 0` lets a body collapse silently. Use `flex: 1 0 auto`.
+  **Still rasterise and look at every card** — the gate sees overflow, not
   ugliness.
-- The layer colours are an **ordinal** ramp, not four categorical hues: swapping
-  surface and model would change the meaning, so the order is the data and one
-  hue stepped by lightness lets the reader see it. Both ramps were validated
-  against this site's own surfaces, not a default pair. Text on the boxes wears
-  the ink tokens; colour is carried by rails and pills, so nothing depends on
-  reading it.
-- `npm run check:output` asserts the images shipped, are not truncated, that the
-  page contains the inlined diagram *and* its stylesheet, and that the committed
-  fragment still matches what the generator produces — otherwise the page and
-  the shared image could describe two different diagrams with CI green.
+- The `stack` row colours are an **ordinal** ramp, not four categorical hues:
+  swapping surface and model would change the meaning, so the order is the data
+  and one hue stepped by lightness lets the reader see it. Both ramps were
+  validated against this site's own surfaces, not a default pair. `pairs` is two
+  labelled categories, so position and heading carry the split and colour only
+  reinforces it. Text always wears the ink tokens; colour is carried by rails
+  and pills, so nothing depends on reading it.
+- `npm run check:output` asserts, per card, that both images shipped and are not
+  truncated, and that the committed fragment still matches what the generator
+  produces — otherwise the page and the shared images could describe different
+  diagrams with CI green. It also asserts every card's title appears on the
+  page, so a card silently dropped from the gallery is caught.
 
 ## Cross-linking
 - Link the first mention of any term that has its own page, and only the first.
