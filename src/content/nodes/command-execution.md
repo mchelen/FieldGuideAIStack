@@ -1,6 +1,14 @@
 ---
 title: Command Execution
 aka: [shell access, code execution, running commands]
+canonical:
+  status: none
+  note: >-
+    Not a term anyone defines; it is a capability this guide names so products
+    can be compared on it. Anthropic's Claude Code glossary comes closest by
+    listing "run a shell command" among what a tool can be, without naming the
+    capability. Vendors describe it in prose, which is exactly why it was
+    missing from this guide's first comparison table.
 tags: [capability, product-anatomy]
 zoom: 2
 summary: The agent can run programs — tests, builds, installs, scripts — rather
@@ -8,6 +16,17 @@ summary: The agent can run programs — tests, builds, installs, scripts — rat
 fieldMark: The question is not whether it runs commands but *where*. On your
   machine, or in a sandbox somewhere else? Almost every vendor documents the
   first part and buries the second.
+useCase:
+  scenario: >-
+    Two coding products both write good code, and only one can tell you whether
+    it works.
+  detail: >-
+    Running the code is the difference between a suggestion and a checked
+    answer. An invented library method survives any amount of re-reading and
+    dies instantly on execution, which is why this capability — rather than
+    code quality — is what separates agentic coding from autocomplete. The
+    second question is always where the command runs: your machine, or a
+    sandbox somewhere else.
 relations:
   - type: consumed-by
     target: harness
@@ -24,7 +43,7 @@ sources:
     title: Get started with Claude Cowork — Anthropic Help Center
     verifiedOn: 2026-08-22
   - id: openai-chatgpt-work
-    url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
+    url: https://learn.chatgpt.com/docs/enterprise/chatgpt-work-overview
     title: ChatGPT Work overview — OpenAI
     verifiedOn: 2026-08-22
 ---

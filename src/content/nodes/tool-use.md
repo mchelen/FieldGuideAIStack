@@ -1,6 +1,18 @@
 ---
 title: Tool Use
 aka: [function calling, tool calling]
+canonical:
+  status: de-facto
+  term: Tool use
+  body: Anthropic, which names the capability and records "function calling" as the alternative
+  url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview
+  title: Tool use with Claude — Claude Platform documentation
+  verifiedOn: 2026-08-22
+  note: >-
+    Anthropic's phrasing is "tool use (also called function calling)". The
+    older name is narrower — it assumed the thing being called was one of your
+    functions — and lost ground as the category widened to search, code
+    execution and whole toolsets.
 tags: [capability, interface]
 zoom: 2
 summary: The model emits a structured request to run a named function with
@@ -9,6 +21,15 @@ summary: The model emits a structured request to run a named function with
 fieldMark: Tool use always has two halves in the transcript — a request from the
   model and a result supplied by something else. If you only ever see one half,
   you are looking at a summary, not the raw exchange.
+useCase:
+  scenario: >-
+    An assistant needs today's exchange rate, which is not in its weights.
+  detail: >-
+    Rather than inventing a number, the model emits a structured request naming
+    a tool and its arguments, and your code decides whether to run it. That
+    boundary — model proposes, caller disposes — is what every permission
+    control in this guide attaches to, and it is why tool use is the capability
+    that turns a text generator into something that can act at all.
 relations:
   - type: part-of
     target: inference-api

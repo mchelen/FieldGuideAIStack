@@ -1,6 +1,18 @@
 ---
 title: Harness
 aka: [agent harness, scaffolding, agent framework, agent loop]
+canonical:
+  status: de-facto
+  term: Agentic harness
+  body: Anthropic, in the Claude Code glossary
+  url: https://code.claude.com/docs/en/glossary
+  title: Glossary — Claude Code documentation
+  verifiedOn: 2026-08-22
+  note: >-
+    Vendor-coined and not yet universal. "Agent framework" and "scaffolding"
+    describe the same component, and much writing has no word for it at all —
+    which is precisely the confusion this guide exists to fix, since most
+    claims about what "the AI" can do are claims about the harness.
 tags: [core, runtime]
 zoom: 1
 summary: The program that turns a model into something useful — it assembles
@@ -8,6 +20,15 @@ summary: The program that turns a model into something useful — it assembles
 fieldMark: If it has a permission prompt, a working directory, a config file, or
   a `--help` flag, it is a harness. Harnesses are versioned and shipped on a
   release cadence measured in days; models change on a cadence of months.
+useCase:
+  scenario: >-
+    Two products built on the same model behave completely differently.
+  detail: >-
+    The model is identical; everything else is not. The harness supplies the
+    system prompt, the tools, the permission gating, what stays in the context
+    window and what gets dropped. When a comparison of two AI products turns
+    out to be a comparison of two harnesses, the model name in the marketing
+    was the least informative thing on the page.
 relations:
   - type: consumes
     target: inference-api

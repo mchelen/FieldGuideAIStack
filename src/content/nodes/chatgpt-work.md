@@ -35,7 +35,7 @@ relations:
 examples:
   - name: ChatGPT Work
     vendor: OpenAI
-    url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
+    url: https://learn.chatgpt.com/docs/enterprise/chatgpt-work-overview
     note: >-
       Enterprise experience within ChatGPT Business and Enterprise workspaces
       that completes multi-step tasks using the information, files, applications
@@ -44,7 +44,7 @@ examples:
     verifiedOn: 2026-08-22
 sources:
   - id: openai-chatgpt-work
-    url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
+    url: https://learn.chatgpt.com/docs/enterprise/chatgpt-work-overview
     title: ChatGPT Work overview — OpenAI
     verifiedOn: 2026-08-22
 ---

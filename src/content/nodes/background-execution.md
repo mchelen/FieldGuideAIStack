@@ -1,12 +1,29 @@
 ---
 title: Background Execution
 aka: [asynchronous agent, long-running task, cloud persistence]
+canonical:
+  status: none
+  note: >-
+    No standard term. "Asynchronous agent", "cloud sessions" and "long-running
+    tasks" all describe it. Named here because it changes the oversight
+    question — work that continues while nobody is watching cannot fall back to
+    a human in the loop.
 tags: [capability, product-anatomy]
 zoom: 2
 summary: The work continues after you look away — running in the vendor's cloud
   rather than in the window you have open.
 fieldMark: Ask what happens when you close the laptop. If the answer is "it
   keeps going", the session lives on the vendor's infrastructure, not yours.
+useCase:
+  scenario: >-
+    You start a long task and close the laptop.
+  detail: >-
+    Whether it keeps going tells you where the session actually lives — the
+    vendor's infrastructure or your machine. The interesting consequence is not
+    convenience but oversight: an unattended run has nobody to ask for
+    approval, so either its permissions are narrower than an interactive run's
+    or the review happens after the fact. Products differ on this and rarely
+    say so on the page advertising the feature.
 relations:
   - type: consumed-by
     target: harness
@@ -23,7 +40,7 @@ sources:
     title: Gemini Spark, new Chrome browsing integration — Google
     verifiedOn: 2026-08-22
   - id: openai-chatgpt-work
-    url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
+    url: https://learn.chatgpt.com/docs/enterprise/chatgpt-work-overview
     title: ChatGPT Work overview — OpenAI
     verifiedOn: 2026-08-22
 ---

@@ -1,6 +1,12 @@
 ---
 title: Model Host
 aka: [inference provider, model serving platform, model gateway]
+canonical:
+  status: none
+  note: >-
+    No settled term. AWS describes Bedrock as "a fully managed service" and
+    others say inference provider, model gateway or serving platform. The role
+    is distinct from the model provider and worth naming, whatever the name.
 tags: [core, org, infrastructure]
 zoom: 1
 summary: A service that runs someone else's model on its own hardware and sells
@@ -8,6 +14,17 @@ summary: A service that runs someone else's model on its own hardware and sells
 fieldMark: A host offers models from several different providers side by side
   behind one endpoint. If the catalogue spans competing labs, you are looking at
   a host.
+useCase:
+  scenario: >-
+    Your organisation already buys cloud from one vendor and wants models
+    through the same contract.
+  detail: >-
+    A host serves several providers' models behind one API, one bill and one
+    identity system, which is real operational value and the main reason hosts
+    exist. What it changes is that the party who can alter terms, regions or
+    availability is now further from the model than it appears — and the
+    latency you measure is a property of that deployment rather than of the
+    model.
 relations:
   - type: hosts
     target: model

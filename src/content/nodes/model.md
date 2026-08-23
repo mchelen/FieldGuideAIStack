@@ -1,6 +1,19 @@
 ---
 title: Model
 aka: [foundation model, base model, LLM, weights]
+canonical:
+  status: de-facto
+  term: Model
+  body: Google, in the Machine Learning Glossary
+  url: https://developers.google.com/machine-learning/glossary
+  title: Machine Learning Glossary — Google for Developers
+  verifiedOn: 2026-08-22
+  note: >-
+    Google defines it generally — "the set of parameters and structure needed
+    for a system to make predictions" — which is precise and much broader than
+    product usage. In marketing, "model" routinely names the artifact, the API
+    and the whole product; keeping the narrow sense is what makes the rest of
+    this guide's distinctions possible.
 tags: [core, artifact]
 zoom: 1
 summary: The trained artifact itself — an architecture plus a set of learned
@@ -9,6 +22,15 @@ fieldMark: A model has a name and a version, a parameter count, and a file size.
   It has no memory, no tools, and no opinion about how it is called. If the thing
   you are looking at can read a file or run a command, you are looking at a
   harness, not a model.
+useCase:
+  scenario: >-
+    Someone asks whether a model can read their files.
+  detail: >-
+    No model can. A model maps input tokens to output token probabilities and
+    has no way to reach anything — reading files is a tool the harness offers
+    and executes. The question is almost always really about a product, and
+    separating the two is the single most useful move available when reasoning
+    about what any of this can do.
 relations:
   - type: distinguished-from
     target: harness

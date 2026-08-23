@@ -1,12 +1,29 @@
 ---
 title: Model Provider
 aka: [model developer, frontier lab, model vendor]
+canonical:
+  status: none
+  note: >-
+    No glossary defines the role. "Model developer" and "AI lab" are used for
+    the same thing, and policy writing prefers "frontier AI developer" for the
+    subset operating at the leading edge. This guide separates provider, host
+    and hyperscaler because the same company is frequently two of the three.
 tags: [core, org]
 zoom: 1
 summary: The organization that trains a model and owns its weights, sets its
   license, and decides what gets released.
 fieldMark: Ask who could retrain it. The provider is whoever holds the weights
   and the training pipeline — not necessarily whoever sold you the API call.
+useCase:
+  scenario: >-
+    A contract question asks who is responsible for a model's behaviour.
+  detail: >-
+    The answer depends on which role each party holds. The provider trained the
+    weights, sets the licence and the acceptable use policy; a model host may
+    only be serving them; a hyperscaler may only own the hardware. Working out
+    who could retrain the model — rather than who sold you the API call — is
+    what identifies the provider, and it is often not the company on the
+    invoice.
 relations:
   - type: distinguished-from
     target: model-host

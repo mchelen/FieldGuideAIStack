@@ -1,6 +1,19 @@
 ---
 title: Surface
 aka: [client, entry point]
+canonical:
+  status: de-facto
+  term: Surface
+  body: Anthropic, in the Claude Code glossary
+  url: https://code.claude.com/docs/en/glossary
+  title: Glossary — Claude Code documentation
+  verifiedOn: 2026-08-22
+  note: >-
+    Vendor vocabulary rather than industry vocabulary — Anthropic defines it as
+    "any place you access Claude Code: the CLI, VS Code, JetBrains, Desktop, or
+    claude.ai", noting that "all surfaces share the same engine". Other vendors
+    have no single word for the distinction, which is part of why product
+    comparisons go wrong.
 tags: [runtime, product-anatomy]
 zoom: 2
 summary: Where you actually meet an agent — terminal, IDE, desktop app,
@@ -8,6 +21,16 @@ summary: Where you actually meet an agent — terminal, IDE, desktop app,
 fieldMark: Vendors ship the same engine on several surfaces and name each one
   differently. When two products sound like rivals, check whether they are
   actually one engine wearing two faces.
+useCase:
+  scenario: >-
+    Two things with different names turn out to be the same product.
+  detail: >-
+    A CLI, an IDE extension and a desktop app can be one engine with three
+    front ends, and vendors name each one separately. Anthropic's glossary is
+    explicit that surfaces "share the same engine" while differing in what they
+    can reach — local sessions read your files and settings, cloud sessions
+    start from a fresh clone. Asking which surface, rather than which product,
+    is usually the question that resolves a contradiction.
 relations:
   - type: part-of
     target: harness

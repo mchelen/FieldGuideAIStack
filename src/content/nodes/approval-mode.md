@@ -1,6 +1,19 @@
 ---
 title: Approval Mode
 aka: [permission mode, confirmation prompt]
+canonical:
+  status: de-facto
+  term: Permission mode
+  body: Anthropic, in the Claude Code glossary
+  url: https://code.claude.com/docs/en/glossary
+  title: Glossary — Claude Code documentation
+  verifiedOn: 2026-08-22
+  note: >-
+    The vendor term is "permission mode" — "the baseline approval behavior for
+    the session". This page is titled "approval mode", which was written before
+    the vendor term was checked; the two name the same thing and the vendor's
+    is the one to use in writing. Nothing standardises the mode names
+    themselves, which is what makes autonomy levels hard to compare.
 tags: [capability, safety, product-anatomy]
 zoom: 2
 summary: The policy deciding which agent actions need your say-so — every one,
@@ -8,6 +21,15 @@ summary: The policy deciding which agent actions need your say-so — every one,
 fieldMark: A product with only one setting has made the trade-off for you. Look
   for a tier list; that is where the vendor tells you which actions it considers
   dangerous.
+useCase:
+  scenario: >-
+    An agent is trusted to edit code and not trusted to push it.
+  detail: >-
+    The mode is where that line gets expressed as policy rather than as
+    vigilance. Everything below the boundary runs freely; the irreversible step
+    waits for a person. Placing it well is the whole skill — too few gates and
+    a mistake escapes, too many and whoever is clicking approve stops reading,
+    which manufactures the appearance of oversight without the substance.
 relations:
   - type: part-of
     target: harness

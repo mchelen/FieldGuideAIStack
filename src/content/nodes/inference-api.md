@@ -1,6 +1,13 @@
 ---
 title: Inference API
 aka: [completions API, messages API, model endpoint]
+canonical:
+  status: none
+  note: >-
+    No surveyed glossary carries the term, and no two vendors name the endpoint
+    the same way — Messages API, completions API, generate. "Inference API" is
+    the generic description this guide uses because the vendor names are not
+    interchangeable and the shape underneath them is.
 tags: [interface, infrastructure]
 zoom: 2
 summary: The HTTP contract for calling a model — you post messages plus
@@ -8,6 +15,15 @@ summary: The HTTP contract for calling a model — you post messages plus
 fieldMark: Look for statelessness. If the whole conversation has to be re-sent
   on every call, it is a raw inference API. If you send only the new message,
   something is storing state for you and it is not the model.
+useCase:
+  scenario: >-
+    A conversation seems to be remembered, and you want to know where.
+  detail: >-
+    Not in the API. It is stateless: every call re-sends the entire history,
+    and the server keeps nothing between requests. Whatever remembers is on
+    your side of the boundary, which explains why cost grows with conversation
+    length, why prompt caching exists, and why "the model remembered" is
+    almost always a claim about a harness.
 relations:
   - type: consumed-by
     target: harness

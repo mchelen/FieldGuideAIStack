@@ -1,6 +1,21 @@
 ---
 title: Context Window
 aka: [context length, context limit]
+canonical:
+  status: de-facto
+  term: Context window
+  body: Google, in the Machine Learning Glossary
+  url: https://developers.google.com/machine-learning/glossary
+  title: Machine Learning Glossary — Google for Developers
+  verifiedOn: 2026-08-22
+  note: >-
+    Used at two levels, consistently enough to be worth separating. Google
+    defines the model property — "the number of tokens a model can process in a
+    given prompt". Anthropic's Claude Code glossary defines the harness's view:
+    "the working memory for a session", holding history, file contents and
+    loaded skills, and points readers at the platform glossary "for the
+    underlying model concept". This page covers the first; the second is
+    context engineering.
 tags: [capability, constraint]
 zoom: 2
 summary: The maximum number of tokens a model can attend to in a single call —
@@ -8,6 +23,16 @@ summary: The maximum number of tokens a model can attend to in a single call —
 fieldMark: It is a per-call ceiling, not a budget that refills. If someone
   describes it as "how much the AI remembers", they are describing a harness
   feature and using the wrong word.
+useCase:
+  scenario: >-
+    A vendor advertises a one-million-token context window and a long
+    conversation still degrades.
+  detail: >-
+    The number is a ceiling, not a promise about quality. Anthropic's own
+    compaction documentation notes that "as a conversation grows, response
+    quality degrades" — relevant material buried among irrelevant material is
+    harder to use than relevant material alone. A bigger window raises the
+    limit and does not remove the need to decide what belongs inside it.
 relations:
   - type: part-of
     target: model

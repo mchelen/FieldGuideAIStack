@@ -40,7 +40,7 @@ sources:
     title: Cowork overview — Anthropic
     verifiedOn: 2026-08-22
   - id: openai-chatgpt-work
-    url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
+    url: https://learn.chatgpt.com/docs/enterprise/chatgpt-work-overview
     title: ChatGPT Work overview — OpenAI
     verifiedOn: 2026-08-22
 ---
