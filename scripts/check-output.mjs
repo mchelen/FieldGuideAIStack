@@ -16,7 +16,10 @@ import { readdir, readFile, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
+import { buildFragment } from './lib/quick-reference-view.mjs';
+
 const DIST = new URL('../dist/', import.meta.url).pathname;
+const GEN = new URL('../src/generated/', import.meta.url).pathname;
 const NODES_SRC = new URL('../src/content/nodes/', import.meta.url).pathname;
 
 const problems = [];
@@ -146,9 +149,9 @@ if (linkedUnmarked === 0 && linked > 0) {
   ok(`${linked} node pages link to fieldwork, all marked`);
 }
 
-// The quick reference is the shareable artifact, so both files have to ship and
+// The quick reference is the shareable artifact, so the images have to ship and
 // the page has to actually contain the diagram rather than a broken import.
-for (const f of ['quick-reference.svg', 'quick-reference.png']) {
+for (const f of ['quick-reference.png', 'quick-reference.pdf']) {
   const p = join(DIST, f);
   if (!existsSync(p)) problems.push(`${f} did not ship`);
   else {
@@ -156,14 +159,28 @@ for (const f of ['quick-reference.svg', 'quick-reference.png']) {
     if (size < 4000) problems.push(`${f} shipped but is only ${size} bytes`);
   }
 }
+// The diagram is generated markup that lives in the repo, so the committed copy
+// and the generator can disagree. CI never runs the generator -- it renders the
+// committed file -- so without this the images and the page could describe two
+// different diagrams and every other check would stay green.
+const committed = await readFile(join(GEN, 'quick-reference.html'), 'utf8');
+if (committed !== buildFragment()) {
+  problems.push(
+    'src/generated/quick-reference.html is stale — run `npm run quick-ref` and commit the result',
+  );
+}
 const qr = join(DIST, 'quick-reference', 'index.html');
 if (!existsSync(qr)) {
   problems.push('quick reference page missing');
 } else {
   const html = await readFile(qr, 'utf8');
-  if (!html.includes('<svg') || !html.includes('AGENTIC LOOP')) {
+  // Two things, because either alone passes while the other is broken: the
+  // markup has to be there, and so does the stylesheet that lays it out.
+  if (!html.includes('Agentic loop') || !html.includes('--qr-l4')) {
     problems.push('quick reference page does not contain the inlined diagram');
-  } else ok('quick reference: page, SVG and PNG all shipped');
+  } else if (!problems.some((x) => x.startsWith('src/generated'))) {
+    ok('quick reference: page in step with the generator, PNG and PDF shipped');
+  }
 }
 
 const bundles = (await readdir(join(DIST, '_astro'))).filter((f) => f.endsWith('.js'));

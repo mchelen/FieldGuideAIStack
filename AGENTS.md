@@ -156,19 +156,35 @@ any new development work.
   stays independent of the invented half.
 
 ## The quick reference
-- `npm run quick-ref` regenerates `public/quick-reference.svg` and the PNG next
-  to it. Both are committed: the PNG is the shareable artifact, and social
-  platforms and chat clients will not render an SVG in a card.
+- One source, three outputs. `scripts/lib/quick-reference-view.mjs` holds the
+  diagram as HTML and CSS; `npm run quick-ref` writes
+  `src/generated/quick-reference.html` (which the page inlines) and renders it
+  through Chromium to `public/quick-reference.png` and `.pdf`. All three are
+  committed, because CI never runs the generator.
+- **Do not hand-compute layout.** This was an SVG assembled by adding
+  coordinates together, and the arithmetic was wrong twice — a footer under a
+  band, a loop arrow floating clear of the boxes it connected. It is HTML and
+  CSS so the browser does the layout. Add a box; do not add a number.
 - The diagram's captions are written for a diagram — shorter than the page
   summaries — but **every concept it names must be a real node**, and the
   generator exits non-zero if one is not. A quick reference that had drifted
   from the guide it summarises would be worse than none.
-- The layout measures the footer rather than assuming its height, because the
-  first draft put the takeaway band on top of two columns of text and looked
-  fine until it was rendered. Rasterise and look at it; the checks cannot see
-  overlap.
-- `npm run check:output` asserts both files shipped, are not truncated, and that
-  the page contains the inlined diagram rather than a broken import.
+- The generator renders, then asks the page whether anything sits past the
+  frame, and fails the build if so. Note what that check needs: `scrollHeight`
+  alone reported 900px of 900px while a grid overflowed its flex parent and
+  painted straight over the footer. It takes a per-element sweep of bottom
+  edges. **Still rasterise and look at it** — the gate sees overflow, not
+  ugliness.
+- The layer colours are an **ordinal** ramp, not four categorical hues: swapping
+  surface and model would change the meaning, so the order is the data and one
+  hue stepped by lightness lets the reader see it. Both ramps were validated
+  against this site's own surfaces, not a default pair. Text on the boxes wears
+  the ink tokens; colour is carried by rails and pills, so nothing depends on
+  reading it.
+- `npm run check:output` asserts the images shipped, are not truncated, that the
+  page contains the inlined diagram *and* its stylesheet, and that the committed
+  fragment still matches what the generator produces — otherwise the page and
+  the shared image could describe two different diagrams with CI green.
 
 ## Cross-linking
 - Link the first mention of any term that has its own page, and only the first.
