@@ -1,6 +1,19 @@
 ---
 title: Browser Automation
 aka: [computer use, web agent, browser control]
+canonical:
+  status: de-facto
+  term: Browser use
+  body: Anthropic, which ships a browser use tool distinct from its computer use tool
+  url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool
+  title: Computer use tool — Claude Platform documentation
+  verifiedOn: 2026-08-22
+  note: >-
+    The term predates AI entirely, from test automation. What is specific here
+    is the split Anthropic draws: "for tasks that stay inside webpages, the
+    browser use tool is the closer fit", where computer use drives a whole
+    desktop. Acting on the page and acting on the screen are different
+    capabilities with different costs.
 tags: [capability, product-anatomy]
 zoom: 2
 summary: The agent drives a real web browser — clicking, typing, navigating,
@@ -8,6 +21,15 @@ summary: The agent drives a real web browser — clicking, typing, navigating,
 fieldMark: The tell is credentials. Ask whether it can use your logged-in
   sessions and saved passwords. That single question separates a sandboxed
   cloud browser from an agent acting as you.
+useCase:
+  scenario: >-
+    A workflow depends on a web application with no API.
+  detail: >-
+    Driving the browser is the fallback, and it works on things nothing else
+    can reach. The question worth asking first is about credentials: whether
+    the agent uses your logged-in sessions and saved passwords, or a sandboxed
+    browser with none. That single distinction separates a bounded capability
+    from an agent acting as you, and vendors document it inconsistently.
 relations:
   - type: consumed-by
     target: harness
@@ -16,7 +38,7 @@ relations:
     note: Tool use calls a defined function; this drives an interface built for humans.
 sources:
   - id: openai-chatgpt-work
-    url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
+    url: https://learn.chatgpt.com/docs/enterprise/chatgpt-work-overview
     title: ChatGPT Work overview — OpenAI
     verifiedOn: 2026-08-22
   - id: google-gemini-spark

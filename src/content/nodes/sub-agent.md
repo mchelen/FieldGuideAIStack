@@ -1,12 +1,33 @@
 ---
 title: Sub-agent
 aka: [subagent, agent delegation, parallel workstreams]
+canonical:
+  status: de-facto
+  term: Subagent
+  body: Anthropic, in the Claude Code glossary
+  url: https://code.claude.com/docs/en/glossary
+  title: Glossary — Claude Code documentation
+  verifiedOn: 2026-08-22
+  note: >-
+    Written both ways. Anthropic closes it up as "subagent"; the hyphenated
+    form is common elsewhere. Distinct from a multi-agent system, where the
+    agents are independent rather than delegated to.
 tags: [capability, runtime]
 zoom: 3
 summary: A parent agent spawning child loops, each with its own context window
   and tools, and merging their results.
 fieldMark: The giveaway is parallel progress on unrelated parts of one task, and
   a summary that reads like it was assembled from reports.
+useCase:
+  scenario: >-
+    A task needs twenty sources read, and reading all twenty leaves no room to
+    think about them.
+  detail: >-
+    Each sub-agent reads one source in its own context window and returns a
+    summary, and the parent synthesises. The fresh windows are the point;
+    parallelism is a bonus. Note what is paid for it — the parent never sees
+    the sources, only the summaries, so anything a summary dropped is gone.
+    Delegation buys capacity with fidelity.
 relations:
   - type: kind-of
     target: agent

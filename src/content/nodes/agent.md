@@ -1,6 +1,18 @@
 ---
 title: Agent
 aka: [AI agent, agentic system]
+canonical:
+  status: de-facto
+  term: Agent
+  body: Google, in the Machine Learning Glossary
+  url: https://developers.google.com/machine-learning/glossary
+  title: Machine Learning Glossary — Google for Developers
+  verifiedOn: 2026-08-22
+  note: >-
+    Google's entry carries two unrelated senses in one definition: the
+    generative one used here, and the reinforcement-learning one, where an
+    agent is "the entity that uses a policy to maximize the expected return".
+    Papers from before about 2022 usually mean the second.
 tags: [core, runtime]
 zoom: 1
 summary: A model driven in a loop by a harness, with tools, working toward a
@@ -8,6 +20,16 @@ summary: A model driven in a loop by a harness, with tools, working toward a
 fieldMark: The tell is autonomy across turns. If you write one prompt and it
   makes twenty tool calls before coming back to you, it is an agent. If every
   model call is one you typed, it is a chat interface.
+useCase:
+  scenario: >-
+    You ask for a failing test to be fixed and come back to a passing suite,
+    having typed one message.
+  detail: >-
+    Everything between those two moments — reading the failure, editing a file,
+    re-running, reading the new failure — was decided without you. That is the
+    whole distinction from a chat interface, where every model call is one you
+    typed. It is also why the interesting questions about agents are about
+    permissions and termination rather than about capability.
 relations:
   - type: contains
     target: harness

@@ -124,6 +124,11 @@ any new development work.
     when it arrives.
 - Missing sections are warnings rather than errors, so the backlog stays visible
   in CI without blocking unrelated work. Malformed ones are errors.
+- **That backlog is now empty.** Every page carries all four, so a warning about
+  a missing `canonical` or `useCase` is a regression rather than a known gap.
+  The fifteen pages written before the rule existed were backfilled together,
+  and seven of them turned out to have no canonical term at all — recorded as
+  `none` with the reason, which is a finding rather than a blank.
 
 ## Cross-linking
 - Link the first mention of any term that has its own page, and only the first.

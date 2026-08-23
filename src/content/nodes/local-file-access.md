@@ -1,6 +1,13 @@
 ---
 title: Local File Access
 aka: [filesystem access, works on your computer]
+canonical:
+  status: none
+  note: >-
+    No standard term. Vendors describe it obliquely — "works with your files",
+    "connect a folder" — and the distinction that matters, between your disk
+    and a cloud sandbox you upload into, is rarely stated plainly. Named here
+    so products can be compared on it.
 tags: [capability, product-anatomy]
 zoom: 2
 summary: Whether the agent can read and write files on your own machine, rather
@@ -8,6 +15,16 @@ summary: Whether the agent can read and write files on your own machine, rather
 fieldMark: Look for the words "upload" and "download". If they appear, you are
   in a cloud sandbox. Direct local access is a desktop-app capability, and it is
   usually gated on a folder you explicitly grant.
+useCase:
+  scenario: >-
+    A product says it works with your documents, and you need to know whether
+    they leave your machine.
+  detail: >-
+    The vocabulary gives it away more reliably than the marketing does: if the
+    interface says upload and download, the files are going to a cloud sandbox.
+    Direct local access is a desktop-app capability, usually gated on a folder
+    you explicitly grant. The difference decides where the data lives, what a
+    sandbox can bound, and whether the answer to a compliance question is yes.
 relations:
   - type: consumed-by
     target: harness
@@ -19,7 +36,7 @@ sources:
     title: Cowork overview — Anthropic
     verifiedOn: 2026-08-22
   - id: openai-chatgpt-work
-    url: https://learn.chatgpt.com/codex/enterprise/chatgpt-work-overview
+    url: https://learn.chatgpt.com/docs/enterprise/chatgpt-work-overview
     title: ChatGPT Work overview — OpenAI
     verifiedOn: 2026-08-22
 ---
