@@ -155,6 +155,21 @@ any new development work.
   inverting each scenario's `concepts` list, so the sourced half of the site
   stays independent of the invented half.
 
+## The quick reference
+- `npm run quick-ref` regenerates `public/quick-reference.svg` and the PNG next
+  to it. Both are committed: the PNG is the shareable artifact, and social
+  platforms and chat clients will not render an SVG in a card.
+- The diagram's captions are written for a diagram — shorter than the page
+  summaries — but **every concept it names must be a real node**, and the
+  generator exits non-zero if one is not. A quick reference that had drifted
+  from the guide it summarises would be worse than none.
+- The layout measures the footer rather than assuming its height, because the
+  first draft put the takeaway band on top of two columns of text and looked
+  fine until it was rendered. Rasterise and look at it; the checks cannot see
+  overlap.
+- `npm run check:output` asserts both files shipped, are not truncated, and that
+  the page contains the inlined diagram rather than a broken import.
+
 ## Cross-linking
 - Link the first mention of any term that has its own page, and only the first.
   An unlinked mention is a dead end for a reader who does not already know the

@@ -12,7 +12,7 @@
  * So this checks the output for the things a dependency bump could quietly
  * take away.
  */
-import { readdir, readFile } from 'node:fs/promises';
+import { readdir, readFile, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
@@ -144,6 +144,26 @@ for (const id of ids) {
 }
 if (linkedUnmarked === 0 && linked > 0) {
   ok(`${linked} node pages link to fieldwork, all marked`);
+}
+
+// The quick reference is the shareable artifact, so both files have to ship and
+// the page has to actually contain the diagram rather than a broken import.
+for (const f of ['quick-reference.svg', 'quick-reference.png']) {
+  const p = join(DIST, f);
+  if (!existsSync(p)) problems.push(`${f} did not ship`);
+  else {
+    const { size } = await stat(p);
+    if (size < 4000) problems.push(`${f} shipped but is only ${size} bytes`);
+  }
+}
+const qr = join(DIST, 'quick-reference', 'index.html');
+if (!existsSync(qr)) {
+  problems.push('quick reference page missing');
+} else {
+  const html = await readFile(qr, 'utf8');
+  if (!html.includes('<svg') || !html.includes('AGENTIC LOOP')) {
+    problems.push('quick reference page does not contain the inlined diagram');
+  } else ok('quick reference: page, SVG and PNG all shipped');
 }
 
 const bundles = (await readdir(join(DIST, '_astro'))).filter((f) => f.endsWith('.js'));
