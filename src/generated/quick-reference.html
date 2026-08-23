@@ -1,0 +1,382 @@
+<style>
+.qr {
+  --qr-paper: #fbfaf7;
+  --qr-raised: #ffffff;
+  --qr-ink: #1c1a17;
+  --qr-soft: #55504a;
+  --qr-faint: #85807a;
+  --qr-rule: #e0dbd2;
+  --qr-accent: #7a4a1e;
+  --qr-accent-soft: #f6efe6;
+  --qr-mark: #2f5d3f;
+  --qr-shadow: rgba(60, 40, 18, 0.10);
+  --qr-glow: rgba(255, 255, 255, 0.9);
+    --qr-l1: #e29858;
+    --qr-t1: #fdf4ec;
+    --qr-l2: #c47c3b;
+    --qr-t2: #fbeee1;
+    --qr-l3: #a7611b;
+    --qr-t3: #f8e7d6;
+    --qr-l4: #874900;
+    --qr-t4: #f4e0cb;
+  color-scheme: light;
+  width: 1600px;
+  height: 900px;
+  box-sizing: border-box;
+  padding: 42px 54px 34px;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(120% 90% at 88% -10%, var(--qr-accent-soft) 0%, transparent 58%),
+    var(--qr-paper);
+  color: var(--qr-ink);
+  font-family: var(--font, ui-sans-serif), "Liberation Sans", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .qr {
+  color-scheme: dark;
+  --qr-paper: #17161a;
+  --qr-raised: #201f24;
+  --qr-ink: #eceaea;
+  --qr-soft: #b3aeae;
+  --qr-faint: #837e7e;
+  --qr-rule: #35333a;
+  --qr-accent: #e0a86a;
+  --qr-accent-soft: #2a2118;
+  --qr-mark: #8fc9a3;
+  --qr-shadow: rgba(0, 0, 0, 0.5);
+  --qr-glow: rgba(255, 255, 255, 0.04);
+    --qr-l1: #925000;
+    --qr-t1: #241a12;
+    --qr-l2: #b06a26;
+    --qr-t2: #2a1f15;
+    --qr-l3: #ce8545;
+    --qr-t3: #302519;
+    --qr-l4: #eca161;
+    --qr-t4: #362a1d;
+  }
+}
+:root[data-theme="dark"] .qr {
+  color-scheme: dark;
+  --qr-paper: #17161a;
+  --qr-raised: #201f24;
+  --qr-ink: #eceaea;
+  --qr-soft: #b3aeae;
+  --qr-faint: #837e7e;
+  --qr-rule: #35333a;
+  --qr-accent: #e0a86a;
+  --qr-accent-soft: #2a2118;
+  --qr-mark: #8fc9a3;
+  --qr-shadow: rgba(0, 0, 0, 0.5);
+  --qr-glow: rgba(255, 255, 255, 0.04);
+    --qr-l1: #925000;
+    --qr-t1: #241a12;
+    --qr-l2: #b06a26;
+    --qr-t2: #2a1f15;
+    --qr-l3: #ce8545;
+    --qr-t3: #302519;
+    --qr-l4: #eca161;
+    --qr-t4: #362a1d;
+}
+
+.qr h2, .qr h3, .qr h4, .qr p { margin: 0; }
+.qr a { color: inherit; text-decoration: none; }
+.qr a:hover { text-decoration: underline; text-decoration-color: var(--qr-accent); text-underline-offset: 3px; }
+
+/* ---- masthead ---- */
+.qr-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; }
+.qr-head h2 {
+  font-size: 31px;
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.022em;
+}
+.qr-head p { margin-top: 5px; font-size: 15px; color: var(--qr-soft); }
+.qr-brand { text-align: right; flex: none; }
+.qr-brand strong {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--qr-accent);
+}
+.qr-brand span {
+  display: block;
+  margin-top: 4px;
+  font-size: 12.5px;
+  color: var(--qr-faint);
+  font-family: var(--font-mono, ui-monospace), "Liberation Mono", monospace;
+}
+.qr-rule {
+  height: 2px;
+  margin: 14px 0 16px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--qr-l4), var(--qr-l1) 32%, var(--qr-rule) 62%, var(--qr-rule));
+}
+
+/* ---- the stack ---- */
+.qr-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 158px minmax(0, 1fr) 74px;
+  grid-template-rows: repeat(4, min-content);
+  column-gap: 16px;
+  row-gap: 14px;
+  /* The frame is a fixed 900px and the rows are content-sized, so whatever is
+     left over is distributed between them rather than pooling as a dead band
+     above the footer. */
+  align-content: space-between;
+}
+.qr-layer { grid-column: 2; }
+
+.qr-layer {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--qr-rule);
+  border-radius: 11px;
+  padding: 19px 22px 19px 28px;
+  background:
+    linear-gradient(163deg, var(--qr-raised) 8%, var(--qr-tint) 108%),
+    var(--qr-raised);
+  box-shadow: 0 1px 0 var(--qr-glow) inset, 0 2px 7px -3px var(--qr-shadow);
+}
+/* The step colour arrives as a rail, not as a fill: text on the box keeps
+   wearing the ink tokens, so nothing depends on reading colour. */
+.qr-layer::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: linear-gradient(180deg, var(--qr-step), color-mix(in oklab, var(--qr-step) 74%, transparent));
+}
+/* Named rather than positional: the grid's children are the two brackets as
+   well as the four layers, so nth-child counted the wrong things and the last
+   layer silently got no step at all. */
+.qr-s1 { --qr-step: var(--qr-l1); --qr-tint: var(--qr-t1); }
+.qr-s2 { --qr-step: var(--qr-l2); --qr-tint: var(--qr-t2); }
+.qr-s3 { --qr-step: var(--qr-l3); --qr-tint: var(--qr-t3); }
+.qr-s4 { --qr-step: var(--qr-l4); --qr-tint: var(--qr-t4); }
+
+.qr-top { display: grid; grid-template-columns: 232px minmax(0, 1fr) auto; gap: 20px; align-items: start; }
+.qr-name {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.014em;
+}
+.qr-kicker { margin-top: 2px; font-size: 11.5px; color: var(--qr-faint); }
+.qr-num {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--qr-step);
+  font-family: var(--font-mono, ui-monospace), "Liberation Mono", monospace;
+}
+.qr-desc { font-size: 14px; line-height: 1.42; color: var(--qr-soft); max-width: 62ch; }
+.qr-tag {
+  flex: none;
+  align-self: start;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--qr-step);
+  border: 1px solid color-mix(in oklab, var(--qr-step) 40%, transparent);
+  background: color-mix(in oklab, var(--qr-step) 12%, var(--qr-raised));
+  border-radius: 999px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+.qr-sub { display: grid; gap: 9px; margin-top: 12px; grid-auto-flow: column; grid-auto-columns: 1fr; }
+.qr-sub div {
+  border: 1px solid var(--qr-rule);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: var(--qr-raised);
+  box-shadow: 0 1px 4px -2px var(--qr-shadow);
+}
+.qr-sub b { display: block; font-size: 12.5px; font-weight: 650; letter-spacing: -0.005em; }
+.qr-sub span { display: block; margin-top: 3px; font-size: 11px; line-height: 1.36; color: var(--qr-faint); }
+
+/* ---- the two brackets ---- */
+.qr-agent, .qr-loop { grid-row: 2 / 5; position: relative; }
+.qr-agent {
+  grid-column: 1;
+  border: 2px solid var(--qr-accent);
+  border-right: 0;
+  border-radius: 10px 0 0 10px;
+  background: linear-gradient(90deg, color-mix(in oklab, var(--qr-accent) 7%, transparent), transparent);
+  padding: 14px 16px 14px 0;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.qr-agent strong {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--qr-accent);
+}
+.qr-agent span { display: block; margin-top: 7px; font-size: 11.5px; line-height: 1.42; color: var(--qr-faint); }
+
+.qr-loop {
+  grid-column: 3;
+  margin: 26px 24px 26px 0;
+  border: 1.6px dashed var(--qr-mark);
+  border-left: 0;
+  border-radius: 0 10px 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* The arrowhead sits on the returning end, at the harness, because the return
+   is the whole point of drawing the loop at all. */
+.qr-loop::before {
+  content: "";
+  position: absolute;
+  top: -6.5px;
+  left: -1px;
+  border: 6px solid transparent;
+  border-right-color: var(--qr-mark);
+  border-left: 0;
+}
+.qr-loop b {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--qr-mark);
+  white-space: nowrap;
+}
+.qr-loop b em { font-style: normal; font-weight: 400; letter-spacing: 0.04em; color: var(--qr-faint); }
+
+/* ---- footer ---- */
+.qr-foot { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 18px; }
+.qr-foot section { border-top: 2px solid var(--qr-rule); padding-top: 11px; }
+.qr-foot h3 {
+  margin: 0 0 8px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--qr-accent);
+}
+.qr-foot p { margin: 0 0 8px; font-size: 11.5px; line-height: 1.42; color: var(--qr-soft); }
+.qr-foot p:last-child { margin-bottom: 0; }
+.qr-foot b { font-size: 12.5px; font-weight: 650; color: var(--qr-ink); }
+
+/* ---- takeaway ---- */
+.qr-take {
+  margin-top: 16px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in oklab, var(--qr-accent) 22%, transparent);
+  border-left: 4px solid var(--qr-accent);
+  background: linear-gradient(90deg, var(--qr-accent-soft), transparent 78%);
+  padding: 12px 20px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--qr-accent);
+  text-align: center;
+}
+</style>
+<div class="qr" role="img" aria-label="The AI stack top to bottom: surface, harness, inference API, model, with the agentic loop returning from the model to the harness.">
+  <header class="qr-head">
+    <div>
+      <h2>The AI stack, top to bottom</h2>
+      <p>One request, and every layer it passes through.</p>
+    </div>
+    <div class="qr-brand">
+      <strong>Field guide to the AI stack</strong>
+      <span>mchelen.github.io/FieldGuideAIStack</span>
+    </div>
+  </header>
+  <div class="qr-rule"></div>
+  <div class="qr-body">
+    <aside class="qr-agent">
+      <strong><a class="qr-agentlink" href="../nodes/agent/">Agent</a></strong>
+      <span>a model driven in a <a class="qr-agentlink" href="../nodes/agentic-loop/">loop</a> by a harness, with tools</span>
+    </aside>
+      <section class="qr-layer qr-s1">
+        <div class="qr-top">
+          <div>
+            <h4 class="qr-name"><span class="qr-num">01</span><a class="qr-namelink" href="../nodes/surface/">Surface</a></h4>
+            <p class="qr-kicker">where you meet it</p>
+          </div>
+          <p class="qr-desc">Terminal, IDE, desktop app, chat window. The front end — not the engine underneath.</p>
+          <span class="qr-tag">one engine, several faces</span>
+        </div>
+      </section>
+      <section class="qr-layer qr-s2">
+        <div class="qr-top">
+          <div>
+            <h4 class="qr-name"><span class="qr-num">02</span><a class="qr-namelink" href="../nodes/harness/">Harness</a></h4>
+            <p class="qr-kicker">the program around the model</p>
+          </div>
+          <p class="qr-desc">Assembles the context, calls the model, executes the tools the model asks for, and decides what happens next.</p>
+          <span class="qr-tag">where the product lives</span>
+        </div>
+        <div class="qr-sub">
+          <div><b><a class="qr-sublink" href="../nodes/prompt-engineering/">Prompt engineering</a></b><span>Change behaviour by changing what you send. No training involved.</span></div>
+          <div><b><a class="qr-sublink" href="../nodes/context-engineering/">Context engineering</a></b><span>What goes in the window, what gets dropped, what gets fetched again.</span></div>
+          <div><b><a class="qr-sublink" href="../nodes/retrieval-augmented-generation/">Retrieval (RAG)</a></b><span>Fetch the document at question time so the answer rests on it.</span></div>
+          <div><b><a class="qr-sublink" href="../nodes/tool-use/">Tool use</a></b><span>The model asks for a function. Your code decides whether to run it.</span></div>
+          <div><b><a class="qr-sublink" href="../nodes/approval-mode/">Approval mode</a></b><span>Which actions need a human before they land.</span></div>
+        </div>
+      </section>
+      <section class="qr-layer qr-s3">
+        <div class="qr-top">
+          <div>
+            <h4 class="qr-name"><span class="qr-num">03</span><a class="qr-namelink" href="../nodes/inference-api/">Inference API</a></h4>
+            <p class="qr-kicker">the call itself</p>
+          </div>
+          <p class="qr-desc">Stateless HTTP. The whole conversation is re-sent every time, and the server keeps nothing between calls.</p>
+          <span class="qr-tag">stateless</span>
+        </div>
+      </section>
+      <section class="qr-layer qr-s4">
+        <div class="qr-top">
+          <div>
+            <h4 class="qr-name"><span class="qr-num">04</span><a class="qr-namelink" href="../nodes/model/">Model</a></h4>
+            <p class="qr-kicker">the trained artifact</p>
+          </div>
+          <p class="qr-desc">An architecture plus learned weights, mapping input tokens to output token probabilities. No memory, no tools, cannot act.</p>
+          <span class="qr-tag">a file, not a service</span>
+        </div>
+        <div class="qr-sub">
+          <div><b><a class="qr-sublink" href="../nodes/token/">Token</a></b><span>The unit it reads, emits, and is billed in. A word fragment, not a word.</span></div>
+          <div><b><a class="qr-sublink" href="../nodes/context-window/">Context window</a></b><span>A per-call ceiling on what it can attend to. Not a memory.</span></div>
+        </div>
+      </section>
+    <aside class="qr-loop"><b>Agentic loop · <em>repeat until done</em></b></aside>
+  </div>
+  <div class="qr-foot">
+      <section>
+        <h3>Who is involved</h3>
+        <p><b><a class="qr-footlink" href="../nodes/model-provider/">Model provider</a></b> — Trains it, owns the weights, sets the licence.</p>
+        <p><b><a class="qr-footlink" href="../nodes/model-host/">Model host</a></b> — Runs someone else’s model and sells access.</p>
+      </section>
+      <section>
+        <h3>What goes wrong</h3>
+        <p><b><a class="qr-footlink" href="../nodes/hallucination/">Hallucination</a></b> — Confident, plausible, wrong — and indistinguishable from correct output, because truth is not a quantity the model computes.</p>
+      </section>
+      <section>
+        <h3>How you know</h3>
+        <p><b><a class="qr-footlink" href="../nodes/evaluation/">Evaluation</a></b> — A repeatable test. The only thing that turns “it seems better” into a claim someone else can check.</p>
+      </section>
+  </div>
+  <p class="qr-take">Almost everything people attribute to “the AI” — that it remembers, searches, runs code, asks permission — belongs to the harness, not the model.</p>
+</div>
