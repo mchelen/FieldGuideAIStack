@@ -11,6 +11,11 @@
   --accent-soft: #f0e6d9;
   --mark: #2f5d3f;
   --mark-soft: #e2ede5;
+  /* Reserved for fieldwork. A third hue used nowhere else, so invented
+     material is distinguishable from sourced material at a glance rather
+     than by reading a label. */
+  --fiction: #6b4a80;
+  --fiction-soft: #efe7f4;
   --max: 74rem;
   --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
@@ -31,6 +36,8 @@
     --accent-soft: #33291d;
     --mark: #8fc9a3;
     --mark-soft: #1e2b22;
+    --fiction: #c4a3da;
+    --fiction-soft: #2a2233;
   }
 }
 
@@ -361,3 +368,85 @@ sup.cite a:hover { background: var(--accent-soft); }
 ol.sources { counter-reset: none; padding-left: 1.4rem; }
 ol.sources li { padding-left: 0.2rem; }
 ol.sources li:target { background: var(--accent-soft); border-radius: 5px; }
+
+
+/* ---- Fieldwork -------------------------------------------------------- */
+/* Invented material. The mark, the badge and the cards all use --fiction and
+   nothing else on the site does, so a reader can tell sourced from invented
+   without reading a word. */
+
+.fiction-mark {
+  border: 1px dashed var(--fiction);
+  background: var(--fiction-soft);
+  color: var(--ink-soft);
+  padding: 0.8rem 1.05rem;
+  border-radius: 7px;
+  margin: 1.4rem 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.fiction-mark strong { color: var(--fiction); }
+.fiction-mark.is-inline { font-size: 0.88rem; padding: 0.6rem 0.9rem; margin: 0.9rem 0 1.1rem; }
+
+.kind-badge.is-fieldwork {
+  color: var(--fiction);
+  background: var(--fiction-soft);
+  text-decoration: none;
+}
+
+.org-card {
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--fiction);
+  background: var(--bg-raised);
+  border-radius: 0 10px 10px 0;
+  padding: 1.3rem 1.5rem;
+  margin: 1.6rem 0 2.4rem;
+}
+.org-card p { color: var(--ink-soft); line-height: 1.65; }
+.org-name { margin: 0; font-size: 1.45rem; }
+.org-tagline { margin: 0.2rem 0 1rem; color: var(--fiction); font-size: 0.95rem; }
+.org-card h3 { font-size: 0.78rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-faint); margin: 1.6rem 0 0.6rem; }
+
+/* The `ul` is the grid and each `li` dissolves into it, so the three columns
+   line up across rows. A grid per row sizes its own columns and does not. */
+.cast-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: max-content max-content 1fr; gap: 0.7rem 1.2rem; align-items: baseline; font-size: 0.92rem; }
+.cast-list li { display: contents; }
+.cast-list strong { font-weight: 600; }
+.cast-role { color: var(--fiction); font-size: 0.87rem; }
+.cast-about { color: var(--ink-soft); }
+@media (max-width: 46rem) {
+  .cast-list { grid-template-columns: 1fr; gap: 0.15rem; }
+  .cast-list li { display: block; margin-bottom: 0.7rem; }
+  .cast-role { display: block; }
+}
+
+.scenario-list { list-style: none; padding: 0; margin: 1.2rem 0 0; display: grid; gap: 0.8rem; }
+.scenario-card {
+  display: grid;
+  grid-template-columns: 2.6rem 1fr;
+  gap: 1rem;
+  align-items: start;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: var(--bg-raised);
+  padding: 1rem 1.2rem;
+  text-decoration: none;
+  color: inherit;
+}
+.scenario-card:hover { border-color: var(--fiction); }
+.scenario-order { font-family: var(--font-mono); font-size: 1.15rem; color: var(--fiction); font-variant-numeric: tabular-nums; }
+.scenario-body { display: grid; gap: 0.35rem; }
+.scenario-title { font-weight: 620; font-size: 1.05rem; }
+.scenario-card:hover .scenario-title { color: var(--fiction); }
+.scenario-summary { color: var(--ink-soft); font-size: 0.93rem; line-height: 1.55; }
+.scenario-concepts { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.25rem; }
+.mini-chip {
+  font-size: 0.72rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid var(--rule);
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.scenario-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2.5rem; padding-top: 1.2rem; border-top: 1px solid var(--rule); font-size: 0.93rem; }

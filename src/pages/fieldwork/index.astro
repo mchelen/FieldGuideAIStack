@@ -1,0 +1,68 @@
+---
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import FictionMark from '../../components/FictionMark.astro';
+import { getEntry } from 'astro:content';
+import { loadScenarios } from '../../lib/fieldwork';
+import { loadGraph } from '../../lib/graph';
+
+const org = (await getEntry('organisation', 'halcyon-ferries'))!.data;
+const scenarios = await loadScenarios();
+const graph = await loadGraph();
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<Base
+  title="Fieldwork — Field Guide to the AI Stack"
+  description="Halcyon Ferries, a fictional organisation, meeting the concepts in this guide one problem at a time."
+>
+  <div class="wrap" style="padding-block:2.5rem 3rem">
+    <h1>Fieldwork</h1>
+    <p class="lede">
+      A field guide tells you what a thing is. Fieldwork is where you watch one
+      happen to somebody. These episodes follow a single organisation as it
+      meets the concepts in this guide, in the order an ordinary company
+      actually meets them.
+    </p>
+
+    <FictionMark />
+
+    <section class="org-card">
+      <h2 class="org-name">{org.name}</h2>
+      <p class="org-tagline">{org.tagline}</p>
+      <p>{org.what}</p>
+      <p>{org.why}</p>
+
+      <h3>Who appears</h3>
+      <ul class="cast-list">
+        {org.people.map((p: any) => (
+          <li>
+            <strong>{p.name}</strong>
+            <span class="cast-role">{p.role}</span>
+            <span class="cast-about">{p.about}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <h2 id="episodes"><Icon name="fieldwork" /> Episodes</h2>
+    <ol class="scenario-list">
+      {scenarios.map((s) => (
+        <li>
+          <a class="scenario-card" href={`${base}/fieldwork/${s.id}/`}>
+            <span class="scenario-order">{String(s.data.order).padStart(2, '0')}</span>
+            <span class="scenario-body">
+              <span class="scenario-title">{s.data.title}</span>
+              <span class="scenario-summary">{s.data.summary}</span>
+              <span class="scenario-concepts">
+                {s.data.concepts.map((c: any) => (
+                  <span class="mini-chip">{graph.byId.get(c.id)?.data.title ?? c.id}</span>
+                ))}
+              </span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Base>

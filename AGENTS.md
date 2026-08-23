@@ -130,6 +130,31 @@ any new development work.
   and seven of them turned out to have no canonical term at all — recorded as
   `none` with the reason, which is a finding rather than a blank.
 
+## Fieldwork
+- The fictional organisation lives in `src/content/scenarios/` and
+  `src/data/organisation.yml`, in its own collections, and **never** in
+  `src/content/nodes/`. Everything under `nodes/` carries a dated source and can
+  be checked; everything under `scenarios/` is invented. One collection would
+  mean one schema and eventually a reader unable to tell which claims were
+  verified, which costs more than the fiction adds.
+- The scenario schema is `.strict()` and has no `sources` field, so a `sources:`
+  key is a build failure rather than a review catch. `npm run validate` names it
+  before the build gets that far.
+- **Every page and card showing invented material carries the fiction mark**, and
+  `npm run check:output` asserts it in `dist/` — on the scenario pages and on
+  every node page that links to one. A reader arriving from a search result sees
+  the mark or the guide is lying by omission. It uses `--fiction`, a hue used
+  nowhere else on the site, so sourced and invented are distinguishable before
+  reading a word.
+- A scenario names at least two concepts. One concept in a situation is a
+  `useCase` and belongs on the node page; fieldwork is for showing concepts
+  interact.
+- Cast names are checked against `organisation.yml`. Nothing external will ever
+  contradict a fiction, so its consistency has to be mechanical or it drifts.
+- Nodes never declare their scenarios. The back-reference is derived by
+  inverting each scenario's `concepts` list, so the sourced half of the site
+  stays independent of the invented half.
+
 ## Cross-linking
 - Link the first mention of any term that has its own page, and only the first.
   An unlinked mention is a dead end for a reader who does not already know the

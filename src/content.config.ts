@@ -1,5 +1,5 @@
 import { defineCollection, reference, z } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { file, glob } from 'astro/loaders';
 
 /**
  * Every factual claim about a real product, license, or service carries its own
@@ -164,4 +164,73 @@ const nodes = defineCollection({
   }),
 });
 
-export const collections = { nodes };
+/**
+ * Fieldwork: the fictional organisation the charter asks for, so concepts can
+ * be shown happening to somebody rather than defined in the abstract.
+ *
+ * Deliberately a separate collection from `nodes`, and deliberately `.strict()`
+ * with no `sources` field. Everything in `nodes` carries a dated source and is
+ * checkable; everything here is invented. Keeping them in one collection would
+ * mean one schema, one page template, and eventually a reader unable to tell
+ * which claims were verified -- which would cost more than the fiction adds.
+ * A `sources:` key in a scenario is a build failure, not a review catch.
+ */
+const scenarios = defineCollection({
+  loader: glob({ base: './src/content/scenarios', pattern: '**/*.md' }),
+  schema: z
+    .object({
+      title: z.string().min(1),
+      /** Reading order on the fieldwork index. Not a difficulty ranking. */
+      order: z.number().int().positive(),
+      summary: z.string().min(1).max(320),
+      /** Who in the organisation this happens to. */
+      cast: z
+        .array(
+          z.object({
+            name: z.string().min(1),
+            role: z.string().min(1),
+          }),
+        )
+        .min(1),
+      /**
+       * The concepts this episode makes concrete. At least two, because a
+       * scenario illustrating one idea is a use case and belongs on the node
+       * page instead -- the point of fieldwork is showing concepts interact.
+       */
+      concepts: z.array(reference('nodes')).min(2),
+      /** What changed for them. The part a reader should remember. */
+      outcome: z.string().min(1),
+    })
+    .strict(),
+});
+
+/**
+ * The fictional organisation itself. One entry, loaded from YAML so the profile
+ * stays data rather than markup, and schema-checked like everything else --
+ * being invented is not a reason for it to be unstructured.
+ */
+const organisation = defineCollection({
+  loader: file('./src/data/organisation.yml'),
+  schema: z.object({
+    name: z.string().min(1),
+    tagline: z.string().min(1),
+    founded: z.number().int(),
+    staff: z.number().int(),
+    what: z.string().min(1),
+    why: z.string().min(1),
+    people: z
+      .array(
+        z.object({
+          name: z.string().min(1),
+          role: z.string().min(1),
+          about: z.string().min(1),
+        }),
+      )
+      .min(1),
+    systems: z
+      .array(z.object({ name: z.string().min(1), about: z.string().min(1) }))
+      .min(1),
+  }),
+});
+
+export const collections = { nodes, scenarios, organisation };

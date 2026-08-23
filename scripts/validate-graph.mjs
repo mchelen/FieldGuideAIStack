@@ -6,7 +6,12 @@
  * target. This covers the rest: prose cross-links, orphans, self-edges, and
  * citation coverage for product claims.
  */
+import { readdir, readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import { loadNodes, report } from './lib/nodes.mjs';
+
+const SCENARIOS_DIR = new URL('../src/content/scenarios/', import.meta.url).pathname;
+const ORG_FILE = new URL('../src/data/organisation.yml', import.meta.url).pathname;
 
 const BARE_LINK = /\]\((?!\/)([a-z0-9][a-z0-9-]*)\)/g;
 
@@ -351,5 +356,65 @@ for (const n of nodes) {
   }
 }
 
-console.log(`Checked ${nodes.length} nodes.`);
+// 6. Fieldwork. The scenarios are invented, which makes them *more* in need of
+//    mechanical checking than the sourced pages, not less: nothing external
+//    will ever contradict them, so drift is silent. The schema covers shape;
+//    this covers consistency with the rest of the repository.
+const scenarioFiles = (await readdir(SCENARIOS_DIR)).filter((f) => f.endsWith('.md'));
+const orgRaw = await readFile(ORG_FILE, 'utf8');
+// Hand-read rather than parsed, matching the inventory reader: the file has one
+// fixed shape and the check should not be able to fail for reasons of its own.
+const castNames = new Set(
+  [...orgRaw.matchAll(/^ {4}- name: (.+)$/gm)].map((m) => m[1].trim()),
+);
+const conceptsSeen = new Set();
+
+for (const file of scenarioFiles) {
+  const raw = await readFile(join(SCENARIOS_DIR, file), 'utf8');
+  const fm = raw.split(/^---$/m)[1] ?? '';
+  const body = raw.split(/^---$/m).slice(2).join('---');
+
+  // A `sources:` key would make invented material look verified. The schema is
+  // `.strict()` so this is already a build failure; naming it here says why.
+  if (/^sources:/m.test(fm)) {
+    problems.push(
+      `scenarios/${file}: declares sources — fieldwork is invented and must not cite anything`,
+    );
+  }
+
+  for (const m of fm.matchAll(/^ {2}- ([a-z0-9][a-z0-9-]*)$/gm)) {
+    conceptsSeen.add(m[1]);
+    if (!ids.has(m[1])) {
+      problems.push(`scenarios/${file}: names concept "${m[1]}", which is not a node`);
+    }
+  }
+
+  // Cast names must exist in the organisation profile. A scenario introducing
+  // somebody who does not work there is the first way a fiction stops cohering.
+  for (const m of fm.matchAll(/^ {2}- name: (.+)$/gm)) {
+    const name = m[1].trim();
+    if (!castNames.has(name)) {
+      problems.push(
+        `scenarios/${file}: casts "${name}", who is not in src/data/organisation.yml`,
+      );
+    }
+  }
+
+  // Prose cross-links resolve, same rule as node pages.
+  for (const m of body.matchAll(BARE_LINK)) {
+    if (!ids.has(m[1])) {
+      problems.push(`scenarios/${file}: prose links to "${m[1]}", which is not a node`);
+    }
+  }
+  for (const m of body.matchAll(/\]\(([a-z0-9-]+)\n\s*([a-z0-9-]+)\)/g)) {
+    problems.push(
+      `scenarios/${file}: link target split across lines — \`](${m[1]}${m[2]})\` renders as text`,
+    );
+  }
+}
+
+console.log(
+  `Checked ${nodes.length} nodes and ${scenarioFiles.length} scenarios ` +
+    `(${conceptsSeen.size} concepts seen in the field).`,
+);
 process.exit(report('graph integrity', problems, warnings) ? 0 : 1);

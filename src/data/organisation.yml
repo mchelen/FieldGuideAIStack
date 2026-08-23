@@ -1,0 +1,70 @@
+# The fictional organisation.
+#
+# The charter asks for one so that concepts can be shown happening to somebody
+# rather than defined in the abstract. Everything in this file is invented.
+#
+# Chosen to be an ordinary business rather than a technology company, because
+# the interesting question is what this stack looks like somewhere that has no
+# machine learning team and no appetite for one. A ferry operator gives varied
+# problems -- timetables, manuals, support, maintenance, compliance, a small
+# engineering team, a finance director who wants a number -- without any of
+# them being exotic.
+#
+# The name is a kingfisher, which is the sort of joke a field guide is entitled
+# to make once.
+
+halcyon-ferries:
+  name: Halcyon Ferries
+  tagline: A regional ferry operator, four routes, eleven vessels, no machine learning team.
+  founded: 1974
+  staff: 410
+
+  what: >-
+    Halcyon runs passenger and vehicle ferries across a coastal region: four
+    routes, eleven vessels, roughly two million passenger journeys a year. It
+    sells tickets through a website nobody is proud of, runs a call centre for
+    everything the website cannot do, and maintains its own fleet in its own yard.
+
+  why: >-
+    It is deliberately not a technology company. Halcyon has four software
+    engineers, no data scientists, and a finance director who reads invoices
+    closely. Every decision in these scenarios is made by somebody with another
+    job, under a budget, using documentation written for someone else — which is
+    the situation most of this guide's readers are actually in.
+
+  # Everyone is referred to as they/them throughout. Nothing in these stories
+  # depends on who anybody is.
+  people:
+    - name: Ama Osei
+      role: Engineering lead
+      about: >-
+        Four engineers, one of them part-time. Owns the booking system, the
+        website, and whatever else nobody else owns.
+    - name: Dev Raman
+      role: Customer operations manager
+      about: >-
+        Runs the call centre. Measured on how quickly a passenger gets a correct
+        answer, which turns out to be the hard word in that sentence.
+    - name: Britt Sørensen
+      role: Chief engineer, fleet
+      about: >-
+        Responsible for eleven vessels and about nine thousand pages of
+        manufacturer maintenance documentation, mostly as scanned PDFs.
+    - name: Noor Haddad
+      role: Finance director
+      about: >-
+        Approves the spend. Asks what a thing costs per unit of something they
+        recognise, and is not satisfied by a price per million tokens.
+    - name: Tomas Kelly
+      role: Safety and compliance officer
+      about: >-
+        Answers to a regulator about vessel safety and to a different one about
+        passenger data. Neither has written rules for any of this yet.
+
+  systems:
+    - name: Booking system
+      about: A twelve-year-old application Ama's team maintains. Handles ticketing, capacity and refunds.
+    - name: Fleet manuals
+      about: Nine thousand pages of manufacturer documentation, scanned, searchable only by filename.
+    - name: Call centre desk
+      about: Where Dev's team answers what the website could not.
