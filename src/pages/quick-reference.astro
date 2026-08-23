@@ -1,0 +1,74 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// Inlined rather than an <img>, so the diagram is selectable, searchable and
+// scales to the reader's screen. The PNG next to it is the shareable copy.
+// `?raw` resolves at build time; a runtime read would look for the file
+// relative to dist/ and fail.
+import svg from '../../public/quick-reference.svg?raw';
+---
+
+<Base
+  title="Quick reference — Field Guide to the AI Stack"
+  description="One request and every layer it passes through: surface, harness, inference API, model. A shareable one-page diagram of the AI stack."
+>
+  <div class="wrap" style="padding-block:2.5rem 3rem">
+    <h1>Quick reference</h1>
+    <p class="lede">
+      The whole stack on one page, following a single request from the window
+      you typed in down to the weights and back. Made to be shared: take the
+      image, or link this page.
+    </p>
+
+    <div class="qr-figure" set:html={svg} />
+
+    <p class="qr-actions">
+      <a class="qr-btn" href={`${base}/quick-reference.png`} download>
+        <Icon name="diagram" size={14} /> Download PNG
+      </a>
+      <a class="qr-btn" href={`${base}/quick-reference.svg`} download>
+        <Icon name="diagram" size={14} /> Download SVG
+      </a>
+      <span class="qr-note">
+        3200 × 1800 · free to reuse with attribution
+      </span>
+    </p>
+
+    <h2><Icon name="contents" /> What it leaves out</h2>
+    <p>
+      Seventeen concepts out of {' '}
+      <a href={`${base}/`}>a hundred and sixty-six</a>. It is the shape of the
+      stack, not an index — every box has a page behind it with a definition, a
+      dated source, and what it is often confused with. The layers it draws are
+      the ones worth getting right first, because nearly every other question
+      turns on which layer a thing belongs to.
+    </p>
+  </div>
+</Base>
+
+<style>
+  .qr-figure {
+    margin: 1.8rem 0 1rem;
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    overflow-x: auto;
+    background: var(--bg-raised);
+  }
+  .qr-figure :global(svg) { display: block; width: 100%; height: auto; min-width: 60rem; }
+  .qr-actions { display: flex; flex-wrap: wrap; gap: 0.6rem 1rem; align-items: center; }
+  .qr-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: 1px solid var(--rule-strong);
+    border-radius: 7px;
+    padding: 0.4rem 0.8rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: var(--ink);
+  }
+  .qr-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .qr-note { color: var(--ink-faint); font-size: 0.85rem; }
+</style>
