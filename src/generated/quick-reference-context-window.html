@@ -1,90 +1,4 @@
-/**
- * The quick reference cards, as markup.
- *
- * This used to be an SVG built by adding numbers together, and the numbers were
- * wrong twice: a footer that landed on top of a band, and a loop arrow that
- * floated clear of the boxes it connected. Both were layout bugs in code that
- * had no layout engine. So the diagram is now real HTML with real CSS, and the
- * browser does the arithmetic -- which also buys gradients, shadows, live links
- * and text that a reader can select.
- *
- * One source, two outputs per card: the same fragment is inlined into the page
- * and screenshotted for the shareable PNG. `scripts/check-output.mjs` rebuilds
- * them and compares, so the committed copies cannot drift from this file.
- *
- * The chrome -- masthead, footer columns, takeaway band -- is shared by every
- * card, so the set reads as one publication. Only the body differs, and there
- * are two body kinds: `stack` for ordered rows (the layers of the stack, the
- * passes of the loop, what fills the window), and `pairs` for a mapping from
- * one column to another. A card's content lives in quick-reference-cards.mjs;
- * nothing here knows what any of it means.
- */
-
-/**
- * The layer palette is an ORDINAL ramp, not four categorical hues: swapping
- * surface and model would change the meaning, so the order is the data, and a
- * single hue stepped by lightness lets the reader see the order in the colour.
- * Hue 60deg is the site accent. Both ramps pass the ordinal checks -- monotone
- * lightness, adjacent dL >= 0.06, light end clear of the surface -- against
- * this site's own surfaces rather than a default pair: 2.27:1 at the light end
- * on #fbfaf7, 2.89:1 on #17161a. Re-check with the dataviz skill's validator
- * before changing a step:
- *   node validate_palette.js "<the four hexes>" --ordinal \
- *     --mode light --surface "#fbfaf7"
- */
-export const RAMP = {
-  light: ['#e29858', '#c47c3b', '#a7611b', '#874900'],
-  dark: ['#925000', '#b06a26', '#ce8545', '#eca161'],
-};
-/** Box fills: the same hue far below the chroma floor, so they read as paper. */
-export const TINT = {
-  light: ['#fdf4ec', '#fbeee1', '#f8e7d6', '#f4e0cb'],
-  dark: ['#241a12', '#2a1f15', '#302519', '#362a1d'],
-};
-
-export const WIDTH = 1600;
-export const HEIGHT = 900;
-
-const esc = (s) =>
-  String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-
-/**
- * Boxes link to the page behind them. Relative, because this fragment is
- * written by a node script that has no idea what Astro's base path is, and
- * /quick-reference/ and /nodes/<id>/ are siblings under it either way.
- */
-const link = (id, label, cls) =>
-  `<a class="${cls}" href="../nodes/${esc(id)}/">${esc(label)}</a>`;
-
-const rampVars = (mode) =>
-  RAMP[mode]
-    .map((hex, i) => `    --qr-l${i + 1}: ${hex};\n    --qr-t${i + 1}: ${TINT[mode][i]};`)
-    .join('\n');
-
-/**
- * Dark values are declared twice on purpose: the media query covers the OS
- * setting, the [data-theme] scope covers a toggle. The site only ships the
- * former today, but a fragment that only answered one of them would be a trap
- * for whoever adds the other.
- */
-const darkBlock = `
-  color-scheme: dark;
-  --qr-paper: #17161a;
-  --qr-raised: #201f24;
-  --qr-ink: #eceaea;
-  --qr-soft: #b3aeae;
-  --qr-faint: #837e7e;
-  --qr-rule: #35333a;
-  --qr-rule-strong: #4c4952;
-  --qr-sunken: #121115;
-  --qr-accent: #e0a86a;
-  --qr-accent-soft: #2a2118;
-  --qr-mark: #8fc9a3;
-  --qr-shadow: rgba(0, 0, 0, 0.5);
-  --qr-glow: rgba(255, 255, 255, 0.04);
-${rampVars('dark')}`;
-
-export const CSS = `
+<style>
 .qr {
   --qr-paper: #fbfaf7;
   --qr-raised: #ffffff;
@@ -99,10 +13,17 @@ export const CSS = `
   --qr-mark: #2f5d3f;
   --qr-shadow: rgba(60, 40, 18, 0.10);
   --qr-glow: rgba(255, 255, 255, 0.9);
-${rampVars('light')}
+    --qr-l1: #e29858;
+    --qr-t1: #fdf4ec;
+    --qr-l2: #c47c3b;
+    --qr-t2: #fbeee1;
+    --qr-l3: #a7611b;
+    --qr-t3: #f8e7d6;
+    --qr-l4: #874900;
+    --qr-t4: #f4e0cb;
   color-scheme: light;
-  width: ${WIDTH}px;
-  height: ${HEIGHT}px;
+  width: 1600px;
+  height: 900px;
   box-sizing: border-box;
   padding: 42px 54px 34px;
   display: flex;
@@ -118,10 +39,54 @@ ${rampVars('light')}
   text-rendering: optimizeLegibility;
 }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .qr {${darkBlock}
+  :root:not([data-theme="light"]) .qr {
+  color-scheme: dark;
+  --qr-paper: #17161a;
+  --qr-raised: #201f24;
+  --qr-ink: #eceaea;
+  --qr-soft: #b3aeae;
+  --qr-faint: #837e7e;
+  --qr-rule: #35333a;
+  --qr-rule-strong: #4c4952;
+  --qr-sunken: #121115;
+  --qr-accent: #e0a86a;
+  --qr-accent-soft: #2a2118;
+  --qr-mark: #8fc9a3;
+  --qr-shadow: rgba(0, 0, 0, 0.5);
+  --qr-glow: rgba(255, 255, 255, 0.04);
+    --qr-l1: #925000;
+    --qr-t1: #241a12;
+    --qr-l2: #b06a26;
+    --qr-t2: #2a1f15;
+    --qr-l3: #ce8545;
+    --qr-t3: #302519;
+    --qr-l4: #eca161;
+    --qr-t4: #362a1d;
   }
 }
-:root[data-theme="dark"] .qr {${darkBlock}
+:root[data-theme="dark"] .qr {
+  color-scheme: dark;
+  --qr-paper: #17161a;
+  --qr-raised: #201f24;
+  --qr-ink: #eceaea;
+  --qr-soft: #b3aeae;
+  --qr-faint: #837e7e;
+  --qr-rule: #35333a;
+  --qr-rule-strong: #4c4952;
+  --qr-sunken: #121115;
+  --qr-accent: #e0a86a;
+  --qr-accent-soft: #2a2118;
+  --qr-mark: #8fc9a3;
+  --qr-shadow: rgba(0, 0, 0, 0.5);
+  --qr-glow: rgba(255, 255, 255, 0.04);
+    --qr-l1: #925000;
+    --qr-t1: #241a12;
+    --qr-l2: #b06a26;
+    --qr-t2: #2a1f15;
+    --qr-l3: #ce8545;
+    --qr-t3: #302519;
+    --qr-l4: #eca161;
+    --qr-t4: #362a1d;
 }
 
 .qr h2, .qr h3, .qr h4, .qr p { margin: 0; }
@@ -378,125 +343,88 @@ ${rampVars('light')}
   color: var(--qr-accent);
   text-align: center;
 }
-`;
-
-const rowHtml = (l, i) => `
-      <section class="qr-layer qr-s${i + 1}">
-        <div class="qr-top">
-          <div>
-            <h4 class="qr-name"><span class="qr-num">${String(i + 1).padStart(2, '0')}</span>${link(l.id, l.name, 'qr-namelink')}</h4>
-            <p class="qr-kicker">${esc(l.kicker)}</p>
-          </div>
-          <p class="qr-desc">${esc(l.body)}</p>
-          <span class="qr-tag">${esc(l.tag)}</span>
-        </div>${
-          l.sub
-            ? `
-        <div class="qr-sub">${l.sub
-          .map((sb) => `
-          <div><b>${link(sb.id, sb.t, 'qr-sublink')}</b><span>${esc(sb.d)}</span></div>`)
-          .join('')}
-        </div>`
-            : ''
-        }
-      </section>`;
-
-/** Grid rows are 1-based and `to` is inclusive, which is how the cards read. */
-const span = (a, b) => `style="grid-row:${Math.min(a, b)}/${Math.max(a, b) + 1}"`;
-
-const alsoHtml = (also) =>
-  also?.length
-    ? `
-          <div class="qr-also">${also.map((a) => link(a.id, a.t, '')).join('')}</div>`
-    : '';
-
-/**
- * `stack`: ordered rows, optionally wrapped by a bracket on the left and a
- * return arrow on the right. Read as depth on the stack card and as time on the
- * loop card -- the same layout, because in both the order is the content.
- */
-const stackBody = (card) => `
-  <div class="qr-body">${
-    card.bracket
-      ? `
-    <aside class="qr-agent" ${span(card.bracket.from, card.bracket.to)}>
-      <strong>${link(card.bracket.id, card.bracket.label, '')}</strong>
-      <span>${esc(card.bracket.note)}</span>
-    </aside>`
-      : ''
-  }${card.rows.map(rowHtml).join('')}${
-    card.loop
-      ? `
-    <aside class="qr-loop" ${span(card.loop.from, card.loop.to)}><b>${esc(card.loop.label)} · <em>${esc(card.loop.note)}</em></b></aside>`
-      : ''
-  }
-  </div>`;
-
-/** `pairs`: a failure on the left, the control that addresses it on the right. */
-const pairsBody = (card) => `
-  <div class="qr-pairs">
-    <div class="qr-pairhead"><span>${esc(card.columns.left)}</span><span>${esc(card.columns.right)}</span></div>${card.rows
-      .map(
-        (r) => `
-    <div class="qr-pair">
-      <div class="qr-risk">
-        <b>${link(r.risk.id, r.risk.t, '')}</b>
-        <p>${esc(r.risk.d)}</p>${alsoHtml(r.risk.also)}
-      </div>
-      <div class="qr-arrow" aria-hidden="true">&#8594;</div>
-      <div class="qr-fix">
-        <b>${link(r.control.id, r.control.t, '')}</b>
-        <p>${esc(r.control.d)}</p>${alsoHtml(r.control.also)}
-      </div>
-    </div>`,
-      )
-      .join('')}
-  </div>`;
-
-const BODIES = { stack: stackBody, pairs: pairsBody };
-
-const footHtml = (col) => `
-      <section>
-        <h3>${esc(col.head)}</h3>${col.items
-          .map((it) => `
-        <p><b>${link(it.id, it.t, 'qr-footlink')}</b> — ${esc(it.d)}</p>`)
-          .join('')}
-      </section>`;
-
-/** Every node id a card names, for the generator's drift check. */
-export function idsIn(card) {
-  const rows =
-    card.kind === 'pairs'
-      ? card.rows.flatMap((r) => [r.risk, r.control].flatMap((c) => [c.id, ...(c.also ?? []).map((a) => a.id)]))
-      : card.rows.flatMap((r) => [r.id, ...(r.sub ?? []).map((s) => s.id)]);
-  return [
-    ...rows,
-    ...card.footer.flatMap((f) => f.items.map((i) => i.id)),
-    ...(card.bracket ? [card.bracket.id] : []),
-    ...(card.loop ? [card.loop.id] : []),
-  ];
-}
-
-/** The fragment for one card: one <style> and one .qr root, all scoped under it. */
-export function buildFragment(card) {
-  const body = BODIES[card.kind];
-  if (!body) throw new Error(`card ${card.slug}: unknown kind ${card.kind}`);
-  return `<style>${CSS}</style>
-<div class="qr" role="img" aria-label="${esc(card.title)}. ${esc(card.sub)}">
+</style>
+<div class="qr" role="img" aria-label="What fills the context window. Every call re-sends the whole thing, and all of it competes for one ceiling.">
   <header class="qr-head">
     <div>
-      <h2>${esc(card.title)}</h2>
-      <p>${esc(card.sub)}</p>
+      <h2>What fills the context window</h2>
+      <p>Every call re-sends the whole thing, and all of it competes for one ceiling.</p>
     </div>
     <div class="qr-brand">
       <strong>Field guide to the AI stack</strong>
       <span>mchelen.github.io/FieldGuideAIStack</span>
     </div>
   </header>
-  <div class="qr-rule"></div>${body(card)}
-  <div class="qr-foot">${card.footer.map(footHtml).join('')}
+  <div class="qr-rule"></div>
+  <div class="qr-body">
+    <aside class="qr-agent" style="grid-row:1/5">
+      <strong><a class="" href="../nodes/context-window/">The window</a></strong>
+      <span>a per-call ceiling on all of it together — not a budget that refills</span>
+    </aside>
+      <section class="qr-layer qr-s1">
+        <div class="qr-top">
+          <div>
+            <h4 class="qr-name"><span class="qr-num">01</span><a class="qr-namelink" href="../nodes/system-prompt/">System prompt</a></h4>
+            <p class="qr-kicker">the vendor’s standing instructions</p>
+          </div>
+          <p class="qr-desc">Role, rules and format, sent ahead of the conversation on every request. It is the part of the product you cannot read or edit.</p>
+          <span class="qr-tag">you never see it</span>
+        </div>
+      </section>
+      <section class="qr-layer qr-s2">
+        <div class="qr-top">
+          <div>
+            <h4 class="qr-name"><span class="qr-num">02</span><a class="qr-namelink" href="../nodes/tool-use/">Tool definitions</a></h4>
+            <p class="qr-kicker">what it is allowed to ask for</p>
+          </div>
+          <p class="qr-desc">Every function’s name, description and arguments. They are part of the prompt, so a large toolset is a standing cost on the window.</p>
+          <span class="qr-tag">charged whether used or not</span>
+        </div>
+      </section>
+      <section class="qr-layer qr-s3">
+        <div class="qr-top">
+          <div>
+            <h4 class="qr-name"><span class="qr-num">03</span><a class="qr-namelink" href="../nodes/short-term-memory/">The conversation</a></h4>
+            <p class="qr-kicker">there is nowhere else for it to live</p>
+          </div>
+          <p class="qr-desc">Not a store the agent writes to — the transcript, re-sent whole. This is the part that runs you out of room.</p>
+          <span class="qr-tag">grows every turn</span>
+        </div>
+        <div class="qr-sub">
+          <div><b><a class="qr-sublink" href="../nodes/compaction/">Compaction</a></b><span>Older turns replaced by a summary so a long run keeps fitting.</span></div>
+          <div><b><a class="qr-sublink" href="../nodes/session/">Session</a></b><span>Ends, and takes the window with it. A fresh one often beats arguing.</span></div>
+        </div>
+      </section>
+      <section class="qr-layer qr-s4">
+        <div class="qr-top">
+          <div>
+            <h4 class="qr-name"><span class="qr-num">04</span><a class="qr-namelink" href="../nodes/retrieval-augmented-generation/">Retrieved material</a></h4>
+            <p class="qr-kicker">fetched at question time</p>
+          </div>
+          <p class="qr-desc">Documents pulled in for this question, so the answer rests on them rather than on what the model absorbed in training.</p>
+          <span class="qr-tag">the point is grounding</span>
+        </div>
+        <div class="qr-sub">
+          <div><b><a class="qr-sublink" href="../nodes/chunking/">Chunking</a></b><span>Documents split small enough to retrieve a piece rather than the whole.</span></div>
+          <div><b><a class="qr-sublink" href="../nodes/semantic-search/">Semantic search</a></b><span>Retrieval by meaning rather than by matching words.</span></div>
+          <div><b><a class="qr-sublink" href="../nodes/reranking/">Reranking</a></b><span>A second pass that reorders hits before any of them cost tokens.</span></div>
+          <div><b><a class="qr-sublink" href="../nodes/grounding/">Grounding</a></b><span>Answering from the retrieved source instead of from memory.</span></div>
+        </div>
+      </section>
   </div>
-  <p class="qr-take">${esc(card.takeaway)}</p>
+  <div class="qr-foot">
+      <section>
+        <h3>The unit it is measured in</h3>
+        <p><b><a class="qr-footlink" href="../nodes/token/">Token</a></b> — A word fragment. The window, the bill and the rate limits are all counted in these, not in words.</p>
+      </section>
+      <section>
+        <h3>The work of deciding</h3>
+        <p><b><a class="qr-footlink" href="../nodes/context-engineering/">Context engineering</a></b> — What goes in, what gets dropped, what gets fetched again — most of what people call prompt engineering is this.</p>
+      </section>
+      <section>
+        <h3>What it is not</h3>
+        <p><b><a class="qr-footlink" href="../nodes/long-term-memory/">Long-term memory</a></b> — State across sessions is a directory the harness reads back into the window. The window itself remembers nothing.</p>
+      </section>
+  </div>
+  <p class="qr-take">Nothing in the window persists. Every call re-sends all of it, the ceiling applies to the whole, and what looks like memory is a file something re-read for you.</p>
 </div>
-`;
-}

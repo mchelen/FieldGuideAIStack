@@ -17,6 +17,7 @@ import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { buildFragment } from './lib/quick-reference-view.mjs';
+import { CARDS } from './lib/quick-reference-cards.mjs';
 
 const DIST = new URL('../dist/', import.meta.url).pathname;
 const GEN = new URL('../src/generated/', import.meta.url).pathname;
@@ -149,38 +150,45 @@ if (linkedUnmarked === 0 && linked > 0) {
   ok(`${linked} node pages link to fieldwork, all marked`);
 }
 
-// The quick reference is the shareable artifact, so the images have to ship and
-// the page has to actually contain the diagram rather than a broken import.
-for (const f of ['quick-reference.png', 'quick-reference.pdf']) {
-  const p = join(DIST, f);
-  if (!existsSync(p)) problems.push(`${f} did not ship`);
-  else {
-    const { size } = await stat(p);
-    if (size < 4000) problems.push(`${f} shipped but is only ${size} bytes`);
+// The quick reference cards are the shareable artifacts, so every image has to
+// ship and the page has to actually contain each diagram rather than a broken
+// import. Driven off CARDS, so adding a card extends the check automatically
+// rather than leaving the new one unasserted.
+let qrStale = 0;
+for (const card of CARDS) {
+  for (const ext of ['png', 'pdf']) {
+    const p = join(DIST, `${card.slug}.${ext}`);
+    if (!existsSync(p)) problems.push(`${card.slug}.${ext} did not ship`);
+    else {
+      const { size } = await stat(p);
+      if (size < 4000) problems.push(`${card.slug}.${ext} shipped but is only ${size} bytes`);
+    }
   }
-}
-// The diagram is generated markup that lives in the repo, so the committed copy
-// and the generator can disagree. CI never runs the generator -- it renders the
-// committed file -- so without this the images and the page could describe two
-// different diagrams and every other check would stay green.
-const committed = await readFile(join(GEN, 'quick-reference.html'), 'utf8');
-if (committed !== buildFragment()) {
-  problems.push(
-    'src/generated/quick-reference.html is stale — run `npm run quick-ref` and commit the result',
-  );
+  // The diagrams are generated markup that lives in the repo, so a committed
+  // copy and the generator can disagree. CI never runs the generator -- it
+  // renders the committed files -- so without this the images and the page
+  // could describe two different diagrams and every other check would stay
+  // green.
+  const p = join(GEN, `${card.slug}.html`);
+  if (!existsSync(p)) {
+    problems.push(`src/generated/${card.slug}.html missing — run \`npm run quick-ref\``);
+    qrStale += 1;
+  } else if ((await readFile(p, 'utf8')) !== buildFragment(card)) {
+    problems.push(`src/generated/${card.slug}.html is stale — run \`npm run quick-ref\` and commit the result`);
+    qrStale += 1;
+  }
 }
 const qr = join(DIST, 'quick-reference', 'index.html');
 if (!existsSync(qr)) {
   problems.push('quick reference page missing');
 } else {
   const html = await readFile(qr, 'utf8');
-  // Two things, because either alone passes while the other is broken: the
-  // markup has to be there, and so does the stylesheet that lays it out.
-  if (!html.includes('Agentic loop') || !html.includes('--qr-l4')) {
-    problems.push('quick reference page does not contain the inlined diagram');
-  } else if (!problems.some((x) => x.startsWith('src/generated'))) {
-    ok('quick reference: page in step with the generator, PNG and PDF shipped');
-  }
+  // Every card's own title, so a page that silently dropped one is caught --
+  // plus the stylesheet, because the markup can be present and unstyled.
+  const absent = CARDS.filter((c) => !html.includes(c.title)).map((c) => c.slug);
+  if (absent.length) problems.push(`quick reference page is missing card(s): ${absent.join(', ')}`);
+  else if (!html.includes('--qr-l4')) problems.push('quick reference page has the diagrams but not their stylesheet');
+  else if (!qrStale) ok(`quick reference: ${CARDS.length} cards in step with the generator, PNG and PDF each`);
 }
 
 const bundles = (await readdir(join(DIST, '_astro'))).filter((f) => f.endsWith('.js'));

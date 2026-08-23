@@ -6,6 +6,8 @@
   --qr-soft: #55504a;
   --qr-faint: #85807a;
   --qr-rule: #e0dbd2;
+  --qr-rule-strong: #c8c1b5;
+  --qr-sunken: #f2efe9;
   --qr-accent: #7a4a1e;
   --qr-accent-soft: #f6efe6;
   --qr-mark: #2f5d3f;
@@ -45,6 +47,8 @@
   --qr-soft: #b3aeae;
   --qr-faint: #837e7e;
   --qr-rule: #35333a;
+  --qr-rule-strong: #4c4952;
+  --qr-sunken: #121115;
   --qr-accent: #e0a86a;
   --qr-accent-soft: #2a2118;
   --qr-mark: #8fc9a3;
@@ -68,6 +72,8 @@
   --qr-soft: #b3aeae;
   --qr-faint: #837e7e;
   --qr-rule: #35333a;
+  --qr-rule-strong: #4c4952;
+  --qr-sunken: #121115;
   --qr-accent: #e0a86a;
   --qr-accent-soft: #2a2118;
   --qr-mark: #8fc9a3;
@@ -121,8 +127,10 @@
 
 /* ---- the stack ---- */
 .qr-body {
-  flex: 1 1 auto;
-  min-height: 0;
+  /* Grow to fill, but never shrink below content. Flex-shrink with min-height 0
+     let the grid collapse and paint straight over the footer -- an overlap no
+     height measurement of the card itself could see. */
+  flex: 1 0 auto;
   display: grid;
   grid-template-columns: 158px minmax(0, 1fr) 74px;
   grid-template-rows: repeat(4, min-content);
@@ -208,7 +216,7 @@
 .qr-sub span { display: block; margin-top: 3px; font-size: 11px; line-height: 1.36; color: var(--qr-faint); }
 
 /* ---- the two brackets ---- */
-.qr-agent, .qr-loop { grid-row: 2 / 5; position: relative; }
+.qr-agent, .qr-loop { position: relative; } /* row span comes from the card */
 .qr-agent {
   grid-column: 1;
   border: 2px solid var(--qr-accent);
@@ -264,6 +272,49 @@
 }
 .qr-loop b em { font-style: normal; font-weight: 400; letter-spacing: 0.04em; color: var(--qr-faint); }
 
+/* ---- pairs: a failure beside the control that addresses it ---- */
+/* Two categories, not four, and each column is labelled -- so the split is
+   carried by position and heading, and colour only reinforces it. */
+.qr-pairs { flex: 1 0 auto; display: grid; grid-template-rows: auto repeat(4, min-content); gap: 12px 18px; align-content: space-between; }
+.qr-pairhead { display: grid; grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr); gap: 0 18px; }
+.qr-pairhead span {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--qr-faint);
+}
+.qr-pairhead span:last-child { grid-column: 3; color: var(--qr-accent); }
+.qr-pair { display: grid; grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr); gap: 0 18px; align-items: stretch; }
+.qr-risk, .qr-fix {
+  border: 1px solid var(--qr-rule);
+  border-radius: 10px;
+  padding: 12px 16px;
+  box-shadow: 0 1px 0 var(--qr-glow) inset, 0 2px 7px -3px var(--qr-shadow);
+}
+.qr-risk { background: linear-gradient(163deg, var(--qr-raised) 8%, var(--qr-sunken) 112%); border-left: 4px solid var(--qr-rule-strong); }
+.qr-fix {
+  background: linear-gradient(163deg, var(--qr-raised) 8%, var(--qr-accent-soft) 112%);
+  border-left: 4px solid var(--qr-accent);
+}
+.qr-pair b { display: block; font-size: 14.5px; font-weight: 700; letter-spacing: -0.01em; }
+.qr-fix b { color: var(--qr-accent); }
+.qr-pair p { margin-top: 4px; font-size: 12.5px; line-height: 1.42; color: var(--qr-soft); }
+.qr-also { margin-top: 7px; display: flex; flex-wrap: wrap; gap: 5px; }
+.qr-also a {
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.05em;
+  color: var(--qr-faint);
+  border: 1px solid var(--qr-rule);
+  border-radius: 999px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+.qr-fix .qr-also a { color: var(--qr-accent); border-color: color-mix(in oklab, var(--qr-accent) 34%, transparent); }
+/* The arrow is the claim: this control addresses that failure. */
+.qr-arrow { display: flex; align-items: center; justify-content: center; color: var(--qr-accent); font-size: 19px; font-weight: 700; }
+
 /* ---- footer ---- */
 .qr-foot { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 18px; }
 .qr-foot section { border-top: 2px solid var(--qr-rule); padding-top: 11px; }
@@ -293,7 +344,7 @@
   text-align: center;
 }
 </style>
-<div class="qr" role="img" aria-label="The AI stack top to bottom: surface, harness, inference API, model, with the agentic loop returning from the model to the harness.">
+<div class="qr" role="img" aria-label="The AI stack, top to bottom. One request, and every layer it passes through.">
   <header class="qr-head">
     <div>
       <h2>The AI stack, top to bottom</h2>
@@ -306,9 +357,9 @@
   </header>
   <div class="qr-rule"></div>
   <div class="qr-body">
-    <aside class="qr-agent">
-      <strong><a class="qr-agentlink" href="../nodes/agent/">Agent</a></strong>
-      <span>a model driven in a <a class="qr-agentlink" href="../nodes/agentic-loop/">loop</a> by a harness, with tools</span>
+    <aside class="qr-agent" style="grid-row:2/5">
+      <strong><a class="" href="../nodes/agent/">Agent</a></strong>
+      <span>a model driven in a loop by a harness, with tools</span>
     </aside>
       <section class="qr-layer qr-s1">
         <div class="qr-top">
@@ -361,7 +412,7 @@
           <div><b><a class="qr-sublink" href="../nodes/context-window/">Context window</a></b><span>A per-call ceiling on what it can attend to. Not a memory.</span></div>
         </div>
       </section>
-    <aside class="qr-loop"><b>Agentic loop · <em>repeat until done</em></b></aside>
+    <aside class="qr-loop" style="grid-row:2/5"><b>Agentic loop · <em>repeat until done</em></b></aside>
   </div>
   <div class="qr-foot">
       <section>
