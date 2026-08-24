@@ -409,11 +409,11 @@
   text-align: center;
 }
 </style>
-<div class="qr" role="img" aria-label="What goes wrong, and what stops it. Four failure modes, and the control that actually addresses each one.">
+<div class="qr" role="img" aria-label="What you actually pay for. From the unit on the price page to the number that decides whether it was worth running.">
   <header class="qr-head">
     <div>
-      <h2>What goes wrong, and what stops it</h2>
-      <p>Four failure modes, and the control that actually addresses each one.</p>
+      <h2>What you actually pay for</h2>
+      <p>From the unit on the price page to the number that decides whether it was worth running.</p>
     </div>
     <div class="qr-brand">
       <strong>Field guide to the AI stack</strong>
@@ -421,76 +421,72 @@
     </div>
   </header>
   <div class="qr-rule"></div>
-  <div class="qr-legend"><span class="qr-k-control"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg>Control</span><span class="qr-k-failure"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg>Failure</span><span class="qr-k-measure"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17Zm0-4.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0-3.4h.01"/></svg>Measure</span></div>
-  <div class="qr-pairs">
-    <div class="qr-pairhead"><span>The failure</span><span>What actually addresses it</span></div>
-    <div class="qr-pair">
-      <div class="qr-risk">
-        <b><span class="qr-n qr-k-failure" data-node="prompt-injection"><svg class="qr-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/prompt-injection/">Prompt injection</a></span></b>
-        <p>Text the system treats as instructions when it was only ever content. The dangerous form arrives in a page, a file or a repo the agent read — nobody typed it.</p>
-          <div class="qr-also"><span class="qr-n qr-k-failure" data-node="indirect-prompt-injection"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/indirect-prompt-injection/">Indirect prompt injection</a></span><span class="qr-n qr-k-failure" data-node="jailbreak"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/jailbreak/">Jailbreak</a></span></div>
-      </div>
-      <div class="qr-arrow" aria-hidden="true">&#8594;</div>
-      <div class="qr-fix">
-        <b><span class="qr-n qr-k-control" data-node="project-trust"><svg class="qr-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/project-trust/">Vet what may configure the agent</a></span></b>
-        <p>A repository supplies configuration, not only code. Decide whether an agent may act on one before it reads it, and check input and output outside the model, where the check cannot be argued with.</p>
-          <div class="qr-also"><span class="qr-n qr-k-control" data-node="guardrails"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/guardrails/">Guardrails</a></span></div>
-      </div>
-    </div>
-    <div class="qr-pair">
-      <div class="qr-risk">
-        <b><span class="qr-n qr-k-failure" data-node="hallucination"><svg class="qr-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/hallucination/">Hallucination</a></span></b>
-        <p>Plausible, confident and wrong, produced identically to correct output — because truth is not a quantity the model computes.</p>
-          <div class="qr-also"><span class="qr-n qr-k-failure" data-node="ai-slop"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/ai-slop/">AI slop</a></span></div>
-      </div>
-      <div class="qr-arrow" aria-hidden="true">&#8594;</div>
-      <div class="qr-fix">
-        <b><span class="qr-n qr-k-control" data-node="grounding"><svg class="qr-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/grounding/">Answer from a source, then check the citation</a></span></b>
-        <p>Retrieve the document and answer from it rather than from what the model remembers — then verify the cited source supports the claim, and that claims needing one have it.</p>
-          <div class="qr-also"><span class="qr-n qr-k-measure" data-node="citation-precision-and-recall"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17Zm0-4.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0-3.4h.01"/></svg><a href="../nodes/citation-precision-and-recall/">Citation precision and recall</a></span><span class="qr-n qr-k-measure" data-node="factuality"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17Zm0-4.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0-3.4h.01"/></svg><a href="../nodes/factuality/">Factuality</a></span></div>
-      </div>
-    </div>
-    <div class="qr-pair">
-      <div class="qr-risk">
-        <b><span class="qr-n qr-k-failure" data-node="excessive-agency"><svg class="qr-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/excessive-agency/">Excessive agency</a></span></b>
-        <p>More permission, autonomy and reach than the task needs — and drift outside the intended scope while every individual action still looks permitted.</p>
-          <div class="qr-also"><span class="qr-n qr-k-failure" data-node="rogue-agent"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/rogue-agent/">Rogue agent</a></span></div>
-      </div>
-      <div class="qr-arrow" aria-hidden="true">&#8594;</div>
-      <div class="qr-fix">
-        <b><span class="qr-n qr-k-control" data-node="permission-model"><svg class="qr-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/permission-model/">Say what is allowed, and enforce it below the prompt</a></span></b>
-        <p>Set the limit per action class and put it where it holds: a rule in the system prompt is advice, a rule in the harness is a mechanism.</p>
-          <div class="qr-also"><span class="qr-n qr-k-control" data-node="approval-mode"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/approval-mode/">Approval mode</a></span><span class="qr-n qr-k-control" data-node="autonomy-level"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/autonomy-level/">Autonomy level</a></span></div>
-      </div>
-    </div>
-    <div class="qr-pair">
-      <div class="qr-risk">
-        <b><span class="qr-n qr-k-failure" data-node="data-exfiltration"><svg class="qr-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/data-exfiltration/">Exfiltration and tool misuse</a></span></b>
-        <p>Legitimate access and legitimate tools, used exactly as designed, to do something you did not want — which is what makes both hard to spot.</p>
-          <div class="qr-also"><span class="qr-n qr-k-failure" data-node="tool-misuse"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/tool-misuse/">Tool misuse</a></span><span class="qr-n qr-k-failure" data-node="memory-poisoning"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/memory-poisoning/">Memory poisoning</a></span></div>
-      </div>
-      <div class="qr-arrow" aria-hidden="true">&#8594;</div>
-      <div class="qr-fix">
-        <b><span class="qr-n qr-k-control" data-node="sandbox"><svg class="qr-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/sandbox/">Bound the blast radius, and keep a way back</a></span></b>
-        <p>Run commands where a bad step damages a copy, put a person in the path of what cannot be undone, and snapshot as you go so an hour is recoverable.</p>
-          <div class="qr-also"><span class="qr-n qr-k-control" data-node="human-in-the-loop"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/human-in-the-loop/">Human in the loop</a></span><span class="qr-n qr-k-control" data-node="checkpoint-and-rollback"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/checkpoint-and-rollback/">Checkpoint and rollback</a></span></div>
-      </div>
-    </div>
+  <div class="qr-legend"><span class="qr-k-component"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5h17v10h-17zM9 7.5v10"/></svg>Component</span><span class="qr-k-artifact"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h7.5L19 9v11.5H6V3.5Zm7.5 0V9H19"/></svg>Artifact</span><span class="qr-k-cost"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.3 3.5H4.5a1 1 0 0 0-1 1v6.8a1 1 0 0 0 .3.7l8 8a1 1 0 0 0 1.4 0l6.3-6.3a1 1 0 0 0 0-1.4l-8-8a1 1 0 0 0-.7-.3Zm-3.9 3.9h.01"/></svg>Cost</span></div>
+  <div class="qr-body">
+    <aside class="qr-agent" style="grid-row:1/5">
+      <strong><span class="qr-n qr-k-cost" data-node="token-billing"><svg class="qr-i" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.3 3.5H4.5a1 1 0 0 0-1 1v6.8a1 1 0 0 0 .3.7l8 8a1 1 0 0 0 1.4 0l6.3-6.3a1 1 0 0 0 0-1.4l-8-8a1 1 0 0 0-.7-.3Zm-3.9 3.9h.01"/></svg><a href="../nodes/token-billing/">Token billing</a></span></strong>
+      <span>charged by consumption, not by seat — so the bill scales with how much the thing is used</span>
+    </aside>
+      <section class="qr-layer qr-s1">
+        <div class="qr-top">
+          <div>
+            <h4 class="qr-name"><span class="qr-num">01</span><span class="qr-n qr-k-artifact" data-node="token"><svg class="qr-i" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h7.5L19 9v11.5H6V3.5Zm7.5 0V9H19"/></svg><a href="../nodes/token/">Token</a></span></h4>
+            <p class="qr-kicker">the unit everything is counted in</p>
+          </div>
+          <p class="qr-desc">Everything downstream is denominated in these: the price, the window, the rate limits. Not words, and not characters.</p>
+          <span class="qr-tag">a word fragment</span>
+        </div>
+      </section>
+      <section class="qr-layer qr-s2">
+        <div class="qr-top">
+          <div>
+            <h4 class="qr-name"><span class="qr-num">02</span><span class="qr-n qr-k-cost" data-node="token-pricing"><svg class="qr-i" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.3 3.5H4.5a1 1 0 0 0-1 1v6.8a1 1 0 0 0 .3.7l8 8a1 1 0 0 0 1.4 0l6.3-6.3a1 1 0 0 0 0-1.4l-8-8a1 1 0 0 0-.7-.3Zm-3.9 3.9h.01"/></svg><a href="../nodes/token-pricing/">Token pricing</a></span></h4>
+            <p class="qr-kicker">three rates, not one</p>
+          </div>
+          <p class="qr-desc">Input and output are charged at different rates, and cached input cheaper again — which is where most of the saving available to you actually is.</p>
+          <span class="qr-tag">output costs the most</span>
+        </div>
+      </section>
+      <section class="qr-layer qr-s3">
+        <div class="qr-top">
+          <div>
+            <h4 class="qr-name"><span class="qr-num">03</span><span>The levers</span></h4>
+            <p class="qr-kicker">what changes the rate you pay</p>
+          </div>
+          <p class="qr-desc">Three ways to pay less for the same work, each giving up something in exchange — repetition, timing, or commitment.</p>
+          <span class="qr-tag">each trades something away</span>
+        </div>
+        <div class="qr-sub">
+          <div><b><span class="qr-n qr-k-cost" data-node="prompt-caching"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.3 3.5H4.5a1 1 0 0 0-1 1v6.8a1 1 0 0 0 .3.7l8 8a1 1 0 0 0 1.4 0l6.3-6.3a1 1 0 0 0 0-1.4l-8-8a1 1 0 0 0-.7-.3Zm-3.9 3.9h.01"/></svg><a href="../nodes/prompt-caching/">Prompt caching</a></span></b><span>A repeated prefix processed once rather than on every call.</span></div>
+          <div><b><span class="qr-n qr-k-cost" data-node="batch-inference"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.3 3.5H4.5a1 1 0 0 0-1 1v6.8a1 1 0 0 0 .3.7l8 8a1 1 0 0 0 1.4 0l6.3-6.3a1 1 0 0 0 0-1.4l-8-8a1 1 0 0 0-.7-.3Zm-3.9 3.9h.01"/></svg><a href="../nodes/batch-inference/">Batch inference</a></span></b><span>Roughly half price for giving up any promise about when.</span></div>
+          <div><b><span class="qr-n qr-k-cost" data-node="provisioned-throughput"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.3 3.5H4.5a1 1 0 0 0-1 1v6.8a1 1 0 0 0 .3.7l8 8a1 1 0 0 0 1.4 0l6.3-6.3a1 1 0 0 0 0-1.4l-8-8a1 1 0 0 0-.7-.3Zm-3.9 3.9h.01"/></svg><a href="../nodes/provisioned-throughput/">Provisioned throughput</a></span></b><span>Guaranteed capacity by the hour: a variable cost made fixed, in both directions.</span></div>
+        </div>
+      </section>
+      <section class="qr-layer qr-s4">
+        <div class="qr-top">
+          <div>
+            <h4 class="qr-name"><span class="qr-num">04</span><span class="qr-n qr-k-cost" data-node="cost-per-task"><svg class="qr-i" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.3 3.5H4.5a1 1 0 0 0-1 1v6.8a1 1 0 0 0 .3.7l8 8a1 1 0 0 0 1.4 0l6.3-6.3a1 1 0 0 0 0-1.4l-8-8a1 1 0 0 0-.7-.3Zm-3.9 3.9h.01"/></svg><a href="../nodes/cost-per-task/">Cost per task</a></span></h4>
+            <p class="qr-kicker">what one finished job cost</p>
+          </div>
+          <p class="qr-desc">Retries, tool calls and the runs that failed, counted against the jobs that completed. An agent making forty calls to finish once is priced by the finish, not by the call.</p>
+          <span class="qr-tag">not the price of a call</span>
+        </div>
+      </section>
   </div>
   <div class="qr-foot">
       <section>
-        <h3>How you find them</h3>
-        <p><b><span class="qr-n qr-k-measure" data-node="red-teaming"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17Zm0-4.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0-3.4h.01"/></svg><a href="../nodes/red-teaming/">Red teaming</a></span></b> — Deliberately trying to make it misbehave, rather than checking that it behaves.</p>
-        <p><b><span class="qr-n qr-k-measure" data-node="evaluation"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17Zm0-4.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0-3.4h.01"/></svg><a href="../nodes/evaluation/">Evaluation</a></span></b> — A repeatable test, so a fix can be shown to have worked.</p>
+        <h3>What you are sold</h3>
+        <p><b><span class="qr-n qr-k-cost" data-node="subscription-tier"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.3 3.5H4.5a1 1 0 0 0-1 1v6.8a1 1 0 0 0 .3.7l8 8a1 1 0 0 0 1.4 0l6.3-6.3a1 1 0 0 0 0-1.4l-8-8a1 1 0 0 0-.7-.3Zm-3.9 3.9h.01"/></svg><a href="../nodes/subscription-tier/">Subscription tier</a></span></b> — The packaging that decides which capabilities you get at all — and the usual reason two people describe the same product differently.</p>
       </section>
       <section>
-        <h3>What should travel with the artifact</h3>
-        <p><b><span class="qr-n qr-k-control" data-node="provenance"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/provenance/">Provenance</a></span></b> — Evidence of where a model, dataset or piece of content came from — attached to the thing, not asserted about it.</p>
+        <h3>Where it stops</h3>
+        <p><b><span class="qr-n qr-k-cost" data-node="usage-limit"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.3 3.5H4.5a1 1 0 0 0-1 1v6.8a1 1 0 0 0 .3.7l8 8a1 1 0 0 0 1.4 0l6.3-6.3a1 1 0 0 0 0-1.4l-8-8a1 1 0 0 0-.7-.3Zm-3.9 3.9h.01"/></svg><a href="../nodes/usage-limit/">Usage limit</a></span></b> — The ceiling a plan puts on consumption over a period. A rate limit shapes traffic; this one stops it.</p>
       </section>
       <section>
-        <h3>The pattern in all four</h3>
-        <p><b><span class="qr-n qr-k-control" data-node="non-human-identity"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/non-human-identity/">Give it its own identity</a></span></b> — An agent acting as you is indistinguishable from you in every log. Its own credentials are what make the other controls observable.</p>
+        <h3>Not paying per token at all</h3>
+        <p><b><span class="qr-n qr-k-component" data-node="self-hosting"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5h17v10h-17zM9 7.5v10"/></svg><a href="../nodes/self-hosting/">Self-hosting</a></span></b> — Run it on infrastructure you control — a hardware decision before it is a software one.</p>
+        <p><b><span class="qr-n qr-k-component" data-node="on-device-inference"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5h17v10h-17zM9 7.5v10"/></svg><a href="../nodes/on-device-inference/">On-device inference</a></span></b> — The user’s own phone or laptop, so nothing is sent anywhere.</p>
       </section>
   </div>
-  <p class="qr-take">Every control here sits outside the model. A rule in the system prompt is advice; a rule in the harness is a mechanism; a rule in the sandbox holds even if the other two are talked around.</p>
+  <p class="qr-take">Per-token prices compare models. Cost per task compares decisions — and the two can point in opposite directions, because the cheaper model is often the one that needs more attempts.</p>
 </div>

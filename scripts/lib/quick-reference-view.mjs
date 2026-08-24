@@ -65,6 +65,8 @@ export const ICON_KINDS = {
   ceiling: { label: 'Ceiling', d: 'M3.5 5h17M12 20V9m0-1.5L8 12m4-4.5 4 4.5' },
   artifact: { label: 'Artifact', d: 'M6 3.5h7.5L19 9v11.5H6V3.5Zm7.5 0V9H19' },
   store: { label: 'Store', d: 'M12 7.5c4.1 0 7.5-1 7.5-2.2S16.1 3 12 3 4.5 4 4.5 5.3 7.9 7.5 12 7.5Zm7.5-2.2v13.4c0 1.2-3.4 2.3-7.5 2.3s-7.5-1-7.5-2.3V5.3m15 6.7c0 1.2-3.4 2.2-7.5 2.2s-7.5-1-7.5-2.2' },
+  cost: { label: 'Cost', d: 'M11.3 3.5H4.5a1 1 0 0 0-1 1v6.8a1 1 0 0 0 .3.7l8 8a1 1 0 0 0 1.4 0l6.3-6.3a1 1 0 0 0 0-1.4l-8-8a1 1 0 0 0-.7-.3Zm-3.9 3.9h.01' },
+  terms: { label: 'Terms', d: 'M6 3.5h12v17H6zM9.5 8h5M9.5 12h5M9.5 16h3' },
   who: { label: 'Who', d: 'M12 11.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4.5 20.5c0-3.6 3.4-6 7.5-6s7.5 2.4 7.5 6' },
   concept: { label: 'Concept', d: 'M12 6.5C10.5 5.2 8.6 4.5 6 4.5H3.5v13H6c2.6 0 4.5.7 6 2 1.5-1.3 3.4-2 6-2h2.5v-13H18c-2.6 0-4.5.7-6 2Zm0 0v14' },
 };
@@ -82,7 +84,11 @@ const KIND_BY_TAG = [
   ['artifact', 'artifact'],
   ['structure', 'store'],
   ['technique', 'technique'],
+  ['economics', 'cost'],
   ['safety', 'control'],
+  // After `safety` on purpose: provenance is tagged both, and on the risks card
+  // it is doing a control's job, not a licence's.
+  ['openness', 'terms'],
   ['org', 'who'],
   ['orgs', 'who'],
   ['agentic', 'process'],
@@ -118,9 +124,18 @@ const esc = (s) =>
  * chip's label is found and tested against the box it has to fit in.
  */
 const nodeLink = (id, label, { size = 15, kinds } = {}) => {
-  const kind = kinds.get(id) ?? 'concept';
-  return `<span class="qr-n qr-k-${kind}" data-node="${esc(id)}">${icon(kind, size)}<a href="../nodes/${esc(id)}/">${esc(label)}</a></span>`;
+  const kind = kinds.get(id);
+  const anchor = `<a href="../nodes/${esc(id)}/">${esc(label)}</a>`;
+  // A card whose concepts are all one kind gets no icons at all -- see
+  // NO_ICONS below. Classifying everything identically is exactly the
+  // decoration this project's icon rule exists to keep out.
+  if (kind === null) return `<span class="qr-n" data-node="${esc(id)}">${anchor}</span>`;
+  const k = kind ?? 'concept';
+  return `<span class="qr-n qr-k-${k}" data-node="${esc(id)}">${icon(k, size)}${anchor}</span>`;
 };
+
+/** Stands in for the kind index on a single-kind card. */
+const NO_ICONS = { get: () => null };
 
 const rampVars = (mode) =>
   RAMP[mode]
@@ -207,8 +222,9 @@ ${rampVars('light')}
    (No backticks in this block -- the whole stylesheet is a template literal.) */
 .qr-k-failure { --qr-kind: #d03b3b; }
 .qr-k-control, .qr-k-measure { --qr-kind: var(--qr-mark); }
-.qr-k-component, .qr-k-process, .qr-k-technique, .qr-k-artifact,
-.qr-k-store, .qr-k-ceiling, .qr-k-who, .qr-k-concept { --qr-kind: var(--qr-faint); }
+.qr-k-component, .qr-k-process, .qr-k-technique, .qr-k-artifact, .qr-k-store,
+.qr-k-ceiling, .qr-k-who, .qr-k-cost, .qr-k-terms,
+.qr-k-concept { --qr-kind: var(--qr-faint); }
 
 .qr-legend {
   display: flex;
@@ -304,7 +320,7 @@ ${rampVars('light')}
 .qr-s3 { --qr-step: var(--qr-l3); --qr-tint: var(--qr-t3); }
 .qr-s4 { --qr-step: var(--qr-l4); --qr-tint: var(--qr-t4); }
 
-.qr-top { display: grid; grid-template-columns: 232px minmax(0, 1fr) auto; gap: 20px; align-items: start; }
+.qr-top { display: grid; grid-template-columns: 248px minmax(0, 1fr) auto; gap: 20px; align-items: start; }
 .qr-name {
   display: flex;
   align-items: baseline;
@@ -514,7 +530,12 @@ const rowHtml = (kinds) => (l, i) => `
       <section class="qr-layer qr-s${i + 1}">
         <div class="qr-top">
           <div>
-            <h4 class="qr-name"><span class="qr-num">${String(i + 1).padStart(2, '0')}</span>${nodeLink(l.id, l.name, { size: 19, kinds })}</h4>
+            <h4 class="qr-name"><span class="qr-num">${String(i + 1).padStart(2, '0')}</span>${
+              // A row with no id is a grouping, not a concept: the boxes under
+              // it are the concepts. Labelling it as one and linking it to
+              // whichever of them came first would be a small lie.
+              l.id ? nodeLink(l.id, l.name, { size: 19, kinds }) : `<span>${esc(l.name)}</span>`
+            }</h4>
             <p class="qr-kicker">${esc(l.kicker)}</p>
           </div>
           <p class="qr-desc">${esc(l.body)}</p>
@@ -696,7 +717,7 @@ const mapBody = (card, kinds, edges) => {
 
   const chip = (id) => {
     const { x, y, item } = at.get(id);
-    const kind = kinds.get(id) ?? 'concept';
+    const kind = kinds.get(id) || 'concept';
     const left = x - MAP.chipW / 2;
     const top = y - MAP.chipH / 2;
     return (
@@ -760,7 +781,7 @@ export function idsIn(card) {
   const rows =
     card.kind === 'pairs'
       ? card.rows.flatMap((r) => [r.risk, r.control].flatMap((c) => [c.id, ...(c.also ?? []).map((a) => a.id)]))
-      : card.rows.flatMap((r) => [r.id, ...(r.sub ?? []).map((s) => s.id)]);
+      : card.rows.flatMap((r) => [r.id, ...(r.sub ?? []).map((s) => s.id)]).filter(Boolean);
   return [
     ...rows,
     ...card.footer.flatMap((f) => f.items.map((i) => i.id)),
@@ -775,10 +796,9 @@ export function idsIn(card) {
  * image has to explain itself -- nobody who sees it on a timeline can click
  * through to find out what a shield means.
  */
-const legendHtml = (card, kinds) => {
-  const used = [...new Set(idsIn(card).map((id) => kinds.get(id) ?? 'concept'))];
+const legendHtml = (used) => {
   const order = Object.keys(ICON_KINDS);
-  used.sort((a, b) => order.indexOf(a) - order.indexOf(b));
+  used = [...used].sort((a, b) => order.indexOf(a) - order.indexOf(b));
   return `
   <div class="qr-legend">${used
     .map((k) => `<span class="qr-k-${k}">${icon(k, 13)}${esc(ICON_KINDS[k].label)}</span>`)
@@ -791,6 +811,12 @@ export function buildFragment(card, kinds, edges = []) {
   if (!body) throw new Error(`card ${card.slug}: unknown kind ${card.kind}`);
   if (!kinds) throw new Error(`card ${card.slug}: no kind index — pass kindsFor(nodes)`);
   if (card.kind === 'map' && !edges.length) throw new Error(`card ${card.slug}: a map needs the graph — pass buildEdges(nodes)`);
+  // Icons earn their space by telling concepts apart. On a card drawn from one
+  // area of the guide they often cannot -- every concept on the evaluation card
+  // classifies as a measure -- so that card carries none, and no legend either.
+  const used = new Set(idsIn(card).map((id) => kinds.get(id) ?? 'concept'));
+  const show = used.size >= 2;
+  const index = show ? kinds : NO_ICONS;
   return `<style>${CSS}</style>
 <div class="qr" role="img" aria-label="${esc(card.title)}. ${esc(card.sub)}">
   <header class="qr-head">
@@ -803,8 +829,8 @@ export function buildFragment(card, kinds, edges = []) {
       <span>mchelen.github.io/FieldGuideAIStack</span>
     </div>
   </header>
-  <div class="qr-rule"></div>${legendHtml(card, kinds)}${body(card, kinds, edges)}
-  <div class="qr-foot">${card.footer.map(footHtml(kinds)).join('')}
+  <div class="qr-rule"></div>${show ? legendHtml(used) : ''}${body(card, index, edges)}
+  <div class="qr-foot">${card.footer.map(footHtml(index)).join('')}
   </div>
   <p class="qr-take">${esc(card.takeaway)}</p>
 </div>

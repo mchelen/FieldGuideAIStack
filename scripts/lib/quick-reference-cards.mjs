@@ -402,4 +402,234 @@ const map = {
     'A vocabulary is not a list. These terms are worth learning as a shape, because almost every question about “the AI” turns out to be a question about which arrow you are standing on.',
 };
 
-export const CARDS = [stack, loop, context, risks, map];
+
+/** Card 6 — the numbers people quote, and what each one is worth. */
+const evaluation = {
+  slug: 'quick-reference-evaluation',
+  kind: 'pairs',
+  title: 'How you know it got better',
+  sub: 'The four claims you will be shown, and the question each one is hiding.',
+  columns: { left: 'What you will be told', right: 'What to ask about it' },
+  rows: [
+    {
+      risk: {
+        id: 'benchmark',
+        t: 'It scores 87 on the benchmark',
+        d: 'A benchmark is shared, which is the point of it — and being shared makes it a target that models get optimised against rather than measured by.',
+        also: [{ id: 'leaderboard', t: 'Leaderboard' }],
+      },
+      control: {
+        id: 'data-contamination',
+        t: 'Was the test set in the training data?',
+        d: 'Test data leaking into training inflates the score without improving anything, and it is now the normal condition rather than an accident. Ask when the set was published relative to the cutoff.',
+      },
+    },
+    {
+      risk: {
+        id: 'leaderboard',
+        t: 'It is top of the leaderboard',
+        d: 'The most-read artifact in the field, and one that stops measuring the thing it ranks once enough people are optimising for the rank.',
+      },
+      control: {
+        id: 'evaluation',
+        t: 'Does it win on your task?',
+        d: 'A public ranking answers a question somebody else asked. The only test that settles your decision is one built from your own inputs and run repeatably.',
+        also: [{ id: 'regression-testing', t: 'Regression testing' }],
+      },
+    },
+    {
+      risk: {
+        id: 'llm-as-a-judge',
+        t: 'A model scored the output as better',
+        d: 'Cheap enough to run on everything, which is why it is everywhere — and carrying biases that the paper naming the technique documented in detail.',
+        also: [{ id: 'autorater-evaluation', t: 'Autorater evaluation' }],
+      },
+      control: {
+        id: 'factuality',
+        t: 'Was the judge checked against people?',
+        d: 'A scorer is itself a model with an error rate. Ask what it was calibrated on, and whether anyone has measured how often it agrees with a human on this kind of output.',
+        also: [{ id: 'citation-precision-and-recall', t: 'Citation precision and recall' }],
+      },
+    },
+    {
+      risk: {
+        id: 'regression-testing',
+        t: 'The fix works — we tried it',
+        d: 'Trying it once is not a result when the same input does not reliably produce the same output. Nothing here regresses loudly; it regresses on the case nobody re-ran.',
+      },
+      control: {
+        id: 'tracing',
+        t: 'Can you see what it actually did?',
+        d: 'Record the run step by step. Without a trace, “why did it do that” has no answer, and a fix cannot be shown to have addressed the cause rather than the symptom.',
+        also: [{ id: 'red-teaming', t: 'Red teaming' }],
+      },
+    },
+  ],
+  footer: [
+    {
+      head: 'The word doing the work',
+      items: [
+        { id: 'evaluation', t: 'Evaluation', d: 'A repeatable test. Repeatable is the whole of it: a number nobody else can reproduce is an anecdote with a decimal point.' },
+      ],
+    },
+    {
+      head: 'What a score cannot tell you',
+      items: [
+        { id: 'factuality', t: 'Factuality', d: 'Whether the output is true, as distinct from whether it sounds right — a property to aim at, not a number to report.' },
+      ],
+    },
+    {
+      head: 'Finding failures on purpose',
+      items: [
+        { id: 'red-teaming', t: 'Red teaming', d: 'Deliberately trying to make it misbehave, rather than checking that it behaves. The two produce very different reports.' },
+      ],
+    },
+  ],
+  takeaway:
+    'Every number here was produced by someone who chose the test. The question is never “what did it score” but “on what, against whom, and could I run it again”.',
+};
+
+/** Card 7 — the rungs people mean by "open", in the order they tell you less. */
+const openness = {
+  slug: 'quick-reference-openness',
+  kind: 'stack',
+  title: 'What “open” actually means',
+  sub: 'Four different claims that all get called open, and what each one does and does not give you.',
+  bracket: {
+    id: 'open-weights',
+    label: 'Called “open”',
+    note: 'all three of these ship under the word, and none of them is the defined term',
+    from: 1,
+    to: 3,
+  },
+  rows: [
+    {
+      id: 'open-weights',
+      name: 'Open weights',
+      kicker: 'you can download and run it',
+      tag: 'about access, not licence',
+      body: 'The parameters are yours to fetch and serve. It says nothing about what the licence permits, and nothing about whether you could rebuild the model.',
+    },
+    {
+      name: 'The licence',
+      kicker: 'what you may do with it',
+      tag: 'read it, do not assume it',
+      body: 'Three different shapes ship under the same word, and which one you have decides whether the weights you downloaded are usable for what you had in mind.',
+      sub: [
+        { id: 'permissive-license', t: 'Permissive', d: 'Reuse with minimal conditions — attribution, a warranty disclaimer, nothing about derivatives.' },
+        { id: 'copyleft', t: 'Copyleft', d: 'Derivatives must carry the same terms. Freedom enforced downstream, not merely granted.' },
+        { id: 'community-license', t: 'Community licence', d: 'A vendor’s own terms: downloadable weights with conditions open source licences do not allow.' },
+      ],
+    },
+    {
+      id: 'acceptable-use-policy',
+      name: 'Acceptable use policy',
+      kicker: 'what you may not do with it',
+      tag: 'moves without the licence moving',
+      body: 'Usually incorporated into the licence by reference — so the terms constraining your use can change while the licence you agreed to stays word for word the same.',
+    },
+    {
+      id: 'open-source-ai',
+      name: 'Open source AI',
+      kicker: 'the defined term',
+      tag: 'a definition, not a vibe',
+      body: 'Under OSI’s Open Source AI Definition 1.0 a system qualifies only with data information, training code and parameters. Most things called open source AI do not clear it.',
+    },
+  ],
+  footer: [
+    {
+      head: 'What should ship with the model',
+      items: [
+        { id: 'model-card', t: 'Model card', d: 'What it is, what it was meant for, how it was evaluated, and where it should not be used.' },
+      ],
+    },
+    {
+      head: 'Where it came from',
+      items: [
+        { id: 'provenance', t: 'Provenance', d: 'Evidence about a model, dataset or piece of content, attached to the artifact rather than asserted about it.' },
+      ],
+    },
+    {
+      head: 'Marking the output',
+      items: [
+        { id: 'watermarking', t: 'Watermarking', d: 'Identification embedded in the generated content itself, rather than attached alongside it as metadata.' },
+      ],
+    },
+  ],
+  takeaway:
+    '“Open” is four separate claims wearing one word. Downloadable is not licensed, licensed is not unrestricted, and none of the three is open source.',
+};
+
+/** Card 8 — the bill, from the unit up to the only number that matters. */
+const cost = {
+  slug: 'quick-reference-cost',
+  kind: 'stack',
+  title: 'What you actually pay for',
+  sub: 'From the unit on the price page to the number that decides whether it was worth running.',
+  bracket: {
+    id: 'token-billing',
+    label: 'Token billing',
+    note: 'charged by consumption, not by seat — so the bill scales with how much the thing is used',
+    from: 1,
+    to: 4,
+  },
+  rows: [
+    {
+      id: 'token',
+      name: 'Token',
+      kicker: 'the unit everything is counted in',
+      tag: 'a word fragment',
+      body: 'Everything downstream is denominated in these: the price, the window, the rate limits. Not words, and not characters.',
+    },
+    {
+      id: 'token-pricing',
+      name: 'Token pricing',
+      kicker: 'three rates, not one',
+      tag: 'output costs the most',
+      body: 'Input and output are charged at different rates, and cached input cheaper again — which is where most of the saving available to you actually is.',
+    },
+    {
+      name: 'The levers',
+      kicker: 'what changes the rate you pay',
+      tag: 'each trades something away',
+      body: 'Three ways to pay less for the same work, each giving up something in exchange — repetition, timing, or commitment.',
+      sub: [
+        { id: 'prompt-caching', t: 'Prompt caching', d: 'A repeated prefix processed once rather than on every call.' },
+        { id: 'batch-inference', t: 'Batch inference', d: 'Roughly half price for giving up any promise about when.' },
+        { id: 'provisioned-throughput', t: 'Provisioned throughput', d: 'Guaranteed capacity by the hour: a variable cost made fixed, in both directions.' },
+      ],
+    },
+    {
+      id: 'cost-per-task',
+      name: 'Cost per task',
+      kicker: 'what one finished job cost',
+      tag: 'not the price of a call',
+      body: 'Retries, tool calls and the runs that failed, counted against the jobs that completed. An agent making forty calls to finish once is priced by the finish, not by the call.',
+    },
+  ],
+  footer: [
+    {
+      head: 'What you are sold',
+      items: [
+        { id: 'subscription-tier', t: 'Subscription tier', d: 'The packaging that decides which capabilities you get at all — and the usual reason two people describe the same product differently.' },
+      ],
+    },
+    {
+      head: 'Where it stops',
+      items: [
+        { id: 'usage-limit', t: 'Usage limit', d: 'The ceiling a plan puts on consumption over a period. A rate limit shapes traffic; this one stops it.' },
+      ],
+    },
+    {
+      head: 'Not paying per token at all',
+      items: [
+        { id: 'self-hosting', t: 'Self-hosting', d: 'Run it on infrastructure you control — a hardware decision before it is a software one.' },
+        { id: 'on-device-inference', t: 'On-device inference', d: 'The user’s own phone or laptop, so nothing is sent anywhere.' },
+      ],
+    },
+  ],
+  takeaway:
+    'Per-token prices compare models. Cost per task compares decisions — and the two can point in opposite directions, because the cheaper model is often the one that needs more attempts.',
+};
+
+export const CARDS = [stack, loop, context, risks, map, evaluation, openness, cost];
