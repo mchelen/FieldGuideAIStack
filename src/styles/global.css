@@ -522,6 +522,10 @@ ol.sources li:target { background: var(--accent-soft); border-radius: 5px; }
 .zoom-count { font-family: var(--font-mono); font-size: 0.76rem; color: var(--ink-faint); }
 .zoom-control button[aria-pressed='true'] .zoom-count { color: var(--accent); }
 .zoom-blurb { color: var(--ink-soft); margin: 0 0 0.2rem; }
+/* The browser's own [hidden] rule is `display: none` from the UA stylesheet,
+   which a class selector setting `display: flex` beats. Without this the zoom
+   control set the attribute on 139 cards and hid none of them. */
+.cards > .card[hidden] { display: none; }
 
 /* The quoted sentence under a source: evidence, not decoration. */
 .src-quote {

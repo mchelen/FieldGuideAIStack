@@ -73,6 +73,49 @@ const PAGES = [
 
 const browser = await chromium.launch();
 const problems = [];
+
+// The zoom control, asserted on what the page actually paints.
+//
+// check:output already compares each button's count against the cards that
+// qualify, and that check passed while the control hid nothing at all: the
+// script set the `hidden` attribute on 139 cards and the UA stylesheet's
+// `[hidden] { display: none }` lost to a class selector setting `display: flex`.
+// Counting the attribute measures the mechanism; counting client rects measures
+// the reader's experience, and only the second one caught it.
+{
+  const page = await browser.newPage({ viewport: { width: 1200, height: 900 } });
+  const res = await page.goto(`${origin}/`, { waitUntil: 'load' }).catch(() => null);
+  if (!res || res.status() >= 400) {
+    problems.push('index did not load — the zoom-control check could not run');
+  } else {
+    const seen = await page.evaluate(async () => {
+      const cards = () => [...document.querySelectorAll('#concept-cards > .card')];
+      const painted = () => cards().filter((c) => c.getClientRects().length > 0).length;
+      const out = [];
+      for (const b of document.querySelectorAll('.zoom-control button[data-zoom]')) {
+        b.click();
+        await new Promise((r) => requestAnimationFrame(r));
+        out.push({
+          level: Number(b.dataset.zoom),
+          claimed: Number(b.querySelector('.zoom-count').textContent),
+          painted: painted(),
+        });
+      }
+      return out;
+    });
+    if (seen.length !== 3) {
+      problems.push(`index: expected 3 zoom levels, the page rendered ${seen.length}`);
+    }
+    for (const s of seen) {
+      if (s.painted !== s.claimed) {
+        problems.push(
+          `index: zoom level ${s.level} says ${s.claimed} concepts but paints ${s.painted}`,
+        );
+      }
+    }
+  }
+  await page.close();
+}
 for (const width of WIDTHS) {
   const page = await browser.newPage({ viewport: { width, height: 900 } });
   for (const path of PAGES) {
@@ -117,6 +160,6 @@ server.close();
 
 for (const p of problems) console.log(`  FAIL  ${p}`);
 console.log(
-  `${problems.length ? 'FAIL' : 'PASS'}  small-width layout — ${PAGES.length} page(s) at ${WIDTHS.join(', ')}px, ${problems.length} problem(s)`,
+  `${problems.length ? 'FAIL' : 'PASS'}  rendered layout — ${PAGES.length} page(s) at ${WIDTHS.join(', ')}px plus the zoom control, ${problems.length} problem(s)`,
 );
 process.exit(problems.length ? 1 : 0);
