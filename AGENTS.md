@@ -273,6 +273,16 @@ any new development work.
   and the page shows all of them; the script narrows to a level once it runs.
   A filter that failed closed would hide most of the guide from anything without
   JavaScript.
+- **Setting `hidden` is not hiding.** The attribute's `display: none` comes from
+  the UA stylesheet, so any class selector setting a display value beats it.
+  The control shipped setting `hidden` on 139 cards and hiding none of them, and
+  `check:output` stayed green throughout because it counted the attribute.
+  `.cards > .card[hidden] { display: none; }` is what makes it real.
+- The lesson generalises past this bug: **count what the page paints, not what
+  the script set.** `getClientRects().length` is the reader's experience;
+  `element.hidden` is only the mechanism agreeing with itself. `check:layout`
+  now walks the three levels in a browser and compares each button's count
+  against the cards actually rendered.
 - A concept page's altitude band is **derived from the relation graph** — the
   neighbours coarser than it are the frame it sits in, the finer ones are the
   detail underneath. It is not a curated "see also", so deleting a relation
