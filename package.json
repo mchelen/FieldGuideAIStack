@@ -13,6 +13,7 @@
     "check:output": "node scripts/check-output.mjs",
     "backlog": "node scripts/backlog.mjs",
     "check:links": "node scripts/check-links.mjs",
+    "check:layout": "node scripts/check-layout.mjs",
     "check:freshness": "node scripts/check-freshness.mjs",
     "quick-ref": "node scripts/quick-reference.mjs"
   },
