@@ -301,6 +301,19 @@ any new development work.
   the run fails. Keep that guard if you extend the script.
 - Adding a quote to a source is worth more than bumping its date, because it
   makes that source re-verifiable for good. Prefer it when re-reading a page.
+- Two things the fetcher has to do, both learned the hard way:
+  - **Send `accept-language`.** Google's ML glossary served Persian on one fetch
+    and English on the next, from the same URL. Without the header a stored
+    English quote reads as "the claim changed" when nothing had.
+  - **Normalise a space before punctuation away.** Stripping an inline tag
+    leaves `"automatic evaluation ."`, so a quote copied as a human reads it
+    would never match. Store the sentence as it reads; let the comparison
+    absorb the artifact.
+- A glossary cited by many pages is the cheapest coverage there is: each citing
+  page quotes that glossary's definition of its own term, so one fetch backfills
+  dozens. Read what you extract — of 36 candidates pulled this way, four were a
+  truncated list item, an unrelated first sense, or a follow-on sentence rather
+  than a definition, and were dropped rather than stored.
 - The weekly workflow opens a pull request for what it confirmed and an issue
   for what it could not. It lives in `.github/workflows/`, which is code-owned:
   a change to it needs the owner's approval and must not auto-merge.

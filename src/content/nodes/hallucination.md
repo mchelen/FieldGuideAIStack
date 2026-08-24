@@ -64,6 +64,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      The production of plausible-seeming but factually incorrect output by a generative AI model that purports to be making an assertion about the real world.
   - id: why-hallucinate
     url: https://arxiv.org/abs/2509.04664
     title: Why Language Models Hallucinate — Kalai, Nachum, Vempala and Zhang

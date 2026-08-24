@@ -62,6 +62,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      A category of specialized hardware components designed to perform key computations needed for deep learning algorithms.
   - id: vllm-paper
     url: https://arxiv.org/abs/2309.06180
     title: Efficient Memory Management for Large Language Model Serving with PagedAttention — Kwon et al.

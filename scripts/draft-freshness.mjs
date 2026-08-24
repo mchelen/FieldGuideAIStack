@@ -37,6 +37,10 @@ const normalise = (s) =>
   s
     .replace(/[\u200b-\u200f\ufeff]/g, '')
     .replace(/\s+/g, ' ')
+    // Stripping an inline tag leaves a space before the punctuation that
+    // followed it -- "automatic evaluation ." -- so a quote copied from the
+    // page as a human reads it would never match the flattened text.
+    .replace(/\s+([.,;:!?])/g, '$1')
     .replace(/[‘’]/g, "'")
     .replace(/[“”]/g, '"')
     .replace(/[–—]/g, '-')
@@ -63,7 +67,11 @@ async function fetchPage(url) {
     const res = await fetch(url, {
       redirect: 'follow',
       signal: ctl.signal,
-      headers: { 'user-agent': UA, accept: 'text/html,*/*' },
+      // accept-language, because at least one cited page (Google's ML glossary)
+      // serves a different translation of the same URL from one fetch to the
+      // next. A quote stored in English would then read as "the claim changed"
+      // when nothing had.
+      headers: { 'user-agent': UA, accept: 'text/html,*/*', 'accept-language': 'en-US,en;q=0.9' },
     });
     if (!res.ok) return { error: `HTTP ${res.status}` };
     const html = await res.text();

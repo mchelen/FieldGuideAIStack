@@ -71,6 +71,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      The process of inferring predictions on multiple unlabeled examples divided into smaller subsets ("batches").
 ---
 
 "Instead of processing requests one at a time with immediate responses, batch

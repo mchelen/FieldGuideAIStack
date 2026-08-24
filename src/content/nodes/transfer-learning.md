@@ -57,6 +57,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      Transferring information from one machine learning task to another.
   - id: lora-paper
     url: https://arxiv.org/abs/2106.09685
     title: "LoRA: Low-Rank Adaptation of Large Language Models — Hu et al."

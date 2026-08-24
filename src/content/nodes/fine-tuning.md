@@ -50,6 +50,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      A second, task-specific training pass performed on a pre-trained model to refine its parameters for a specific use case.
   - id: instructgpt
     url: https://arxiv.org/abs/2203.02155
     title: Training language models to follow instructions with human feedback — Ouyang et al.

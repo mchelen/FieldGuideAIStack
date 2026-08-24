@@ -49,6 +49,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      A scheme to increase neural network efficiency by using only a subset of its parameters (known as an expert ) to process a given input token or example.
   - id: moe-paper
     url: https://arxiv.org/abs/1701.06538
     title: "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer — Shazeer et al."
