@@ -69,6 +69,8 @@ sources:
     url: https://pypi.org/project/tiktoken/
     title: tiktoken — Python Package Index
     verifiedOn: 2026-08-22
+    quote: >-
+      tiktoken is a fast BPE tokeniser for use with OpenAI's models.
 ---
 
 A token is, in Google's phrasing, "the atomic unit that the model is training on

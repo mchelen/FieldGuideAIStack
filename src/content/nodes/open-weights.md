@@ -64,6 +64,8 @@ sources:
     url: https://opensource.org/ai/open-source-ai-definition
     title: The Open Source AI Definition – 1.0 — Open Source Initiative
     verifiedOn: 2026-08-22
+    quote: >-
+      An Open Source AI is an AI system made available under terms and in a way that grant the freedoms
     note: >-
       Read directly. The page returns HTTP 403 to some automated fetchers;
       retrieved with a browser user-agent.

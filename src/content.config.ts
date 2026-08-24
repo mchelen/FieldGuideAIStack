@@ -18,6 +18,19 @@ const source = z.object({
   url: z.string().url(),
   title: z.string().min(1),
   verifiedOn: z.coerce.date(),
+  /**
+   * The sentence on the page that carries the claim, copied verbatim.
+   *
+   * Optional, and the only thing that makes a citation machine-re-verifiable:
+   * `npm run draft:freshness` re-fetches the URL and will bump `verifiedOn`
+   * only when it finds this text still there. Without it a script can confirm
+   * that a URL resolves and nothing more, and bumping a date on that basis is
+   * exactly the thing the rules forbid.
+   *
+   * Copy it; never paraphrase it. A quote that has been tidied will stop
+   * matching a page that did not change.
+   */
+  quote: z.string().min(20).optional(),
   // Provenance caveats -- e.g. "publisher blocks automated fetchers; read with
   // a browser user-agent". Surfaced on the page so readers can judge the claim.
   note: z.string().optional(),
