@@ -1,0 +1,72 @@
+---
+/**
+ * Zoom in and zoom out, from wherever you are.
+ *
+ * The charter asks that it be possible to move between levels of detail. Every
+ * node already declares the coarsest level it belongs at; until now that only
+ * filtered the graph explorer, which is a way to thin a picture rather than a
+ * way to read.
+ *
+ * So: from this concept, the neighbours coarser than it are the frame it sits
+ * inside, and the neighbours finer than it are the detail underneath. Both are
+ * derived from the relation graph — nothing here is a curated "see also" list,
+ * and a relation deleted from a page removes it from this band too.
+ */
+import type { Graph } from '../lib/graph';
+import Icon from './Icon.astro';
+
+interface Props {
+  id: string;
+  graph: Graph;
+}
+const { id, graph } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const LEVELS: Record<number, string> = {
+  1: 'the terms everything else is defined against',
+  2: 'the working vocabulary',
+  3: 'detail you look up when you hit it',
+};
+
+const here = graph.byId.get(id)!.data.zoom;
+
+// One entry per neighbour, not one per edge: two concepts often relate in more
+// than one direction, and the same title twice reads as a mistake.
+const seen = new Map<string, { id: string; title: string; zoom: number }>();
+for (const edge of graph.neighborsOf(id)) {
+  if (seen.has(edge.to)) continue;
+  const n = graph.byId.get(edge.to);
+  if (!n) continue;
+  seen.set(edge.to, { id: edge.to, title: n.data.title, zoom: n.data.zoom });
+}
+const byTitle = (a: { title: string }, b: { title: string }) => a.title.localeCompare(b.title);
+const out = [...seen.values()].filter((n) => n.zoom < here).sort(byTitle);
+const into = [...seen.values()].filter((n) => n.zoom > here).sort(byTitle);
+---
+
+{
+  (out.length > 0 || into.length > 0) && (
+    <nav class="altitude" aria-label="Zoom in and out from this concept">
+      <p class="altitude-here">
+        <span class="altitude-level">Zoom {here}</span>
+        <span class="altitude-blurb">{LEVELS[here]}</span>
+      </p>
+      {out.length > 0 && (
+        <p class="altitude-row">
+          <span class="altitude-dir"><Icon name="contents" size={13} /> Zoom out</span>
+          {out.map((n) => (
+            <a class="chip" href={`${base}/nodes/${n.id}/`}>{n.title}</a>
+          ))}
+        </p>
+      )}
+      {into.length > 0 && (
+        <p class="altitude-row">
+          <span class="altitude-dir"><Icon name="diagram" size={13} /> Zoom in</span>
+          {into.map((n) => (
+            <a class="chip" href={`${base}/nodes/${n.id}/`}>{n.title}</a>
+          ))}
+        </p>
+      )}
+    </nav>
+  )
+}

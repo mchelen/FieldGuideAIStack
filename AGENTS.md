@@ -261,6 +261,27 @@ any new development work.
   the real findings; the check skips anything with a scrolling or clipping
   ancestor for exactly this reason.
 
+## Zoom levels
+- Every node declares `zoom` — **the coarsest level at which it should appear**,
+  so a level is cumulative: level 2 means "1 and 2". The index and the graph
+  explorer must agree on that. They did not for a long time: the graph filtered
+  `zoom <= n` while the index rendered the three levels as disjoint groups, so
+  the same word named two different sets on two pages and nothing noticed.
+  `npm run check:output` now compares each button's count against the cards that
+  actually qualify.
+- The index's control **hides, it does not omit.** Every card ships in the HTML
+  and the page shows all of them; the script narrows to a level once it runs.
+  A filter that failed closed would hide most of the guide from anything without
+  JavaScript.
+- A concept page's altitude band is **derived from the relation graph** — the
+  neighbours coarser than it are the frame it sits in, the finer ones are the
+  detail underneath. It is not a curated "see also", so deleting a relation
+  removes it from the band too. 153 of 166 pages carry one; the rest have no
+  neighbour at a different level, and correctly show nothing.
+- `npm run quick-ref` rewrites the PDFs every run because they carry a creation
+  timestamp. If a change did not touch the cards, `git checkout -- public/*.pdf`
+  before committing rather than shipping the churn.
+
 ## Cross-linking
 - Link the first mention of any term that has its own page, and only the first.
   An unlinked mention is a dead end for a reader who does not already know the
