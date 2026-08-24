@@ -90,6 +90,38 @@
 }
 
 .qr h2, .qr h3, .qr h4, .qr p { margin: 0; }
+
+/* ---- concepts wear their kind ---- */
+.qr-n { display: inline-flex; align-items: center; gap: 6px; }
+/* The uppercase tracking on these two would otherwise pull the label back into
+   the glyph, since letter-spacing lands before the first character too. */
+.qr-agent .qr-n { gap: 8px; }
+.qr-legend span { letter-spacing: 0.09em; }
+.qr-n .qr-i { flex: none; color: var(--qr-kind); }
+/* One hue per kind would be ten categorical colours on one page, which no
+   palette survives. The icon shape carries the kind; colour marks only the two
+   the reader sorts by first, and both are status roles rather than series
+   colours -- so they ship with a shape and a legend label, never hue alone.
+   The red is the reserved status step, fixed in both themes by design.
+   (No backticks in this block -- the whole stylesheet is a template literal.) */
+.qr-k-failure { --qr-kind: #d03b3b; }
+.qr-k-control, .qr-k-measure { --qr-kind: var(--qr-mark); }
+.qr-k-component, .qr-k-process, .qr-k-technique, .qr-k-artifact,
+.qr-k-store, .qr-k-ceiling, .qr-k-who, .qr-k-concept { --qr-kind: var(--qr-faint); }
+
+.qr-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: -7px 0 9px;
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--qr-faint);
+}
+.qr-legend span { display: inline-flex; align-items: center; gap: 4px; }
+.qr-legend .qr-i { color: var(--qr-kind); }
 .qr a { color: inherit; text-decoration: none; }
 .qr a:hover { text-decoration: underline; text-decoration-color: var(--qr-accent); text-underline-offset: 3px; }
 
@@ -301,19 +333,51 @@
 .qr-fix b { color: var(--qr-accent); }
 .qr-pair p { margin-top: 4px; font-size: 12.5px; line-height: 1.42; color: var(--qr-soft); }
 .qr-also { margin-top: 7px; display: flex; flex-wrap: wrap; gap: 5px; }
-.qr-also a {
+/* The pill wraps the whole thing, icon included -- styling the anchor alone
+   left every icon floating outside its own chip. */
+.qr-also .qr-n {
   font-size: 10px;
   font-weight: 650;
   letter-spacing: 0.05em;
   color: var(--qr-faint);
   border: 1px solid var(--qr-rule);
   border-radius: 999px;
-  padding: 2px 8px;
+  padding: 2px 8px 2px 6px;
+  gap: 4px;
   white-space: nowrap;
 }
-.qr-fix .qr-also a { color: var(--qr-accent); border-color: color-mix(in oklab, var(--qr-accent) 34%, transparent); }
+.qr-fix .qr-also .qr-n { color: var(--qr-accent); border-color: color-mix(in oklab, var(--qr-accent) 34%, transparent); }
 /* The arrow is the claim: this control addresses that failure. */
 .qr-arrow { display: flex; align-items: center; justify-content: center; color: var(--qr-accent); font-size: 19px; font-weight: 700; }
+
+
+/* ---- map: the same concepts, drawn as the graph they actually form ---- */
+.qr-map { flex: 1 0 auto; position: relative; }
+/* Direct child only. The chips carry nested <svg> icons, and a descendant
+   selector stretched every one of them to the size of the whole diagram. */
+.qr-map > svg { display: block; width: 100%; height: auto; overflow: visible; }
+.qr-lane-head {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  fill: var(--qr-faint);
+}
+.qr-chip-box { fill: var(--qr-raised); stroke: var(--qr-rule); stroke-width: 1; }
+.qr-chip-rail { stroke-width: 3; stroke-linecap: round; }
+.qr-chip-name { font-size: 13.5px; font-weight: 650; fill: var(--qr-ink); }
+.qr-chip-note { font-size: 10.5px; fill: var(--qr-faint); }
+/* Relation families read by line, not by colour: four styles, one legend, and
+   the arrowhead says which way the verb runs. */
+.qr-edge { fill: none; stroke: var(--qr-rule-strong); stroke-width: 1.3; }
+.qr-edge-contains { stroke: var(--qr-accent); stroke-width: 1.6; }
+.qr-edge-consumes { stroke: var(--qr-rule-strong); }
+.qr-edge-confused { stroke: var(--qr-mark); stroke-dasharray: 4 4; }
+.qr-edge-implements { stroke: var(--qr-faint); stroke-dasharray: 1 4; stroke-linecap: round; }
+.qr-key { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 10px; font-size: 10.5px; color: var(--qr-soft); }
+.qr-key span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.qr-key-note { color: var(--qr-faint); }
+.qr-key svg { flex: none; }
 
 /* ---- footer ---- */
 .qr-foot { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 18px; }
@@ -356,58 +420,55 @@
     </div>
   </header>
   <div class="qr-rule"></div>
+  <div class="qr-legend"><span class="qr-k-component"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5h17v10h-17zM9 7.5v10"/></svg>Component</span><span class="qr-k-process"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.6-5.9M20 4v4h-4"/></svg>Process</span><span class="qr-k-technique"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16M9 4.5v5M16 9.5v5M7 14.5v5"/></svg>Technique</span><span class="qr-k-control"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg>Control</span><span class="qr-k-ceiling"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 5h17M12 20V9m0-1.5L8 12m4-4.5 4 4.5"/></svg>Ceiling</span><span class="qr-k-artifact"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h7.5L19 9v11.5H6V3.5Zm7.5 0V9H19"/></svg>Artifact</span><span class="qr-k-store"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7.5c4.1 0 7.5-1 7.5-2.2S16.1 3 12 3 4.5 4 4.5 5.3 7.9 7.5 12 7.5Zm7.5-2.2v13.4c0 1.2-3.4 2.3-7.5 2.3s-7.5-1-7.5-2.3V5.3m15 6.7c0 1.2-3.4 2.2-7.5 2.2s-7.5-1-7.5-2.2"/></svg>Store</span></div>
   <div class="qr-body">
     <aside class="qr-agent" style="grid-row:1/5">
-      <strong><a class="" href="../nodes/turn/">One turn</a></strong>
+      <strong><span class="qr-n qr-k-process" data-node="turn"><svg class="qr-i" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.6-5.9M20 4v4h-4"/></svg><a href="../nodes/turn/">One turn</a></span></strong>
       <span>your message, to the agent finishing</span>
     </aside>
       <section class="qr-layer qr-s1">
         <div class="qr-top">
           <div>
-            <h4 class="qr-name"><span class="qr-num">01</span><a class="qr-namelink" href="../nodes/context-engineering/">Assemble</a></h4>
+            <h4 class="qr-name"><span class="qr-num">01</span><span class="qr-n qr-k-technique" data-node="context-engineering"><svg class="qr-i" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16M9 4.5v5M16 9.5v5M7 14.5v5"/></svg><a href="../nodes/context-engineering/">Assemble</a></span></h4>
             <p class="qr-kicker">the harness builds the request</p>
           </div>
           <p class="qr-desc">System prompt, conversation so far, every tool definition, anything retrieved — sent whole, because the API kept nothing from last time.</p>
           <span class="qr-tag">from scratch, every pass</span>
         </div>
-        <div class="qr-sub">
-          <div><b><a class="qr-sublink" href="../nodes/system-prompt/">System prompt</a></b><span>Standing instructions the user never sees. Most of what makes two products differ.</span></div>
-          <div><b><a class="qr-sublink" href="../nodes/short-term-memory/">The conversation</a></b><span>There is nowhere else for it to live. “Remembering” means it is still in the window.</span></div>
-        </div>
       </section>
       <section class="qr-layer qr-s2">
         <div class="qr-top">
           <div>
-            <h4 class="qr-name"><span class="qr-num">02</span><a class="qr-namelink" href="../nodes/model/">Propose</a></h4>
+            <h4 class="qr-name"><span class="qr-num">02</span><span class="qr-n qr-k-artifact" data-node="model"><svg class="qr-i" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h7.5L19 9v11.5H6V3.5Zm7.5 0V9H19"/></svg><a href="../nodes/model/">Propose</a></span></h4>
             <p class="qr-kicker">the model’s only move</p>
           </div>
           <p class="qr-desc">Out comes either an answer or a structured request to run a named function with arguments. Emitting the request is the whole of what the model does.</p>
           <span class="qr-tag">it cannot act</span>
         </div>
         <div class="qr-sub">
-          <div><b><a class="qr-sublink" href="../nodes/tool-use/">Tool use</a></b><span>Two halves in the transcript: a request from the model, a result from something else.</span></div>
-          <div><b><a class="qr-sublink" href="../nodes/context-window/">Context window</a></b><span>A ceiling on the request and the reply together. Per call, and it does not refill.</span></div>
+          <div><b><span class="qr-n qr-k-component" data-node="tool-use"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5h17v10h-17zM9 7.5v10"/></svg><a href="../nodes/tool-use/">Tool use</a></span></b><span>Two halves in the transcript: a request from the model, a result from something else.</span></div>
+          <div><b><span class="qr-n qr-k-ceiling" data-node="context-window"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 5h17M12 20V9m0-1.5L8 12m4-4.5 4 4.5"/></svg><a href="../nodes/context-window/">Context window</a></span></b><span>A ceiling on the request and the reply together. Per call, and it does not refill.</span></div>
         </div>
       </section>
       <section class="qr-layer qr-s3">
         <div class="qr-top">
           <div>
-            <h4 class="qr-name"><span class="qr-num">03</span><a class="qr-namelink" href="../nodes/permission-model/">Check</a></h4>
+            <h4 class="qr-name"><span class="qr-num">03</span><span class="qr-n qr-k-control" data-node="permission-model"><svg class="qr-i" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/permission-model/">Check</a></span></h4>
             <p class="qr-kicker">before anything lands</p>
           </div>
           <p class="qr-desc">The harness decides whether the action is allowed: silently, by policy, or by asking you. Where that rule lives is what makes it advice or a mechanism.</p>
           <span class="qr-tag">this is the “autonomous” step</span>
         </div>
         <div class="qr-sub">
-          <div><b><a class="qr-sublink" href="../nodes/approval-mode/">Approval mode</a></b><span>Which actions need your say-so: all of them, the risky ones, or none.</span></div>
-          <div><b><a class="qr-sublink" href="../nodes/human-in-the-loop/">Human in the loop</a></b><span>A person in the path. The tenth prompt in a row is approved unread.</span></div>
-          <div><b><a class="qr-sublink" href="../nodes/sandbox/">Sandbox</a></b><span>Holds even when the prompt and the harness are both talked around.</span></div>
+          <div><b><span class="qr-n qr-k-control" data-node="approval-mode"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/approval-mode/">Approval mode</a></span></b><span>Which actions need your say-so: all of them, the risky ones, or none.</span></div>
+          <div><b><span class="qr-n qr-k-control" data-node="human-in-the-loop"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/human-in-the-loop/">Human in the loop</a></span></b><span>A person in the path. The tenth prompt in a row is approved unread.</span></div>
+          <div><b><span class="qr-n qr-k-control" data-node="sandbox"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/sandbox/">Sandbox</a></span></b><span>Holds even when the prompt and the harness are both talked around.</span></div>
         </div>
       </section>
       <section class="qr-layer qr-s4">
         <div class="qr-top">
           <div>
-            <h4 class="qr-name"><span class="qr-num">04</span><a class="qr-namelink" href="../nodes/verification-loop/">Act, and take the result</a></h4>
+            <h4 class="qr-name"><span class="qr-num">04</span><span class="qr-n qr-k-technique" data-node="verification-loop"><svg class="qr-i" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16M9 4.5v5M16 9.5v5M7 14.5v5"/></svg><a href="../nodes/verification-loop/">Act, and take the result</a></span></h4>
             <p class="qr-kicker">feedback from outside the model</p>
           </div>
           <p class="qr-desc">The tool runs and its output goes back into the context — a test failure, an HTTP status, a compiler error. Facts it cannot talk its way around.</p>
@@ -419,16 +480,15 @@
   <div class="qr-foot">
       <section>
         <h3>What decides how far it goes</h3>
-        <p><b><a class="qr-footlink" href="../nodes/autonomy-level/">Autonomy level</a></b> — Set per action class, not per product — usually free on reads, gated on writes, forbidden on a short list.</p>
+        <p><b><span class="qr-n qr-k-control" data-node="autonomy-level"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/autonomy-level/">Autonomy level</a></span></b> — Set per action class, not per product: free on reads, gated on writes, forbidden on a short list.</p>
       </section>
       <section>
         <h3>When the run gets long</h3>
-        <p><b><a class="qr-footlink" href="../nodes/compaction/">Compaction</a></b> — Older turns swapped for a summary so the run keeps fitting. Lossy on purpose: what mattered only in the original wording is gone.</p>
+        <p><b><span class="qr-n qr-k-technique" data-node="compaction"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16M9 4.5v5M16 9.5v5M7 14.5v5"/></svg><a href="../nodes/compaction/">Compaction</a></span></b> — Older turns swapped for a summary so the run keeps fitting. Lossy on purpose — the original wording is gone.</p>
       </section>
       <section>
         <h3>What outlives it</h3>
-        <p><b><a class="qr-footlink" href="../nodes/session/">Session</a></b> — One run, and everything scoped to it. A new session is a new window.</p>
-        <p><b><a class="qr-footlink" href="../nodes/long-term-memory/">Long-term memory</a></b> — Files the harness writes and reads back. Not a faculty of the model.</p>
+        <p><b><span class="qr-n qr-k-store" data-node="long-term-memory"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7.5c4.1 0 7.5-1 7.5-2.2S16.1 3 12 3 4.5 4 4.5 5.3 7.9 7.5 12 7.5Zm7.5-2.2v13.4c0 1.2-3.4 2.3-7.5 2.3s-7.5-1-7.5-2.3V5.3m15 6.7c0 1.2-3.4 2.2-7.5 2.2s-7.5-1-7.5-2.2"/></svg><a href="../nodes/long-term-memory/">Long-term memory</a></span></b> — A session ends and takes its window with it. What survives is files the harness writes and reads back — not a faculty of the model.</p>
       </section>
   </div>
   <p class="qr-take">The loop is the product. A model call answers once; everything you recognise as an agent is this cycle, plus the rules about when it may act.</p>

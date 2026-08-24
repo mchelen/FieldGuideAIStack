@@ -90,6 +90,38 @@
 }
 
 .qr h2, .qr h3, .qr h4, .qr p { margin: 0; }
+
+/* ---- concepts wear their kind ---- */
+.qr-n { display: inline-flex; align-items: center; gap: 6px; }
+/* The uppercase tracking on these two would otherwise pull the label back into
+   the glyph, since letter-spacing lands before the first character too. */
+.qr-agent .qr-n { gap: 8px; }
+.qr-legend span { letter-spacing: 0.09em; }
+.qr-n .qr-i { flex: none; color: var(--qr-kind); }
+/* One hue per kind would be ten categorical colours on one page, which no
+   palette survives. The icon shape carries the kind; colour marks only the two
+   the reader sorts by first, and both are status roles rather than series
+   colours -- so they ship with a shape and a legend label, never hue alone.
+   The red is the reserved status step, fixed in both themes by design.
+   (No backticks in this block -- the whole stylesheet is a template literal.) */
+.qr-k-failure { --qr-kind: #d03b3b; }
+.qr-k-control, .qr-k-measure { --qr-kind: var(--qr-mark); }
+.qr-k-component, .qr-k-process, .qr-k-technique, .qr-k-artifact,
+.qr-k-store, .qr-k-ceiling, .qr-k-who, .qr-k-concept { --qr-kind: var(--qr-faint); }
+
+.qr-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: -7px 0 9px;
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--qr-faint);
+}
+.qr-legend span { display: inline-flex; align-items: center; gap: 4px; }
+.qr-legend .qr-i { color: var(--qr-kind); }
 .qr a { color: inherit; text-decoration: none; }
 .qr a:hover { text-decoration: underline; text-decoration-color: var(--qr-accent); text-underline-offset: 3px; }
 
@@ -301,19 +333,51 @@
 .qr-fix b { color: var(--qr-accent); }
 .qr-pair p { margin-top: 4px; font-size: 12.5px; line-height: 1.42; color: var(--qr-soft); }
 .qr-also { margin-top: 7px; display: flex; flex-wrap: wrap; gap: 5px; }
-.qr-also a {
+/* The pill wraps the whole thing, icon included -- styling the anchor alone
+   left every icon floating outside its own chip. */
+.qr-also .qr-n {
   font-size: 10px;
   font-weight: 650;
   letter-spacing: 0.05em;
   color: var(--qr-faint);
   border: 1px solid var(--qr-rule);
   border-radius: 999px;
-  padding: 2px 8px;
+  padding: 2px 8px 2px 6px;
+  gap: 4px;
   white-space: nowrap;
 }
-.qr-fix .qr-also a { color: var(--qr-accent); border-color: color-mix(in oklab, var(--qr-accent) 34%, transparent); }
+.qr-fix .qr-also .qr-n { color: var(--qr-accent); border-color: color-mix(in oklab, var(--qr-accent) 34%, transparent); }
 /* The arrow is the claim: this control addresses that failure. */
 .qr-arrow { display: flex; align-items: center; justify-content: center; color: var(--qr-accent); font-size: 19px; font-weight: 700; }
+
+
+/* ---- map: the same concepts, drawn as the graph they actually form ---- */
+.qr-map { flex: 1 0 auto; position: relative; }
+/* Direct child only. The chips carry nested <svg> icons, and a descendant
+   selector stretched every one of them to the size of the whole diagram. */
+.qr-map > svg { display: block; width: 100%; height: auto; overflow: visible; }
+.qr-lane-head {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  fill: var(--qr-faint);
+}
+.qr-chip-box { fill: var(--qr-raised); stroke: var(--qr-rule); stroke-width: 1; }
+.qr-chip-rail { stroke-width: 3; stroke-linecap: round; }
+.qr-chip-name { font-size: 13.5px; font-weight: 650; fill: var(--qr-ink); }
+.qr-chip-note { font-size: 10.5px; fill: var(--qr-faint); }
+/* Relation families read by line, not by colour: four styles, one legend, and
+   the arrowhead says which way the verb runs. */
+.qr-edge { fill: none; stroke: var(--qr-rule-strong); stroke-width: 1.3; }
+.qr-edge-contains { stroke: var(--qr-accent); stroke-width: 1.6; }
+.qr-edge-consumes { stroke: var(--qr-rule-strong); }
+.qr-edge-confused { stroke: var(--qr-mark); stroke-dasharray: 4 4; }
+.qr-edge-implements { stroke: var(--qr-faint); stroke-dasharray: 1 4; stroke-linecap: round; }
+.qr-key { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 10px; font-size: 10.5px; color: var(--qr-soft); }
+.qr-key span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.qr-key-note { color: var(--qr-faint); }
+.qr-key svg { flex: none; }
 
 /* ---- footer ---- */
 .qr-foot { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 18px; }
@@ -356,74 +420,75 @@
     </div>
   </header>
   <div class="qr-rule"></div>
+  <div class="qr-legend"><span class="qr-k-control"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg>Control</span><span class="qr-k-failure"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg>Failure</span><span class="qr-k-measure"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17Zm0-4.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0-3.4h.01"/></svg>Measure</span></div>
   <div class="qr-pairs">
     <div class="qr-pairhead"><span>The failure</span><span>What actually addresses it</span></div>
     <div class="qr-pair">
       <div class="qr-risk">
-        <b><a class="" href="../nodes/prompt-injection/">Prompt injection</a></b>
+        <b><span class="qr-n qr-k-failure" data-node="prompt-injection"><svg class="qr-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/prompt-injection/">Prompt injection</a></span></b>
         <p>Text the system treats as instructions when it was only ever content. The dangerous form arrives in a page, a file or a repo the agent read — nobody typed it.</p>
-          <div class="qr-also"><a class="" href="../nodes/indirect-prompt-injection/">Indirect prompt injection</a><a class="" href="../nodes/jailbreak/">Jailbreak</a></div>
+          <div class="qr-also"><span class="qr-n qr-k-failure" data-node="indirect-prompt-injection"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/indirect-prompt-injection/">Indirect prompt injection</a></span><span class="qr-n qr-k-failure" data-node="jailbreak"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/jailbreak/">Jailbreak</a></span></div>
       </div>
       <div class="qr-arrow" aria-hidden="true">&#8594;</div>
       <div class="qr-fix">
-        <b><a class="" href="../nodes/project-trust/">Vet what may configure the agent</a></b>
+        <b><span class="qr-n qr-k-control" data-node="project-trust"><svg class="qr-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/project-trust/">Vet what may configure the agent</a></span></b>
         <p>A repository supplies configuration, not only code. Decide whether an agent may act on one before it reads it, and check input and output outside the model, where the check cannot be argued with.</p>
-          <div class="qr-also"><a class="" href="../nodes/guardrails/">Guardrails</a></div>
+          <div class="qr-also"><span class="qr-n qr-k-control" data-node="guardrails"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/guardrails/">Guardrails</a></span></div>
       </div>
     </div>
     <div class="qr-pair">
       <div class="qr-risk">
-        <b><a class="" href="../nodes/hallucination/">Hallucination</a></b>
+        <b><span class="qr-n qr-k-failure" data-node="hallucination"><svg class="qr-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/hallucination/">Hallucination</a></span></b>
         <p>Plausible, confident and wrong, produced identically to correct output — because truth is not a quantity the model computes.</p>
-          <div class="qr-also"><a class="" href="../nodes/ai-slop/">AI slop</a></div>
+          <div class="qr-also"><span class="qr-n qr-k-failure" data-node="ai-slop"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/ai-slop/">AI slop</a></span></div>
       </div>
       <div class="qr-arrow" aria-hidden="true">&#8594;</div>
       <div class="qr-fix">
-        <b><a class="" href="../nodes/grounding/">Answer from a source, then check the citation</a></b>
+        <b><span class="qr-n qr-k-control" data-node="grounding"><svg class="qr-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/grounding/">Answer from a source, then check the citation</a></span></b>
         <p>Retrieve the document and answer from it rather than from what the model remembers — then verify the cited source supports the claim, and that claims needing one have it.</p>
-          <div class="qr-also"><a class="" href="../nodes/citation-precision-and-recall/">Citation precision and recall</a><a class="" href="../nodes/factuality/">Factuality</a></div>
+          <div class="qr-also"><span class="qr-n qr-k-measure" data-node="citation-precision-and-recall"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17Zm0-4.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0-3.4h.01"/></svg><a href="../nodes/citation-precision-and-recall/">Citation precision and recall</a></span><span class="qr-n qr-k-measure" data-node="factuality"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17Zm0-4.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0-3.4h.01"/></svg><a href="../nodes/factuality/">Factuality</a></span></div>
       </div>
     </div>
     <div class="qr-pair">
       <div class="qr-risk">
-        <b><a class="" href="../nodes/excessive-agency/">Excessive agency</a></b>
+        <b><span class="qr-n qr-k-failure" data-node="excessive-agency"><svg class="qr-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/excessive-agency/">Excessive agency</a></span></b>
         <p>More permission, autonomy and reach than the task needs — and drift outside the intended scope while every individual action still looks permitted.</p>
-          <div class="qr-also"><a class="" href="../nodes/rogue-agent/">Rogue agent</a></div>
+          <div class="qr-also"><span class="qr-n qr-k-failure" data-node="rogue-agent"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/rogue-agent/">Rogue agent</a></span></div>
       </div>
       <div class="qr-arrow" aria-hidden="true">&#8594;</div>
       <div class="qr-fix">
-        <b><a class="" href="../nodes/permission-model/">Say what is allowed, and enforce it below the prompt</a></b>
+        <b><span class="qr-n qr-k-control" data-node="permission-model"><svg class="qr-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/permission-model/">Say what is allowed, and enforce it below the prompt</a></span></b>
         <p>Set the limit per action class and put it where it holds: a rule in the system prompt is advice, a rule in the harness is a mechanism.</p>
-          <div class="qr-also"><a class="" href="../nodes/approval-mode/">Approval mode</a><a class="" href="../nodes/autonomy-level/">Autonomy level</a></div>
+          <div class="qr-also"><span class="qr-n qr-k-control" data-node="approval-mode"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/approval-mode/">Approval mode</a></span><span class="qr-n qr-k-control" data-node="autonomy-level"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/autonomy-level/">Autonomy level</a></span></div>
       </div>
     </div>
     <div class="qr-pair">
       <div class="qr-risk">
-        <b><a class="" href="../nodes/data-exfiltration/">Exfiltration and tool misuse</a></b>
+        <b><span class="qr-n qr-k-failure" data-node="data-exfiltration"><svg class="qr-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/data-exfiltration/">Exfiltration and tool misuse</a></span></b>
         <p>Legitimate access and legitimate tools, used exactly as designed, to do something you did not want — which is what makes both hard to spot.</p>
-          <div class="qr-also"><a class="" href="../nodes/tool-misuse/">Tool misuse</a><a class="" href="../nodes/memory-poisoning/">Memory poisoning</a></div>
+          <div class="qr-also"><span class="qr-n qr-k-failure" data-node="tool-misuse"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/tool-misuse/">Tool misuse</a></span><span class="qr-n qr-k-failure" data-node="memory-poisoning"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg><a href="../nodes/memory-poisoning/">Memory poisoning</a></span></div>
       </div>
       <div class="qr-arrow" aria-hidden="true">&#8594;</div>
       <div class="qr-fix">
-        <b><a class="" href="../nodes/sandbox/">Bound the blast radius, and keep a way back</a></b>
+        <b><span class="qr-n qr-k-control" data-node="sandbox"><svg class="qr-i" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/sandbox/">Bound the blast radius, and keep a way back</a></span></b>
         <p>Run commands where a bad step damages a copy, put a person in the path of what cannot be undone, and snapshot as you go so an hour is recoverable.</p>
-          <div class="qr-also"><a class="" href="../nodes/human-in-the-loop/">Human in the loop</a><a class="" href="../nodes/checkpoint-and-rollback/">Checkpoint and rollback</a></div>
+          <div class="qr-also"><span class="qr-n qr-k-control" data-node="human-in-the-loop"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/human-in-the-loop/">Human in the loop</a></span><span class="qr-n qr-k-control" data-node="checkpoint-and-rollback"><svg class="qr-i" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/checkpoint-and-rollback/">Checkpoint and rollback</a></span></div>
       </div>
     </div>
   </div>
   <div class="qr-foot">
       <section>
         <h3>How you find them</h3>
-        <p><b><a class="qr-footlink" href="../nodes/red-teaming/">Red teaming</a></b> — Deliberately trying to make it misbehave, rather than checking that it behaves.</p>
-        <p><b><a class="qr-footlink" href="../nodes/evaluation/">Evaluation</a></b> — A repeatable test, so a fix can be shown to have worked.</p>
+        <p><b><span class="qr-n qr-k-measure" data-node="red-teaming"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17Zm0-4.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0-3.4h.01"/></svg><a href="../nodes/red-teaming/">Red teaming</a></span></b> — Deliberately trying to make it misbehave, rather than checking that it behaves.</p>
+        <p><b><span class="qr-n qr-k-measure" data-node="evaluation"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17Zm0-4.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0-3.4h.01"/></svg><a href="../nodes/evaluation/">Evaluation</a></span></b> — A repeatable test, so a fix can be shown to have worked.</p>
       </section>
       <section>
         <h3>What should travel with the artifact</h3>
-        <p><b><a class="qr-footlink" href="../nodes/provenance/">Provenance</a></b> — Evidence of where a model, dataset or piece of content came from — attached to the thing, not asserted about it.</p>
+        <p><b><span class="qr-n qr-k-control" data-node="provenance"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/provenance/">Provenance</a></span></b> — Evidence of where a model, dataset or piece of content came from — attached to the thing, not asserted about it.</p>
       </section>
       <section>
         <h3>The pattern in all four</h3>
-        <p><b><a class="qr-footlink" href="../nodes/non-human-identity/">Give it its own identity</a></b> — An agent acting as you is indistinguishable from you in every log. Its own credentials are what make the other controls observable.</p>
+        <p><b><span class="qr-n qr-k-control" data-node="non-human-identity"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg><a href="../nodes/non-human-identity/">Give it its own identity</a></span></b> — An agent acting as you is indistinguishable from you in every log. Its own credentials are what make the other controls observable.</p>
       </section>
   </div>
   <p class="qr-take">Every control here sits outside the model. A rule in the system prompt is advice; a rule in the harness is a mechanism; a rule in the sandbox holds even if the other two are talked around.</p>

@@ -1,0 +1,448 @@
+<style>
+.qr {
+  --qr-paper: #fbfaf7;
+  --qr-raised: #ffffff;
+  --qr-ink: #1c1a17;
+  --qr-soft: #55504a;
+  --qr-faint: #85807a;
+  --qr-rule: #e0dbd2;
+  --qr-rule-strong: #c8c1b5;
+  --qr-sunken: #f2efe9;
+  --qr-accent: #7a4a1e;
+  --qr-accent-soft: #f6efe6;
+  --qr-mark: #2f5d3f;
+  --qr-shadow: rgba(60, 40, 18, 0.10);
+  --qr-glow: rgba(255, 255, 255, 0.9);
+    --qr-l1: #e29858;
+    --qr-t1: #fdf4ec;
+    --qr-l2: #c47c3b;
+    --qr-t2: #fbeee1;
+    --qr-l3: #a7611b;
+    --qr-t3: #f8e7d6;
+    --qr-l4: #874900;
+    --qr-t4: #f4e0cb;
+  color-scheme: light;
+  width: 1600px;
+  height: 900px;
+  box-sizing: border-box;
+  padding: 42px 54px 34px;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(120% 90% at 88% -10%, var(--qr-accent-soft) 0%, transparent 58%),
+    var(--qr-paper);
+  color: var(--qr-ink);
+  font-family: var(--font, ui-sans-serif), "Liberation Sans", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .qr {
+  color-scheme: dark;
+  --qr-paper: #17161a;
+  --qr-raised: #201f24;
+  --qr-ink: #eceaea;
+  --qr-soft: #b3aeae;
+  --qr-faint: #837e7e;
+  --qr-rule: #35333a;
+  --qr-rule-strong: #4c4952;
+  --qr-sunken: #121115;
+  --qr-accent: #e0a86a;
+  --qr-accent-soft: #2a2118;
+  --qr-mark: #8fc9a3;
+  --qr-shadow: rgba(0, 0, 0, 0.5);
+  --qr-glow: rgba(255, 255, 255, 0.04);
+    --qr-l1: #925000;
+    --qr-t1: #241a12;
+    --qr-l2: #b06a26;
+    --qr-t2: #2a1f15;
+    --qr-l3: #ce8545;
+    --qr-t3: #302519;
+    --qr-l4: #eca161;
+    --qr-t4: #362a1d;
+  }
+}
+:root[data-theme="dark"] .qr {
+  color-scheme: dark;
+  --qr-paper: #17161a;
+  --qr-raised: #201f24;
+  --qr-ink: #eceaea;
+  --qr-soft: #b3aeae;
+  --qr-faint: #837e7e;
+  --qr-rule: #35333a;
+  --qr-rule-strong: #4c4952;
+  --qr-sunken: #121115;
+  --qr-accent: #e0a86a;
+  --qr-accent-soft: #2a2118;
+  --qr-mark: #8fc9a3;
+  --qr-shadow: rgba(0, 0, 0, 0.5);
+  --qr-glow: rgba(255, 255, 255, 0.04);
+    --qr-l1: #925000;
+    --qr-t1: #241a12;
+    --qr-l2: #b06a26;
+    --qr-t2: #2a1f15;
+    --qr-l3: #ce8545;
+    --qr-t3: #302519;
+    --qr-l4: #eca161;
+    --qr-t4: #362a1d;
+}
+
+.qr h2, .qr h3, .qr h4, .qr p { margin: 0; }
+
+/* ---- concepts wear their kind ---- */
+.qr-n { display: inline-flex; align-items: center; gap: 6px; }
+/* The uppercase tracking on these two would otherwise pull the label back into
+   the glyph, since letter-spacing lands before the first character too. */
+.qr-agent .qr-n { gap: 8px; }
+.qr-legend span { letter-spacing: 0.09em; }
+.qr-n .qr-i { flex: none; color: var(--qr-kind); }
+/* One hue per kind would be ten categorical colours on one page, which no
+   palette survives. The icon shape carries the kind; colour marks only the two
+   the reader sorts by first, and both are status roles rather than series
+   colours -- so they ship with a shape and a legend label, never hue alone.
+   The red is the reserved status step, fixed in both themes by design.
+   (No backticks in this block -- the whole stylesheet is a template literal.) */
+.qr-k-failure { --qr-kind: #d03b3b; }
+.qr-k-control, .qr-k-measure { --qr-kind: var(--qr-mark); }
+.qr-k-component, .qr-k-process, .qr-k-technique, .qr-k-artifact,
+.qr-k-store, .qr-k-ceiling, .qr-k-who, .qr-k-concept { --qr-kind: var(--qr-faint); }
+
+.qr-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: -7px 0 9px;
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--qr-faint);
+}
+.qr-legend span { display: inline-flex; align-items: center; gap: 4px; }
+.qr-legend .qr-i { color: var(--qr-kind); }
+.qr a { color: inherit; text-decoration: none; }
+.qr a:hover { text-decoration: underline; text-decoration-color: var(--qr-accent); text-underline-offset: 3px; }
+
+/* ---- masthead ---- */
+.qr-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; }
+.qr-head h2 {
+  font-size: 31px;
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.022em;
+}
+.qr-head p { margin-top: 5px; font-size: 15px; color: var(--qr-soft); }
+.qr-brand { text-align: right; flex: none; }
+.qr-brand strong {
+  display: block;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--qr-accent);
+}
+.qr-brand span {
+  display: block;
+  margin-top: 4px;
+  font-size: 12.5px;
+  color: var(--qr-faint);
+  font-family: var(--font-mono, ui-monospace), "Liberation Mono", monospace;
+}
+.qr-rule {
+  height: 2px;
+  margin: 14px 0 16px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--qr-l4), var(--qr-l1) 32%, var(--qr-rule) 62%, var(--qr-rule));
+}
+
+/* ---- the stack ---- */
+.qr-body {
+  /* Grow to fill, but never shrink below content. Flex-shrink with min-height 0
+     let the grid collapse and paint straight over the footer -- an overlap no
+     height measurement of the card itself could see. */
+  flex: 1 0 auto;
+  display: grid;
+  grid-template-columns: 158px minmax(0, 1fr) 74px;
+  grid-template-rows: repeat(4, min-content);
+  column-gap: 16px;
+  row-gap: 14px;
+  /* The frame is a fixed 900px and the rows are content-sized, so whatever is
+     left over is distributed between them rather than pooling as a dead band
+     above the footer. */
+  align-content: space-between;
+}
+.qr-layer { grid-column: 2; }
+
+.qr-layer {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--qr-rule);
+  border-radius: 11px;
+  padding: 19px 22px 19px 28px;
+  background:
+    linear-gradient(163deg, var(--qr-raised) 8%, var(--qr-tint) 108%),
+    var(--qr-raised);
+  box-shadow: 0 1px 0 var(--qr-glow) inset, 0 2px 7px -3px var(--qr-shadow);
+}
+/* The step colour arrives as a rail, not as a fill: text on the box keeps
+   wearing the ink tokens, so nothing depends on reading colour. */
+.qr-layer::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: linear-gradient(180deg, var(--qr-step), color-mix(in oklab, var(--qr-step) 74%, transparent));
+}
+/* Named rather than positional: the grid's children are the two brackets as
+   well as the four layers, so nth-child counted the wrong things and the last
+   layer silently got no step at all. */
+.qr-s1 { --qr-step: var(--qr-l1); --qr-tint: var(--qr-t1); }
+.qr-s2 { --qr-step: var(--qr-l2); --qr-tint: var(--qr-t2); }
+.qr-s3 { --qr-step: var(--qr-l3); --qr-tint: var(--qr-t3); }
+.qr-s4 { --qr-step: var(--qr-l4); --qr-tint: var(--qr-t4); }
+
+.qr-top { display: grid; grid-template-columns: 232px minmax(0, 1fr) auto; gap: 20px; align-items: start; }
+.qr-name {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.014em;
+}
+.qr-kicker { margin-top: 2px; font-size: 11.5px; color: var(--qr-faint); }
+.qr-num {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--qr-step);
+  font-family: var(--font-mono, ui-monospace), "Liberation Mono", monospace;
+}
+.qr-desc { font-size: 14px; line-height: 1.42; color: var(--qr-soft); max-width: 62ch; }
+.qr-tag {
+  flex: none;
+  align-self: start;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--qr-step);
+  border: 1px solid color-mix(in oklab, var(--qr-step) 40%, transparent);
+  background: color-mix(in oklab, var(--qr-step) 12%, var(--qr-raised));
+  border-radius: 999px;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+.qr-sub { display: grid; gap: 9px; margin-top: 12px; grid-auto-flow: column; grid-auto-columns: 1fr; }
+.qr-sub div {
+  border: 1px solid var(--qr-rule);
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: var(--qr-raised);
+  box-shadow: 0 1px 4px -2px var(--qr-shadow);
+}
+.qr-sub b { display: block; font-size: 12.5px; font-weight: 650; letter-spacing: -0.005em; }
+.qr-sub span { display: block; margin-top: 3px; font-size: 11px; line-height: 1.36; color: var(--qr-faint); }
+
+/* ---- the two brackets ---- */
+.qr-agent, .qr-loop { position: relative; } /* row span comes from the card */
+.qr-agent {
+  grid-column: 1;
+  border: 2px solid var(--qr-accent);
+  border-right: 0;
+  border-radius: 10px 0 0 10px;
+  background: linear-gradient(90deg, color-mix(in oklab, var(--qr-accent) 7%, transparent), transparent);
+  padding: 14px 16px 14px 0;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.qr-agent strong {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--qr-accent);
+}
+.qr-agent span { display: block; margin-top: 7px; font-size: 11.5px; line-height: 1.42; color: var(--qr-faint); }
+
+.qr-loop {
+  grid-column: 3;
+  margin: 26px 24px 26px 0;
+  border: 1.6px dashed var(--qr-mark);
+  border-left: 0;
+  border-radius: 0 10px 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* The arrowhead sits on the returning end, at the harness, because the return
+   is the whole point of drawing the loop at all. */
+.qr-loop::before {
+  content: "";
+  position: absolute;
+  top: -6.5px;
+  left: -1px;
+  border: 6px solid transparent;
+  border-right-color: var(--qr-mark);
+  border-left: 0;
+}
+.qr-loop b {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--qr-mark);
+  white-space: nowrap;
+}
+.qr-loop b em { font-style: normal; font-weight: 400; letter-spacing: 0.04em; color: var(--qr-faint); }
+
+/* ---- pairs: a failure beside the control that addresses it ---- */
+/* Two categories, not four, and each column is labelled -- so the split is
+   carried by position and heading, and colour only reinforces it. */
+.qr-pairs { flex: 1 0 auto; display: grid; grid-template-rows: auto repeat(4, min-content); gap: 12px 18px; align-content: space-between; }
+.qr-pairhead { display: grid; grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr); gap: 0 18px; }
+.qr-pairhead span {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--qr-faint);
+}
+.qr-pairhead span:last-child { grid-column: 3; color: var(--qr-accent); }
+.qr-pair { display: grid; grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr); gap: 0 18px; align-items: stretch; }
+.qr-risk, .qr-fix {
+  border: 1px solid var(--qr-rule);
+  border-radius: 10px;
+  padding: 12px 16px;
+  box-shadow: 0 1px 0 var(--qr-glow) inset, 0 2px 7px -3px var(--qr-shadow);
+}
+.qr-risk { background: linear-gradient(163deg, var(--qr-raised) 8%, var(--qr-sunken) 112%); border-left: 4px solid var(--qr-rule-strong); }
+.qr-fix {
+  background: linear-gradient(163deg, var(--qr-raised) 8%, var(--qr-accent-soft) 112%);
+  border-left: 4px solid var(--qr-accent);
+}
+.qr-pair b { display: block; font-size: 14.5px; font-weight: 700; letter-spacing: -0.01em; }
+.qr-fix b { color: var(--qr-accent); }
+.qr-pair p { margin-top: 4px; font-size: 12.5px; line-height: 1.42; color: var(--qr-soft); }
+.qr-also { margin-top: 7px; display: flex; flex-wrap: wrap; gap: 5px; }
+/* The pill wraps the whole thing, icon included -- styling the anchor alone
+   left every icon floating outside its own chip. */
+.qr-also .qr-n {
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.05em;
+  color: var(--qr-faint);
+  border: 1px solid var(--qr-rule);
+  border-radius: 999px;
+  padding: 2px 8px 2px 6px;
+  gap: 4px;
+  white-space: nowrap;
+}
+.qr-fix .qr-also .qr-n { color: var(--qr-accent); border-color: color-mix(in oklab, var(--qr-accent) 34%, transparent); }
+/* The arrow is the claim: this control addresses that failure. */
+.qr-arrow { display: flex; align-items: center; justify-content: center; color: var(--qr-accent); font-size: 19px; font-weight: 700; }
+
+
+/* ---- map: the same concepts, drawn as the graph they actually form ---- */
+.qr-map { flex: 1 0 auto; position: relative; }
+/* Direct child only. The chips carry nested <svg> icons, and a descendant
+   selector stretched every one of them to the size of the whole diagram. */
+.qr-map > svg { display: block; width: 100%; height: auto; overflow: visible; }
+.qr-lane-head {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  fill: var(--qr-faint);
+}
+.qr-chip-box { fill: var(--qr-raised); stroke: var(--qr-rule); stroke-width: 1; }
+.qr-chip-rail { stroke-width: 3; stroke-linecap: round; }
+.qr-chip-name { font-size: 13.5px; font-weight: 650; fill: var(--qr-ink); }
+.qr-chip-note { font-size: 10.5px; fill: var(--qr-faint); }
+/* Relation families read by line, not by colour: four styles, one legend, and
+   the arrowhead says which way the verb runs. */
+.qr-edge { fill: none; stroke: var(--qr-rule-strong); stroke-width: 1.3; }
+.qr-edge-contains { stroke: var(--qr-accent); stroke-width: 1.6; }
+.qr-edge-consumes { stroke: var(--qr-rule-strong); }
+.qr-edge-confused { stroke: var(--qr-mark); stroke-dasharray: 4 4; }
+.qr-edge-implements { stroke: var(--qr-faint); stroke-dasharray: 1 4; stroke-linecap: round; }
+.qr-key { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 10px; font-size: 10.5px; color: var(--qr-soft); }
+.qr-key span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.qr-key-note { color: var(--qr-faint); }
+.qr-key svg { flex: none; }
+
+/* ---- footer ---- */
+.qr-foot { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 18px; }
+.qr-foot section { border-top: 2px solid var(--qr-rule); padding-top: 11px; }
+.qr-foot h3 {
+  margin: 0 0 8px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--qr-accent);
+}
+.qr-foot p { margin: 0 0 8px; font-size: 11.5px; line-height: 1.42; color: var(--qr-soft); }
+.qr-foot p:last-child { margin-bottom: 0; }
+.qr-foot b { font-size: 12.5px; font-weight: 650; color: var(--qr-ink); }
+
+/* ---- takeaway ---- */
+.qr-take {
+  margin-top: 16px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in oklab, var(--qr-accent) 22%, transparent);
+  border-left: 4px solid var(--qr-accent);
+  background: linear-gradient(90deg, var(--qr-accent-soft), transparent 78%);
+  padding: 12px 20px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--qr-accent);
+  text-align: center;
+}
+</style>
+<div class="qr" role="img" aria-label="What is connected to what. The stack card’s vocabulary, drawn as relations rather than layers. Every line is declared on a node page.">
+  <header class="qr-head">
+    <div>
+      <h2>What is connected to what</h2>
+      <p>The stack card’s vocabulary, drawn as relations rather than layers. Every line is declared on a node page.</p>
+    </div>
+    <div class="qr-brand">
+      <strong>Field guide to the AI stack</strong>
+      <span>mchelen.github.io/FieldGuideAIStack</span>
+    </div>
+  </header>
+  <div class="qr-rule"></div>
+  <div class="qr-legend"><span class="qr-k-component"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5h17v10h-17zM9 7.5v10"/></svg>Component</span><span class="qr-k-process"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.6-5.9M20 4v4h-4"/></svg>Process</span><span class="qr-k-technique"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16M9 4.5v5M16 9.5v5M7 14.5v5"/></svg>Technique</span><span class="qr-k-control"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg>Control</span><span class="qr-k-failure"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg>Failure</span><span class="qr-k-ceiling"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 5h17M12 20V9m0-1.5L8 12m4-4.5 4 4.5"/></svg>Ceiling</span><span class="qr-k-artifact"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h7.5L19 9v11.5H6V3.5Zm7.5 0V9H19"/></svg>Artifact</span><span class="qr-k-who"><svg class="qr-i" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 11.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4.5 20.5c0-3.6 3.4-6 7.5-6s7.5 2.4 7.5 6"/></svg>Who</span></div>
+  <div class="qr-map">
+    <svg viewBox="0 0 1492 529" height="529" role="presentation">
+      <defs><marker id="qr-arrow-contains" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1.5 9 5 0 8.5Z" class="qr-edge-contains" stroke="none" fill="context-stroke"/></marker><marker id="qr-arrow-consumes" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1.5 9 5 0 8.5Z" class="qr-edge-consumes" stroke="none" fill="context-stroke"/></marker><marker id="qr-arrow-confused" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1.5 9 5 0 8.5Z" class="qr-edge-confused" stroke="none" fill="context-stroke"/></marker><marker id="qr-arrow-implements" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1.5 9 5 0 8.5Z" class="qr-edge-implements" stroke="none" fill="context-stroke"/></marker></defs>
+      <text class="qr-lane-head" x="12" y="12">Where you are</text><text class="qr-lane-head" x="406" y="12">The program around it</text><text class="qr-lane-head" x="800" y="12">The call, and who serves it</text><text class="qr-lane-head" x="1194" y="12">The trained artifact</text>
+      <g><path class="qr-edge qr-edge-contains" d="M298 239 C352 239 352 54 406 54" marker-end="url(#qr-arrow-contains)"/><path class="qr-edge qr-edge-contains" d="M298 239 H325.96000000000004 Q334.96000000000004 239 334.96000000000004 248 V465 Q334.96000000000004 474 343.96000000000004 474 H1148.04 Q1157.04 474 1157.04 465 V137 Q1157.04 128 1148.04 128 H1194" marker-end="url(#qr-arrow-contains)"/><path class="qr-edge qr-edge-contains" d="M298 239 C352 239 352 350 406 350" marker-end="url(#qr-arrow-contains)"/><path class="qr-edge qr-edge-contains" d="M298 313 C330 313 330 239 298 239" marker-end="url(#qr-arrow-contains)"/><path class="qr-edge qr-edge-consumes" d="M298 313 H325.96000000000004 Q334.96000000000004 313 334.96000000000004 322 V475 Q334.96000000000004 484 343.96000000000004 484 H754.04 Q763.04 484 763.04 475 V174 Q763.04 165 754.04 165 H800" marker-end="url(#qr-arrow-consumes)"/><path class="qr-edge qr-edge-contains" d="M692 424 C724 424 724 54 692 54" marker-end="url(#qr-arrow-contains)"/><path class="qr-edge qr-edge-consumes" d="M692 424 C724 424 724 350 692 350" marker-end="url(#qr-arrow-consumes)"/><path class="qr-edge qr-edge-consumes" d="M692 202 H719.96 Q728.96 202 728.96 211 V485 Q728.96 494 737.96 494 H1148.04 Q1157.04 494 1157.04 485 V211 Q1157.04 202 1148.04 202 H1194" marker-end="url(#qr-arrow-consumes)"/><path class="qr-edge qr-edge-confused" d="M692 202 C724 202 724 128 692 128" marker-end="url(#qr-arrow-confused)"/><path class="qr-edge qr-edge-contains" d="M1194 202 C1162 202 1162 128 1194 128" marker-end="url(#qr-arrow-contains)"/><path class="qr-edge qr-edge-contains" d="M1194 350 C1162 350 1162 128 1194 128" marker-end="url(#qr-arrow-contains)"/><path class="qr-edge qr-edge-consumes" d="M692 54 C746 54 746 165 800 165" marker-end="url(#qr-arrow-consumes)"/><path class="qr-edge qr-edge-consumes" d="M800 165 C746 165 746 54 692 54" marker-end="url(#qr-arrow-consumes)"/><path class="qr-edge qr-edge-implements" d="M1086 313 C1140 313 1140 128 1194 128" marker-end="url(#qr-arrow-implements)"/><path class="qr-edge qr-edge-implements" d="M1086 313 C1118 313 1118 165 1086 165" marker-end="url(#qr-arrow-implements)"/><path class="qr-edge qr-edge-confused" d="M1086 239 C1118 239 1118 313 1086 313" marker-end="url(#qr-arrow-confused)"/><path class="qr-edge qr-edge-implements" d="M1086 239 C1118 239 1118 165 1086 165" marker-end="url(#qr-arrow-implements)"/><path class="qr-edge qr-edge-confused" d="M1194 128 H1166.04 Q1157.04 128 1157.04 137 V495 Q1157.04 504 1148.04 504 H737.96 Q728.96 504 728.96 495 V63 Q728.96 54 737.96 54 H692" marker-end="url(#qr-arrow-confused)"/><path class="qr-edge qr-edge-confused" d="M1194 128 C1140 128 1140 239 1086 239" marker-end="url(#qr-arrow-confused)"/><path class="qr-edge qr-edge-consumes" d="M692 128 H719.96 Q728.96 128 728.96 137 V505 Q728.96 514 737.96 514 H1148.04 Q1157.04 514 1157.04 505 V211 Q1157.04 202 1148.04 202 H1194" marker-end="url(#qr-arrow-consumes)"/><path class="qr-edge qr-edge-consumes" d="M692 276 H719.96 Q728.96 276 728.96 285 V465 Q728.96 474 737.96 474 H1148.04 Q1157.04 474 1157.04 465 V211 Q1157.04 202 1148.04 202 H1194" marker-end="url(#qr-arrow-consumes)"/><path class="qr-edge qr-edge-contains" d="M298 165 C352 165 352 54 406 54" marker-end="url(#qr-arrow-contains)"/><path class="qr-edge qr-edge-consumes" d="M1194 276 C1162 276 1162 128 1194 128" marker-end="url(#qr-arrow-consumes)"/><path class="qr-edge qr-edge-contains" d="M1194 276 C1162 276 1162 202 1194 202" marker-end="url(#qr-arrow-contains)"/><path class="qr-edge qr-edge-contains" d="M692 350 C746 350 746 165 800 165" marker-end="url(#qr-arrow-contains)"/></g>
+      <g><a href="../nodes/surface/" data-node="surface"><rect class="qr-chip-box" x="12" y="137" width="286" height="56" rx="9"/><line class="qr-chip-rail qr-k-component" x1="13.5" y1="146" x2="13.5" y2="184" stroke="var(--qr-kind)"/><g class="qr-k-component" transform="translate(26 157) scale(0.68)" style="color:var(--qr-kind)"><svg class="qr-i" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5h17v10h-17zM9 7.5v10"/></svg></g><text class="qr-chip-name" x="52" y="162">Surface</text><text class="qr-chip-note" x="52" y="177">the window you typed in</text></a><a href="../nodes/agent/" data-node="agent"><rect class="qr-chip-box" x="12" y="211" width="286" height="56" rx="9"/><line class="qr-chip-rail qr-k-component" x1="13.5" y1="220" x2="13.5" y2="258" stroke="var(--qr-kind)"/><g class="qr-k-component" transform="translate(26 231) scale(0.68)" style="color:var(--qr-kind)"><svg class="qr-i" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5h17v10h-17zM9 7.5v10"/></svg></g><text class="qr-chip-name" x="52" y="236">Agent</text><text class="qr-chip-note" x="52" y="251">the whole assembly</text></a><a href="../nodes/agentic-loop/" data-node="agentic-loop"><rect class="qr-chip-box" x="12" y="285" width="286" height="56" rx="9"/><line class="qr-chip-rail qr-k-process" x1="13.5" y1="294" x2="13.5" y2="332" stroke="var(--qr-kind)"/><g class="qr-k-process" transform="translate(26 305) scale(0.68)" style="color:var(--qr-kind)"><svg class="qr-i" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.6-5.9M20 4v4h-4"/></svg></g><text class="qr-chip-name" x="52" y="310">Agentic loop</text><text class="qr-chip-note" x="52" y="325">what makes it an agent</text></a><a href="../nodes/harness/" data-node="harness"><rect class="qr-chip-box" x="406" y="26" width="286" height="56" rx="9"/><line class="qr-chip-rail qr-k-component" x1="407.5" y1="35" x2="407.5" y2="73" stroke="var(--qr-kind)"/><g class="qr-k-component" transform="translate(420 46) scale(0.68)" style="color:var(--qr-kind)"><svg class="qr-i" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5h17v10h-17zM9 7.5v10"/></svg></g><text class="qr-chip-name" x="446" y="51">Harness</text><text class="qr-chip-note" x="446" y="66">where the product lives</text></a><a href="../nodes/prompt-engineering/" data-node="prompt-engineering"><rect class="qr-chip-box" x="406" y="100" width="286" height="56" rx="9"/><line class="qr-chip-rail qr-k-technique" x1="407.5" y1="109" x2="407.5" y2="147" stroke="var(--qr-kind)"/><g class="qr-k-technique" transform="translate(420 120) scale(0.68)" style="color:var(--qr-kind)"><svg class="qr-i" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16M9 4.5v5M16 9.5v5M7 14.5v5"/></svg></g><text class="qr-chip-name" x="446" y="133">Prompt engineering</text></a><a href="../nodes/context-engineering/" data-node="context-engineering"><rect class="qr-chip-box" x="406" y="174" width="286" height="56" rx="9"/><line class="qr-chip-rail qr-k-technique" x1="407.5" y1="183" x2="407.5" y2="221" stroke="var(--qr-kind)"/><g class="qr-k-technique" transform="translate(420 194) scale(0.68)" style="color:var(--qr-kind)"><svg class="qr-i" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16M9 4.5v5M16 9.5v5M7 14.5v5"/></svg></g><text class="qr-chip-name" x="446" y="207">Context engineering</text></a><a href="../nodes/retrieval-augmented-generation/" data-node="retrieval-augmented-generation"><rect class="qr-chip-box" x="406" y="248" width="286" height="56" rx="9"/><line class="qr-chip-rail qr-k-technique" x1="407.5" y1="257" x2="407.5" y2="295" stroke="var(--qr-kind)"/><g class="qr-k-technique" transform="translate(420 268) scale(0.68)" style="color:var(--qr-kind)"><svg class="qr-i" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16M9 4.5v5M16 9.5v5M7 14.5v5"/></svg></g><text class="qr-chip-name" x="446" y="281">Retrieval (RAG)</text></a><a href="../nodes/tool-use/" data-node="tool-use"><rect class="qr-chip-box" x="406" y="322" width="286" height="56" rx="9"/><line class="qr-chip-rail qr-k-component" x1="407.5" y1="331" x2="407.5" y2="369" stroke="var(--qr-kind)"/><g class="qr-k-component" transform="translate(420 342) scale(0.68)" style="color:var(--qr-kind)"><svg class="qr-i" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5h17v10h-17zM9 7.5v10"/></svg></g><text class="qr-chip-name" x="446" y="355">Tool use</text></a><a href="../nodes/approval-mode/" data-node="approval-mode"><rect class="qr-chip-box" x="406" y="396" width="286" height="56" rx="9"/><line class="qr-chip-rail qr-k-control" x1="407.5" y1="405" x2="407.5" y2="443" stroke="var(--qr-kind)"/><g class="qr-k-control" transform="translate(420 416) scale(0.68)" style="color:var(--qr-kind)"><svg class="qr-i" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z"/></svg></g><text class="qr-chip-name" x="446" y="429">Approval mode</text></a><a href="../nodes/inference-api/" data-node="inference-api"><rect class="qr-chip-box" x="800" y="137" width="286" height="56" rx="9"/><line class="qr-chip-rail qr-k-component" x1="801.5" y1="146" x2="801.5" y2="184" stroke="var(--qr-kind)"/><g class="qr-k-component" transform="translate(814 157) scale(0.68)" style="color:var(--qr-kind)"><svg class="qr-i" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5h17v10h-17zM9 7.5v10"/></svg></g><text class="qr-chip-name" x="840" y="162">Inference API</text><text class="qr-chip-note" x="840" y="177">stateless HTTP</text></a><a href="../nodes/model-provider/" data-node="model-provider"><rect class="qr-chip-box" x="800" y="211" width="286" height="56" rx="9"/><line class="qr-chip-rail qr-k-who" x1="801.5" y1="220" x2="801.5" y2="258" stroke="var(--qr-kind)"/><g class="qr-k-who" transform="translate(814 231) scale(0.68)" style="color:var(--qr-kind)"><svg class="qr-i" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 11.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4.5 20.5c0-3.6 3.4-6 7.5-6s7.5 2.4 7.5 6"/></svg></g><text class="qr-chip-name" x="840" y="236">Model provider</text><text class="qr-chip-note" x="840" y="251">trains it</text></a><a href="../nodes/model-host/" data-node="model-host"><rect class="qr-chip-box" x="800" y="285" width="286" height="56" rx="9"/><line class="qr-chip-rail qr-k-who" x1="801.5" y1="294" x2="801.5" y2="332" stroke="var(--qr-kind)"/><g class="qr-k-who" transform="translate(814 305) scale(0.68)" style="color:var(--qr-kind)"><svg class="qr-i" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 11.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4.5 20.5c0-3.6 3.4-6 7.5-6s7.5 2.4 7.5 6"/></svg></g><text class="qr-chip-name" x="840" y="310">Model host</text><text class="qr-chip-note" x="840" y="325">runs someone else’s</text></a><a href="../nodes/model/" data-node="model"><rect class="qr-chip-box" x="1194" y="100" width="286" height="56" rx="9"/><line class="qr-chip-rail qr-k-artifact" x1="1195.5" y1="109" x2="1195.5" y2="147" stroke="var(--qr-kind)"/><g class="qr-k-artifact" transform="translate(1208 120) scale(0.68)" style="color:var(--qr-kind)"><svg class="qr-i" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h7.5L19 9v11.5H6V3.5Zm7.5 0V9H19"/></svg></g><text class="qr-chip-name" x="1234" y="125">Model</text><text class="qr-chip-note" x="1234" y="140">weights, not a service</text></a><a href="../nodes/context-window/" data-node="context-window"><rect class="qr-chip-box" x="1194" y="174" width="286" height="56" rx="9"/><line class="qr-chip-rail qr-k-ceiling" x1="1195.5" y1="183" x2="1195.5" y2="221" stroke="var(--qr-kind)"/><g class="qr-k-ceiling" transform="translate(1208 194) scale(0.68)" style="color:var(--qr-kind)"><svg class="qr-i" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 5h17M12 20V9m0-1.5L8 12m4-4.5 4 4.5"/></svg></g><text class="qr-chip-name" x="1234" y="207">Context window</text></a><a href="../nodes/token/" data-node="token"><rect class="qr-chip-box" x="1194" y="248" width="286" height="56" rx="9"/><line class="qr-chip-rail qr-k-artifact" x1="1195.5" y1="257" x2="1195.5" y2="295" stroke="var(--qr-kind)"/><g class="qr-k-artifact" transform="translate(1208 268) scale(0.68)" style="color:var(--qr-kind)"><svg class="qr-i" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h7.5L19 9v11.5H6V3.5Zm7.5 0V9H19"/></svg></g><text class="qr-chip-name" x="1234" y="281">Token</text></a><a href="../nodes/hallucination/" data-node="hallucination"><rect class="qr-chip-box" x="1194" y="322" width="286" height="56" rx="9"/><line class="qr-chip-rail qr-k-failure" x1="1195.5" y1="331" x2="1195.5" y2="369" stroke="var(--qr-kind)"/><g class="qr-k-failure" transform="translate(1208 342) scale(0.68)" style="color:var(--qr-kind)"><svg class="qr-i" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01"/></svg></g><text class="qr-chip-name" x="1234" y="355">Hallucination</text></a></g>
+    </svg>
+    <div class="qr-key"><span><svg width="34" height="10" aria-hidden="true"><path class="qr-edge qr-edge-contains" d="M1 5H27" marker-end="url(#qr-arrow-contains)"/></svg>contains / is part of</span><span><svg width="34" height="10" aria-hidden="true"><path class="qr-edge qr-edge-consumes" d="M1 5H27" marker-end="url(#qr-arrow-consumes)"/></svg>consumes</span><span><svg width="34" height="10" aria-hidden="true"><path class="qr-edge qr-edge-confused" d="M1 5H27" marker-end="url(#qr-arrow-confused)"/></svg>is often confused with</span><span><svg width="34" height="10" aria-hidden="true"><path class="qr-edge qr-edge-implements" d="M1 5H27" marker-end="url(#qr-arrow-implements)"/></svg>implements / hosts</span><span class="qr-key-note">25 relations, every one declared on a node page</span></div>
+  </div>
+  <div class="qr-foot">
+      <section>
+        <h3>Read the dashed green lines first</h3>
+        <p><b><span class="qr-n qr-k-artifact" data-node="model"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h7.5L19 9v11.5H6V3.5Zm7.5 0V9H19"/></svg><a href="../nodes/model/">Model ↔ harness</a></span></b> — The confusions are the point of the guide. Nearly every wrong claim about “the AI” is one of these two mistaken for the other.</p>
+      </section>
+      <section>
+        <h3>The arrows are directional</h3>
+        <p><b><span class="qr-n qr-k-component" data-node="harness"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5h17v10h-17zM9 7.5v10"/></svg><a href="../nodes/harness/">Consumes</a></span></b> — A harness consumes an inference API, not the reverse. Which way the verb runs is usually the whole disagreement.</p>
+      </section>
+      <section>
+        <h3>Nothing here is drawn by hand</h3>
+        <p><b><span class="qr-n qr-k-component" data-node="agent"><svg class="qr-i" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 7.5h17v10h-17zM9 7.5v10"/></svg><a href="../nodes/agent/">Declared once</a></span></b> — Each relation is written on one page and the inverse derived, so the two sides can never disagree — and deleting one deletes this line.</p>
+      </section>
+  </div>
+  <p class="qr-take">A vocabulary is not a list. These terms are worth learning as a shape, because almost every question about “the AI” turns out to be a question about which arrow you are standing on.</p>
+</div>

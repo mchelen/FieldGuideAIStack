@@ -22,19 +22,25 @@
  * "900px of 900px" while a grid overflowed its flex parent and painted straight
  * over the footer. It needs a per-element sweep of bottom edges.
  */
-import { writeFile, readdir, mkdir } from 'node:fs/promises';
-import { buildFragment, idsIn, WIDTH, HEIGHT } from './lib/quick-reference-view.mjs';
+import { writeFile, mkdir } from 'node:fs/promises';
+import { buildFragment, idsIn, kindsFor, WIDTH, HEIGHT } from './lib/quick-reference-view.mjs';
 import { CARDS } from './lib/quick-reference-cards.mjs';
+import { loadNodes, buildEdges } from './lib/nodes.mjs';
 
 const PUBLIC = new URL('../public/', import.meta.url).pathname;
 const GEN = new URL('../src/generated/', import.meta.url).pathname;
-const NODES = new URL('../src/content/nodes/', import.meta.url).pathname;
 
 // ---- drift check ----------------------------------------------------------
 
-const nodeIds = new Set(
-  (await readdir(NODES)).filter((f) => f.endsWith('.md')).map((f) => f.replace(/\.md$/, '')),
-);
+const nodes = await loadNodes();
+const nodeIds = new Set(nodes.map((n) => n.id));
+// Each concept's kind comes from its own tags, so a retagged page reclassifies
+// itself on the next run rather than a card asserting something the guide does
+// not say.
+const kinds = kindsFor(nodes);
+// The map card draws the graph rather than an illustration of it, so it needs
+// the same edges the site builds -- authored plus derived inverses.
+const edges = buildEdges(nodes);
 let broken = 0;
 for (const card of CARDS) {
   const missing = idsIn(card).filter((id) => !nodeIds.has(id));
@@ -53,7 +59,7 @@ if (dupes.length) {
   process.exit(1);
 }
 
-const fragments = new Map(CARDS.map((card) => [card.slug, buildFragment(card)]));
+const fragments = new Map(CARDS.map((card) => [card.slug, buildFragment(card, kinds, edges)]));
 
 // ---- raster and vector ----------------------------------------------------
 // Social cards and chat clients will not render an HTML fragment, so the PNG is
@@ -108,13 +114,24 @@ for (const card of CARDS) {
       .map((n, i) => [n, bands[i + 1]])
       .filter(([a, b]) => a.getBoundingClientRect().bottom > b.getBoundingClientRect().top + 0.5)
       .map(([a, b]) => `${cls(a)} over ${cls(b)}`);
-    return { content: el.scrollHeight, frame: el.clientHeight, over: [...new Set(over)], collisions };
+    // Map chips are fixed-size boxes with text in them, so the one thing the
+    // grid cannot absorb is a label too long for its chip. SVG text does not
+    // wrap and does not overflow visibly enough to notice, so measure it.
+    const clipped = [...el.querySelectorAll('.qr-map [data-node]')].flatMap((chip) => {
+      const box = chip.querySelector('rect');
+      const room = box.width.baseVal.value - 52;
+      return [...chip.querySelectorAll('text')]
+        .filter((t) => t.getComputedTextLength() > room)
+        .map((t) => `${chip.dataset.node}: "${t.textContent}" needs ${Math.ceil(t.getComputedTextLength())}px of ${Math.floor(room)}px`);
+    });
+    return { content: el.scrollHeight, frame: el.clientHeight, over: [...new Set(over)], collisions, clipped };
   });
-  if (fit.content > fit.frame + 1 || fit.over.length || fit.collisions.length) {
+  if (fit.content > fit.frame + 1 || fit.over.length || fit.collisions.length || fit.clipped.length) {
     overflowing.push(
       `${card.slug}: content is ${fit.content}px in a ${fit.frame}px frame` +
         (fit.over.length ? `; past the bottom edge: ${fit.over.slice(0, 6).join(', ')}` : '') +
-        (fit.collisions.length ? `; overlapping: ${fit.collisions.join(', ')}` : ''),
+        (fit.collisions.length ? `; overlapping: ${fit.collisions.join(', ')}` : '') +
+        (fit.clipped.length ? `; label too long — ${fit.clipped.join('; ')}` : ''),
     );
     continue;
   }

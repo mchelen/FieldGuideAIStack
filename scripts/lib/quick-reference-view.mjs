@@ -42,6 +42,66 @@ export const TINT = {
   dark: ['#241a12', '#2a1f15', '#302519', '#362a1d'],
 };
 
+
+/**
+ * Icons that classify, because the site's icon rule is "nothing decorative: an
+ * icon that repeats what the adjacent word already says costs scanning effort
+ * and buys nothing." So these do not illustrate each concept -- they say what
+ * *kind* of thing it is, which the label does not, and which the reader acts
+ * on: a component you can point at behaves differently from a technique you
+ * apply, a failure, or a control.
+ *
+ * The kind is derived from the node's own tags rather than assigned here, so a
+ * retagged page reclassifies itself and a card cannot quietly disagree with the
+ * guide. Stroke-only and currentColor, like the rest of the site's set.
+ */
+export const ICON_KINDS = {
+  component: { label: 'Component', d: 'M3.5 7.5h17v10h-17zM9 7.5v10' },
+  process: { label: 'Process', d: 'M20 12a8 8 0 1 1-2.6-5.9M20 4v4h-4' },
+  technique: { label: 'Technique', d: 'M4 7h16M4 12h16M4 17h16M9 4.5v5M16 9.5v5M7 14.5v5' },
+  control: { label: 'Control', d: 'M12 3.2 4.5 6v6.2c0 4.3 3.1 7.4 7.5 8.6 4.4-1.2 7.5-4.3 7.5-8.6V6L12 3.2Z' },
+  failure: { label: 'Failure', d: 'M12 4 2.8 20h18.4L12 4Zm0 5.5v5m0 3h.01' },
+  measure: { label: 'Measure', d: 'M12 20.5a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17Zm0-4.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0-3.4h.01' },
+  ceiling: { label: 'Ceiling', d: 'M3.5 5h17M12 20V9m0-1.5L8 12m4-4.5 4 4.5' },
+  artifact: { label: 'Artifact', d: 'M6 3.5h7.5L19 9v11.5H6V3.5Zm7.5 0V9H19' },
+  store: { label: 'Store', d: 'M12 7.5c4.1 0 7.5-1 7.5-2.2S16.1 3 12 3 4.5 4 4.5 5.3 7.9 7.5 12 7.5Zm7.5-2.2v13.4c0 1.2-3.4 2.3-7.5 2.3s-7.5-1-7.5-2.3V5.3m15 6.7c0 1.2-3.4 2.2-7.5 2.2s-7.5-1-7.5-2.2' },
+  who: { label: 'Who', d: 'M12 11.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4.5 20.5c0-3.6 3.4-6 7.5-6s7.5 2.4 7.5 6' },
+  concept: { label: 'Concept', d: 'M12 6.5C10.5 5.2 8.6 4.5 6 4.5H3.5v13H6c2.6 0 4.5.7 6 2 1.5-1.3 3.4-2 6-2h2.5v-13H18c-2.6 0-4.5.7-6 2Zm0 0v14' },
+};
+
+/**
+ * Tag to kind, first match wins. The order is the whole design: a page tagged
+ * both `evaluation` and `safety` is a way of measuring, not a control, and one
+ * tagged both `safety` and `risk` is the failure rather than the guard against
+ * it. Change the order and every card reclassifies, which is the point.
+ */
+const KIND_BY_TAG = [
+  ['risk', 'failure'],
+  ['evaluation', 'measure'],
+  ['constraint', 'ceiling'],
+  ['artifact', 'artifact'],
+  ['structure', 'store'],
+  ['technique', 'technique'],
+  ['safety', 'control'],
+  ['org', 'who'],
+  ['orgs', 'who'],
+  ['agentic', 'process'],
+  ['runtime', 'component'],
+  ['infrastructure', 'component'],
+  ['interface', 'component'],
+  ['capability', 'component'],
+  ['product-anatomy', 'component'],
+];
+
+export function kindOf(tags = []) {
+  for (const [tag, kind] of KIND_BY_TAG) if (tags.includes(tag)) return kind;
+  return 'concept';
+}
+
+const icon = (kind, size) =>
+  `<svg class="qr-i" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" ` +
+  `stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ICON_KINDS[kind].d}"/></svg>`;
+
 export const WIDTH = 1600;
 export const HEIGHT = 900;
 
@@ -49,12 +109,18 @@ const esc = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 /**
- * Boxes link to the page behind them. Relative, because this fragment is
- * written by a node script that has no idea what Astro's base path is, and
- * /quick-reference/ and /nodes/<id>/ are siblings under it either way.
+ * A concept, wearing its kind, linking to the page behind it. The href is
+ * relative because this fragment is written by a node script that has no idea
+ * what Astro's base path is, and /quick-reference/ and /nodes/<id>/ are
+ * siblings under it either way.
+ *
+ * `data-node` is the hook the generator's checks measure against -- it is how a
+ * chip's label is found and tested against the box it has to fit in.
  */
-const link = (id, label, cls) =>
-  `<a class="${cls}" href="../nodes/${esc(id)}/">${esc(label)}</a>`;
+const nodeLink = (id, label, { size = 15, kinds } = {}) => {
+  const kind = kinds.get(id) ?? 'concept';
+  return `<span class="qr-n qr-k-${kind}" data-node="${esc(id)}">${icon(kind, size)}<a href="../nodes/${esc(id)}/">${esc(label)}</a></span>`;
+};
 
 const rampVars = (mode) =>
   RAMP[mode]
@@ -125,6 +191,38 @@ ${rampVars('light')}
 }
 
 .qr h2, .qr h3, .qr h4, .qr p { margin: 0; }
+
+/* ---- concepts wear their kind ---- */
+.qr-n { display: inline-flex; align-items: center; gap: 6px; }
+/* The uppercase tracking on these two would otherwise pull the label back into
+   the glyph, since letter-spacing lands before the first character too. */
+.qr-agent .qr-n { gap: 8px; }
+.qr-legend span { letter-spacing: 0.09em; }
+.qr-n .qr-i { flex: none; color: var(--qr-kind); }
+/* One hue per kind would be ten categorical colours on one page, which no
+   palette survives. The icon shape carries the kind; colour marks only the two
+   the reader sorts by first, and both are status roles rather than series
+   colours -- so they ship with a shape and a legend label, never hue alone.
+   The red is the reserved status step, fixed in both themes by design.
+   (No backticks in this block -- the whole stylesheet is a template literal.) */
+.qr-k-failure { --qr-kind: #d03b3b; }
+.qr-k-control, .qr-k-measure { --qr-kind: var(--qr-mark); }
+.qr-k-component, .qr-k-process, .qr-k-technique, .qr-k-artifact,
+.qr-k-store, .qr-k-ceiling, .qr-k-who, .qr-k-concept { --qr-kind: var(--qr-faint); }
+
+.qr-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: -7px 0 9px;
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--qr-faint);
+}
+.qr-legend span { display: inline-flex; align-items: center; gap: 4px; }
+.qr-legend .qr-i { color: var(--qr-kind); }
 .qr a { color: inherit; text-decoration: none; }
 .qr a:hover { text-decoration: underline; text-decoration-color: var(--qr-accent); text-underline-offset: 3px; }
 
@@ -336,19 +434,51 @@ ${rampVars('light')}
 .qr-fix b { color: var(--qr-accent); }
 .qr-pair p { margin-top: 4px; font-size: 12.5px; line-height: 1.42; color: var(--qr-soft); }
 .qr-also { margin-top: 7px; display: flex; flex-wrap: wrap; gap: 5px; }
-.qr-also a {
+/* The pill wraps the whole thing, icon included -- styling the anchor alone
+   left every icon floating outside its own chip. */
+.qr-also .qr-n {
   font-size: 10px;
   font-weight: 650;
   letter-spacing: 0.05em;
   color: var(--qr-faint);
   border: 1px solid var(--qr-rule);
   border-radius: 999px;
-  padding: 2px 8px;
+  padding: 2px 8px 2px 6px;
+  gap: 4px;
   white-space: nowrap;
 }
-.qr-fix .qr-also a { color: var(--qr-accent); border-color: color-mix(in oklab, var(--qr-accent) 34%, transparent); }
+.qr-fix .qr-also .qr-n { color: var(--qr-accent); border-color: color-mix(in oklab, var(--qr-accent) 34%, transparent); }
 /* The arrow is the claim: this control addresses that failure. */
 .qr-arrow { display: flex; align-items: center; justify-content: center; color: var(--qr-accent); font-size: 19px; font-weight: 700; }
+
+
+/* ---- map: the same concepts, drawn as the graph they actually form ---- */
+.qr-map { flex: 1 0 auto; position: relative; }
+/* Direct child only. The chips carry nested <svg> icons, and a descendant
+   selector stretched every one of them to the size of the whole diagram. */
+.qr-map > svg { display: block; width: 100%; height: auto; overflow: visible; }
+.qr-lane-head {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  fill: var(--qr-faint);
+}
+.qr-chip-box { fill: var(--qr-raised); stroke: var(--qr-rule); stroke-width: 1; }
+.qr-chip-rail { stroke-width: 3; stroke-linecap: round; }
+.qr-chip-name { font-size: 13.5px; font-weight: 650; fill: var(--qr-ink); }
+.qr-chip-note { font-size: 10.5px; fill: var(--qr-faint); }
+/* Relation families read by line, not by colour: four styles, one legend, and
+   the arrowhead says which way the verb runs. */
+.qr-edge { fill: none; stroke: var(--qr-rule-strong); stroke-width: 1.3; }
+.qr-edge-contains { stroke: var(--qr-accent); stroke-width: 1.6; }
+.qr-edge-consumes { stroke: var(--qr-rule-strong); }
+.qr-edge-confused { stroke: var(--qr-mark); stroke-dasharray: 4 4; }
+.qr-edge-implements { stroke: var(--qr-faint); stroke-dasharray: 1 4; stroke-linecap: round; }
+.qr-key { display: flex; flex-wrap: wrap; gap: 4px 18px; margin-top: 10px; font-size: 10.5px; color: var(--qr-soft); }
+.qr-key span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.qr-key-note { color: var(--qr-faint); }
+.qr-key svg { flex: none; }
 
 /* ---- footer ---- */
 .qr-foot { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 18px; }
@@ -380,11 +510,11 @@ ${rampVars('light')}
 }
 `;
 
-const rowHtml = (l, i) => `
+const rowHtml = (kinds) => (l, i) => `
       <section class="qr-layer qr-s${i + 1}">
         <div class="qr-top">
           <div>
-            <h4 class="qr-name"><span class="qr-num">${String(i + 1).padStart(2, '0')}</span>${link(l.id, l.name, 'qr-namelink')}</h4>
+            <h4 class="qr-name"><span class="qr-num">${String(i + 1).padStart(2, '0')}</span>${nodeLink(l.id, l.name, { size: 19, kinds })}</h4>
             <p class="qr-kicker">${esc(l.kicker)}</p>
           </div>
           <p class="qr-desc">${esc(l.body)}</p>
@@ -394,7 +524,7 @@ const rowHtml = (l, i) => `
             ? `
         <div class="qr-sub">${l.sub
           .map((sb) => `
-          <div><b>${link(sb.id, sb.t, 'qr-sublink')}</b><span>${esc(sb.d)}</span></div>`)
+          <div><b>${nodeLink(sb.id, sb.t, { size: 14, kinds })}</b><span>${esc(sb.d)}</span></div>`)
           .join('')}
         </div>`
             : ''
@@ -404,10 +534,10 @@ const rowHtml = (l, i) => `
 /** Grid rows are 1-based and `to` is inclusive, which is how the cards read. */
 const span = (a, b) => `style="grid-row:${Math.min(a, b)}/${Math.max(a, b) + 1}"`;
 
-const alsoHtml = (also) =>
+const alsoHtml = (also, kinds) =>
   also?.length
     ? `
-          <div class="qr-also">${also.map((a) => link(a.id, a.t, '')).join('')}</div>`
+          <div class="qr-also">${also.map((a) => nodeLink(a.id, a.t, { size: 12, kinds })).join('')}</div>`
     : '';
 
 /**
@@ -415,16 +545,16 @@ const alsoHtml = (also) =>
  * return arrow on the right. Read as depth on the stack card and as time on the
  * loop card -- the same layout, because in both the order is the content.
  */
-const stackBody = (card) => `
+const stackBody = (card, kinds) => `
   <div class="qr-body">${
     card.bracket
       ? `
     <aside class="qr-agent" ${span(card.bracket.from, card.bracket.to)}>
-      <strong>${link(card.bracket.id, card.bracket.label, '')}</strong>
+      <strong>${nodeLink(card.bracket.id, card.bracket.label, { size: 15, kinds })}</strong>
       <span>${esc(card.bracket.note)}</span>
     </aside>`
       : ''
-  }${card.rows.map(rowHtml).join('')}${
+  }${card.rows.map(rowHtml(kinds)).join('')}${
     card.loop
       ? `
     <aside class="qr-loop" ${span(card.loop.from, card.loop.to)}><b>${esc(card.loop.label)} · <em>${esc(card.loop.note)}</em></b></aside>`
@@ -433,38 +563,200 @@ const stackBody = (card) => `
   </div>`;
 
 /** `pairs`: a failure on the left, the control that addresses it on the right. */
-const pairsBody = (card) => `
+const pairsBody = (card, kinds) => `
   <div class="qr-pairs">
     <div class="qr-pairhead"><span>${esc(card.columns.left)}</span><span>${esc(card.columns.right)}</span></div>${card.rows
       .map(
         (r) => `
     <div class="qr-pair">
       <div class="qr-risk">
-        <b>${link(r.risk.id, r.risk.t, '')}</b>
-        <p>${esc(r.risk.d)}</p>${alsoHtml(r.risk.also)}
+        <b>${nodeLink(r.risk.id, r.risk.t, { size: 16, kinds })}</b>
+        <p>${esc(r.risk.d)}</p>${alsoHtml(r.risk.also, kinds)}
       </div>
       <div class="qr-arrow" aria-hidden="true">&#8594;</div>
       <div class="qr-fix">
-        <b>${link(r.control.id, r.control.t, '')}</b>
-        <p>${esc(r.control.d)}</p>${alsoHtml(r.control.also)}
+        <b>${nodeLink(r.control.id, r.control.t, { size: 16, kinds })}</b>
+        <p>${esc(r.control.d)}</p>${alsoHtml(r.control.also, kinds)}
       </div>
     </div>`,
       )
       .join('')}
   </div>`;
 
-const BODIES = { stack: stackBody, pairs: pairsBody };
 
-const footHtml = (col) => `
+/**
+ * `map`: the same vocabulary as a card like the stack one, drawn as the graph
+ * it actually forms. Every line is a relation declared in a node file -- not
+ * one drawn here -- so the card cannot claim a connection the guide does not
+ * make, and a relation deleted from a page disappears from the diagram.
+ *
+ * SVG with computed coordinates, which is the one place in this file that is
+ * honest arithmetic rather than a layout engine: a lane index and a slot index
+ * give a centre, and nothing depends on how text wrapped. What text *can* do is
+ * overflow its chip, so the generator measures the rendered labels and fails on
+ * one that does not fit.
+ */
+const MAP = {
+  top: 26, // room for the lane headings
+  chipW: 286,
+  chipH: 56,
+  gapY: 18,
+  laneGap: 84,
+  bus: 22, // where long-range edges run, clear of every chip
+};
+/** Which line style a verb gets. Grouped by what the relation does, not by name. */
+const EDGE_FAMILY = {
+  contains: 'contains',
+  'part-of': 'contains',
+  consumes: 'consumes',
+  'consumed-by': 'consumes',
+  'distinguished-from': 'confused',
+  implements: 'implements',
+  'implemented-by': 'implements',
+  'kind-of': 'contains',
+  'has-kind': 'contains',
+  hosts: 'implements',
+  'runs-on': 'implements',
+};
+const EDGE_KEY = [
+  ['contains', 'contains / is part of'],
+  ['consumes', 'consumes'],
+  ['confused', 'is often confused with'],
+  ['implements', 'implements / hosts'],
+];
+
+const mapBody = (card, kinds, edges) => {
+  const lanes = card.lanes;
+  const cols = lanes.length;
+  const laneW = (WIDTH - 108 - MAP.laneGap * (cols - 1)) / cols;
+  const rows = Math.max(...lanes.map((l) => l.items.length));
+  const height = MAP.top + rows * MAP.chipH + (rows - 1) * MAP.gapY;
+
+  // Centre of every chip, by lane and slot. Everything else derives from this.
+  const at = new Map();
+  lanes.forEach((lane, li) => {
+    const x = li * (laneW + MAP.laneGap) + laneW / 2;
+    const span = lane.items.length * MAP.chipH + (lane.items.length - 1) * MAP.gapY;
+    const y0 = MAP.top + (height - MAP.top - span) / 2;
+    lane.items.forEach((it, si) => {
+      at.set(it.id, { x, y: y0 + si * (MAP.chipH + MAP.gapY) + MAP.chipH / 2, lane: li, item: it });
+    });
+  });
+
+  // Only edges whose both ends are on the card, and only as authored -- drawing
+  // the derived inverse as well would double every line.
+  const drawn = edges.filter((e) => !e.derived && at.has(e.from) && at.has(e.to));
+
+  // Three routes, picked by how far the edge reaches. The rule that matters is
+  // the third: a curve drawn straight between two lanes two apart passes
+  // through whatever chips sit in between, so those are sent under the diagram
+  // instead, on a stack of channels wide enough to stay clear of everything.
+  let longRange = 0;
+  const edge = (e) => {
+    const a = at.get(e.from);
+    const b = at.get(e.to);
+    const half = MAP.chipW / 2;
+    const family = EDGE_FAMILY[e.type] ?? 'consumes';
+    const path = (d) =>
+      `<path class="qr-edge qr-edge-${family}" d="${d}" marker-end="url(#qr-arrow-${family})"/>`;
+
+    if (a.lane === b.lane) {
+      // Bow into the lane's own gutter -- to the left for the last lane, which
+      // otherwise pushes the curve off the right edge of the card entirely.
+      const out = a.lane === cols - 1 ? -1 : 1;
+      const edgeX = a.x + out * half;
+      const side = edgeX + out * 32;
+      return path(`M${edgeX} ${a.y} C${side} ${a.y} ${side} ${b.y} ${b.x + out * half} ${b.y}`);
+    }
+    if (Math.abs(a.lane - b.lane) === 1) {
+      const fwd = a.x < b.x;
+      const x1 = fwd ? a.x + half : a.x - half;
+      const x2 = fwd ? b.x - half : b.x + half;
+      const mid = (x1 + x2) / 2;
+      return path(`M${x1} ${a.y} C${mid} ${a.y} ${mid} ${b.y} ${x2} ${b.y}`);
+    }
+    // Out through the side into the gutter, down it, across, and back in the
+    // same way. Leaving downward from the chip's own centre would cross every
+    // chip below it in its own lane, which is what the first version did.
+    const channel = height + MAP.bus + (longRange++ % 5) * 10;
+    const dir = Math.sign(b.x - a.x) || 1;
+    const gap = half + MAP.laneGap * 0.44;
+    const g1 = a.x + dir * gap;
+    const g2 = b.x - dir * gap;
+    const r = 9;
+    return path(
+      `M${a.x + dir * half} ${a.y}` +
+        ` H${g1 - dir * r} Q${g1} ${a.y} ${g1} ${a.y + r}` +
+        ` V${channel - r} Q${g1} ${channel} ${g1 + dir * r} ${channel}` +
+        ` H${g2 - dir * r} Q${g2} ${channel} ${g2} ${channel - r}` +
+        ` V${b.y + r} Q${g2} ${b.y} ${g2 - dir * r} ${b.y}` +
+        ` H${b.x - dir * half}`,
+    );
+  };
+
+  const chip = (id) => {
+    const { x, y, item } = at.get(id);
+    const kind = kinds.get(id) ?? 'concept';
+    const left = x - MAP.chipW / 2;
+    const top = y - MAP.chipH / 2;
+    return (
+      `<a href="../nodes/${esc(id)}/" data-node="${esc(id)}">` +
+      `<rect class="qr-chip-box" x="${left}" y="${top}" width="${MAP.chipW}" height="${MAP.chipH}" rx="9"/>` +
+      `<line class="qr-chip-rail qr-k-${kind}" x1="${left + 1.5}" y1="${top + 9}" x2="${left + 1.5}" y2="${top + MAP.chipH - 9}" stroke="var(--qr-kind)"/>` +
+      `<g class="qr-k-${kind}" transform="translate(${left + 14} ${y - 8}) scale(0.68)" style="color:var(--qr-kind)">${icon(kind, 24)}</g>` +
+      `<text class="qr-chip-name" x="${left + 40}" y="${item.note ? y - 3 : y + 5}">${esc(item.t)}</text>` +
+      (item.note ? `<text class="qr-chip-note" x="${left + 40}" y="${y + 12}">${esc(item.note)}</text>` : '') +
+      `</a>`
+    );
+  };
+
+  const marker = (family) =>
+    `<marker id="qr-arrow-${family}" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">` +
+    `<path d="M0 1.5 9 5 0 8.5Z" class="qr-edge-${family}" stroke="none" fill="context-stroke"/></marker>`;
+
+  // Edges are laid out first so the channel count is known before the viewBox
+  // is sized -- otherwise the last channel is drawn outside the picture.
+  const edgeHtml = drawn.map(edge).join('');
+  const full = height + MAP.bus + Math.min(longRange, 5) * 9 + 10;
+
+  return `
+  <div class="qr-map">
+    <svg viewBox="0 0 ${WIDTH - 108} ${full}" height="${full}" role="presentation">
+      <defs>${EDGE_KEY.map(([f]) => marker(f)).join('')}</defs>
+      ${lanes
+        .map((lane, li) => `<text class="qr-lane-head" x="${li * (laneW + MAP.laneGap) + laneW / 2 - MAP.chipW / 2}" y="12">${esc(lane.head)}</text>`)
+        .join('')}
+      <g>${edgeHtml}</g>
+      <g>${[...at.keys()].map(chip).join('')}</g>
+    </svg>
+    <div class="qr-key">${EDGE_KEY.map(
+      ([f, label]) =>
+        `<span><svg width="34" height="10" aria-hidden="true"><path class="qr-edge qr-edge-${f}" d="M1 5H27" marker-end="url(#qr-arrow-${f})"/></svg>${esc(label)}</span>`,
+    ).join('')}<span class="qr-key-note">${drawn.length} relations, every one declared on a node page</span></div>
+  </div>`;
+};
+
+const BODIES = { stack: stackBody, pairs: pairsBody, map: mapBody };
+
+const footHtml = (kinds) => (col) => `
       <section>
         <h3>${esc(col.head)}</h3>${col.items
           .map((it) => `
-        <p><b>${link(it.id, it.t, 'qr-footlink')}</b> — ${esc(it.d)}</p>`)
+        <p><b>${nodeLink(it.id, it.t, { size: 14, kinds })}</b> — ${esc(it.d)}</p>`)
           .join('')}
       </section>`;
 
 /** Every node id a card names, for the generator's drift check. */
+/** id -> kind, from the node files. Deterministic, so fragments stay byte-stable. */
+export const kindsFor = (nodes) => new Map(nodes.map((n) => [n.id, kindOf(n.data?.tags)]));
+
 export function idsIn(card) {
+  if (card.kind === 'map') {
+    return [
+      ...card.lanes.flatMap((l) => l.items.map((i) => i.id)),
+      ...card.footer.flatMap((f) => f.items.map((i) => i.id)),
+    ];
+  }
   const rows =
     card.kind === 'pairs'
       ? card.rows.flatMap((r) => [r.risk, r.control].flatMap((c) => [c.id, ...(c.also ?? []).map((a) => a.id)]))
@@ -477,10 +769,28 @@ export function idsIn(card) {
   ];
 }
 
+/**
+ * The legend, built from the kinds this card actually uses. Icons that classify
+ * are only worth their space if the classification is readable, and a shared
+ * image has to explain itself -- nobody who sees it on a timeline can click
+ * through to find out what a shield means.
+ */
+const legendHtml = (card, kinds) => {
+  const used = [...new Set(idsIn(card).map((id) => kinds.get(id) ?? 'concept'))];
+  const order = Object.keys(ICON_KINDS);
+  used.sort((a, b) => order.indexOf(a) - order.indexOf(b));
+  return `
+  <div class="qr-legend">${used
+    .map((k) => `<span class="qr-k-${k}">${icon(k, 13)}${esc(ICON_KINDS[k].label)}</span>`)
+    .join('')}</div>`;
+};
+
 /** The fragment for one card: one <style> and one .qr root, all scoped under it. */
-export function buildFragment(card) {
+export function buildFragment(card, kinds, edges = []) {
   const body = BODIES[card.kind];
   if (!body) throw new Error(`card ${card.slug}: unknown kind ${card.kind}`);
+  if (!kinds) throw new Error(`card ${card.slug}: no kind index — pass kindsFor(nodes)`);
+  if (card.kind === 'map' && !edges.length) throw new Error(`card ${card.slug}: a map needs the graph — pass buildEdges(nodes)`);
   return `<style>${CSS}</style>
 <div class="qr" role="img" aria-label="${esc(card.title)}. ${esc(card.sub)}">
   <header class="qr-head">
@@ -493,8 +803,8 @@ export function buildFragment(card) {
       <span>mchelen.github.io/FieldGuideAIStack</span>
     </div>
   </header>
-  <div class="qr-rule"></div>${body(card)}
-  <div class="qr-foot">${card.footer.map(footHtml).join('')}
+  <div class="qr-rule"></div>${legendHtml(card, kinds)}${body(card, kinds, edges)}
+  <div class="qr-foot">${card.footer.map(footHtml(kinds)).join('')}
   </div>
   <p class="qr-take">${esc(card.takeaway)}</p>
 </div>

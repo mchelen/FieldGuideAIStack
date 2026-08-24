@@ -169,6 +169,10 @@ any new development work.
     right. Read as depth on the stack card and as time on the loop card; use it
     wherever the order *is* the content.
   - `pairs` — a mapping, two labelled columns with an arrow between.
+  - `map` — a node-link diagram. Lanes of chips, and **the edges are the graph**:
+    every line is an authored relation between two concepts the card places, so
+    a card cannot claim a connection the guide does not make, and deleting a
+    relation from a page deletes the line. A card declares lanes, never edges.
   Slugs are filenames, so the first card keeps the bare `quick-reference` name:
   that PNG is the site's Open Graph card and may already be linked elsewhere.
 - **Do not hand-compute layout.** This was an SVG assembled by adding
@@ -189,6 +193,8 @@ any new development work.
     so it is clear how much to trim.
   - a sibling sweep — catches a band painted over by the block above it, which
     is *inside* the frame and so invisible to both of the above.
+  - a label-fit sweep on `map` chips — SVG text does not wrap and overflows too
+    quietly to notice, so each label is measured against the box it sits in.
   Overflow is also a CSS bug worth fixing at the source: `flex: 1 1 auto` with
   `min-height: 0` lets a body collapse silently. Use `flex: 1 0 auto`.
   **Still rasterise and look at every card** — the gate sees overflow, not
@@ -200,6 +206,25 @@ any new development work.
   labelled categories, so position and heading carry the split and colour only
   reinforces it. Text always wears the ink tokens; colour is carried by rails
   and pills, so nothing depends on reading it.
+- **Icons classify; they do not illustrate.** The site's icon rule is that an
+  icon repeating the adjacent word buys nothing, so these say what *kind* of
+  thing a concept is — component, process, technique, control, failure, measure,
+  ceiling, artifact, store, who — which the label does not. The kind is derived
+  from each node's own tags by an ordered table in the view, so a retagged page
+  reclassifies itself and a card cannot disagree with the guide. Change the
+  order and everything reclassifies: that is the design, not a hazard. Only two
+  kinds carry colour, both status roles rather than series colours, and both
+  ship with a shape and a legend label.
+- Two traps in the view file specifically, each of which shipped a visible bug:
+  - **No backticks in the stylesheet's comments.** `CSS` is a template literal,
+    so a backtick inside one is a syntax error at import time.
+  - **Scope selectors to direct children.** `.qr-map svg` also matched the icon
+    SVGs nested inside every chip and stretched each one to the size of the
+    whole diagram.
+- `scripts/lib/nodes.mjs` mirrors `RELATION_TYPES` from `src/content.config.ts`,
+  because the validators deliberately run without booting Astro. `npm run
+  validate` compares the two and fails if they diverge — a copy is only safe
+  when something checks it.
 - `npm run check:output` asserts, per card, that both images shipped and are not
   truncated, and that the committed fragment still matches what the generator
   produces — otherwise the page and the shared images could describe different
