@@ -54,6 +54,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      In a language model, the atomic unit that the model is training on and making predictions on.
   - id: bpe-paper
     url: https://arxiv.org/abs/1508.07909
     title: Neural Machine Translation of Rare Words with Subword Units — Sennrich, Haddow and Birch

@@ -59,6 +59,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      The weights and biases that a model learns during training.
   - id: hf-mistral
     url: https://huggingface.co/mistralai/Mistral-7B-v0.1
     title: mistralai/Mistral-7B-v0.1 — Hugging Face

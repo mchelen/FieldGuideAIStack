@@ -49,6 +49,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      A cycle that an agent iterates through until a termination condition is met.
   - id: anthropic-agents
     url: https://www.anthropic.com/engineering/building-effective-agents
     title: Building effective agents — Anthropic

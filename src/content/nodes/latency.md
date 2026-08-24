@@ -55,6 +55,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      The time it takes for a model to process input and generate a response.
   - id: aws-what-is
     url: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html
     title: What is Amazon Bedrock? — AWS documentation

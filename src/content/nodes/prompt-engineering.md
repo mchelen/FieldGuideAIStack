@@ -57,6 +57,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      The art of creating prompts that elicit the desired responses from a large language model.
   - id: anthropic-prompting
     url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
     title: Prompting best practices — Claude Platform documentation

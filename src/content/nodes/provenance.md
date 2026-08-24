@@ -57,6 +57,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      Data detailing how a piece of digital media content was created or changed.
 ---
 
 Google's glossary keeps it to one line: provenance is "data detailing how a

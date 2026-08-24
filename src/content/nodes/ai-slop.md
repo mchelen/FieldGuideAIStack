@@ -57,6 +57,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      Output from a generative AI system that favors quantity over quality.
   - id: synthetic-survey
     url: https://arxiv.org/abs/2404.07503
     title: Best Practices and Lessons Learned on Synthetic Data — Liu et al.

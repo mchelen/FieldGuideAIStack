@@ -55,6 +55,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      Any software or process that prevents harm to humans or systems.
   - id: owasp-agentic-top
     url: https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/
     title: OWASP Top 10 for Agentic Applications 2026 — OWASP GenAI Security Project

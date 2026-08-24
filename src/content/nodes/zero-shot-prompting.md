@@ -45,6 +45,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      A prompt that does not provide an example of how you want the large language model to respond.
   - id: promptguide-zeroshot
     url: https://www.promptingguide.ai/techniques/zeroshot
     title: Zero-Shot Prompting — Prompt Engineering Guide

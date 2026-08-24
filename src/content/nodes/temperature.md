@@ -48,6 +48,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      A hyperparameter that controls the degree of randomness of a model's output.
   - id: hf-generation
     url: https://huggingface.co/docs/transformers/en/main_classes/text_generation
     title: Generation — Hugging Face Transformers documentation

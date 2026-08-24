@@ -51,6 +51,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      A model whose inputs, outputs, or both include more than one modality.
   - id: google-gemini-app
     url: https://gemini.google/overview/
     title: Gemini app overview — Google

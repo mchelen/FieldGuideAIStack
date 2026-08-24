@@ -54,6 +54,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      An agent that works towards a complex goal by planning, acting, and adapting without continuous human intervention.
   - id: anthropic-agents
     url: https://www.anthropic.com/engineering/building-effective-agents
     title: Building effective agents — Anthropic

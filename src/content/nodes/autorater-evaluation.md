@@ -53,6 +53,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      A hybrid mechanism for judging the quality of a generative AI model's output that combines human evaluation with automatic evaluation.
   - id: judge-paper
     url: https://arxiv.org/abs/2306.05685
     title: Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena — Zheng et al.

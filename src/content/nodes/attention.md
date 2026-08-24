@@ -58,6 +58,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      A mechanism used in a neural network that indicates the importance of a particular word or part of a word.
   - id: hf-transformers
     url: https://huggingface.co/docs/transformers/en/index
     title: Transformers — Hugging Face documentation

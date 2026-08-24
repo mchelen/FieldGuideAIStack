@@ -49,6 +49,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      The process of reducing the size of one model (known as the teacher ) into a smaller model (known as the student ) that emulates the original model's predictions as faithfully as possible.
   - id: hinton-distillation
     url: https://arxiv.org/abs/1503.02531
     title: Distilling the Knowledge in a Neural Network — Hinton, Vinyals and Dean

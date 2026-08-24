@@ -58,6 +58,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      A prompt engineering technique that encourages a large language model (LLM) to explain its reasoning, step by step.
   - id: promptguide-cot
     url: https://www.promptingguide.ai/techniques/cot
     title: Chain-of-Thought Prompting — Prompt Engineering Guide
