@@ -231,6 +231,25 @@ any new development work.
   diagrams with CI green. It also asserts every card's title appears on the
   page, so a card silently dropped from the gallery is caught.
 
+## Small-width layout
+- `npm run check:layout` loads every page type at 320, 390, 430 and 768px and
+  fails if the document scrolls sideways. **It needs a browser**, which CI does
+  not have, so it skips cleanly there — run it yourself after any change to
+  layout CSS.
+- Horizontal overflow is the failure this site kept shipping: invisible on a
+  laptop, invisible in the diff, and every other check green. Three causes were
+  live at once when the check was written — a nav that did not wrap, a grid
+  track sized `1fr` (whose min-width is `auto`, so one long chip widened the
+  whole card), and `white-space: nowrap` on a chip carrying a forty-character
+  term.
+- So: size flexible grid tracks `minmax(0, 1fr)`, put `min-width: 0` on a nested
+  grid or flex child, and do not set `nowrap` on anything holding a concept
+  name — the names run to forty characters.
+- The signal is the **document's** `scrollWidth`, never an element's width. A
+  wide element inside a scrolling wrapper is correct, and reporting it buries
+  the real findings; the check skips anything with a scrolling or clipping
+  ancestor for exactly this reason.
+
 ## Cross-linking
 - Link the first mention of any term that has its own page, and only the first.
   An unlinked mention is a dead end for a reader who does not already know the
