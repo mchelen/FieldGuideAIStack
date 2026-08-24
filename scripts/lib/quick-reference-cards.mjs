@@ -110,10 +110,6 @@ const loop = {
       kicker: 'the harness builds the request',
       tag: 'from scratch, every pass',
       body: 'System prompt, conversation so far, every tool definition, anything retrieved — sent whole, because the API kept nothing from last time.',
-      sub: [
-        { id: 'system-prompt', t: 'System prompt', d: 'Standing instructions the user never sees. Most of what makes two products differ.' },
-        { id: 'short-term-memory', t: 'The conversation', d: 'There is nowhere else for it to live. “Remembering” means it is still in the window.' },
-      ],
     },
     {
       id: 'model',
@@ -150,20 +146,19 @@ const loop = {
     {
       head: 'What decides how far it goes',
       items: [
-        { id: 'autonomy-level', t: 'Autonomy level', d: 'Set per action class, not per product — usually free on reads, gated on writes, forbidden on a short list.' },
+        { id: 'autonomy-level', t: 'Autonomy level', d: 'Set per action class, not per product: free on reads, gated on writes, forbidden on a short list.' },
       ],
     },
     {
       head: 'When the run gets long',
       items: [
-        { id: 'compaction', t: 'Compaction', d: 'Older turns swapped for a summary so the run keeps fitting. Lossy on purpose: what mattered only in the original wording is gone.' },
+        { id: 'compaction', t: 'Compaction', d: 'Older turns swapped for a summary so the run keeps fitting. Lossy on purpose — the original wording is gone.' },
       ],
     },
     {
       head: 'What outlives it',
       items: [
-        { id: 'session', t: 'Session', d: 'One run, and everything scoped to it. A new session is a new window.' },
-        { id: 'long-term-memory', t: 'Long-term memory', d: 'Files the harness writes and reads back. Not a faculty of the model.' },
+        { id: 'long-term-memory', t: 'Long-term memory', d: 'A session ends and takes its window with it. What survives is files the harness writes and reads back — not a faculty of the model.' },
       ],
     },
   ],
@@ -338,4 +333,73 @@ const risks = {
     'Every control here sits outside the model. A rule in the system prompt is advice; a rule in the harness is a mechanism; a rule in the sandbox holds even if the other two are talked around.',
 };
 
-export const CARDS = [stack, loop, context, risks];
+
+/** Card 5 — the same vocabulary as card 1, drawn as the graph it forms. */
+const map = {
+  slug: 'quick-reference-map',
+  kind: 'map',
+  title: 'What is connected to what',
+  sub: 'The stack card’s vocabulary, drawn as relations rather than layers. Every line is declared on a node page.',
+  lanes: [
+    {
+      head: 'Where you are',
+      items: [
+        { id: 'surface', t: 'Surface', note: 'the window you typed in' },
+        { id: 'agent', t: 'Agent', note: 'the whole assembly' },
+        { id: 'agentic-loop', t: 'Agentic loop', note: 'what makes it an agent' },
+      ],
+    },
+    {
+      head: 'The program around it',
+      items: [
+        { id: 'harness', t: 'Harness', note: 'where the product lives' },
+        { id: 'prompt-engineering', t: 'Prompt engineering' },
+        { id: 'context-engineering', t: 'Context engineering' },
+        { id: 'retrieval-augmented-generation', t: 'Retrieval (RAG)' },
+        { id: 'tool-use', t: 'Tool use' },
+        { id: 'approval-mode', t: 'Approval mode' },
+      ],
+    },
+    {
+      head: 'The call, and who serves it',
+      items: [
+        { id: 'inference-api', t: 'Inference API', note: 'stateless HTTP' },
+        { id: 'model-provider', t: 'Model provider', note: 'trains it' },
+        { id: 'model-host', t: 'Model host', note: 'runs someone else’s' },
+      ],
+    },
+    {
+      head: 'The trained artifact',
+      items: [
+        { id: 'model', t: 'Model', note: 'weights, not a service' },
+        { id: 'context-window', t: 'Context window' },
+        { id: 'token', t: 'Token' },
+        { id: 'hallucination', t: 'Hallucination' },
+      ],
+    },
+  ],
+  footer: [
+    {
+      head: 'Read the dashed green lines first',
+      items: [
+        { id: 'model', t: 'Model ↔ harness', d: 'The confusions are the point of the guide. Nearly every wrong claim about “the AI” is one of these two mistaken for the other.' },
+      ],
+    },
+    {
+      head: 'The arrows are directional',
+      items: [
+        { id: 'harness', t: 'Consumes', d: 'A harness consumes an inference API, not the reverse. Which way the verb runs is usually the whole disagreement.' },
+      ],
+    },
+    {
+      head: 'Nothing here is drawn by hand',
+      items: [
+        { id: 'agent', t: 'Declared once', d: 'Each relation is written on one page and the inverse derived, so the two sides can never disagree — and deleting one deletes this line.' },
+      ],
+    },
+  ],
+  takeaway:
+    'A vocabulary is not a list. These terms are worth learning as a shape, because almost every question about “the AI” turns out to be a question about which arrow you are standing on.',
+};
+
+export const CARDS = [stack, loop, context, risks, map];

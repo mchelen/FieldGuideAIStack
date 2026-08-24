@@ -28,6 +28,50 @@ export async function loadNodes() {
   );
 }
 
+/**
+ * The relation verbs, mirrored from src/content.config.ts. Duplicated rather
+ * than imported because the validators deliberately run without booting Astro
+ * or TypeScript; `npm run validate` fails if the two ever disagree.
+ */
+export const RELATION_TYPES = {
+  'part-of': { label: 'is part of', inverse: 'contains' },
+  contains: { label: 'contains', inverse: 'part-of' },
+  'distinguished-from': { label: 'is often confused with', inverse: 'distinguished-from' },
+  consumes: { label: 'consumes', inverse: 'consumed-by' },
+  'consumed-by': { label: 'is consumed by', inverse: 'consumes' },
+  implements: { label: 'implements', inverse: 'implemented-by' },
+  'implemented-by': { label: 'is implemented by', inverse: 'implements' },
+  'kind-of': { label: 'is a kind of', inverse: 'has-kind' },
+  'has-kind': { label: 'has kind', inverse: 'kind-of' },
+  'runs-on': { label: 'runs on', inverse: 'hosts' },
+  hosts: { label: 'hosts', inverse: 'runs-on' },
+  bundles: { label: 'bundles', inverse: 'bundled-by' },
+  'bundled-by': { label: 'is bundled by', inverse: 'bundles' },
+  'variant-of': { label: 'is a variant of', inverse: 'has-variant' },
+  'has-variant': { label: 'has variant', inverse: 'variant-of' },
+};
+
+/**
+ * Every edge in the graph, authored and derived. An author declares an edge
+ * once, from whichever side reads more naturally; the inverse is generated
+ * here so the two can never disagree. Mirrors src/lib/graph.ts, for the same
+ * reason RELATION_TYPES is mirrored above.
+ */
+export function buildEdges(nodes) {
+  const edges = new Map();
+  for (const n of nodes) {
+    for (const rel of n.data?.relations ?? []) {
+      const fwd = { from: n.id, to: rel.target, type: rel.type, label: RELATION_TYPES[rel.type].label, derived: false };
+      edges.set(`${fwd.from}|${fwd.type}|${fwd.to}`, fwd);
+      const inv = RELATION_TYPES[rel.type].inverse;
+      const rev = { from: rel.target, to: n.id, type: inv, label: RELATION_TYPES[inv].label, derived: true };
+      const key = `${rev.from}|${rev.type}|${rev.to}`;
+      if (!edges.has(key)) edges.set(key, rev);
+    }
+  }
+  return [...edges.values()];
+}
+
 /** Every source and example URL in the graph, tagged with where it came from. */
 export function citations(nodes) {
   const out = [];

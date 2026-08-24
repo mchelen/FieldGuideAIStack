@@ -16,8 +16,9 @@ import { readdir, readFile, stat } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { buildFragment } from './lib/quick-reference-view.mjs';
+import { buildFragment, kindsFor } from './lib/quick-reference-view.mjs';
 import { CARDS } from './lib/quick-reference-cards.mjs';
+import { loadNodes, buildEdges } from './lib/nodes.mjs';
 
 const DIST = new URL('../dist/', import.meta.url).pathname;
 const GEN = new URL('../src/generated/', import.meta.url).pathname;
@@ -155,6 +156,9 @@ if (linkedUnmarked === 0 && linked > 0) {
 // import. Driven off CARDS, so adding a card extends the check automatically
 // rather than leaving the new one unasserted.
 let qrStale = 0;
+const qrNodes = await loadNodes();
+const qrKinds = kindsFor(qrNodes);
+const qrEdges = buildEdges(qrNodes);
 for (const card of CARDS) {
   for (const ext of ['png', 'pdf']) {
     const p = join(DIST, `${card.slug}.${ext}`);
@@ -173,7 +177,7 @@ for (const card of CARDS) {
   if (!existsSync(p)) {
     problems.push(`src/generated/${card.slug}.html missing — run \`npm run quick-ref\``);
     qrStale += 1;
-  } else if ((await readFile(p, 'utf8')) !== buildFragment(card)) {
+  } else if ((await readFile(p, 'utf8')) !== buildFragment(card, qrKinds, qrEdges)) {
     problems.push(`src/generated/${card.slug}.html is stale — run \`npm run quick-ref\` and commit the result`);
     qrStale += 1;
   }

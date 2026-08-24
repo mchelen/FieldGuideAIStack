@@ -8,7 +8,7 @@
  */
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { loadNodes, report } from './lib/nodes.mjs';
+import { loadNodes, report, RELATION_TYPES } from './lib/nodes.mjs';
 
 const SCENARIOS_DIR = new URL('../src/content/scenarios/', import.meta.url).pathname;
 const ORG_FILE = new URL('../src/data/organisation.yml', import.meta.url).pathname;
@@ -417,4 +417,29 @@ console.log(
   `Checked ${nodes.length} nodes and ${scenarioFiles.length} scenarios ` +
     `(${conceptsSeen.size} concepts seen in the field).`,
 );
+// The validators run without booting Astro, so scripts/lib/nodes.mjs keeps its
+// own copy of the relation table. A copy is only safe if something checks it:
+// a verb added to the schema and not here would silently stop being drawn.
+{
+  const config = await readFile(new URL('../src/content.config.ts', import.meta.url), 'utf8');
+  const block = /export const RELATION_TYPES = \{([\s\S]*?)\n\} as const;/.exec(config);
+  if (!block) {
+    problems.push('could not find RELATION_TYPES in src/content.config.ts — the mirror in scripts/lib/nodes.mjs is now unchecked');
+  } else {
+    const declared = {};
+    for (const m of block[1].matchAll(/^\s*'?([\w-]+)'?: \{ label: '([^']*)', inverse: '([\w-]+)' \},/gm)) {
+      declared[m[1]] = { label: m[2], inverse: m[3] };
+    }
+    const shape = (t) => Object.keys(t).sort().map((k) => `${k}=${t[k].label}>${t[k].inverse}`).join('|');
+    if (shape(declared) !== shape(RELATION_TYPES)) {
+      const a = new Set(Object.keys(declared));
+      const b = new Set(Object.keys(RELATION_TYPES));
+      const only = [...[...a].filter((k) => !b.has(k)).map((k) => `${k} only in the schema`),
+                    ...[...b].filter((k) => !a.has(k)).map((k) => `${k} only in the mirror`),
+                    ...[...a].filter((k) => b.has(k) && shape({ [k]: declared[k] }) !== shape({ [k]: RELATION_TYPES[k] })).map((k) => `${k} differs`)];
+      problems.push(`RELATION_TYPES in scripts/lib/nodes.mjs no longer matches src/content.config.ts: ${only.join(', ')}`);
+    }
+  }
+}
+
 process.exit(report('graph integrity', problems, warnings) ? 0 : 1);
