@@ -307,6 +307,10 @@ const derived = relations.filter((r) => r.derived);
               <li id={`src-${s.id}`}>
                 <a href={s.url}>{s.title}</a>
                 <span class="when"> — read {fmt(s.verifiedOn)}</span>
+                {/* The sentence the claim rests on, so a reader can judge it
+                    without leaving the page — and the same text the weekly job
+                    re-fetches to decide whether the date can still stand. */}
+                {s.quote && <blockquote class="src-quote">{s.quote}</blockquote>}
                 {s.note && <div class="caveat">{s.note}</div>}
               </li>
             ))}

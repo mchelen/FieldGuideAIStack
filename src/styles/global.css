@@ -460,3 +460,12 @@ ol.sources li:target { background: var(--accent-soft); border-radius: 5px; }
 }
 
 .scenario-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2.5rem; padding-top: 1.2rem; border-top: 1px solid var(--rule); font-size: 0.93rem; }
+
+/* The quoted sentence under a source: evidence, not decoration. */
+.src-quote {
+  margin: 0.35rem 0 0;
+  padding-left: 0.7rem;
+  border-left: 2px solid var(--rule-strong);
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}

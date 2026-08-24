@@ -1,15 +1,23 @@
 name: Verify sources
 
 # Content rot is a background process, so checking is too. Runs weekly and on
-# demand; opens a single issue listing everything that needs a human.
+# demand.
+#
+# It does the verifiable part rather than only reporting it: every citation
+# that stored the sentence it was citing gets its page re-read, and where the
+# sentence is still there the date is bumped in a pull request. Everything else
+# — a source with no quote, a page that moved, a sentence that is gone — is
+# listed for a human, because a date bumped without re-reading the page is the
+# failure this whole mechanism exists to prevent.
 on:
   schedule:
     - cron: '17 6 * * 1'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   issues: write
+  pull-requests: write
 
 jobs:
   verify:
@@ -42,8 +50,56 @@ jobs:
             echo REPORT
           } >> "$GITHUB_OUTPUT"
 
+      - name: Draft the re-verifiable part
+        id: draft
+        continue-on-error: true
+        run: |
+          {
+            echo 'report<<REPORT'
+            npm run --silent draft:freshness -- --max-age 180 --write 2>&1
+            echo REPORT
+          } >> "$GITHUB_OUTPUT"
+          # tr, because wc pads its output on some platforms and the step
+          # condition compares against the string '0'.
+          echo "changed=$(git status --porcelain src/content/nodes | wc -l | tr -d ' ')" >> "$GITHUB_OUTPUT"
+
+      - name: Open a pull request for what was re-verified
+        if: steps.draft.outputs.changed != '0'
+        uses: actions/github-script@v9
+        env:
+          DRAFT: ${{ steps.draft.outputs.report }}
+        with:
+          script: |
+            const { execSync } = require('node:child_process');
+            const stamp = new Date().toISOString().slice(0, 10);
+            const branch = `chore/reverified-sources-${stamp}`;
+            execSync(`git config user.name "github-actions[bot]"`);
+            execSync(`git config user.email "41898282+github-actions[bot]@users.noreply.github.com"`);
+            execSync(`git checkout -b ${branch}`);
+            execSync(`git add src/content/nodes`);
+            execSync(`git commit -m "Re-verify sources whose quoted text is still on the page"`);
+            execSync(`git push -u origin ${branch}`);
+            const body = [
+              'Each date moved here was moved because the job re-fetched the page and found',
+              'the sentence stored in that source still on it. Nothing else was touched —',
+              'the drafter refuses to write a change that is not a `verifiedOn` date.',
+              '',
+              'Everything it could not confirm is listed below and still needs a human.',
+              '',
+              '```', process.env.DRAFT ?? '(no output)', '```',
+            ].join('\n');
+            await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Re-verified sources (${stamp})`,
+              head: branch,
+              base: context.payload.repository.default_branch,
+              body,
+            });
+
       - name: Open issue when something needs a human
         if: steps.links.outcome == 'failure' || steps.freshness.outcome == 'failure'
+        continue-on-error: true
         uses: actions/github-script@v9
         env:
           LINKS: ${{ steps.links.outputs.report }}
@@ -58,6 +114,10 @@ jobs:
               '',
               'Re-read each URL, update the claim if it changed, and bump `verifiedOn`.',
               'Never bump a date without reopening the page.',
+              '',
+              'Anything with a stored `quote` that still matched has already been drafted',
+              'into a pull request. Adding a quote to a source is what makes it',
+              're-verifiable next time, so prefer that over only bumping the date.',
             ].join('\n');
             const title = `Source check: citations need re-verification (${new Date().toISOString().slice(0, 10)})`;
             await github.rest.issues.create({

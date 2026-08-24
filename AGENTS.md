@@ -261,6 +261,29 @@ any new development work.
   the real findings; the check skips anything with a scrolling or clipping
   ancestor for exactly this reason.
 
+## Source freshness
+- **Never bump `verifiedOn` without reopening the page.** That rule is why the
+  weekly job cannot simply refresh dates: a URL returning 200 is not evidence
+  the claim survived.
+- A source may carry a **`quote`** — the sentence on the page the claim rests
+  on, copied verbatim. It is the only thing that makes a citation
+  machine-re-verifiable, and it is rendered under the source so a reader can
+  judge the claim without leaving the page. Copy it; never paraphrase, and never
+  tidy it, or it will stop matching a page that did not change. Sentences
+  containing `": "` need a block scalar like any other.
+- `npm run draft:freshness` re-fetches every aged-out citation and, with
+  `--write`, bumps only those whose quote is still on the page. Everything else
+  is reported with the reason: no quote, unreachable, or the sentence is gone.
+- The drafter is deliberately narrow: **it only ever moves a date, and it proves
+  it did.** After writing it re-reads the file and every differing line must be
+  a `verifiedOn` it meant to change; anything else and the file is restored and
+  the run fails. Keep that guard if you extend the script.
+- Adding a quote to a source is worth more than bumping its date, because it
+  makes that source re-verifiable for good. Prefer it when re-reading a page.
+- The weekly workflow opens a pull request for what it confirmed and an issue
+  for what it could not. It lives in `.github/workflows/`, which is code-owned:
+  a change to it needs the owner's approval and must not auto-merge.
+
 ## Cross-linking
 - Link the first mention of any term that has its own page, and only the first.
   An unlinked mention is a dead end for a reader who does not already know the

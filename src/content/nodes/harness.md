@@ -58,6 +58,8 @@ sources:
     url: https://code.claude.com/docs/en/overview
     title: Claude Code overview — Anthropic
     verifiedOn: 2026-08-22
+    quote: >-
+      Claude Code runs on several surfaces: the terminal, IDE extensions, a desktop app, and the web.
   - id: openai-openai-codex
     url: https://learn.chatgpt.com/docs
     title: OpenAI Codex documentation
