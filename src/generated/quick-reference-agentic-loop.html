@@ -106,8 +106,9 @@
    (No backticks in this block -- the whole stylesheet is a template literal.) */
 .qr-k-failure { --qr-kind: #d03b3b; }
 .qr-k-control, .qr-k-measure { --qr-kind: var(--qr-mark); }
-.qr-k-component, .qr-k-process, .qr-k-technique, .qr-k-artifact,
-.qr-k-store, .qr-k-ceiling, .qr-k-who, .qr-k-concept { --qr-kind: var(--qr-faint); }
+.qr-k-component, .qr-k-process, .qr-k-technique, .qr-k-artifact, .qr-k-store,
+.qr-k-ceiling, .qr-k-who, .qr-k-cost, .qr-k-terms,
+.qr-k-concept { --qr-kind: var(--qr-faint); }
 
 .qr-legend {
   display: flex;
@@ -203,7 +204,7 @@
 .qr-s3 { --qr-step: var(--qr-l3); --qr-tint: var(--qr-t3); }
 .qr-s4 { --qr-step: var(--qr-l4); --qr-tint: var(--qr-t4); }
 
-.qr-top { display: grid; grid-template-columns: 232px minmax(0, 1fr) auto; gap: 20px; align-items: start; }
+.qr-top { display: grid; grid-template-columns: 248px minmax(0, 1fr) auto; gap: 20px; align-items: start; }
 .qr-name {
   display: flex;
   align-items: baseline;

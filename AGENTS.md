@@ -168,7 +168,9 @@ any new development work.
   - `stack` — ordered rows, optional bracket on the left and return arrow on the
     right. Read as depth on the stack card and as time on the loop card; use it
     wherever the order *is* the content.
-  - `pairs` — a mapping, two labelled columns with an arrow between.
+  - `pairs` — a mapping, two labelled columns with an arrow between. The column
+    headings are the card's, so it fits "failure → control" and "the claim →
+    what to ask about it" equally.
   - `map` — a node-link diagram. Lanes of chips, and **the edges are the graph**:
     every line is an authored relation between two concepts the card places, so
     a card cannot claim a connection the guide does not make, and deleting a
@@ -215,6 +217,15 @@ any new development work.
   order and everything reclassifies: that is the design, not a hazard. Only two
   kinds carry colour, both status roles rather than series colours, and both
   ship with a shape and a legend label.
+- **A card drawn from one area of the guide gets no icons at all**, and no
+  legend. Every concept on the evaluation card classifies as a measure, so the
+  glyphs would distinguish nothing — which is the decoration the icon rule
+  exists to keep out. The generator counts the kinds a card uses and decides;
+  do not force them back on.
+- A row whose name is a grouping rather than a concept takes **no `id`**. It
+  renders as plain text with no icon and no link, and the concepts sit in the
+  boxes beneath it. Giving such a row the id of whichever concept came first —
+  "The levers" linking to prompt caching — is a small lie the reader catches.
 - Two traps in the view file specifically, each of which shipped a visible bug:
   - **No backticks in the stylesheet's comments.** `CSS` is a template literal,
     so a backtick inside one is a syntax error at import time.
