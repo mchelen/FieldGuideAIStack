@@ -1,0 +1,204 @@
+---
+/**
+ * Lookup, which is what the charter asks this site to be.
+ *
+ * "You may see a bird in the wild and want to check the field guide to
+ * understand what you saw." That is a lookup, and until now the only way to
+ * perform one was to scroll the index or open the graph.
+ *
+ * Two decisions worth keeping:
+ *
+ * It searches `aka`, not just titles. Someone who read "scaffolding" in a
+ * release note needs to land on Harness; a title-only search answers "no such
+ * thing" to precisely the question the guide exists to answer. When a match
+ * comes from an alternate name the result says so, because otherwise the reader
+ * cannot tell why an unrelated-looking title appeared.
+ *
+ * It is hidden until the script runs. A search box that does nothing is worse
+ * than no search box, and this site is static — without JavaScript there is
+ * nothing behind it.
+ */
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<div class="site-search" hidden data-base={base}>
+  <input
+    type="search"
+    id="site-q"
+    role="combobox"
+    aria-expanded="false"
+    aria-controls="site-results"
+    aria-autocomplete="list"
+    aria-label="Search the field guide"
+    placeholder="Search terms…"
+    autocomplete="off"
+    spellcheck="false"
+  />
+  <kbd class="search-hint">/</kbd>
+  <ul id="site-results" role="listbox" aria-label="Search results" hidden></ul>
+</div>
+
+<script>
+  interface Entry {
+    title: string;
+    summary: string;
+    kind: string;
+    vendor: string | null;
+    aka: string[];
+    tags: string[];
+  }
+
+  const root = document.querySelector<HTMLElement>('.site-search');
+  const input = document.getElementById('site-q') as HTMLInputElement | null;
+  const list = document.getElementById('site-results') as HTMLUListElement | null;
+  if (root && input && list) {
+    const base = root.dataset.base ?? '';
+    root.hidden = false;
+
+    let index: [string, Entry][] | null = null;
+    let pending: Promise<void> | null = null;
+    const load = () => {
+      pending ||= fetch(`${base}/nodes-index.json`)
+        .then((r) => r.json())
+        .then((d: Record<string, Entry>) => {
+          index = Object.entries(d);
+        })
+        .catch(() => {
+          // A failed index is not worth an error message in the header; the
+          // rest of the site still works and the reader can use the index page.
+          index = [];
+        });
+      return pending;
+    };
+
+    const norm = (s: string) => s.toLowerCase().trim();
+
+    /**
+     * Ranked, not filtered. An exact title has to beat a summary mention, or
+     * searching "model" buries the Model page under everything that mentions
+     * one.
+     */
+    const score = (q: string, e: Entry) => {
+      const t = norm(e.title);
+      if (t === q) return { s: 0, why: '' };
+      if (t.startsWith(q)) return { s: 1, why: '' };
+      for (const a of e.aka) {
+        const n = norm(a);
+        if (n === q) return { s: 2, why: a };
+        if (n.startsWith(q)) return { s: 3, why: a };
+      }
+      if (t.includes(q)) return { s: 4, why: '' };
+      for (const a of e.aka) if (norm(a).includes(q)) return { s: 5, why: a };
+      if (e.tags.some((x) => norm(x) === q)) return { s: 6, why: '' };
+      if (norm(e.summary).includes(q)) return { s: 7, why: '' };
+      return null;
+    };
+
+    let results: { id: string; e: Entry; why: string }[] = [];
+    let active = -1;
+
+    const render = () => {
+      list.innerHTML = '';
+      if (!results.length) {
+        list.hidden = true;
+        input.setAttribute('aria-expanded', 'false');
+        return;
+      }
+      results.forEach((r, i) => {
+        const li = document.createElement('li');
+        li.role = 'option';
+        li.id = `site-result-${i}`;
+        li.setAttribute('aria-selected', String(i === active));
+        li.className = i === active ? 'is-active' : '';
+        const a = document.createElement('a');
+        a.href = `${base}/nodes/${r.id}/`;
+        a.innerHTML = '';
+        const title = document.createElement('span');
+        title.className = 'r-title';
+        title.textContent = r.e.title;
+        a.append(title);
+        if (r.why) {
+          const why = document.createElement('span');
+          why.className = 'r-why';
+          why.textContent = `also called “${r.why}”`;
+          a.append(why);
+        } else {
+          const sum = document.createElement('span');
+          sum.className = 'r-sum';
+          sum.textContent = r.e.summary;
+          a.append(sum);
+        }
+        li.append(a);
+        list.append(li);
+      });
+      list.hidden = false;
+      input.setAttribute('aria-expanded', 'true');
+      input.setAttribute(
+        'aria-activedescendant',
+        active >= 0 ? `site-result-${active}` : '',
+      );
+    };
+
+    const search = async () => {
+      const q = norm(input.value);
+      if (q.length < 2) {
+        results = [];
+        active = -1;
+        render();
+        return;
+      }
+      await load();
+      results = (index ?? [])
+        .map(([id, e]) => {
+          const m = score(q, e);
+          return m ? { id, e, why: m.why, s: m.s } : null;
+        })
+        .filter((x): x is { id: string; e: Entry; why: string; s: number } => x !== null)
+        .sort((a, b) => a.s - b.s || a.e.title.localeCompare(b.e.title))
+        .slice(0, 8);
+      active = results.length ? 0 : -1;
+      render();
+    };
+
+    const close = () => {
+      results = [];
+      active = -1;
+      render();
+    };
+
+    input.addEventListener('input', search);
+    input.addEventListener('focus', load);
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        close();
+        input.blur();
+        return;
+      }
+      if (!results.length) return;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        active = (active + (e.key === 'ArrowDown' ? 1 : -1) + results.length) % results.length;
+        render();
+      } else if (e.key === 'Enter' && active >= 0) {
+        e.preventDefault();
+        window.location.href = `${base}/nodes/${results[active].id}/`;
+      }
+    });
+    document.addEventListener('click', (e) => {
+      if (!root.contains(e.target as Node)) close();
+    });
+    // "/" is the convention for jump-to-search, but not while someone is typing
+    // somewhere else.
+    document.addEventListener('keydown', (e) => {
+      const el = document.activeElement;
+      const typing =
+        el instanceof HTMLInputElement ||
+        el instanceof HTMLTextAreaElement ||
+        (el as HTMLElement | null)?.isContentEditable;
+      if (e.key === '/' && !typing) {
+        e.preventDefault();
+        input.focus();
+      }
+    });
+  }
+</script>

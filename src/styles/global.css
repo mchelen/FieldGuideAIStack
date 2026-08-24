@@ -535,3 +535,74 @@ ol.sources li:target { background: var(--accent-soft); border-radius: 5px; }
   color: var(--ink-soft);
   font-size: 0.9rem;
 }
+
+/* ---- search ---- */
+/* Explicitly, because [hidden]'s display:none comes from the UA stylesheet and
+   loses to any class rule that sets a display -- the bug the zoom control
+   shipped with. */
+.site-search[hidden] { display: none; }
+.site-search { position: relative; flex: 0 1 20rem; min-width: 11rem; }
+.site-search input {
+  width: 100%;
+  font: inherit;
+  font-size: 0.92rem;
+  padding: 0.34rem 2rem 0.34rem 0.7rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-appearance: none;
+  appearance: none;
+}
+.site-search input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.site-search input::-webkit-search-cancel-button { -webkit-appearance: none; }
+.search-hint {
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 0 0.3rem;
+  pointer-events: none;
+}
+.site-search input:focus ~ .search-hint { display: none; }
+#site-results[hidden] { display: none; }
+#site-results {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  left: 0;
+  z-index: 20;
+  margin: 0;
+  padding: 0.3rem;
+  list-style: none;
+  background: var(--bg-raised);
+  border: 1px solid var(--rule-strong);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px -12px rgba(60, 40, 18, 0.35);
+  max-height: 70vh;
+  overflow-y: auto;
+}
+#site-results li { border-radius: 7px; }
+#site-results li.is-active { background: var(--accent-soft); }
+#site-results a {
+  display: block;
+  padding: 0.42rem 0.6rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+#site-results .r-title { display: block; font-weight: 620; font-size: 0.94rem; }
+#site-results .r-sum,
+#site-results .r-why {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#site-results .r-why { color: var(--accent); }

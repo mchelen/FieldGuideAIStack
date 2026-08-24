@@ -116,6 +116,44 @@ const problems = [];
   }
   await page.close();
 }
+// Search, exercised the way a reader uses it: type, and see what comes back.
+//
+// The case that matters is the alias one. The charter's whole framing is that
+// you saw a word in the wild and want its page, and the words people meet are
+// often not the titles here -- so a search that indexes titles alone answers
+// "no such thing" to the question the guide exists to answer.
+{
+  const page = await browser.newPage({ viewport: { width: 1200, height: 900 } });
+  const res = await page.goto(`${origin}/`, { waitUntil: 'load' }).catch(() => null);
+  if (!res || res.status() >= 400) {
+    problems.push('index did not load — the search check could not run');
+  } else if (!(await page.locator('.site-search').isVisible())) {
+    problems.push('search box did not appear (its script did not run)');
+  } else {
+    // term typed -> page it must find. Two aliases, one title, one miss.
+    const CASES = [
+      ['scaffolding', 'Harness'],
+      ['agent framework', 'Harness'],
+      ['context window', 'Context Window'],
+      ['zzzznotaterm', null],
+    ];
+    for (const [term, expected] of CASES) {
+      await page.fill('#site-q', '');
+      await page.type('#site-q', term, { delay: 5 });
+      await page.waitForTimeout(250);
+      const top = await page.evaluate(
+        () => document.querySelector('#site-results li .r-title')?.textContent ?? null,
+      );
+      if (top !== expected) {
+        problems.push(
+          `search: "${term}" returned ${top ? `"${top}"` : 'nothing'}, expected ${expected ? `"${expected}"` : 'nothing'}`,
+        );
+      }
+    }
+  }
+  await page.close();
+}
+
 for (const width of WIDTHS) {
   const page = await browser.newPage({ viewport: { width, height: 900 } });
   for (const path of PAGES) {

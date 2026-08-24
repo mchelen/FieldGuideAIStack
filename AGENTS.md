@@ -328,6 +328,25 @@ any new development work.
   for what it could not. It lives in `.github/workflows/`, which is code-owned:
   a change to it needs the owner's approval and must not auto-merge.
 
+## Search
+- The charter's framing is lookup — *"you may see a bird in the wild and want to
+  check the field guide"* — so search indexes **`aka`, not just titles**. The
+  words readers meet are often not the titles here: someone who read
+  "scaffolding" must land on Harness. A title-only search answers "no such
+  thing" to the exact question the guide exists to answer.
+- When a hit comes from an alternate name the result says which one. Without
+  that the reader cannot tell why an unrelated-looking title appeared.
+- The box is `hidden` in the markup and revealed by its own script, because the
+  site is static and a search box that does nothing is worse than none. Note the
+  explicit `.site-search[hidden] { display: none }` — see the zoom-control note
+  above for why the attribute alone is not enough.
+- `nodes-index.json` is the one shared index: link previews and search both read
+  it, and it is fetched on first hover or first keystroke rather than inlined.
+- `npm run check:layout` types real queries into a real page and asserts what
+  comes back, including two alias lookups. **Type, do not `fill`.** A test that
+  set the value programmatically reported Enter-to-navigate as broken when it
+  works; testing the way a reader interacts is what made the behaviour legible.
+
 ## Cross-linking
 - Link the first mention of any term that has its own page, and only the first.
   An unlinked mention is a dead end for a reader who does not already know the
