@@ -6,6 +6,7 @@ import Icon from '../../components/Icon.astro';
 import PageNav from '../../components/PageNav.astro';
 import { loadGraph } from '../../lib/graph';
 import FictionMark from '../../components/FictionMark.astro';
+import Altitude from '../../components/Altitude.astro';
 import { scenariosByConcept } from '../../lib/fieldwork';
 
 export async function getStaticPaths() {
@@ -107,8 +108,9 @@ const derived = relations.filter((r) => r.derived);
       {entry.data.tags.map((t) => (
         <li><a class="chip" href={`${base}/#tag-${t}`}>{t}</a></li>
       ))}
-      <li><span class="chip">zoom {entry.data.zoom}</span></li>
     </ul>
+
+    <Altitude id={id} graph={graph} />
 
     {
       entry.data.canonical && (

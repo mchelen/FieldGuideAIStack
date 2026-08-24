@@ -460,3 +460,65 @@ ol.sources li:target { background: var(--accent-soft); border-radius: 5px; }
 }
 
 .scenario-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2.5rem; padding-top: 1.2rem; border-top: 1px solid var(--rule); font-size: 0.93rem; }
+
+/* ---- altitude: zoom in and out from a concept ---- */
+.altitude {
+  margin: 1.2rem 0 1.6rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--accent);
+  border-radius: 8px;
+  background: var(--bg-raised);
+}
+.altitude-here { margin: 0 0 0.55rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem; }
+.altitude-level {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.altitude-blurb { color: var(--ink-faint); font-size: 0.85rem; }
+.altitude-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  margin: 0 0 0.45rem;
+}
+.altitude-row:last-child { margin-bottom: 0; }
+.altitude-dir {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.76rem;
+  font-weight: 650;
+  color: var(--ink-soft);
+  min-width: 6.2rem;
+}
+
+/* ---- the zoom control on the index ---- */
+.zoom-control { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.9rem 0 0.6rem; }
+.zoom-control button {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  background: var(--bg-raised);
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  padding: 0.32rem 0.85rem;
+  cursor: pointer;
+}
+.zoom-control button:hover { border-color: var(--accent); color: var(--accent); }
+.zoom-control button[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 620;
+}
+.zoom-count { font-family: var(--font-mono); font-size: 0.76rem; color: var(--ink-faint); }
+.zoom-control button[aria-pressed='true'] .zoom-count { color: var(--accent); }
+.zoom-blurb { color: var(--ink-soft); margin: 0 0 0.2rem; }

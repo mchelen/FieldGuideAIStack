@@ -22,18 +22,32 @@ const byVendor = [...new Set(products.map((p) => p.vendor ?? '—'))]
       .sort((a, b) => a.title.localeCompare(b.title)),
   }));
 
-const byZoom = [1, 2, 3].map((z) => ({
-  zoom: z,
-  nodes: concepts
-    .filter((n) => n.zoom === z)
-    .sort((a, b) => b.degree - a.degree || a.title.localeCompare(b.title)),
-}));
+// One list, ordered so that raising the level appends rather than reshuffles:
+// a node declares the coarsest level it belongs at, so level 2 means "1 and 2",
+// which is what the graph explorer has always meant by it. The index used to
+// show the three as disjoint groups, so the two views disagreed about what
+// "zoom 2" was.
+const byZoom = concepts
+  .slice()
+  .sort((a, b) => a.zoom - b.zoom || b.degree - a.degree || a.title.localeCompare(b.title));
 
-const zoomBlurb: Record<number, string> = {
-  1: 'The handful of terms that everything else is defined against. Start here.',
-  2: 'The working vocabulary — what you need to read a release note without guessing.',
-  3: 'Detail you look up when you actually hit it.',
-};
+const LEVELS = [
+  {
+    zoom: 1,
+    label: 'Start here',
+    blurb: 'The terms everything else is defined against. If you read only one level, this one.',
+  },
+  {
+    zoom: 2,
+    label: 'Working vocabulary',
+    blurb: 'Enough to read a release note without guessing. The first level, plus what sits on it.',
+  },
+  {
+    zoom: 3,
+    label: 'Everything',
+    blurb: 'Detail you look up when you actually hit it. Every concept in the guide.',
+  },
+].map((l) => ({ ...l, count: concepts.filter((n) => n.zoom <= l.zoom).length }));
 ---
 
 <Base
@@ -97,28 +111,33 @@ const zoomBlurb: Record<number, string> = {
       }
     </section>
 
-    {
-      byZoom.map(
-        (group) =>
-          group.nodes.length > 0 && (
-            <section style="margin-top:2.6rem">
-              <h2 style="margin-bottom:0.2rem"><Icon name="concept" /> Zoom {group.zoom}</h2>
-              <p style="color:var(--ink-soft);margin:0">{zoomBlurb[group.zoom]}</p>
-              <ul class="cards">
-                {group.nodes.map((n) => (
-                  <li class="card">
-                    <a class="title" href={`${base}/nodes/${n.id}/`}>{n.title}</a>
-                    <p>{n.summary}</p>
-                    <ul class="chips" style="margin-top:auto;padding-top:0.4rem">
-                      {n.tags.map((t) => <li><span class="chip">{t}</span></li>)}
-                    </ul>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ),
-      )
-    }
+    <section style="margin-top:2.6rem" id="concepts">
+      <h2 style="margin-bottom:0.2rem"><Icon name="concept" /> The concepts</h2>
+      {/* Every card is rendered; the control hides the finer ones. Without
+          JavaScript you get all of them, which is the honest fallback for an
+          index — a filter that fails closed would hide most of the guide. */}
+      <div class="zoom-control" role="group" aria-label="Level of detail">
+        {LEVELS.map((l) => (
+          <button type="button" data-zoom={l.zoom} aria-pressed={l.zoom === 3 ? 'true' : 'false'}>
+            {l.label} <span class="zoom-count">{l.count}</span>
+          </button>
+        ))}
+      </div>
+      <p class="zoom-blurb" data-blurbs={JSON.stringify(LEVELS.map((l) => l.blurb))}>
+        {LEVELS[2].blurb}
+      </p>
+      <ul class="cards" id="concept-cards">
+        {byZoom.map((n) => (
+          <li class="card" data-zoom={n.zoom}>
+            <a class="title" href={`${base}/nodes/${n.id}/`}>{n.title}</a>
+            <p>{n.summary}</p>
+            <ul class="chips" style="margin-top:auto;padding-top:0.4rem">
+              {n.tags.map((t) => <li><span class="chip">{t}</span></li>)}
+            </ul>
+          </li>
+        ))}
+      </ul>
+    </section>
 
     <section style="margin-top:3rem">
       <h2><Icon name="naming" /> By tag</h2>
@@ -141,3 +160,38 @@ const zoomBlurb: Record<number, string> = {
     </section>
   </div>
 </Base>
+
+<script>
+  // Progressive enhancement: the page ships every card and shows them all, and
+  // this narrows to a level. Starting at 1 once JavaScript is present makes the
+  // front door the twenty-seven terms the rest are defined against.
+  const control = document.querySelector<HTMLElement>('.zoom-control');
+  const cards = [...document.querySelectorAll<HTMLElement>('#concept-cards > .card')];
+  const blurb = document.querySelector<HTMLElement>('.zoom-blurb');
+  if (control && cards.length && blurb) {
+    const blurbs = JSON.parse(blurb.dataset.blurbs ?? '[]') as string[];
+    const buttons = [...control.querySelectorAll<HTMLButtonElement>('button')];
+    const apply = (level: number) => {
+      for (const b of buttons) b.setAttribute('aria-pressed', String(Number(b.dataset.zoom) === level));
+      for (const c of cards) c.hidden = Number(c.dataset.zoom) > level;
+      blurb.textContent = blurbs[level - 1] ?? '';
+      try {
+        localStorage.setItem('fg-zoom', String(level));
+      } catch {
+        /* private mode, or storage disabled — the control still works */
+      }
+    };
+    control.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-zoom]');
+      if (b) apply(Number(b.dataset.zoom));
+    });
+    let start = 1;
+    try {
+      const saved = Number(localStorage.getItem('fg-zoom'));
+      if (saved >= 1 && saved <= 3) start = saved;
+    } catch {
+      /* fall back to the first level */
+    }
+    apply(start);
+  }
+</script>

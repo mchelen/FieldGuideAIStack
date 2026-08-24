@@ -195,6 +195,56 @@ if (!existsSync(qr)) {
   else if (!qrStale) ok(`quick reference: ${CARDS.length} cards in step with the generator, PNG and PDF each`);
 }
 
+// The zoom control is the charter's "zoom in and zoom out", so two things have
+// to hold on the built index: every concept card ships (the control hides, it
+// does not omit — without JavaScript the whole list must still be there), and
+// each button's count equals the number of cards at or below its level.
+//
+// That second one is the check that matters. The index used to group the three
+// levels disjointly while the graph explorer treated them cumulatively, so the
+// same word meant two different sets on two pages, and nothing noticed.
+const home = await readFile(join(DIST, 'index.html'), 'utf8');
+const cardZooms = [...home.matchAll(/<li class="card" data-zoom="(\d)"/g)].map((m) => Number(m[1]));
+const buttons = [...home.matchAll(/data-zoom="(\d)"[^>]*>([^<]*)<span class="zoom-count">(\d+)</g)];
+if (buttons.length !== 3) {
+  problems.push(`index: expected 3 zoom buttons, found ${buttons.length}`);
+} else if (cardZooms.length === 0) {
+  problems.push('index: zoom control shipped but no concept cards carry a level');
+} else {
+  const wrong = buttons
+    .map(([, level, , count]) => ({
+      level: Number(level),
+      claimed: Number(count),
+      actual: cardZooms.filter((z) => z <= Number(level)).length,
+    }))
+    .filter((b) => b.claimed !== b.actual);
+  if (wrong.length) {
+    problems.push(
+      `index: zoom counts disagree with the cards — ${wrong
+        .map((w) => `level ${w.level} says ${w.claimed}, ${w.actual} cards qualify`)
+        .join('; ')}`,
+    );
+  } else ok(`zoom control: 3 levels, counts match ${cardZooms.length} concept cards`);
+}
+
+// The altitude band on a concept page is derived from the relation graph, so a
+// dead link in it means the derivation is wrong rather than that someone typed
+// a bad href.
+let banded = 0;
+const deadAltitude = [];
+for (const id of ids) {
+  const html = await readFile(join(DIST, 'nodes', id, 'index.html'), 'utf8');
+  const band = /<nav class="altitude"[\s\S]*?<\/nav>/.exec(html);
+  if (!band) continue;
+  banded += 1;
+  for (const m of band[0].matchAll(/href="[^"]*\/nodes\/([a-z0-9-]+)\//g)) {
+    if (!existsSync(join(DIST, 'nodes', m[1], 'index.html'))) deadAltitude.push(`${id} → ${m[1]}`);
+  }
+}
+if (deadAltitude.length) problems.push(`altitude band links to missing pages: ${deadAltitude.slice(0, 5).join(', ')}`);
+else if (banded === 0) problems.push('no concept page carries an altitude band');
+else ok(`${banded} concept page(s) offer zoom in/out, all targets resolve`);
+
 const bundles = (await readdir(join(DIST, '_astro'))).filter((f) => f.endsWith('.js'));
 if (bundles.length === 0) problems.push('no client bundle emitted for the graph explorer');
 else ok(`${bundles.length} client bundle(s) emitted`);
