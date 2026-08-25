@@ -54,6 +54,8 @@ sources:
     url: https://code.claude.com/docs/en/glossary
     title: Glossary — Claude Code documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      A user-defined handler that executes automatically at a specific point in Claude Code’s lifecycle, such as before a tool runs, after a file edit, or at session start.
   - id: claude-code-hooks
     url: https://code.claude.com/docs/en/hooks
     title: Hooks reference — Claude Code documentation

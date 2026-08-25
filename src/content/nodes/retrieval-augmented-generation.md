@@ -58,6 +58,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      A technique for improving the quality of large language model (LLM) output by grounding it with sources of knowledge retrieved after the model was trained.
   - id: anthropic-contextual-retrieval
     url: https://www.anthropic.com/engineering/contextual-retrieval
     title: Introducing Contextual Retrieval — Anthropic

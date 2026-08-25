@@ -58,6 +58,8 @@ sources:
     url: https://code.claude.com/docs/en/glossary
     title: Glossary — Claude Code documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      How a session knows the work is actually done rather than just plausible.
   - id: anthropic-agents
     url: https://www.anthropic.com/engineering/building-effective-agents
     title: Building effective agents — Anthropic

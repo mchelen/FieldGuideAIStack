@@ -52,6 +52,8 @@ sources:
     url: https://code.claude.com/docs/en/glossary
     title: Glossary — Claude Code documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      A workflow where the AI can read files, run commands, and make changes autonomously while you watch, redirect, or step away, as opposed to chat-based assistants that only respond with text you must apply yourself.
 ---
 
 Agentic coding is "a workflow where the AI can read files, run commands, and

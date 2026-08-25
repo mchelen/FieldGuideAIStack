@@ -64,6 +64,8 @@ sources:
     url: https://code.claude.com/docs/en/glossary
     title: Glossary — Claude Code documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      A setting that controls how much of the adaptive-reasoning thinking budget Claude uses on each turn.
 ---
 
 "The effort parameter lets you control how many tokens Claude spends when

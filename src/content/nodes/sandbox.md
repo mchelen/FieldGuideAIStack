@@ -58,6 +58,8 @@ sources:
     url: https://code.claude.com/docs/en/glossary
     title: Glossary — Claude Code documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      OS-level filesystem and network isolation for the Bash tool.
   - id: anthropic-agents
     url: https://www.anthropic.com/engineering/building-effective-agents
     title: Building effective agents — Anthropic

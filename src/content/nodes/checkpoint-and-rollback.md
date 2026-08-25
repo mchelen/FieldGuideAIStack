@@ -55,6 +55,8 @@ sources:
     url: https://code.claude.com/docs/en/glossary
     title: Glossary — Claude Code documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      A restore point created at each prompt you send.
   - id: claude-code-checkpointing
     url: https://code.claude.com/docs/en/checkpointing
     title: Checkpointing — Claude Code documentation

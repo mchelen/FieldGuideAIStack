@@ -59,6 +59,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      In general, any ML system that converts from a raw, sparse, or external representation into a more processed, denser, or more internal representation.
   - id: attention-paper
     url: https://arxiv.org/abs/1706.03762
     title: Attention Is All You Need — Vaswani et al.
