@@ -479,6 +479,17 @@ ol.sources li:target { background: var(--accent-soft); border-radius: 5px; }
   color: var(--accent);
 }
 .altitude-blurb { color: var(--ink-faint); font-size: 0.85rem; }
+.altitude-evidence {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.9rem;
+  margin: -0.2rem 0 0.6rem;
+  font-size: 0.82rem;
+  color: var(--ink-faint);
+}
+/* No inserted separator: these wrap onto their own lines at narrow widths and
+   a leading "·" on the second line reads as a bullet that lost its list. */
+.altitude-evidence strong { color: var(--ink-soft); font-variant-numeric: tabular-nums; }
 .altitude-row {
   display: flex;
   flex-wrap: wrap;
@@ -522,6 +533,30 @@ ol.sources li:target { background: var(--accent-soft); border-radius: 5px; }
 .zoom-count { font-family: var(--font-mono); font-size: 0.76rem; color: var(--ink-faint); }
 .zoom-control button[aria-pressed='true'] .zoom-count { color: var(--accent); }
 .zoom-blurb { color: var(--ink-soft); margin: 0 0 0.2rem; }
+.zoom-control button { flex-direction: column; align-items: flex-start; gap: 0; padding: 0.3rem 0.9rem 0.34rem; }
+.zoom-for { font-size: 0.74rem; color: var(--ink-faint); font-weight: 400; }
+.zoom-control button[aria-pressed='true'] .zoom-for { color: var(--accent); }
+/* The ladder's rungs. Full width so the list reads as sections rather than as
+   one long grid that happens to get longer. */
+.level-rule {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 0.9rem 0 -0.2rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-faint);
+  font-size: 0.86rem;
+}
+.level-rule span {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.cards > .level-rule[hidden] { display: none; }
 /* The browser's own [hidden] rule is `display: none` from the UA stylesheet,
    which a class selector setting `display: flex` beats. Without this the zoom
    control set the attribute on 139 cards and hid none of them. */

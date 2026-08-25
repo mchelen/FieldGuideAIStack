@@ -16,7 +16,7 @@ canonical:
     an assistant that acts against a codebase, as opposed to one that returns
     text a person applies.
 tags: [agentic, core]
-zoom: 1
+zoom: 2
 summary: Using an agent to write, run and fix code rather than to suggest it —
   the distinction being whether the tool can act on the repository itself.
 fieldMark: The test is whether it can run the tests. A tool that writes code
