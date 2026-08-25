@@ -319,11 +319,26 @@ any new development work.
     leaves `"automatic evaluation ."`, so a quote copied as a human reads it
     would never match. Store the sentence as it reads; let the comparison
     absorb the artifact.
+- **A `quote` belongs only under `sources:`.** `canonical:` and each `examples:`
+  entry carry a `url` and a `verifiedOn` too, so anything editing frontmatter by
+  pattern will land in the wrong block. Both are now `.strict()`, so a stray key
+  is a build failure — before that Zod dropped it and 15 of 17 quotes were
+  written into canonical blocks with every check green.
 - A glossary cited by many pages is the cheapest coverage there is: each citing
   page quotes that glossary's definition of its own term, so one fetch backfills
   dozens. Read what you extract — of 36 candidates pulled this way, four were a
   truncated list item, an unrelated first sense, or a follow-on sentence rather
   than a definition, and were dropped rather than stored.
+- Check the anchor actually defines the citing page's subject. Several
+  candidates pointed at a neighbouring entry — time to first token at the
+  latency definition, citation precision at the classification-metric one — and
+  a plausible-looking quote for the wrong concept is worse than none.
+- Split sentences on punctuation followed by whitespace and a capital, never on
+  punctuation alone: `CLAUDE.md` and `SKILL.md` tore in half and produced quotes
+  beginning "md file containing...".
+- Strip the topic chips a glossary prefixes to each entry (`#fundamentals`,
+  `#generativeAI`); they flatten into the text and get stored as part of the
+  sentence.
 - The weekly workflow opens a pull request for what it confirmed and an issue
   for what it could not. It lives in `.github/workflows/`, which is code-owned:
   a change to it needs the owner's approval and must not auto-merge.

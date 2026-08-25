@@ -53,6 +53,8 @@ sources:
     url: https://code.claude.com/docs/en/glossary
     title: Glossary — Claude Code documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      A dialog accepting a directory before Claude Code loads its configuration.
   - id: claude-code-security
     url: https://code.claude.com/docs/en/security
     title: Security — Claude Code documentation

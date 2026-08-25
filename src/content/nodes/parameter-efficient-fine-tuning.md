@@ -54,6 +54,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      A set of techniques to fine-tune a large pre-trained language model (PLM) more efficiently than full fine-tuning.
   - id: lora-paper
     url: https://arxiv.org/abs/2106.09685
     title: "LoRA: Low-Rank Adaptation of Large Language Models — Hu et al."

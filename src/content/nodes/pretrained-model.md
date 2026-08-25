@@ -53,6 +53,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      Although this term could refer to any trained model or trained embedding vector, pre-trained model now typically refers to a trained large language model or other form of trained generative AI model.
   - id: hf-mistral
     url: https://huggingface.co/mistralai/Mistral-7B-v0.1
     title: mistralai/Mistral-7B-v0.1 — Hugging Face

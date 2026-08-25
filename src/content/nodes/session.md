@@ -55,6 +55,8 @@ sources:
     url: https://code.claude.com/docs/en/glossary
     title: Glossary — Claude Code documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      A conversation tied to your current directory, with its own independent context window.
 ---
 
 A session is "a conversation tied to your current directory, with its own

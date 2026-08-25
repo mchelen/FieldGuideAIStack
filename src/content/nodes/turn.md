@@ -54,6 +54,8 @@ sources:
     url: https://code.claude.com/docs/en/glossary
     title: Glossary — Claude Code documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      One complete response from Claude within a session.
 ---
 
 A turn is "one complete response from Claude within a

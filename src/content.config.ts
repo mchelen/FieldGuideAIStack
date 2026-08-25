@@ -104,15 +104,23 @@ const alias = z.union([
  *   contested  — vendors use different words for the same thing
  *   none       — no settled term; the guide is picking one
  */
-const canonical = z.object({
-  status: z.enum(['standard', 'de-facto', 'contested', 'none']),
-  term: z.string().optional(),
-  body: z.string().optional(),
-  note: z.string().optional(),
-  url: z.string().url().optional(),
-  title: z.string().optional(),
-  verifiedOn: z.coerce.date().optional(),
-});
+/**
+ * `.strict()` because this block carries a `url` and a `verifiedOn` just like a
+ * source does, so a key meant for a source lands here plausibly. Without it Zod
+ * drops the stray key and every check stays green -- which is exactly how a
+ * batch of `quote`s was silently written into canonical blocks and lost.
+ */
+const canonical = z
+  .object({
+    status: z.enum(['standard', 'de-facto', 'contested', 'none']),
+    term: z.string().optional(),
+    body: z.string().optional(),
+    note: z.string().optional(),
+    url: z.string().url().optional(),
+    title: z.string().optional(),
+    verifiedOn: z.coerce.date().optional(),
+  })
+  .strict();
 
 /** A concrete situation the concept shows up in. Generic for now. */
 const useCase = z.object({
@@ -163,13 +171,17 @@ const nodes = defineCollection({
       .default([]),
     examples: z
       .array(
-        z.object({
-          name: z.string().min(1),
-          vendor: z.string().optional(),
-          url: z.string().url(),
-          note: z.string().optional(),
-          verifiedOn: z.coerce.date(),
-        }),
+        // Strict for the same reason as `canonical` above: url + verifiedOn
+        // makes this look like a source to anything editing frontmatter.
+        z
+          .object({
+            name: z.string().min(1),
+            vendor: z.string().optional(),
+            url: z.string().url(),
+            note: z.string().optional(),
+            verifiedOn: z.coerce.date(),
+          })
+          .strict(),
       )
       .default([]),
     sources: z.array(source).default([]),

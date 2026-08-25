@@ -54,6 +54,8 @@ sources:
     url: https://code.claude.com/docs/en/glossary
     title: Glossary — Claude Code documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      A SKILL.md file containing instructions, knowledge, or a workflow that Claude adds to its toolkit.
   - id: claude-code-skills
     url: https://code.claude.com/docs/en/skills
     title: Skills — Claude Code documentation
