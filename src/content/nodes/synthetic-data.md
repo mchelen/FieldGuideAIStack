@@ -52,6 +52,8 @@ sources:
     url: https://arxiv.org/abs/2404.07503
     title: Best Practices and Lessons Learned on Synthetic Data — Liu et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      Synthetic data has emerged as a promising solution by generating artificial data that mimics real-world patterns.
     note: Submitted 11 April 2024, last revised 10 August 2024.
   - id: phi-paper
     url: https://arxiv.org/abs/2306.11644

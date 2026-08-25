@@ -52,6 +52,8 @@ sources:
     url: https://arxiv.org/abs/2305.14627
     title: Enabling Large Language Models to Generate Text with Citations — Gao et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      We develop automatic metrics along three dimensions -- fluency, correctness, and citation quality -- and demonstrate their strong correlation with human judgements.
     note: Submitted 24 May 2023, last revised 31 October 2023.
   - id: google-glossary
     url: https://developers.google.com/machine-learning/glossary

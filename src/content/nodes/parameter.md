@@ -72,6 +72,8 @@ sources:
     url: https://arxiv.org/abs/2005.14165
     title: Language Models are Few-Shot Learners — Brown et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      Specifically, we train GPT-3, an autoregressive language model with 175 billion parameters, 10x more than any previous non-sparse language model, and test its performance in the few-shot setting.
     note: Submitted 28 May 2020. The GPT-3 paper.
 ---
 

@@ -60,6 +60,8 @@ sources:
     url: https://arxiv.org/abs/1508.07909
     title: Neural Machine Translation of Rare Words with Subword Units — Sennrich, Haddow and Birch
     verifiedOn: 2026-08-22
+    quote: >-
+      In this paper, we introduce a simpler and more effective approach, making the NMT model capable of open-vocabulary translation by encoding rare and unknown words as sequences of subword units.
     note: >-
       Submitted 31 August 2015. The paper that put byte-pair encoding into
       neural language modelling; most tokenizers in use today are descendants.

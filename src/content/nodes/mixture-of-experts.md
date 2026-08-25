@@ -55,6 +55,8 @@ sources:
     url: https://arxiv.org/abs/1701.06538
     title: "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer — Shazeer et al."
     verifiedOn: 2026-08-22
+    quote: >-
+      We introduce a Sparsely-Gated Mixture-of-Experts layer (MoE), consisting of up to thousands of feed-forward sub-networks.
     note: Submitted 23 January 2017.
 ---
 

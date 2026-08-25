@@ -39,6 +39,8 @@ sources:
     url: https://claude.com/docs/cowork/overview
     title: Cowork overview — Anthropic
     verifiedOn: 2026-08-22
+    quote: >-
+      Sub-agent coordination — Complex work gets divided into smaller tasks with parallel workstreams for faster results.
   - id: anthropic-claude-code
     url: https://code.claude.com/docs/en/overview
     title: Claude Code overview — Anthropic

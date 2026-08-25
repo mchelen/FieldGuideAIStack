@@ -47,6 +47,8 @@ sources:
     url: https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture
     title: Architecture overview — Model Context Protocol
     verifiedOn: 2026-08-22
+    quote: >-
+      The MCP host accomplishes this by creating one MCP client for each MCP server.
 ---
 
 The specification names three participants and the middle one is the least

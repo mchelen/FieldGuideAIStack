@@ -55,6 +55,8 @@ sources:
     url: https://code.claude.com/docs/en/scheduled-tasks
     title: Scheduled tasks — Claude Code documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      For scheduling that survives independently of any session, use Routines to create a routine on the cloud, set up a Desktop scheduled task, or use GitHub Actions.
 ---
 
 Scheduled tasks "let Claude re-run a prompt automatically on an interval",

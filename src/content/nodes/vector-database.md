@@ -53,10 +53,14 @@ sources:
     url: https://en.wikipedia.org/wiki/Vector_database
     title: Vector database — Wikipedia
     verifiedOn: 2026-08-22
+    quote: >-
+      The retrieval component of a RAG can be any search system, but is most often implemented as a vector database.
   - id: anthropic-contextual-retrieval
     url: https://www.anthropic.com/engineering/contextual-retrieval
     title: Introducing Contextual Retrieval — Anthropic
     verifiedOn: 2026-08-22
+    quote: >-
+      At runtime, when a user inputs a query to the model, the vector database is used to find the most relevant chunks based on semantic similarity to the query.
 ---
 
 A vector database "is a database that stores and retrieves

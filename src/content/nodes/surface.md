@@ -40,6 +40,8 @@ sources:
     url: https://code.claude.com/docs/en/overview
     title: Claude Code overview — Anthropic
     verifiedOn: 2026-08-22
+    quote: >-
+      Get started Claude Code runs on several surfaces: the terminal, IDE extensions, a desktop app, and the web.
   - id: anthropic-cowork-overview
     url: https://claude.com/docs/cowork/overview
     title: Cowork overview — Anthropic

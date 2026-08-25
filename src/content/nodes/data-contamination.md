@@ -64,6 +64,8 @@ sources:
     url: https://arxiv.org/abs/2310.17623
     title: Proving Test Set Contamination in Black Box Language Models — Oren et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      We show that it is possible to provide provable guarantees of test set contamination in language models without access to pretraining data or model weights.
     note: Submitted 26 October 2023, last revised 24 November 2023.
 ---
 

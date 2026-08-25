@@ -48,6 +48,8 @@ sources:
     url: https://learn.chatgpt.com/docs/enterprise/chatgpt-work-overview
     title: ChatGPT Work overview — OpenAI
     verifiedOn: 2026-08-22
+    quote: >-
+      It runs the Codex harness in an isolated environment on OpenAI-managed infrastructure.
 ---
 
 Codex sits opposite [Claude Code](claude-code) in the two vendors' line-ups: the

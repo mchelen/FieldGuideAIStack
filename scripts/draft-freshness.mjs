@@ -57,7 +57,12 @@ const textOf = (html) =>
       .replace(/&amp;/g, '&')
       .replace(/&quot;/g, '"')
       .replace(/&#39;|&rsquo;|&lsquo;/g, "'")
-      .replace(/&mdash;|&ndash;/g, '-'),
+      .replace(/&mdash;|&ndash;/g, '-')
+      // Numeric entities too. Without this a page writing &#34; forces the
+      // stored quote to carry the entity rather than the character, which is
+      // wrong on the page even though it would still match.
+      .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
+      .replace(/&#x([0-9a-fA-F]+);/g, (_, n) => String.fromCharCode(parseInt(n, 16))),
   );
 
 async function fetchPage(url) {

@@ -52,6 +52,8 @@ sources:
     url: https://arxiv.org/abs/2202.03286
     title: Red Teaming Language Models with Language Models — Perez et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      In this work, we automatically find cases where a target LM behaves in a harmful way, by generating test cases ("red teaming") using another LM.
     note: Submitted 7 February 2022.
   - id: owasp-agentic-top
     url: https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/

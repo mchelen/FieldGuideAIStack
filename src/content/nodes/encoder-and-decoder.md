@@ -65,6 +65,8 @@ sources:
     url: https://arxiv.org/abs/1706.03762
     title: Attention Is All You Need — Vaswani et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      The best performing models also connect the encoder and decoder through an attention mechanism.
 ---
 
 An encoder is "any ML system that converts from a raw, sparse, or external

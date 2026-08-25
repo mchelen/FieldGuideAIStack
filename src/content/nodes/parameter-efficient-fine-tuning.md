@@ -60,6 +60,8 @@ sources:
     url: https://arxiv.org/abs/2106.09685
     title: "LoRA: Low-Rank Adaptation of Large Language Models — Hu et al."
     verifiedOn: 2026-08-22
+    quote: >-
+      LoRA performs on-par or better than fine-tuning in model quality on RoBERTa, DeBERTa, GPT-2, and GPT-3, despite having fewer trainable parameters, a higher training throughput, and, unlike adapters, no additional inference latency.
     note: Submitted 17 June 2021, last revised 16 October 2021.
 ---
 
