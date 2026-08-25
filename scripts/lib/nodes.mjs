@@ -72,6 +72,31 @@ export function buildEdges(nodes) {
   return [...edges.values()];
 }
 
+/**
+ * How many other pages are written in terms of each concept — counted once per
+ * page, because a page saying "harness" nine times is one page that depends on
+ * the word.
+ *
+ * This is the popularity half of the zoom levels: the terms the rest of the
+ * guide explains itself with are the ones a reader meets first. Shared with
+ * src/lib/levels.ts rather than reimplemented there, so the number on the page
+ * and the number the validator checks against cannot drift apart.
+ *
+ * `docs` is [{ id, body }] — raw markdown, from either loader.
+ */
+export function reachOf(docs) {
+  const ids = new Set(docs.map((d) => d.id));
+  const reach = new Map(docs.map((d) => [d.id, 0]));
+  for (const d of docs) {
+    const seen = new Set();
+    for (const m of (d.body ?? '').matchAll(/\]\(([a-z0-9-]+)\)/g)) {
+      if (ids.has(m[1]) && m[1] !== d.id) seen.add(m[1]);
+    }
+    for (const t of seen) reach.set(t, (reach.get(t) ?? 0) + 1);
+  }
+  return reach;
+}
+
 /** Every source and example URL in the graph, tagged with where it came from. */
 export function citations(nodes) {
   const out = [];

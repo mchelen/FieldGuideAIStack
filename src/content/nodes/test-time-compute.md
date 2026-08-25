@@ -13,7 +13,7 @@ canonical:
     vendor-specific names — thinking budget, reasoning effort. The idea is
     settled; the vocabulary is three years old and still moving.
 tags: [runtime, constraint]
-zoom: 3
+zoom: 2
 summary: Compute spent while answering rather than while training — the second
   dial for making a model perform better, and the one you pay for per request.
 fieldMark: Any control that trades latency for quality on a single request is

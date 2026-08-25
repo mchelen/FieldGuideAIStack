@@ -31,21 +31,33 @@ const byZoom = concepts
   .slice()
   .sort((a, b) => a.zoom - b.zoom || b.degree - a.degree || a.title.localeCompare(b.title));
 
+// Three rungs of one ladder, described by who is standing on them rather than
+// by a number. Zooming in means getting more specialised, so each level says
+// what it adds and each is cumulative.
 const LEVELS = [
   {
     zoom: 1,
     label: 'Start here',
-    blurb: 'The terms everything else is defined against. If you read only one level, this one.',
+    for: 'new to this',
+    blurb:
+      'The terms the rest of the guide is written in. Nearly every other page explains itself using these, so they repay learning first.',
+    adds: 'The terms everything else is defined against',
   },
   {
     zoom: 2,
     label: 'Working vocabulary',
-    blurb: 'Enough to read a release note without guessing. The first level, plus what sits on it.',
+    for: 'reading release notes',
+    blurb:
+      'Enough to follow an announcement or a product page without guessing. The first level, plus everything built directly on it.',
+    adds: 'What is built on the first level',
   },
   {
     zoom: 3,
     label: 'Everything',
-    blurb: 'Detail you look up when you actually hit it. Every concept in the guide.',
+    for: 'going deep',
+    blurb:
+      'The specialist detail — worth looking up when you hit it, not worth reading through. Every concept in the guide.',
+    adds: 'Specialist detail, for when you hit it',
   },
 ].map((l) => ({ ...l, count: concepts.filter((n) => n.zoom <= l.zoom).length }));
 ---
@@ -120,14 +132,24 @@ const LEVELS = [
         {LEVELS.map((l) => (
           <button type="button" data-zoom={l.zoom} aria-pressed={l.zoom === 3 ? 'true' : 'false'}>
             {l.label} <span class="zoom-count">{l.count}</span>
+            <span class="zoom-for">{l.for}</span>
           </button>
         ))}
       </div>
       <p class="zoom-blurb" data-blurbs={JSON.stringify(LEVELS.map((l) => l.blurb))}>
         {LEVELS[2].blurb}
       </p>
+      {/* A rule before each level's first card, so the ladder stays visible
+          instead of the list simply getting longer. Hidden with its own level
+          by the same filter. */}
       <ul class="cards" id="concept-cards">
-        {byZoom.map((n) => (
+        {byZoom.map((n, i) => (
+          <>
+            {(i === 0 || byZoom[i - 1].zoom !== n.zoom) && (
+              <li class="level-rule" data-zoom={n.zoom}>
+                <span>Level {n.zoom}</span> {LEVELS[n.zoom - 1].adds}
+              </li>
+            )}
           <li class="card" data-zoom={n.zoom}>
             <a class="title" href={`${base}/nodes/${n.id}/`}>{n.title}</a>
             <p>{n.summary}</p>
@@ -135,6 +157,7 @@ const LEVELS = [
               {n.tags.map((t) => <li><span class="chip">{t}</span></li>)}
             </ul>
           </li>
+          </>
         ))}
       </ul>
     </section>
@@ -166,7 +189,10 @@ const LEVELS = [
   // this narrows to a level. Starting at 1 once JavaScript is present makes the
   // front door the twenty-seven terms the rest are defined against.
   const control = document.querySelector<HTMLElement>('.zoom-control');
-  const cards = [...document.querySelectorAll<HTMLElement>('#concept-cards > .card')];
+  // Every child carrying a level, not only the cards: the rules between levels
+  // have to disappear with the cards they introduce, or level 1 shows a "Level
+  // 3" heading with nothing under it.
+  const cards = [...document.querySelectorAll<HTMLElement>('#concept-cards > [data-zoom]')];
   const blurb = document.querySelector<HTMLElement>('.zoom-blurb');
   if (control && cards.length && blurb) {
     const blurbs = JSON.parse(blurb.dataset.blurbs ?? '[]') as string[];

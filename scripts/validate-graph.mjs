@@ -8,7 +8,7 @@
  */
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { loadNodes, report, RELATION_TYPES } from './lib/nodes.mjs';
+import { loadNodes, report, reachOf, RELATION_TYPES } from './lib/nodes.mjs';
 
 const SCENARIOS_DIR = new URL('../src/content/scenarios/', import.meta.url).pathname;
 const ORG_FILE = new URL('../src/data/organisation.yml', import.meta.url).pathname;
@@ -417,6 +417,29 @@ console.log(
   `Checked ${nodes.length} nodes and ${scenarioFiles.length} scenarios ` +
     `(${conceptsSeen.size} concepts seen in the field).`,
 );
+// Zoom levels are an editorial judgement — a human decides what a beginner meets
+// first — but they are checkable against evidence. A level-1 term the rest of
+// the guide almost never uses, or a level-3 term half the guide is written in
+// terms of, is probably mislevelled. This warns rather than fails: reach is a
+// proxy, and a genuinely essential term can be rarely linked.
+{
+  const concepts = nodes.filter((n) => n.data && (n.data.kind ?? 'concept') === 'concept');
+  const reach = reachOf(concepts.map((n) => ({ id: n.id, body: n.content })));
+  for (const n of concepts) {
+    const r = reach.get(n.id) ?? 0;
+    if (n.data.zoom === 1 && r <= 2) {
+      warnings.push(
+        `${n.id}: level 1, but only ${r} other page(s) are written in terms of it — is it really a day-one term?`,
+      );
+    }
+    if (n.data.zoom === 3 && r >= 6) {
+      warnings.push(
+        `${n.id}: level 3, but ${r} other pages are written in terms of it — that is not look-it-up detail`,
+      );
+    }
+  }
+}
+
 // The validators run without booting Astro, so scripts/lib/nodes.mjs keeps its
 // own copy of the relation table. A copy is only safe if something checks it:
 // a verb added to the schema and not here would silently stop being drawn.

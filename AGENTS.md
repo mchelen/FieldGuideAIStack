@@ -283,6 +283,23 @@ any new development work.
   `element.hidden` is only the mechanism agreeing with itself. `check:layout`
   now walks the three levels in a browser and compares each button's count
   against the cards actually rendered.
+- The levels stay **authored** — a human decides what a beginner meets first —
+  but they are checked against evidence. `reach` is how many other pages are
+  written in terms of a concept; `npm run validate` warns when a level-1 term
+  has almost no reach or a level-3 term has a lot. It warns rather than fails,
+  because reach is a proxy and a genuinely essential term can be rarely linked.
+- **Prerequisite depth was tried and rejected.** Chains of `consumes` edges made
+  leaderboard and evaluation the two deepest concepts in the guide, which says
+  something about graph shape and nothing about what is hard. Do not revive it
+  without checking the ranking it produces first.
+- `reachOf` lives in `scripts/lib/nodes.mjs` and is imported by
+  `src/lib/levels.ts`, so the number shown on a page and the number the
+  validator tests against cannot drift.
+- **`attestedBy` is a floor, never a count.** The survey matched each
+  inventory term, not its synonyms, so Embedding records zero while Google's
+  glossary defines it under "embedding vector" — which that page cites. Render
+  it only positively; a zero means "not found by the survey", and stating it as
+  "no glossary defines this" contradicts the page's own canonical block.
 - A concept page's altitude band is **derived from the relation graph** — the
   neighbours coarser than it are the frame it sits in, the finer ones are the
   detail underneath. It is not a curated "see also", so deleting a relation

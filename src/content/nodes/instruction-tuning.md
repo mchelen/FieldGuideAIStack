@@ -12,7 +12,7 @@ canonical:
   title: Machine Learning Glossary — Google for Developers
   verifiedOn: 2026-08-22
 tags: [training]
-zoom: 3
+zoom: 2
 summary: Fine-tuning whose task is following instructions in general, rather
   than doing one job — the step that turns a text continuation engine into
   something you can ask for things.

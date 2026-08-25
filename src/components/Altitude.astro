@@ -13,6 +13,7 @@
  * and a relation deleted from a page removes it from this band too.
  */
 import type { Graph } from '../lib/graph';
+import { levelsFor } from '../lib/levels';
 import Icon from './Icon.astro';
 
 interface Props {
@@ -20,12 +21,13 @@ interface Props {
   graph: Graph;
 }
 const { id, graph } = Astro.props;
+const level = levelsFor(graph).get(id);
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const LEVELS: Record<number, string> = {
-  1: 'the terms everything else is defined against',
-  2: 'the working vocabulary',
-  3: 'detail you look up when you hit it',
+  1: 'a term to meet first — the rest of the guide is written in these words',
+  2: 'working vocabulary, once the first level is familiar',
+  3: 'detail worth looking up when you actually hit it',
 };
 
 const here = graph.byId.get(id)!.data.zoom;
@@ -48,9 +50,30 @@ const into = [...seen.values()].filter((n) => n.zoom > here).sort(byTitle);
   (out.length > 0 || into.length > 0) && (
     <nav class="altitude" aria-label="Zoom in and out from this concept">
       <p class="altitude-here">
-        <span class="altitude-level">Zoom {here}</span>
+        <span class="altitude-level">Level {here} of 3</span>
         <span class="altitude-blurb">{LEVELS[here]}</span>
       </p>
+      {/* The evidence for that level, rather than only the assertion. Reach is
+          how much of this guide is written in terms of this concept; the
+          glossary count is whether the wider field has settled the word. The
+          two disagree often, and the disagreement is informative. */}
+      {level && (
+        <p class="altitude-evidence">
+          {level.reach > 0 && (
+            <span>
+              <strong>{level.reach}</strong> other {level.reach === 1 ? 'page' : 'pages'} here
+              {' '}{level.reach === 1 ? 'is' : 'are'} written in terms of it
+            </span>
+          )}
+          {/* Only ever stated positively. The survey matched terms, not their
+              synonyms, so a zero is "not found" rather than "not defined" —
+              Embedding records zero while Google's glossary defines it under
+              "embedding vector", which this page cites. A floor, not a count. */}
+          {level.attestedBy > 0 && (
+            <span>found in {level.attestedBy} of 8 surveyed glossaries</span>
+          )}
+        </p>
+      )}
       {out.length > 0 && (
         <p class="altitude-row">
           <span class="altitude-dir"><Icon name="contents" size={13} /> Zoom out</span>

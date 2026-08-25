@@ -14,7 +14,7 @@ canonical:
   title: OWASP Top 10 for Agentic Applications 2026 — OWASP GenAI Security Project
   verifiedOn: 2026-08-22
 tags: [safety, risk]
-zoom: 3
+zoom: 2
 summary: Injection arriving through content the agent reads, rather than
   through anything the user typed.
 fieldMark: The user is not the attacker and is not being fooled. Look for a
