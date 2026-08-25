@@ -49,6 +49,8 @@ sources:
     url: https://arxiv.org/abs/2203.11171
     title: Self-Consistency Improves Chain of Thought Reasoning in Language Models — Wang et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      In this paper, we propose a new decoding strategy, self-consistency, to replace the naive greedy decoding used in chain-of-thought prompting.
     note: Submitted 21 March 2022, last revised 7 March 2023.
   - id: cot-paper
     url: https://arxiv.org/abs/2201.11903

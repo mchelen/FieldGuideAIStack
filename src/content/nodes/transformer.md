@@ -55,6 +55,8 @@ sources:
     url: https://arxiv.org/abs/1706.03762
     title: Attention Is All You Need — Vaswani et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.
     note: >-
       Submitted 12 June 2017, last revised 2 August 2023. Introduces and names
       the architecture.

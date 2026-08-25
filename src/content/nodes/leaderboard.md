@@ -55,6 +55,8 @@ sources:
     url: https://arxiv.org/abs/2403.04132
     title: "Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference — Chiang et al."
     verifiedOn: 2026-08-22
+    quote: >-
+      Because of its unique value and openness, Chatbot Arena has emerged as one of the most referenced LLM leaderboards, widely cited by leading LLM developers and companies.
     note: Submitted 7 March 2024.
   - id: helm-site
     url: https://crfm.stanford.edu/helm/

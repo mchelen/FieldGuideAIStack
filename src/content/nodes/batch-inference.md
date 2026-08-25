@@ -63,10 +63,14 @@ sources:
     url: https://platform.claude.com/docs/en/build-with-claude/batch-processing
     title: Batch processing — Claude Platform documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      Instead of processing requests one at a time with immediate responses, batch processing allows you to submit multiple requests together for asynchronous processing.
   - id: aws-batch
     url: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference.html
     title: Process multiple prompts with batch inference — AWS documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      Batch inference helps you process a large number of requests efficiently by sending a single request and generating the responses in an Amazon S3 bucket.
   - id: google-glossary
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers

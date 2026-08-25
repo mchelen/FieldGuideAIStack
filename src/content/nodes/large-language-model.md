@@ -69,10 +69,14 @@ sources:
     url: https://arxiv.org/abs/2005.14165
     title: Language Models are Few-Shot Learners — Brown et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      Here we show that scaling up language models greatly improves task-agnostic, few-shot performance, sometimes even reaching competitiveness with prior state-of-the-art fine-tuning approaches.
   - id: wikipedia-llm
     url: https://en.wikipedia.org/wiki/Large_language_model
     title: Large language model — Wikipedia
     verifiedOn: 2026-08-22
+    quote: >-
+      Training [ edit ] See also: Fine-tuning (machine learning) and Post-training of large language models An LLM is a type of foundation model (large X model) trained on language.
 ---
 
 Google's glossary is refreshingly candid about how loose this term is: "at a

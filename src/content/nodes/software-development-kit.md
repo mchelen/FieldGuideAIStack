@@ -55,6 +55,8 @@ sources:
     url: https://platform.claude.com/docs/en/cli-sdks-libraries/overview
     title: CLI, SDKs, and libraries — Claude Platform documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      The CLI, client SDKs, and libraries are for calling the Claude API yourself: you send each request and handle each response.
 ---
 
 Anthropic separates its tooling into three kinds, and the separation is the

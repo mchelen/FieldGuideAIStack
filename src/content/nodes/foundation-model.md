@@ -62,6 +62,8 @@ sources:
     url: https://arxiv.org/abs/2108.07258
     title: On the Opportunities and Risks of Foundation Models — Bommasani et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      We call these models foundation models to underscore their critically central yet incomplete character.
     note: >-
       Submitted 16 August 2021 by the Stanford Center for Research on
       Foundation Models. Coins the term.

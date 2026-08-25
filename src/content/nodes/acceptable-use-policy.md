@@ -66,6 +66,8 @@ sources:
     url: https://huggingface.co/meta-llama/Llama-3.1-8B
     title: meta-llama/Llama-3.1-8B — Hugging Face
     verifiedOn: 2026-08-22
+    quote: >-
+      If you access or use Llama 3.1, you agree to this Acceptable Use Policy (“Policy”).
   - id: osi-licenses
     url: https://opensource.org/licenses
     title: OSI Approved Licenses — Open Source Initiative

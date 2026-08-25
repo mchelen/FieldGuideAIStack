@@ -54,6 +54,8 @@ sources:
     url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview
     title: Tool use with Claude — Claude Platform documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      See where tools execute, when Claude calls them, and which tool fits your task.  Copy page  Tool use (also called function calling) lets Claude call functions that you define or that Anthropic provides.
 ---
 
 "Tool use (also called function calling) lets Claude call functions that you

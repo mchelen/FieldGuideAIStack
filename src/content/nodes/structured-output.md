@@ -56,6 +56,8 @@ sources:
     url: https://platform.claude.com/docs/en/build-with-claude/structured-outputs
     title: Structured outputs — Claude Platform documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      See the following code examples for the updated API shape.  Why use structured outputs Without structured outputs, Claude can generate malformed JSON responses or invalid tool inputs that break your applications.
 ---
 
 The problem is stated as a list of things that happen without it: "parsing

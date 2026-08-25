@@ -62,6 +62,8 @@ sources:
     url: https://www.promptingguide.ai/techniques/react
     title: ReAct Prompting — Prompt Engineering Guide
     verifiedOn: 2026-08-22
+    quote: >-
+      The ReAct framework can allow LLMs to interact with external tools to retrieve additional information that leads to more reliable and factual responses.
 ---
 
 Before ReAct, reasoning and acting were separate research problems: "their

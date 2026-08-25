@@ -53,6 +53,8 @@ sources:
     url: https://arxiv.org/abs/2005.11401
     title: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks — Lewis et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      We explore a general-purpose fine-tuning recipe for retrieval-augmented generation (RAG) -- models which combine pre-trained parametric and non-parametric memory for language generation.
     note: Submitted 22 May 2020, last revised 12 April 2021.
   - id: google-glossary
     url: https://developers.google.com/machine-learning/glossary
@@ -64,6 +66,8 @@ sources:
     url: https://www.anthropic.com/engineering/contextual-retrieval
     title: Introducing Contextual Retrieval — Anthropic
     verifiedOn: 2026-08-22
+    quote: >-
+      A Standard Retrieval-Augmented Generation (RAG) system that uses both embeddings and Best Match 25 (BM25) to retrieve information.
 ---
 
 The 2020 paper starts from what a [model](model) cannot do with knowledge held

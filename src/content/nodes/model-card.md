@@ -56,11 +56,15 @@ sources:
     url: https://arxiv.org/abs/1810.03993
     title: Model Cards for Model Reporting — Mitchell et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      In this paper, we propose a framework that we call model cards, to encourage such transparent model reporting.
     note: Submitted 5 October 2018, last revised 14 January 2019.
   - id: hf-model-cards
     url: https://huggingface.co/docs/hub/model-cards
     title: Model Cards — Hugging Face Hub documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      The model card is a Markdown file, with a YAML section at the top that contains metadata about the model.
   - id: hf-mistral
     url: https://huggingface.co/mistralai/Mistral-7B-v0.1
     title: mistralai/Mistral-7B-v0.1 — Hugging Face

@@ -48,6 +48,8 @@ sources:
     url: https://arxiv.org/abs/2309.06180
     title: Efficient Memory Management for Large Language Model Serving with PagedAttention — Kwon et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      However, existing systems struggle because the key-value cache (KV cache) memory for each request is huge and grows and shrinks dynamically.
     note: Submitted 12 September 2023. Introduces PagedAttention and vLLM.
   - id: anthropic-caching
     url: https://platform.claude.com/docs/en/build-with-claude/prompt-caching

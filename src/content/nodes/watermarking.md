@@ -52,6 +52,8 @@ sources:
     url: https://deepmind.google/models/synthid/
     title: SynthID — Google DeepMind
     verifiedOn: 2026-08-22
+    quote: >-
+      SynthID is our new watermarking tool, designed specifically for AI-generated content.
   - id: c2pa
     url: https://c2pa.org/
     title: C2PA — Verifying Media Content Sources

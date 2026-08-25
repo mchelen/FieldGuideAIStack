@@ -53,6 +53,8 @@ sources:
     url: https://arxiv.org/abs/2207.14255
     title: Efficient Training of Language Models to Fill in the Middle — Bavarian et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      Given the usefulness, simplicity, and efficiency of training models to fill-in-the-middle (FIM), we suggest that future autoregressive language models be trained with FIM by default.
     note: Submitted 28 July 2022.
 ---
 

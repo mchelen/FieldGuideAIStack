@@ -65,6 +65,8 @@ sources:
     url: https://en.wikipedia.org/wiki/Hyperscale_computing
     title: Hyperscale computing — Wikipedia
     verifiedOn: 2026-08-22
+    quote: >-
+      Hyperscalers are... geared to a much larger scale than typical on-premises data centers... building and running an enormous hardware and software infrastructure in the hyperscaler facilities.
   - id: aws-what-is
     url: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html
     title: What is Amazon Bedrock? — AWS documentation

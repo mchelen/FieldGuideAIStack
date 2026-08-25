@@ -55,6 +55,8 @@ sources:
     url: https://en.wikipedia.org/wiki/Semantic_search
     title: Semantic search — Wikipedia
     verifiedOn: 2026-08-22
+    quote: >-
+      Modern semantic search systems use vector embeddings which convert words, phrases, or documents into numerical vectors.
   - id: anthropic-contextual-retrieval
     url: https://www.anthropic.com/engineering/contextual-retrieval
     title: Introducing Contextual Retrieval — Anthropic

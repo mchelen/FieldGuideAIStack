@@ -67,6 +67,8 @@ sources:
     url: https://www.promptingguide.ai/techniques/fewshot
     title: Few-Shot Prompting — Prompt Engineering Guide
     verifiedOn: 2026-08-22
+    quote: >-
+      Few-shot prompting can be used as a technique to enable in-context learning where we provide demonstrations in the prompt to steer the model to better performance.
 ---
 
 Few-shot prompting is "a prompt that contains more than one (a 'few') example

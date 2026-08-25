@@ -53,10 +53,14 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      Reinforcement Learning from Human Feedback (RLHF) #generativeAI Using feedback from human raters to improve the quality of a model's responses.
   - id: instructgpt
     url: https://arxiv.org/abs/2203.02155
     title: Training language models to follow instructions with human feedback — Ouyang et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      We then collect a dataset of rankings of model outputs, which we use to further fine-tune this supervised model using reinforcement learning from human feedback.
 ---
 
 Google's glossary keeps it short: "using feedback from human raters to improve

@@ -51,6 +51,8 @@ sources:
     url: https://arxiv.org/abs/2305.10601
     title: "Tree of Thoughts: Deliberate Problem Solving with Large Language Models — Yao et al."
     verifiedOn: 2026-08-22
+    quote: >-
+      Our experiments show that ToT significantly enhances language models' problem-solving abilities on three novel tasks requiring non-trivial planning or search: Game of 24, Creative Writing, and Mini Crosswords.
     note: Submitted 17 May 2023, last revised 3 December 2023.
   - id: self-consistency-paper
     url: https://arxiv.org/abs/2203.11171

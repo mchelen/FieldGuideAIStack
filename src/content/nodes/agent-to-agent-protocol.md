@@ -49,6 +49,8 @@ sources:
     url: https://a2a-protocol.org/latest/
     title: A2A Protocol
     verifiedOn: 2026-08-22
+    quote: >-
+      The Agent2Agent (A2A) Protocol is an open standard for seamless communication and collaboration between AI agents.
   - id: a2a-spec
     url: https://a2a-protocol.org/latest/specification/
     title: A2A Protocol Specification

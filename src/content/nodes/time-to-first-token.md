@@ -52,6 +52,8 @@ sources:
     url: https://platform.claude.com/docs/en/build-with-claude/prompt-caching
     title: Prompt caching — Claude Platform documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      This eliminates the cache-miss latency penalty on the first user interaction, reducing time-to-first-token (TTFT) for latency-sensitive applications.  How it works Set max_tokens: 0 in your request.
   - id: google-glossary
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
