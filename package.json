@@ -15,6 +15,7 @@
     "check:links": "node scripts/check-links.mjs",
     "check:layout": "node scripts/check-layout.mjs",
     "check:freshness": "node scripts/check-freshness.mjs",
+    "survey:attestation": "node scripts/survey-attestation.mjs",
     "draft:freshness": "node scripts/draft-freshness.mjs",
     "quick-ref": "node scripts/quick-reference.mjs"
   },

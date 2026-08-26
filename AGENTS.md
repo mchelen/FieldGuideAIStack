@@ -295,11 +295,24 @@ any new development work.
 - `reachOf` lives in `scripts/lib/nodes.mjs` and is imported by
   `src/lib/levels.ts`, so the number shown on a page and the number the
   validator tests against cannot drift.
-- **`attestedBy` is a floor, never a count.** The survey matched each
-  inventory term, not its synonyms, so Embedding records zero while Google's
-  glossary defines it under "embedding vector" — which that page cites. Render
-  it only positively; a zero means "not found by the survey", and stating it as
-  "no glossary defines this" contradicts the page's own canonical block.
+- **`attestedBy` is measured, and re-measurable.** `npm run survey:attestation`
+  re-runs it; `--write` updates the inventory. Two kinds of evidence count: a
+  glossary's own list of defined terms containing the term (exact match on a
+  normalised form, **never substring** — "model" appears inside half the entries
+  of every glossary), or a node's canonical block citing that glossary by URL,
+  which is a human having checked and catches what matching cannot.
+- The first survey recorded 56 attested terms where there are 79, because it
+  matched each term but not its synonyms and read four of the eight sources as
+  defining nothing at all. Two guards exist so that cannot recur quietly: the
+  script exits non-zero if a source 404s, and if a source yields fewer than five
+  defined terms — a glossary that suddenly defines nothing has changed its
+  markup, and recording that as zeroes is worse than not running.
+- **Extraction is per source.** One generic "take every heading" rule returned
+  731 terms from one glossary and zero from four others. Each source's entry
+  says where its defined terms actually live; if you add a source, look at its
+  markup rather than assuming.
+- Render it only positively. A zero means "not found", and stating it as "no
+  glossary defines this" can contradict the page's own canonical block.
 - A concept page's altitude band is **derived from the relation graph** — the
   neighbours coarser than it are the frame it sits in, the finer ones are the
   detail underneath. It is not a curated "see also", so deleting a relation
