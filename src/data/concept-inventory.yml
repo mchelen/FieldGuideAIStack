@@ -6,8 +6,18 @@
 # sources and this list does not.
 #
 # `attestedBy` is computed, not asserted: it records which public glossaries
-# were found to carry the term when the inventory was compiled. Eight sources,
-# all read 2026-08-22:
+# were found to carry the term. Re-surveyed 2026-08-25 by
+# `npm run survey:attestation`, which is re-runnable — the first pass matched
+# each term but not its synonyms and read four of the eight sources as defining
+# nothing at all, so it recorded 56 attested terms where there are 78.
+#
+# A term counts as attested when a glossary's own list of defined terms
+# contains it (exact match on a normalised form, never substring), or when a
+# node page's canonical block cites that glossary by URL — a human having
+# checked, which catches what matching cannot: Google defines "embedding
+# vector" for what this guide calls Embedding.
+#
+# Eight sources:
 #
 #   google-ml     developers.google.com/machine-learning/glossary (incl. the
 #                 generative section, which is part of the same publication and
@@ -34,7 +44,7 @@ concepts:
     area: models
     gloss: >-
       The trained artifact itself: architecture plus learned weights, nothing more.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, wikipedia, anthropic]
     status: written
   - term: Harness
     slug: harness
@@ -42,7 +52,7 @@ concepts:
     area: agentic
     gloss: >-
       The program that turns a model into something useful by looping around it.
-    attestedBy: []
+    attestedBy: [claude-code]
     status: written
   - term: Agent
     slug: agent
@@ -50,7 +60,7 @@ concepts:
     area: agentic
     gloss: >-
       A model driven in a loop by a harness, with tools, working toward a goal.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, outline]
     status: written
   - term: Sub-agent
     slug: sub-agent
@@ -58,7 +68,7 @@ concepts:
     area: agentic
     gloss: >-
       A parent agent spawning child loops and merging their results.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, claude-code]
     status: written
   - term: Approval mode
     slug: approval-mode
@@ -66,7 +76,7 @@ concepts:
     area: agentic
     gloss: >-
       The policy deciding which agent actions need a human say-so.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, claude-code]
     status: written
   - term: Background execution
     slug: background-execution
@@ -106,7 +116,7 @@ concepts:
     area: agentic
     gloss: >-
       Where you meet an agent, as distinct from the engine underneath.
-    attestedBy: []
+    attestedBy: [claude-code]
     status: written
   - term: Inference API
     slug: inference-api
@@ -130,7 +140,7 @@ concepts:
     area: interfaces
     gloss: >-
       An open standard connecting AI applications to external tools and data.
-    attestedBy: []
+    attestedBy: [outline]
     status: written
   - term: Connector
     slug: connector
@@ -138,7 +148,7 @@ concepts:
     area: interfaces
     gloss: >-
       A packaged link between an assistant and an outside service.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, claude-code]
     status: written
   - term: Context window
     slug: context-window
@@ -146,7 +156,7 @@ concepts:
     area: context
     gloss: >-
       The per-call ceiling on how much a model can attend to at once.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, claude-code, anthropic, mistral]
     status: written
   - term: Model provider
     slug: model-provider
@@ -170,7 +180,7 @@ concepts:
     area: openness
     gloss: >-
       Downloadable parameters, which says nothing about licence freedom.
-    attestedBy: []
+    attestedBy: [outline]
     status: written
   - term: Open Source AI
     slug: open-source-ai
@@ -194,7 +204,7 @@ concepts:
     area: models
     gloss: >-
       A model trained on text at a scale where general language ability emerges.
-    attestedBy: [google-ml, wikipedia]
+    attestedBy: [google-ml, wikipedia, anthropic, hf, outline]
     status: written
   - term: Small language model
     slug: small-language-model
@@ -217,7 +227,7 @@ concepts:
     area: models
     gloss: >-
       The attention-based architecture nearly all current language models are built on.
-    attestedBy: [google-ml, hf, wikipedia]
+    attestedBy: [google-ml, wikipedia, hf, outline]
     status: written
   - term: Attention
     slug: attention
@@ -225,7 +235,7 @@ concepts:
     area: models
     gloss: >-
       The mechanism letting a model weigh every token against every other.
-    attestedBy: [google-ml, hf]
+    attestedBy: [google-ml, hf, outline]
     status: written
   - term: Parameter
     slug: parameter
@@ -233,7 +243,7 @@ concepts:
     area: models
     gloss: >-
       A learned number inside the model; the count is the usual size headline.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, outline]
     status: written
   - term: Tokenizer
     slug: tokenizer
@@ -247,7 +257,7 @@ concepts:
     area: models
     gloss: >-
       The unit a model reads and writes, and the unit you are billed in.
-    attestedBy: [google-ml, hf]
+    attestedBy: [google-ml, anthropic, hf]
     status: written
   - term: Embedding
     slug: embedding
@@ -255,14 +265,14 @@ concepts:
     area: models
     gloss: >-
       A numeric vector standing in for meaning, so similarity becomes arithmetic.
-    attestedBy: []
+    attestedBy: [google-ml]
     status: written
   - term: Pretraining
     slug: pretraining
     area: models
     gloss: >-
       The first and most expensive training stage, on broad unlabelled data.
-    attestedBy: []
+    attestedBy: [google-ml, anthropic]
     status: written
   - term: Post-training
     slug: post-training
@@ -277,7 +287,7 @@ concepts:
     area: models
     gloss: >-
       Further training of an existing model on narrower data.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, anthropic]
     status: written
   - term: Parameter-efficient fine-tuning
     slug: parameter-efficient-fine-tuning
@@ -293,7 +303,7 @@ concepts:
     area: models
     gloss: >-
       Post-training against human preference judgements.
-    attestedBy: [google-ml, wikipedia]
+    attestedBy: [google-ml, wikipedia, anthropic, outline]
     status: written
   - term: Distillation
     slug: distillation
@@ -315,7 +325,7 @@ concepts:
     area: models
     gloss: >-
       A saved snapshot of weights at a point in training.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, claude-code]
     status: written
   - term: Model card
     slug: model-card
@@ -345,7 +355,7 @@ concepts:
     area: models
     gloss: >-
       A model trained to spend inference compute on intermediate reasoning.
-    attestedBy: [wikipedia]
+    attestedBy: [wikipedia, outline]
     status: written
   - term: Test-time compute
     slug: test-time-compute
@@ -369,14 +379,14 @@ concepts:
     area: models
     gloss: >-
       Fluent output asserting things that are not true.
-    attestedBy: [google-ml, wikipedia]
+    attestedBy: [google-ml, wikipedia, outline]
     status: written
   - term: Temperature
     slug: temperature
     area: models
     gloss: >-
       The sampling parameter trading determinism against variety.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, anthropic]
     status: written
   - term: Scaling laws
     slug: scaling-laws
@@ -538,7 +548,7 @@ concepts:
     area: agentic
     gloss: >-
       An agent working out the steps before taking them.
-    attestedBy: [google-ml, outline]
+    attestedBy: [google-ml]
     status: written
   - term: ReAct
     slug: react
@@ -554,7 +564,7 @@ concepts:
     area: agentic
     gloss: >-
       An agent evaluating its own output to decide what to do next.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, outline]
     status: written
   - term: Memory
     slug: memory
@@ -602,7 +612,7 @@ concepts:
     area: agentic
     gloss: >-
       The bounded environment an agent's code and commands run inside.
-    attestedBy: []
+    attestedBy: [claude-code]
     status: written
   - term: Permission model
     slug: permission-model
@@ -650,7 +660,7 @@ concepts:
     area: context
     gloss: >-
       Standing instructions prepended to every request.
-    attestedBy: []
+    attestedBy: [mistral]
     status: written
   - term: Prompt template
     slug: prompt-template
@@ -673,7 +683,7 @@ concepts:
     area: context
     gloss: >-
       Fetching relevant documents and putting them in the prompt.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, wikipedia, mistral, promptguide, outline]
     status: written
   - term: Vector database
     slug: vector-database
@@ -770,7 +780,7 @@ concepts:
     area: safety
     gloss: >-
       Untrusted input that the model treats as instructions.
-    attestedBy: []
+    attestedBy: [claude-code]
     status: written
   - term: Indirect prompt injection
     slug: indirect-prompt-injection
@@ -792,7 +802,7 @@ concepts:
     area: safety
     gloss: >-
       Checks around the model that block disallowed input or output.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, mistral]
     status: written
   - term: Excessive agency
     slug: excessive-agency
@@ -954,14 +964,14 @@ concepts:
     area: context
     gloss: >-
       Squeezing earlier turns into a summary so a long run fits the window.
-    attestedBy: []
+    attestedBy: [claude-code]
     status: written
   - term: Prompt engineering
     slug: prompt-engineering
     area: context
     gloss: >-
       Shaping the prompt to change behaviour, without touching the model.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, outline]
     status: written
   - term: Chain-of-thought prompting
     slug: chain-of-thought-prompting
@@ -1012,7 +1022,7 @@ concepts:
     area: agentic
     gloss: >-
       Using an agent to write, run and fix code rather than to suggest it.
-    attestedBy: []
+    attestedBy: [claude-code]
     status: written
   - term: Agentic loop
     slug: agentic-loop
@@ -1020,35 +1030,35 @@ concepts:
     area: agentic
     gloss: >-
       The cycle of context, model call, tool execution, repeat.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, claude-code]
     status: written
   - term: Verification loop
     slug: verification-loop
     area: agentic
     gloss: >-
       An agent checking its own work by running it, then fixing what failed.
-    attestedBy: []
+    attestedBy: [claude-code]
     status: written
   - term: Session
     slug: session
     area: agentic
     gloss: >-
       One continuous run of an agent, and the state scoped to it.
-    attestedBy: []
+    attestedBy: [claude-code]
     status: written
   - term: Turn
     slug: turn
     area: agentic
     gloss: >-
       One exchange within a session, which is the unit autonomy is measured in.
-    attestedBy: []
+    attestedBy: [claude-code]
     status: written
   - term: Hook
     slug: hook
     area: agentic
     gloss: >-
       A user-defined command the harness runs before or after its actions.
-    attestedBy: []
+    attestedBy: [claude-code]
     status: written
   - term: Skill
     slug: skill
@@ -1056,7 +1066,7 @@ concepts:
     area: agentic
     gloss: >-
       Packaged instructions that teach an agent a repeatable workflow.
-    attestedBy: []
+    attestedBy: [claude-code]
     status: written
   - term: Checkpoint and rollback
     slug: checkpoint-and-rollback
@@ -1064,7 +1074,7 @@ concepts:
     area: agentic
     gloss: >-
       Restoring an agent's work to an earlier point after a bad step.
-    attestedBy: []
+    attestedBy: [claude-code]
     status: written
   - term: Effort level
     slug: effort-level
@@ -1072,7 +1082,7 @@ concepts:
     area: agentic
     gloss: >-
       How much inference compute a request is allowed to spend on reasoning.
-    attestedBy: []
+    attestedBy: [claude-code]
     status: written
   - term: Multi-agent system
     slug: multi-agent-system
@@ -1080,7 +1090,7 @@ concepts:
     area: agentic
     gloss: >-
       Several agents coordinating, with the delegation problems that brings.
-    attestedBy: [wikipedia]
+    attestedBy: [wikipedia, claude-code, outline]
     status: written
   - term: Autonomous agent
     slug: autonomous-agent
@@ -1095,7 +1105,7 @@ concepts:
     area: agentic
     gloss: >-
       Whether an agent may act on a codebase it has not been vetted against.
-    attestedBy: []
+    attestedBy: [claude-code]
     status: written
   - term: Generative AI
     slug: generative-ai
@@ -1103,35 +1113,35 @@ concepts:
     area: models
     gloss: >-
       Models that produce new content rather than only classifying existing content.
-    attestedBy: [google-ml, wikipedia]
+    attestedBy: [google-ml, wikipedia, outline]
     status: written
   - term: Autoregressive model
     slug: autoregressive-model
     area: models
     gloss: >-
       A model generating one token at a time, each conditioned on the last.
-    attestedBy: []
+    attestedBy: [google-ml, hf, outline]
     status: written
   - term: Pretrained model
     slug: pretrained-model
     area: models
     gloss: >-
       A model released after pretraining, before task-specific adaptation.
-    attestedBy: [hf]
+    attestedBy: [google-ml, hf]
     status: written
   - term: Transfer learning
     slug: transfer-learning
     area: models
     gloss: >-
       Reusing what a model learned on one task to do better on another.
-    attestedBy: [google-ml, hf, wikipedia]
+    attestedBy: [google-ml, wikipedia, hf]
     status: written
   - term: Self-supervised learning
     slug: self-supervised-learning
     area: models
     gloss: >-
       Learning from structure in unlabelled data by predicting held-out parts.
-    attestedBy: [google-ml, hf]
+    attestedBy: [google-ml, hf, outline]
     status: written
   - term: Encoder and decoder
     slug: encoder-and-decoder
@@ -1139,7 +1149,7 @@ concepts:
     area: models
     gloss: >-
       The two halves of the architecture, and which half a model keeps.
-    attestedBy: []
+    attestedBy: [google-ml]
     status: written
   - term: Fill in the middle
     slug: fill-in-the-middle
@@ -1177,14 +1187,14 @@ concepts:
     area: safety
     gloss: >-
       Low-quality generated content produced at volume because it is cheap.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, outline]
     status: written
   - term: Latency
     slug: latency
     area: serving
     gloss: >-
       How long a request takes, split into time to first token and throughput.
-    attestedBy: [google-ml]
+    attestedBy: [google-ml, anthropic]
     status: written
   - term: Token billing
     slug: token-billing
@@ -1192,7 +1202,7 @@ concepts:
     area: serving
     gloss: >-
       Charging by consumption rather than by seat or licence.
-    attestedBy: []
+    attestedBy: [mistral]
     status: written
   - term: Fill-in-the-middle API
     slug: fill-in-the-middle-api
@@ -1207,7 +1217,7 @@ concepts:
     area: interfaces
     gloss: >-
       The program that serves tools, resources and prompts to an MCP client.
-    attestedBy: []
+    attestedBy: [claude-code]
     status: written
   - term: MCP client
     slug: mcp-client
