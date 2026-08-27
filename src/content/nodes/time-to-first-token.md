@@ -26,6 +26,26 @@ useCase:
     must be processed before the first output token can be produced. The fix is
     not a faster model — it is sending less, or arranging for the unchanged
     prefix to be cached so it does not have to be processed again.
+flow:
+  scenario: >-
+    Two systems finishing in the same eight seconds, one of which felt fast
+    and one of which did not.
+  path:
+    - actor: A request
+      does: >-
+        sent, and then waited on in silence
+    - node: time-to-first-token
+      does: >-
+        how long until anything appears at all
+      self: true
+    - node: token
+      does: >-
+        after which the rest arrive at their own rate
+    - node: latency
+      does: >-
+        of which this is the half a person actually experiences
+  returns: >-
+    The number users feel, hidden inside the average
 relations:
   - type: distinguished-from
     target: throughput

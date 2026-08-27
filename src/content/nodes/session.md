@@ -33,6 +33,26 @@ useCase:
     the abandoned work keeps voting. Starting a fresh session with a paragraph
     of what actually matters is the cheapest fix available, and knowing when to
     reach for it is a real operating skill.
+flow:
+  scenario: >-
+    Closing a terminal on a half-finished task and picking it up an hour
+    later with everything still in place.
+  path:
+    - actor: One run
+      does: >-
+        started, interrupted, and resumed
+    - node: session
+      does: >-
+        the state scoped to it — conversation, context, working files
+      self: true
+    - node: turn
+      does: >-
+        each exchange inside it, counted separately
+    - node: checkpoint-and-rollback
+      does: >-
+        and the restore points taken along the way
+  returns: >-
+    Resumable, forkable, and it ends
 relations:
   - type: contains
     target: turn

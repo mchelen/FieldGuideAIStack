@@ -32,6 +32,26 @@ useCase:
     data can be shaped to the task; the risk is that it can only contain what
     the generating model already knew, so a gap in the teacher becomes a gap in
     everything trained on its output.
+flow:
+  scenario: >-
+    Training data written by a model, which is now a routine part of how the
+    next model is built.
+  path:
+    - node: model
+      does: >-
+        generates examples, cheaply and at volume
+    - node: synthetic-data
+      does: >-
+        used as training data rather than collected
+      self: true
+    - node: pretraining
+      does: >-
+        where it now routinely appears
+    - node: ai-slop
+      does: >-
+        and the same output, when nobody checked it
+  returns: >-
+    Inherits whatever the generating model got wrong
 relations:
   - type: consumed-by
     target: pretraining

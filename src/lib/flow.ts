@@ -46,22 +46,44 @@ const TITLE_H = 21;
 const LINE_H = 14;
 const BOX_PAD_Y = 9;
 
-/** Wrapping by character count. The box is one width and the font is one size. */
-const CHARS = 34;
-/** The title is bold and a size larger, so it fits fewer characters. */
-const TITLE_CHARS = 27;
+/**
+ * Wrapping is by estimated width, not by character count. Counting characters
+ * put "which compares models, and answers" -- thirty-four of them, but full of
+ * m, w and d -- straight out of its box, because a character is not a width.
+ * The table is coarse on purpose: it only has to be close enough that the
+ * label check in `check:layout` passes, and that check is what makes it safe
+ * to be approximate here.
+ */
+const HAIRLINE = new Set([...'iljI.,;:\'|!']);
+const NARROW = new Set([...'ft()[]{}/\\"r-']);
+const WIDE = new Set([...'mwMW@—–']);
+const advance = (ch: string, size: number) => {
+  if (ch === ' ') return 0.28 * size;
+  if (HAIRLINE.has(ch)) return 0.31 * size;
+  if (NARROW.has(ch)) return 0.43 * size;
+  if (WIDE.has(ch)) return 0.99 * size;
+  if (/[A-Z0-9]/.test(ch)) return 0.73 * size;
+  return 0.64 * size;
+};
+const textWidth = (s: string, size: number) =>
+  [...s].reduce((w, ch) => w + advance(ch, size), 0);
+
+/** Inner width of a station box, after the 14px text inset on each side. */
+const TEXT_W = WIDTH - PAD * 2 - 28;
+const DOES_SIZE = 13;
+const TITLE_SIZE = 15;
 /** Width of the gutter the return arrow is drawn in. Its label is HTML below
  *  the drawing, not text inside it: a label wide enough to read needed a
  *  gutter that pushed the whole viewBox past 500px, and a phone then scaled
  *  15px type down to 7px. */
 const RETURN_GUTTER = 28;
 
-function wrap(text: string, chars = CHARS): string[] {
+function wrap(text: string, size: number): string[] {
   const lines: string[] = [];
   let line = '';
   for (const word of text.split(/\s+/)) {
     if (!line) line = word;
-    else if (line.length + 1 + word.length <= chars) line += ` ${word}`;
+    else if (textWidth(`${line} ${word}`, size) <= TEXT_W) line += ` ${word}`;
     else {
       lines.push(line);
       line = word;
@@ -86,8 +108,8 @@ export function flowDiagram(graph: Graph, input: FlowInput): FlowDiagram {
   for (const step of input.path) {
     const id = step.node?.id;
     const title = id ? (graph.byId.get(id)?.data.title ?? id) : step.actor!;
-    const lines = wrap(step.does);
-    const titleLines = wrap(title, TITLE_CHARS);
+    const lines = wrap(step.does, DOES_SIZE);
+    const titleLines = wrap(title, TITLE_SIZE);
     const h = TITLE_H * titleLines.length + lines.length * LINE_H + BOX_PAD_Y * 2;
     stations.push({
       id,

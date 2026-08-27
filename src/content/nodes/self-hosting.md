@@ -29,6 +29,26 @@ useCase:
     cache needs at expected concurrency, who is on call. This is the honest
     shape of most self-hosting decisions — a requirement that removes the hosted
     option, rather than a cost comparison that favours running it yourself.
+flow:
+  scenario: >-
+    Running the weights yourself, on hardware you control, and taking on
+    everything a host was doing for you.
+  path:
+    - node: model-host
+      does: >-
+        the alternative — someone else's hardware and contract
+    - node: self-hosting
+      does: >-
+        your infrastructure, your operations, your capacity planning
+      self: true
+    - node: accelerator
+      does: >-
+        which you now have to size, buy and keep busy
+    - node: on-device-inference
+      does: >-
+        the same argument, at the scale of one device
+  returns: >-
+    Wins on privacy and steady-volume cost, loses on nearly everything else
 relations:
   - type: distinguished-from
     target: model-host

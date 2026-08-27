@@ -34,6 +34,26 @@ useCase:
     that comparative judgment into a trainable signal: rank outputs, fit a
     reward model to the rankings, and optimise the model against it. It is the
     method for teaching things that are easier to recognise than to specify.
+flow:
+  scenario: >-
+    Two answers, a person picking the better one, and a model trained on ten
+    thousand of those choices.
+  path:
+    - actor: A preference
+      does: >-
+        one of two answers, chosen by a person
+    - node: reinforcement-learning-from-human-feedback
+      does: >-
+        trained against what people preferred, not a written answer
+      self: true
+    - node: post-training
+      does: >-
+        the stage it belongs to
+    - node: model
+      does: >-
+        whose refusals and tone mostly come from here
+  returns: >-
+    Where two vendors' models start disagreeing about what to refuse
 relations:
   - type: consumed-by
     target: model

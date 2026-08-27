@@ -35,6 +35,26 @@ useCase:
     a retry policy. That makes cost an engineering concern owned by the people
     writing prompts, which is a genuinely new arrangement and one most teams
     discover late.
+flow:
+  scenario: >-
+    An invoice that goes up because usage went up, on a product with no
+    seats to count.
+  path:
+    - node: token
+      does: >-
+        the unit of consumption, in and out
+    - node: token-billing
+      does: >-
+        charged by what you used, not by who has a licence
+      self: true
+    - node: token-pricing
+      does: >-
+        at different rates for input, output and cache reads
+    - node: provisioned-throughput
+      does: >-
+        or by the hour, if variable cost is the problem
+  returns: >-
+    Cost scales with use, which is the point and the risk
 relations:
   - type: consumes
     target: token

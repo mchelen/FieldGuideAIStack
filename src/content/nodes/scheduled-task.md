@@ -32,6 +32,26 @@ useCase:
     or investigate and fix. That question is a permission decision, not a
     scheduling one, and the honest answer is usually that unattended runs get a
     narrower autonomy level than the same agent gets when someone is watching.
+flow:
+  scenario: >-
+    Agent work that runs at 3am on a timetable, with nobody available to
+    approve anything it decides to do.
+  path:
+    - actor: A timetable
+      does: >-
+        not a request — nobody is asking
+    - node: scheduled-task
+      does: >-
+        the run starts on a clock
+      self: true
+    - node: background-execution
+      does: >-
+        and continues with no surface open
+    - node: human-in-the-loop
+      does: >-
+        which is the thing that is missing at 3am
+  returns: >-
+    Nobody to ask, so the permissions have to be right first
 relations:
   - type: consumes
     target: background-execution

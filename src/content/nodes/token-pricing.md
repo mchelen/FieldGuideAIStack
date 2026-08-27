@@ -32,6 +32,26 @@ useCase:
     short answers and one that is short prompts with long answers cost
     completely different amounts at identical call volumes, and only the token
     mix predicts which is which.
+flow:
+  scenario: >-
+    Four rates on one invoice for what looks like one thing, and a prompt
+    whose layout decides which apply.
+  path:
+    - node: token-billing
+      does: >-
+        charges by consumption, counted separately in and out
+    - node: token-pricing
+      does: >-
+        input, output and cached input all priced differently
+      self: true
+    - node: prompt-caching
+      does: >-
+        which is the cheapest of them, by an order of magnitude
+    - node: cost-per-task
+      does: >-
+        and the number that actually matters, once retries are counted
+  returns: >-
+    Prompt layout is a pricing decision
 relations:
   - type: part-of
     target: token-billing

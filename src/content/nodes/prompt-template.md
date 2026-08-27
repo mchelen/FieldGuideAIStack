@@ -27,6 +27,26 @@ useCase:
     it is what makes [evaluation](evaluation) possible at all — you cannot measure whether a
     change helped if every caller is running a different prompt. The discipline
     that follows is the point: version it, test it, and change it in one place.
+flow:
+  scenario: >-
+    A prompt that used to live in three source files and now lives in one,
+    with a history.
+  path:
+    - actor: A prompt
+      does: >-
+        copied into three places, and drifting
+    - node: prompt-template
+      does: >-
+        one reusable text with slots for what varies
+      self: true
+    - node: prompt-engineering
+      does: >-
+        versioned, evaluated, and reviewed like code
+    - node: prompt-injection
+      does: >-
+        and a slot is exactly where untrusted text arrives
+  returns: >-
+    A file with a diff beats a string in three places
 relations:
   - type: kind-of
     target: prompt-engineering

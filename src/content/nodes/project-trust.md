@@ -31,6 +31,26 @@ useCase:
     instructions that widen what runs without asking. Trust is the gate between
     those two things, which is why it is asked once per directory and why
     accepting it casually undoes work that a permission model did carefully.
+flow:
+  scenario: >-
+    Opening an unfamiliar repository in an agent, where the repository
+    itself can configure the agent.
+  path:
+    - actor: A repository
+      does: >-
+        cloned, and not yet vetted by anyone
+    - node: project-trust
+      does: >-
+        until it is trusted, its configuration is held back
+      self: true
+    - node: sandbox
+      does: >-
+        and what does run, runs bounded
+    - node: permission-model
+      does: >-
+        the wider policy this is one gate in
+  returns: >-
+    A repo can carry instructions, which is the whole point
 relations:
   - type: part-of
     target: permission-model

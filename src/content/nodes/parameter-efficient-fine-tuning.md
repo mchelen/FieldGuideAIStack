@@ -33,6 +33,23 @@ useCase:
     swapped at load time, or in some serving stacks per request. The economics
     of per-customer and per-task model customisation rest almost entirely on
     this difference.
+flow:
+  scenario: >-
+    Twenty customer-specific variants of one model, without twenty full
+    copies of its weights.
+  path:
+    - node: fine-tuning
+      does: >-
+        the goal — a model adapted to one task
+    - node: parameter-efficient-fine-tuning
+      does: >-
+        freeze the base, train a small number of new weights
+      self: true
+    - node: parameter
+      does: >-
+        so what is stored per variant is megabytes, not gigabytes
+  returns: >-
+    One base model, many small adapters beside it
 relations:
   - type: kind-of
     target: fine-tuning

@@ -28,6 +28,26 @@ useCase:
     entire question of what data was sent where. The trade is real capability,
     and it is worth making precisely when the task is narrow enough not to need
     the difference.
+flow:
+  scenario: >-
+    A model that has to run on a laptop, where the frontier model is not an
+    option at any price.
+  path:
+    - actor: A constraint
+      does: >-
+        a laptop, offline, with a few gigabytes
+    - node: small-language-model
+      does: >-
+        small enough to run where a frontier model cannot
+      self: true
+    - node: large-language-model
+      does: >-
+        the comparison it always loses on open-ended work
+    - node: model
+      does: >-
+        and the same contract, at a different size
+  returns: >-
+    Latency, cost and privacy — and a narrower range
 relations:
   - type: kind-of
     target: model

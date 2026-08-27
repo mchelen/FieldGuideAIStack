@@ -34,6 +34,26 @@ useCase:
     having been trained to. The cost is [latency](latency) and tokens; the gain shows up on
     exactly the tasks where the first token commits you to an answer you have
     not worked out yet.
+flow:
+  scenario: >-
+    A model that pauses before answering, having been trained to, and is
+    worth the wait on some tasks and not others.
+  path:
+    - actor: A hard problem
+      does: >-
+        one where the first attempt is usually wrong
+    - node: reasoning-model
+      does: >-
+        trained to work through it in steps before answering
+      self: true
+    - node: chain-of-thought-prompting
+      does: >-
+        the same behaviour, previously asked for in the prompt
+    - node: test-time-compute
+      does: >-
+        spent by default rather than on request
+  returns: >-
+    Latency and tokens, for accuracy on some tasks only
 relations:
   - type: kind-of
     target: model

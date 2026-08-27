@@ -24,6 +24,26 @@ useCase:
     the agent did. This is why per-tool permissioning is weaker than it looks:
     approving each capability separately approves every combination of them, and
     the combinations are where the damage is.
+flow:
+  scenario: >-
+    Every action allowed, every tool used as designed, and an outcome nobody
+    would have approved.
+  path:
+    - node: tool-use
+      does: >-
+        the agent calls something it is permitted to call
+    - node: tool-misuse
+      does: >-
+        used exactly as designed, toward something harmful
+      self: true
+    - node: excessive-agency
+      does: >-
+        which is usually why the tool was reachable at all
+    - node: data-exfiltration
+      does: >-
+        the common shape it takes
+  returns: >-
+    Nothing was broken into. Everything was permitted.
 relations:
   - type: consumes
     target: tool-use

@@ -33,6 +33,23 @@ useCase:
     a malformed parameter before it becomes a runtime error. None of it is hard
     and all of it is tedious, which is precisely the work a client library is
     for.
+flow:
+  scenario: >-
+    Types, retries and streaming that every caller would otherwise write
+    again, shipped by the vendor instead.
+  path:
+    - node: inference-api
+      does: >-
+        the HTTP contract underneath
+    - node: software-development-kit
+      does: >-
+        the vendor library wrapping it
+      self: true
+    - node: harness
+      does: >-
+        which uses it rather than writing HTTP by hand
+  returns: >-
+    Convenience, and a second thing to keep current
 relations:
   - type: consumes
     target: inference-api

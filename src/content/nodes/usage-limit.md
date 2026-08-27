@@ -34,6 +34,23 @@ useCase:
     helps. Reading the error body rather than the status is the whole
     diagnosis, and building retry logic that cannot tell them apart guarantees
     a job that hammers an endpoint for hours to no effect.
+flow:
+  scenario: >-
+    A plan that stops working on the twenty-eighth of the month, having
+    worked fine on the twenty-seventh.
+  path:
+    - node: subscription-tier
+      does: >-
+        the plan, and what it includes
+    - node: usage-limit
+      does: >-
+        the ceiling on consumption over a period
+      self: true
+    - node: rate-limit
+      does: >-
+        the other ceiling, which shapes traffic rather than total
+  returns: >-
+    One shapes the month, the other shapes the minute
 relations:
   - type: distinguished-from
     target: rate-limit

@@ -30,6 +30,23 @@ useCase:
     how promising each looks, expands the good ones and abandons the dead ends.
     It is ordinary search, with the model supplying both the candidate moves and
     the position [evaluation](evaluation).
+flow:
+  scenario: >-
+    A puzzle where the first plausible line of reasoning is wrong, and
+    committing to it early is the whole failure.
+  path:
+    - node: chain-of-thought-prompting
+      does: >-
+        one line of reasoning, followed to the end
+    - node: tree-of-thoughts
+      does: >-
+        several branches, evaluated, with backtracking
+      self: true
+    - node: self-consistency
+      does: >-
+        the cheaper cousin — sample several, take the majority
+  returns: >-
+    Many times the tokens, for the problems that need it
 relations:
   - type: consumes
     target: chain-of-thought-prompting

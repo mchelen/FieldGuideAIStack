@@ -31,6 +31,26 @@ useCase:
     The reason not to put it in the always-loaded instructions file is
     economics: a procedure needed twice a month would otherwise occupy the
     context window on every call for the rest of the month.
+flow:
+  scenario: >-
+    A procedure your team does the same way every time, taught to an agent
+    once rather than pasted in each time.
+  path:
+    - actor: A procedure
+      does: >-
+        repeatable, and specific to how you work
+    - node: skill
+      does: >-
+        packaged instructions, loaded when they are relevant
+      self: true
+    - node: context-window
+      does: >-
+        so it occupies space only when it is needed
+    - node: agent
+      does: >-
+        which now follows it without being reminded
+  returns: >-
+    Loaded on relevance, not pasted on every call
 relations:
   - type: consumed-by
     target: agent

@@ -169,8 +169,16 @@ any new development work.
   declared in frontmatter. A picture of the wrong pipeline is worse than no
   picture, because it looks authoritative.
 - Missing illustrations are one aggregated warning listing the first twelve
-  ids. The backlog starts at nearly every page, and a warning nobody can read
+  ids. The backlog started at nearly every page, and a warning nobody can read
   to the end of is a warning nobody reads.
+- **That backlog is now empty.** All 155 concepts carry one, so the warning
+  firing again means a new page arrived without an illustration -- a regression
+  rather than a known gap.
+- Wrapping is by estimated width, not by character count: a character is not a
+  width, and "which compares models, and answers" is thirty-four of them and
+  far too wide. The advance table in `src/lib/flow.ts` is deliberately
+  conservative -- measured against every label in the guide, it never
+  under-estimates -- and the label check is what makes it safe to approximate.
 
 ## Fieldwork
 - The fictional organisation lives in `src/content/scenarios/` and

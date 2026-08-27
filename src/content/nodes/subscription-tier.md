@@ -29,6 +29,26 @@ useCase:
     first in any disagreement about what a product does, and it is why this
     guide records capabilities per product with sources rather than from
     experience.
+flow:
+  scenario: >-
+    Two accounts on the same product where one has a capability the other
+    cannot buy at any usage level.
+  path:
+    - actor: A capability
+      does: >-
+        present in the product, absent from your account
+    - node: subscription-tier
+      does: >-
+        the packaging that decides what you get at all
+      self: true
+    - node: usage-limit
+      does: >-
+        and how much of it, over a period
+    - node: token-billing
+      does: >-
+        as opposed to paying for what you actually used
+  returns: >-
+    Which features exist for you is decided here, not by usage
 relations:
   - type: consumes
     target: usage-limit

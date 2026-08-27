@@ -33,6 +33,26 @@ useCase:
     discounted further. It is worth it when the load is predictable and heavy,
     and wasteful the rest of the time, because idle reserved capacity costs
     exactly as much as busy reserved capacity.
+flow:
+  scenario: >-
+    A workload steady enough that paying per token is worse than paying for
+    the capacity itself.
+  path:
+    - actor: Steady load
+      does: >-
+        predictable, heavy, and always there
+    - node: provisioned-throughput
+      does: >-
+        capacity bought by the hour instead of by the token
+      self: true
+    - node: throughput
+      does: >-
+        which is what is actually being reserved
+    - node: token-billing
+      does: >-
+        the variable alternative, and the one you are leaving
+  returns: >-
+    A variable cost converted into a fixed one
 relations:
   - type: distinguished-from
     target: token-billing

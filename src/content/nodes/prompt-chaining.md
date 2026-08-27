@@ -32,6 +32,26 @@ useCase:
     see whether the extraction was wrong, which a single prompt does not let you
     do. The cost is more calls and more latency; the gain is that the system
     becomes debuggable, which for anything in production usually decides it.
+flow:
+  scenario: >-
+    One request asking for a summary, a translation and a tone change, done
+    badly, split into three that are done well.
+  path:
+    - actor: A composite task
+      does: >-
+        three jobs asked for in one prompt
+    - node: prompt-chaining
+      does: >-
+        split it: each prompt's output feeds the next
+      self: true
+    - node: prompt-engineering
+      does: >-
+        each link simple enough to evaluate on its own
+    - node: agent
+      does: >-
+        the difference being that the steps are fixed in advance
+  returns: >-
+    Each step inspectable, and each step billed
 relations:
   - type: kind-of
     target: prompt-engineering

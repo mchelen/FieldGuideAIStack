@@ -32,6 +32,26 @@ useCase:
     own. Which of the three a model ships under decides whether a
     commercialisation plan is viable, and it is a licence question rather than a
     technical one.
+flow:
+  scenario: >-
+    A licence with almost no conditions, written for source code, applied to
+    a set of weights.
+  path:
+    - actor: A licence file
+      does: >-
+        beside the weights, and short
+    - node: permissive-license
+      does: >-
+        reuse with minimal conditions — attribution, no warranty
+      self: true
+    - node: copyleft
+      does: >-
+        the other axis, where derivatives must carry the same terms
+    - node: open-weights
+      does: >-
+        which is a claim about availability, not about either
+  returns: >-
+    Written for source, and weights are not source
 relations:
   - type: distinguished-from
     target: copyleft

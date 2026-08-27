@@ -31,6 +31,26 @@ useCase:
     guidance at a fraction of the tokens, and without the model latching onto
     incidental details of whichever examples were chosen. The trade is that
     structure is harder to write than examples are to collect.
+flow:
+  scenario: >-
+    A prompt about the shape of a problem rather than its content, and a
+    second model rewriting the first one's prompt.
+  path:
+    - actor: A weak prompt
+      does: >-
+        producing inconsistent output
+    - node: meta-prompting
+      does: >-
+        prompt about structure, not content — or have a model rewrite it
+      self: true
+    - node: few-shot-prompting
+      does: >-
+        the alternative it is usually measured against
+    - node: prompt-engineering
+      does: >-
+        and the evaluation set that says which one won
+  returns: >-
+    Fewer tokens than examples, and harder to predict
 relations:
   - type: kind-of
     target: prompt-engineering
