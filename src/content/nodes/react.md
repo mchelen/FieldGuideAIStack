@@ -32,6 +32,23 @@ useCase:
     Interleaving lets the model decide the next action from the last
     observation, and revise the plan when an observation contradicts it. Nearly
     every [agent framework](harness) in use implements some version of this loop.
+flow:
+  scenario: >-
+    A loop where thinking and acting alternate, so what came back from the
+    last tool call changes the next thought.
+  path:
+    - node: chain-of-thought-prompting
+      does: >-
+        reasoning written out as text
+    - node: react
+      does: >-
+        interleaved with tool calls, rather than done all at once
+      self: true
+    - node: agentic-loop
+      does: >-
+        which is the shape most agent loops still have
+  returns: >-
+    Thinking updates the plan; acting updates the facts
 relations:
   - type: kind-of
     target: agentic-loop

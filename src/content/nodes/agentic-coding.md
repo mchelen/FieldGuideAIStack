@@ -30,6 +30,26 @@ useCase:
     the files, runs the suite itself, sees which fixes worked, and iterates.
     The difference is not code quality — it is that the feedback loop closed
     without a human ferrying results back and forth.
+flow:
+  scenario: >-
+    An agent that edits files, runs the suite, reads the failure and edits
+    again — rather than suggesting a line.
+  path:
+    - actor: A failing test
+      does: >-
+        the goal, and the thing that says when it is met
+    - node: agentic-coding
+      does: >-
+        the agent writes, runs and fixes rather than suggesting
+      self: true
+    - node: command-execution
+      does: >-
+        which is what makes running it possible at all
+    - node: verification-loop
+      does: >-
+        and what lets the loop stop on evidence
+  returns: >-
+    Review shifts from reading lines to reading diffs
 relations:
   - type: consumes
     target: command-execution

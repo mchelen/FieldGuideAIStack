@@ -36,6 +36,26 @@ useCase:
     Running it catches it immediately and unambiguously, and the error message
     tells the agent what to fix. This is why [agentic coding](agentic-coding) works at all, and
     why the same agent given no way to execute anything is a much weaker tool.
+flow:
+  scenario: >-
+    An agent that keeps going until the test suite is green, rather than
+    until it believes the work is done.
+  path:
+    - node: agentic-loop
+      does: >-
+        acts, observes, acts again
+    - node: command-execution
+      does: >-
+        runs the suite and returns the real result
+    - node: verification-loop
+      does: >-
+        an external check the model does not author
+      self: true
+    - node: reflection
+      does: >-
+        the weaker version, where the model grades its own work
+  returns: >-
+    Something outside the model has to say when it is done
 relations:
   - type: part-of
     target: agentic-loop

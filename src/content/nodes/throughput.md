@@ -34,6 +34,26 @@ useCase:
     throughput, without making any single one faster. Knowing which of the two
     numbers a purchase improves is the difference between a useful upgrade and
     an expensive one.
+flow:
+  scenario: >-
+    A deployment sized for a thousand concurrent users, where the number
+    that matters is not how fast one reply is.
+  path:
+    - node: accelerator
+      does: >-
+        one deployment, with fixed memory and fixed compute
+    - node: throughput
+      does: >-
+        total tokens per second across everyone being served
+      self: true
+    - node: latency
+      does: >-
+        which trades against it — batching helps one and hurts the other
+    - node: provisioned-throughput
+      does: >-
+        and can be bought by the hour instead of by the token
+  returns: >-
+    Batching raises this and raises waiting at the same time
 relations:
   - type: consumes
     target: accelerator

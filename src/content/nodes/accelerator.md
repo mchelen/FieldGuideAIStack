@@ -35,6 +35,26 @@ useCase:
     throughput matters for training and for serving many requests at once, and
     is usually the least binding of the three for a single-user deployment —
     which is why the headline number on the box is the least useful one.
+flow:
+  scenario: >-
+    A deployment that fits or does not fit, decided by memory capacity
+    before anything about speed comes up.
+  path:
+    - node: model
+      does: >-
+        weights that have to be resident to be served
+    - node: kv-cache
+      does: >-
+        plus per-request state for every concurrent conversation
+    - node: accelerator
+      does: >-
+        and both have to fit in its memory, or nothing runs
+      self: true
+    - node: throughput
+      does: >-
+        only then does how fast it goes become the question
+  returns: >-
+    Capacity is pass or fail. Speed is a negotiation.
 relations:
   - type: hosts
     target: model

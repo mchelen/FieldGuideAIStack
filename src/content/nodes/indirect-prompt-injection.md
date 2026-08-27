@@ -30,6 +30,26 @@ useCase:
     aimed at the user — confirmation prompts, intent checks, rate limits — sits
     on the wrong side of the problem, because the person being asked to confirm
     has no idea there is anything to confirm.
+flow:
+  scenario: >-
+    Nothing the user typed was hostile, and the instruction the agent
+    followed came from a page it fetched.
+  path:
+    - actor: A web page
+      does: >-
+        content the agent was asked to read
+    - node: browser-automation
+      does: >-
+        the agent fetches it as part of the task
+    - node: indirect-prompt-injection
+      does: >-
+        the instruction arrives through content, not through the user
+      self: true
+    - node: prompt-injection
+      does: >-
+        the general failure it is a case of
+  returns: >-
+    The user is not the attacker, and cannot see the attack
 relations:
   - type: kind-of
     target: prompt-injection

@@ -28,6 +28,26 @@ summary: A defined term, not a vibe — under OSI's Open Source AI Definition 1.
 fieldMark: Test it against the four freedoms and the three components. Almost
   every model marketed as "open source" fails on data information, which is the
   component nobody ships.
+flow:
+  scenario: >-
+    A release described as open source, measured against a definition that
+    asks for three things rather than one.
+  path:
+    - actor: A release
+      does: >-
+        described as open, in a press announcement
+    - node: open-weights
+      does: >-
+        the parameters are downloadable — one of the three
+    - node: open-source-ai
+      does: >-
+        which also asks for the code and for data information
+      self: true
+    - node: model-card
+      does: >-
+        where most of the required disclosure would have to live
+  returns: >-
+    A defined term. Most releases meet part of it.
 relations:
   - type: distinguished-from
     target: model

@@ -30,6 +30,26 @@ useCase:
     whenever the [base model](model) moves, whereas a prompt is a string you can edit.
     Try the prompt first; reach for fine-tuning when the failures are about
     form rather than knowledge.
+flow:
+  scenario: >-
+    A model that gets the task right but never in the format the downstream
+    system needs, on a few thousand examples.
+  path:
+    - node: pretrained-model
+      does: >-
+        the starting point — someone else's expensive training run
+    - node: fine-tuning
+      does: >-
+        a second pass, on a much smaller set of task-specific examples
+      self: true
+    - node: parameter-efficient-fine-tuning
+      does: >-
+        usually this, so the base weights are never copied
+    - node: parameter
+      does: >-
+        what actually changes, and how much of it
+  returns: >-
+    A dataset and a model to maintain, forever
 relations:
   - type: consumes
     target: parameter

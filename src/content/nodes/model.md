@@ -31,6 +31,29 @@ useCase:
     and executes. The question is almost always really about a product, and
     separating the two is the single most useful move available when reasoning
     about what any of this can do.
+flow:
+  scenario: >-
+    Someone types a question into a chat assistant and watches an answer
+    appear, and wants to know which part did what.
+  path:
+    - actor: You
+      does: >-
+        type a question and press enter
+    - node: harness
+      does: >-
+        assembles the system prompt, the history, and your question
+    - node: inference-api
+      does: >-
+        carries the whole thing as one request
+    - node: model
+      does: >-
+        returns a probability distribution over the next token, repeatedly
+      self: true
+    - node: token
+      does: >-
+        the only units that cross the boundary, in either direction
+  returns: >-
+    No memory, no tools, no files — those are all the harness
 relations:
   - type: distinguished-from
     target: harness

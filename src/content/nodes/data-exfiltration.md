@@ -32,6 +32,23 @@ useCase:
     tools it was legitimately granted to carry it out. Host monitoring sees
     approved software making approved calls under valid credentials, which is
     exactly why this class of incident is caught late or not at all.
+flow:
+  scenario: >-
+    An agent with legitimate access to a mailbox and legitimate access to
+    the web, and one instruction joining them.
+  path:
+    - node: prompt-injection
+      does: >-
+        an instruction arrives inside content the agent reads
+    - node: data-exfiltration
+      does: >-
+        it asks the agent to send something out, using its own access
+      self: true
+    - node: tool-misuse
+      does: >-
+        every call it makes is one it was allowed to make
+  returns: >-
+    No credential is stolen. The agent is the channel.
 relations:
   - type: consumed-by
     target: prompt-injection

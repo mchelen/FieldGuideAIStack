@@ -33,6 +33,26 @@ useCase:
     published model has seen the benchmark discussed, and often the benchmark
     itself. The score is evidence about the benchmark; your own eval set is
     evidence about your product, and only the second one predicts anything.
+flow:
+  scenario: >-
+    A model release quoting a benchmark score, and a decision about whether
+    that number describes your work.
+  path:
+    - node: benchmark
+      does: >-
+        a shared test, so results are comparable across models
+      self: true
+    - node: leaderboard
+      does: >-
+        where the comparison is published and ranked
+    - node: data-contamination
+      does: >-
+        and the risk that the test was in the training data
+    - node: regression-testing
+      does: >-
+        which is the different question: better than your last release?
+  returns: >-
+    Shared makes it comparable, and makes it a target
 relations:
   - type: kind-of
     target: evaluation

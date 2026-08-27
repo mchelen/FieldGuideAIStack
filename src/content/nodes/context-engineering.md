@@ -29,6 +29,26 @@ useCase:
     window only postpones it. What fixes it is a policy: keep the task
     statement, summarise finished work, drop stale tool output, re-fetch on
     demand.
+flow:
+  scenario: >-
+    An agent forty turns into a task starts losing track of what it was
+    doing, and the context window is nearly full.
+  path:
+    - actor: Forty turns of history
+      does: >-
+        tool output, file contents, half-finished plans
+    - node: context-engineering
+      does: >-
+        decides what stays, what is dropped, what is summarised
+      self: true
+    - node: compaction
+      does: >-
+        replaces finished work with a summary of it
+    - node: context-window
+      does: >-
+        what survives has to fit here, on every single call
+  returns: >-
+    Cost and latency fall with it — you pay for what you send
 relations:
   - type: consumes
     target: context-window

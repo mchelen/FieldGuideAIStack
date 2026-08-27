@@ -32,6 +32,29 @@ useCase:
     an afternoon. The general language ability the team wants was learned from
     text that has nothing to do with their industry, which is precisely why
     they do not have to pay for it again.
+flow:
+  scenario: >-
+    A model is said to have cost tens of millions of dollars, and almost all
+    of that number is one training pass.
+  path:
+    - actor: A corpus
+      does: >-
+        an enormous general collection of text
+    - node: pretraining
+      does: >-
+        the first and by far the most expensive pass
+      self: true
+    - node: self-supervised-learning
+      does: >-
+        no labels — the next token is the label
+    - node: foundation-model
+      does: >-
+        the artifact that comes out, general and not yet aimed
+    - node: post-training
+      does: >-
+        what makes it answer questions instead of continuing text
+  returns: >-
+    Everything after this is cheap by comparison
 relations:
   - type: consumed-by
     target: foundation-model

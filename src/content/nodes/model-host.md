@@ -25,6 +25,26 @@ useCase:
     availability is now further from the model than it appears — and the
     [latency](latency) you measure is a property of that deployment rather than of the
     model.
+flow:
+  scenario: >-
+    The same open-weights model bought from two vendors, with different
+    latency, different terms, and the same weights.
+  path:
+    - node: model-provider
+      does: >-
+        trained the weights and licensed them for others to run
+    - node: model-host
+      does: >-
+        runs them on its own hardware, under its own contract
+      self: true
+    - node: accelerator
+      does: >-
+        the GPUs that deployment actually sits on
+    - node: inference-api
+      does: >-
+        what you call — the host's endpoint, not the provider's
+  returns: >-
+    Latency and availability are properties of the deployment
 relations:
   - type: hosts
     target: model

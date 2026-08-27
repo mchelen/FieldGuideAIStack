@@ -26,6 +26,23 @@ useCase:
     list is accurate and answers a different question than the one being asked.
     Measuring the completed job — including the runs that did not complete — is
     the only estimate that predicts a bill.
+flow:
+  scenario: >-
+    A per-token price that looks cheap, and a finished job that took
+    nineteen calls and two retries.
+  path:
+    - node: agentic-loop
+      does: >-
+        one instruction becomes many calls
+    - node: token-pricing
+      does: >-
+        each call is priced per token, which looks small
+    - node: cost-per-task
+      does: >-
+        what one completed job costs once retries are counted
+      self: true
+  returns: >-
+    The unit that matters is the job, not the call
 relations:
   - type: consumes
     target: token-pricing

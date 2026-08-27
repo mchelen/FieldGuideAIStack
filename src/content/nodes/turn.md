@@ -32,6 +32,26 @@ useCase:
     tool result so far. The unit the user perceives and the unit the bill is
     computed in are different, and mistaking one for the other is the most
     common error in budgeting agentic work.
+flow:
+  scenario: >-
+    A billing line showing 340 items for one conversation, and a question
+    about what an item is.
+  path:
+    - actor: One exchange
+      does: >-
+        a message, and the reply to it
+    - node: turn
+      does: >-
+        the unit a conversation is counted and logged in
+      self: true
+    - node: inference-api
+      does: >-
+        one call per turn, each carrying the whole history again
+    - node: session
+      does: >-
+        which is all of them, held together and resumable
+  returns: >-
+    An agent takes many per instruction, and pays for each
 relations:
   - type: contains
     target: agentic-loop

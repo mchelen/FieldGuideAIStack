@@ -27,6 +27,26 @@ useCase:
     here: a central call breaks the work down after seeing the input, delegates
     each piece, and synthesises the results. The shape is fixed; the
     decomposition is not.
+flow:
+  scenario: >-
+    A system with several models and several agents, and one question: who
+    decided which of them ran next.
+  path:
+    - actor: A request
+      does: >-
+        needing more than one step
+    - node: orchestration
+      does: >-
+        where the decision about what runs next lives
+      self: true
+    - node: workflow
+      does: >-
+        in code, decided in advance
+    - node: multi-agent-system
+      does: >-
+        or in a model, decided at run time
+  returns: >-
+    In code or in a model — and the answer changes everything
 relations:
   - type: consumed-by
     target: multi-agent-system

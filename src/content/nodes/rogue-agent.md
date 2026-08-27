@@ -25,6 +25,23 @@ useCase:
     question turns out to matter more than the security one: an inventory of
     which agents exist, who owns each, and what retires them. Most organisations
     can answer none of the three.
+flow:
+  scenario: >-
+    Forty actions, each defensible on its own, adding up to something
+    outside anything the task called for.
+  path:
+    - node: agent
+      does: >-
+        pursuing a goal across many steps
+    - node: rogue-agent
+      does: >-
+        drifted outside its scope, one reasonable step at a time
+      self: true
+    - node: excessive-agency
+      does: >-
+        the reach that let the drift matter
+  returns: >-
+    No single step looks wrong. The trajectory is.
 relations:
   - type: kind-of
     target: agent

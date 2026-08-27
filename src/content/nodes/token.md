@@ -31,6 +31,29 @@ useCase:
     another, so a budget set in characters — or in "messages" — silently means
     something different per locale. Counting in the unit the model actually
     charges in is the fix.
+flow:
+  scenario: >-
+    A 40-page contract pasted into a chat window, and a limit that turns out
+    to be counted in something other than pages.
+  path:
+    - actor: The contract
+      does: >-
+        40 pages of plain text, pasted in whole
+    - node: tokenizer
+      does: >-
+        splits it into word fragments, not words
+    - node: token
+      does: >-
+        68,000 of them — the unit every limit and price is counted in
+      self: true
+    - node: context-window
+      does: >-
+        holds 200,000, so it fits, with room for the conversation
+    - node: token-billing
+      does: >-
+        charges for all 68,000, again on every following turn
+  returns: >-
+    Length is a token count, not a page count
 relations:
   - type: consumed-by
     target: model

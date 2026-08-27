@@ -29,6 +29,29 @@ useCase:
     is ordinary code in the harness — call, execute what came back, append the
     result, call again. The model supplies judgment one step at a time and
     never sees the loop it is inside.
+flow:
+  scenario: >-
+    Step 7 of 30 in a run to make a test suite pass, with the last command's
+    output as the only new information.
+  path:
+    - node: agent
+      does: >-
+        holds the goal across the whole run
+    - node: agentic-loop
+      does: >-
+        observe the last result, reason about it, act again
+      self: true
+    - node: inference-api
+      does: >-
+        one call per pass — the loop belongs to the harness, not the model
+    - node: turn
+      does: >-
+        each pass is one of these, billed and logged separately
+    - node: verification-loop
+      does: >-
+        running the test is what lets the loop stop on something real
+  returns: >-
+    Cost and blast radius both scale with the number of passes
 relations:
   - type: part-of
     target: agent

@@ -33,6 +33,26 @@ useCase:
     "read it once at adoption" insufficient for anything long-lived. This is a
     genuine dependency, and treating it like one means checking it on a
     schedule.
+flow:
+  scenario: >-
+    A contract term that decides what a deployment may be used for,
+    incorporated by reference into a licence nobody read.
+  path:
+    - actor: A use
+      does: >-
+        something someone wants to build
+    - node: acceptable-use-policy
+      does: >-
+        the vendor's list of what may not be done
+      self: true
+    - node: community-license
+      does: >-
+        which incorporates it by reference, and can change
+    - node: guardrails
+      does: >-
+        the enforcement, which is a different thing from the rule
+  returns: >-
+    A rule you agreed to; enforcement is separate
 relations:
   - type: consumed-by
     target: community-license

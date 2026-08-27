@@ -33,6 +33,23 @@ useCase:
     representation, which is exactly the job. Using the wrong half is a common
     early mistake in retrieval work, and it produces something that technically
     runs and retrieves badly.
+flow:
+  scenario: >-
+    A choice made once in an architecture that decides what a model is good
+    for ever after.
+  path:
+    - node: transformer
+      does: >-
+        the original had both halves, for translation
+    - node: encoder-and-decoder
+      does: >-
+        and later models mostly kept one
+      self: true
+    - node: embedding
+      does: >-
+        the encoder half is what produces those
+  returns: >-
+    Decoder-only for generation; encoder-only for understanding
 relations:
   - type: part-of
     target: transformer

@@ -33,6 +33,26 @@ useCase:
     time. The same property explains why asking for the answer first and the
     reasoning after performs worse than the reverse — the answer would be
     committed before the reasoning exists.
+flow:
+  scenario: >-
+    A reply that cannot be revised once written, because each word was
+    chosen given the ones already committed.
+  path:
+    - node: token
+      does: >-
+        one at a time, appended to what came before
+    - node: autoregressive-model
+      does: >-
+        predicts the next from its own previous predictions
+      self: true
+    - node: model
+      does: >-
+        which is every current large language model
+    - node: fill-in-the-middle
+      does: >-
+        and the trick needed to write into a gap instead
+  returns: >-
+    No going back — a bad early token is now context
 relations:
   - type: kind-of
     target: model

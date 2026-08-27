@@ -34,6 +34,23 @@ useCase:
     parties are one account. Giving the agent its own identity restores the
     distinction, which is what makes least privilege and separation of duties
     enforceable at all.
+flow:
+  scenario: >-
+    An audit log full of actions, all of them attributed to a person who was
+    asleep at the time.
+  path:
+    - node: autonomous-agent
+      does: >-
+        acts without anyone being asked in the moment
+    - node: non-human-identity
+      does: >-
+        the credential it acts under, which should not be a person's
+      self: true
+    - node: permission-model
+      does: >-
+        what that credential is allowed to do, decided separately
+  returns: >-
+    Accountability needs the actor to be nameable
 relations:
   - type: part-of
     target: permission-model

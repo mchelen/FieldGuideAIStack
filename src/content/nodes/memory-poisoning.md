@@ -30,6 +30,23 @@ useCase:
     the staleness question have one answer: what can write, what validates it,
     and how does anything ever get retracted. Most systems have a good answer to
     the first and no answer to the third.
+flow:
+  scenario: >-
+    A false fact written into an agent's notes on Tuesday and reasoned from
+    as true every day after.
+  path:
+    - node: prompt-injection
+      does: >-
+        gets one instruction in, once
+    - node: memory-poisoning
+      does: >-
+        which is to write something false into what persists
+      self: true
+    - node: memory
+      does: >-
+        and it is read back as established fact on every later run
+  returns: >-
+    One injection, then persistence does the rest
 relations:
   - type: consumes
     target: memory

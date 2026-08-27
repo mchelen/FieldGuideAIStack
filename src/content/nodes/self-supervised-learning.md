@@ -28,6 +28,26 @@ useCase:
     unlabelled corpus into a supervised problem with a free, exactly correct
     label for every position — which removes the annotation bottleneck that
     bounded the scale of everything before it.
+flow:
+  scenario: >-
+    A training run over a trillion tokens with nobody labelling anything,
+    because the next word is the label.
+  path:
+    - actor: Unlabelled text
+      does: >-
+        an enormous amount of it, and no annotators
+    - node: self-supervised-learning
+      does: >-
+        the labels come from the data's own structure
+      self: true
+    - node: pretraining
+      does: >-
+        which is this, at the largest scale anyone runs
+    - node: fine-tuning
+      does: >-
+        and where labelled data comes back in, in far smaller amounts
+  returns: >-
+    Scale became possible because labelling stopped being the bottleneck
 relations:
   - type: consumed-by
     target: pretraining

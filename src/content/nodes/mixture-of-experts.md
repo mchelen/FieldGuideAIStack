@@ -30,6 +30,26 @@ useCase:
     than the total. The catch is memory: every expert has to be resident even
     though most are idle, which is why these models are cheap to run at scale
     on a large cluster and awkward to run at all on one machine.
+flow:
+  scenario: >-
+    A model advertised at 400B parameters that costs about as much to run as
+    one a fraction of that size.
+  path:
+    - node: parameter
+      does: >-
+        the headline count, which is the total
+    - node: mixture-of-experts
+      does: >-
+        a router sends each token to a small subset of them
+      self: true
+    - node: transformer
+      does: >-
+        the architecture the routing is built into
+    - actor: The active count
+      does: >-
+        a fraction of the total, and the one that decides what it costs
+  returns: >-
+    Total count and active count are different numbers
 relations:
   - type: part-of
     target: transformer

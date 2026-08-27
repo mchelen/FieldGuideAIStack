@@ -30,6 +30,26 @@ useCase:
     is why plan-then-approve is the most common human-in-the-loop design for
     consequential agent work, and why the approval gate matters more than the
     plan's quality.
+flow:
+  scenario: >-
+    An agent that writes out the steps first, producing a plan a person can
+    read and stop before anything runs.
+  path:
+    - actor: A goal
+      does: >-
+        several steps, none of them taken yet
+    - node: planning
+      does: >-
+        the agent works out the steps and writes them down
+      self: true
+    - node: agentic-loop
+      does: >-
+        then executes them, revising as results come back
+    - node: test-time-compute
+      does: >-
+        and the plan itself is tokens spent before the work
+  returns: >-
+    A plan is text, so it can be read and refused
 relations:
   - type: part-of
     target: agentic-loop

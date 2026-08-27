@@ -32,6 +32,27 @@ useCase:
     undifferentiated text. The more tools the agent holds, the more the failure
     costs, which is why injection is a design constraint on agents rather than a
     bug to be patched out of models.
+flow:
+  scenario: >-
+    A web page the agent was asked to summarise contains a line addressed to
+    the agent instead of the reader.
+  path:
+    - actor: A fetched page
+      does: >-
+        content, with an instruction hidden in it
+    - node: tool-use
+      does: >-
+        the agent fetched it, so it arrives as ordinary tool output
+    - node: prompt-injection
+      does: >-
+        the model reads content as instruction, because it cannot tell them
+        apart
+      self: true
+    - node: data-exfiltration
+      does: >-
+        and the instruction asks it to send something somewhere
+  returns: >-
+    There is no delimiter that fixes this. Only what you allow next.
 relations:
   - type: consumes
     target: tool-use

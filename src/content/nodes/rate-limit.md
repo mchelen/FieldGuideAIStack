@@ -31,6 +31,26 @@ useCase:
     tokens per minute — and any one of them can bind alone. Backing off on
     request count does nothing if the constraint is tokens; sending less per
     request does. Reading which limit the error names is the whole diagnosis.
+flow:
+  scenario: >-
+    A batch job that worked yesterday and now returns 429s at the same
+    volume, on an account nothing changed about.
+  path:
+    - actor: A burst
+      does: >-
+        more requests than usual, in less time than usual
+    - node: inference-api
+      does: >-
+        accepts them until the account's ceiling is reached
+    - node: rate-limit
+      does: >-
+        the ceiling — requests and tokens per minute, per account
+      self: true
+    - node: token
+      does: >-
+        which is what most of the ceilings are actually counted in
+  returns: >-
+    A property of your account, not of the model
 relations:
   - type: part-of
     target: inference-api

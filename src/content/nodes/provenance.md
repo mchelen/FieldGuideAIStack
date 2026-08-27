@@ -32,6 +32,26 @@ useCase:
     the question becomes whether that record is present and verifiable rather
     than whether the pixels look real. Absence of a record proves nothing, which
     is the honest limit of the approach.
+flow:
+  scenario: >-
+    An image, a model, and a dataset, each of which needs an answer to the
+    same question: where did this come from.
+  path:
+    - actor: An artifact
+      does: >-
+        a file, with no history attached to it
+    - node: provenance
+      does: >-
+        evidence of origin, attached to the artifact rather than claimed
+      self: true
+    - node: watermarking
+      does: >-
+        one mechanism, embedded in the content itself
+    - node: ai-bill-of-materials
+      does: >-
+        another, listing what a system was built from
+  returns: >-
+    Attached and checkable, or it is just an assertion
 relations:
   - type: implemented-by
     target: watermarking

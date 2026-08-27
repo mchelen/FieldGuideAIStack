@@ -29,6 +29,29 @@ useCase:
     window](context-window) and what gets dropped. When a comparison of two AI products turns
     out to be a comparison of two harnesses, the model name in the marketing
     was the least informative thing on the page.
+flow:
+  scenario: >-
+    A coding agent is asked to fix a failing test, and does four things the
+    model cannot do by itself.
+  path:
+    - actor: You
+      does: >-
+        ask for the failing test to be fixed
+    - node: harness
+      does: >-
+        builds the prompt, calls the model, executes what it asks for
+      self: true
+    - node: inference-api
+      does: >-
+        the only channel to the model, and the only thing it sees
+    - node: approval-mode
+      does: >-
+        decides whether the next command runs without asking you
+    - node: command-execution
+      does: >-
+        runs the test and hands the output back as the next input
+  returns: >-
+    Every capability in the product is on this side of the call
 relations:
   - type: consumes
     target: inference-api

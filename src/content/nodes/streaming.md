@@ -27,6 +27,26 @@ useCase:
     seconds. The total is identical; the experience is not comparable. This is
     also why streaming is close to mandatory for anything interactive and
     unnecessary for anything batch.
+flow:
+  scenario: >-
+    Two replies that take the same eight seconds, one of which starts
+    arriving after 300 milliseconds.
+  path:
+    - actor: A request
+      does: >-
+        sent, with streaming enabled
+    - node: inference-api
+      does: >-
+        keeps the connection open instead of buffering
+    - node: token
+      does: >-
+        each one is sent the moment it is produced
+    - node: streaming
+      does: >-
+        which is why a chat window feels quick before it is finished
+      self: true
+  returns: >-
+    Total time unchanged. Perceived time, transformed.
 relations:
   - type: part-of
     target: inference-api

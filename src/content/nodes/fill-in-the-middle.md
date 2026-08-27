@@ -32,6 +32,26 @@ useCase:
     teaches the model to condition on both sides, which is what makes inline
     completion useful rather than merely plausible. Almost every code model
     ships with it for exactly this reason.
+flow:
+  scenario: >-
+    A cursor in the middle of a function, with code above it and code below
+    it that both have to be honoured.
+  path:
+    - actor: A cursor
+      does: >-
+        text before it, and text after it
+    - node: autoregressive-model
+      does: >-
+        which by default only continues forwards
+    - node: fill-in-the-middle
+      does: >-
+        generate given both sides, by reordering the training data
+      self: true
+    - node: agentic-coding
+      does: >-
+        the capability behind every inline code completion
+  returns: >-
+    Same model, different arrangement of the prompt
 relations:
   - type: consumes
     target: autoregressive-model

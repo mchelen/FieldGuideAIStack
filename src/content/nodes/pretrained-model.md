@@ -33,6 +33,26 @@ useCase:
     compete. Starting from the base model means doing that work yourself — more
     expensive, and the only way to control it fully. Which variant a project
     should download is decided by whether it intends to do post-training at all.
+flow:
+  scenario: >-
+    Starting a project with someone else's training run rather than with
+    random numbers.
+  path:
+    - actor: A task
+      does: >-
+        a few thousand labelled examples, and no budget for a training run
+    - node: pretrained-model
+      does: >-
+        weights that already encode general language
+      self: true
+    - node: fine-tuning
+      does: >-
+        a short second pass, on your examples
+    - node: model
+      does: >-
+        and what you ship is still one artifact
+  returns: >-
+    The expensive part was paid by someone else
 relations:
   - type: kind-of
     target: model

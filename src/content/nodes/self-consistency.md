@@ -28,6 +28,23 @@ useCase:
     result and no agreement among the incorrect ones. The cost is five calls
     instead of one, which makes this a technique for high-value questions
     rather than a default.
+flow:
+  scenario: >-
+    The same question asked five times with different sampling, and an
+    answer chosen by vote rather than by luck.
+  path:
+    - node: chain-of-thought-prompting
+      does: >-
+        each run reasons its way to an answer
+    - node: self-consistency
+      does: >-
+        sample several independently, take the majority
+      self: true
+    - node: test-time-compute
+      does: >-
+        which is what the extra samples are
+  returns: >-
+    Five times the cost, for the questions that earn it
 relations:
   - type: consumes
     target: chain-of-thought-prompting

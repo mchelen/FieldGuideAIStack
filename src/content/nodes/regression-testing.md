@@ -33,6 +33,26 @@ useCase:
     the most common way model-backed systems degrade, and it is invisible
     without a saved set of cases that gets re-run on every change — which is
     exactly what regression testing is.
+flow:
+  scenario: >-
+    A prompt change that fixed one case and quietly broke four others nobody
+    thought to re-check.
+  path:
+    - actor: A change
+      does: >-
+        an improvement, on the case it was made for
+    - node: regression-testing
+      does: >-
+        re-runs what already worked, against your own last release
+      self: true
+    - node: evaluation
+      does: >-
+        over a fixed set, so "unchanged" means something
+    - node: benchmark
+      does: >-
+        which compares models, and answers a different question
+  returns: >-
+    Non-deterministic output makes "unchanged" a threshold
 relations:
   - type: kind-of
     target: evaluation

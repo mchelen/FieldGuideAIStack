@@ -30,6 +30,26 @@ useCase:
     being worth building: responses can be demonstrably improved when a human
     articulates feedback, and the model can produce that kind of feedback
     itself.
+flow:
+  scenario: >-
+    A draft passed back to the same model with one instruction: find what is
+    wrong with this.
+  path:
+    - actor: A draft
+      does: >-
+        the first output, not yet passed on
+    - node: reflection
+      does: >-
+        the same model examines it in a critical role
+      self: true
+    - node: agentic-loop
+      does: >-
+        and the revision becomes the next step
+    - node: verification-loop
+      does: >-
+        as opposed to an external check it did not author
+  returns: >-
+    Same model, so the same blind spots review the work
 relations:
   - type: part-of
     target: agentic-loop

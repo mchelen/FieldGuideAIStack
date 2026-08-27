@@ -32,6 +32,26 @@ useCase:
     the day it applies. Whether it matters depends entirely on the ambition of
     the product — which is exactly why it should be read before rather than
     after.
+flow:
+  scenario: >-
+    Downloadable weights under terms written by the vendor rather than by
+    anyone in the licence-approval business.
+  path:
+    - actor: A download
+      does: >-
+        weights, with a licence file beside them
+    - node: community-license
+      does: >-
+        the vendor's own terms, not an approved open-source licence
+      self: true
+    - node: acceptable-use-policy
+      does: >-
+        incorporated by reference, and changeable later
+    - node: open-source-ai
+      does: >-
+        the definition these terms are usually written to miss
+  returns: >-
+    Downloadable is not the same as unrestricted
 relations:
   - type: distinguished-from
     target: open-source-ai

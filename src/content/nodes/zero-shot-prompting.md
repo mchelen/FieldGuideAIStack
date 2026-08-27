@@ -26,6 +26,26 @@ useCase:
     model picks a plausible one each time. This is the exact failure that
     one example in the prompt fixes, and it is why [few-shot prompting](few-shot-prompting) exists as
     a technique rather than as a curiosity.
+flow:
+  scenario: >-
+    The baseline every other prompting technique is measured against — just
+    the instruction, and nothing else.
+  path:
+    - actor: An instruction
+      does: >-
+        no examples, no worked reasoning, no scaffolding
+    - node: zero-shot-prompting
+      does: >-
+        the baseline case, and often good enough
+      self: true
+    - node: few-shot-prompting
+      does: >-
+        the next thing to try when it is not
+    - node: prompt-engineering
+      does: >-
+        and the measurement that says whether it helped
+  returns: >-
+    Try this first — the alternatives cost context
 relations:
   - type: kind-of
     target: prompt-engineering

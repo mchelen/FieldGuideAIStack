@@ -27,6 +27,26 @@ useCase:
     — thousands of accelerators, weeks of wall-clock time, hardware failures
     expected rather than exceptional — checkpointing is not a convenience but
     the thing that makes the run finishable at all.
+flow:
+  scenario: >-
+    A model name with a date after it, and a question about which exact set
+    of numbers is being served.
+  path:
+    - actor: A training run
+      does: >-
+        long, and saved periodically as it goes
+    - node: checkpoint
+      does: >-
+        one saved set of weights, at one point in that run
+      self: true
+    - node: parameter
+      does: >-
+        the numbers themselves, at that moment
+    - node: model-card
+      does: >-
+        which should say which one you are actually getting
+  returns: >-
+    "The model" is usually one of many saved states
 relations:
   - type: contains
     target: parameter

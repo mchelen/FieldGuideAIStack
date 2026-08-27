@@ -31,6 +31,23 @@ useCase:
     learned from a corpus that had nothing to do with the domain. That
     asymmetry is why small datasets became useful, and it is the reason most
     applied machine learning stopped starting from zero.
+flow:
+  scenario: >-
+    A model that learned language in general doing a task nobody trained it
+    for, better than one trained from scratch.
+  path:
+    - node: pretraining
+      does: >-
+        learns general structure from an enormous corpus
+    - node: transfer-learning
+      does: >-
+        that structure is reused for a task it never saw
+      self: true
+    - node: fine-tuning
+      does: >-
+        the practical form: a short second pass
+  returns: >-
+    The assumption every fine-tune rests on
 relations:
   - type: consumed-by
     target: fine-tuning

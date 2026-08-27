@@ -33,6 +33,26 @@ useCase:
     fits, and the weighting is learned rather than programmed. The same
     mechanism, applied to a codebase, is what lets a model connect a call site
     to a definition ten thousand tokens away.
+flow:
+  scenario: >-
+    A model asked what "it" refers to in the fourth paragraph, in a document
+    where the answer is in the first.
+  path:
+    - node: token
+      does: >-
+        the sequence, one position per unit
+    - node: attention
+      does: >-
+        every position looks at every other and weighs how much it matters
+      self: true
+    - node: kv-cache
+      does: >-
+        the work it did for earlier positions, saved so it is done once
+    - node: transformer
+      does: >-
+        the architecture that is mostly this operation, stacked
+  returns: >-
+    The cost grows with the square of the sequence
 relations:
   - type: consumes
     target: token

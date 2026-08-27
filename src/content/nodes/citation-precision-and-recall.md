@@ -33,6 +33,26 @@ useCase:
     they are attached to (precision), and does everything needing support have a
     citation (recall). A system can score well on one and badly on the other,
     and the reader cannot tell either way.
+flow:
+  scenario: >-
+    An answer with three citations, one of which does not support the
+    sentence it is attached to.
+  path:
+    - actor: An answer
+      does: >-
+        with sources attached to some of its claims
+    - node: citation-precision-and-recall
+      does: >-
+        do the cited sources support the claim, and is anything uncited
+      self: true
+    - node: grounding
+      does: >-
+        the design that made citation possible at all
+    - node: evaluation
+      does: >-
+        and the measurement, over a fixed set
+  returns: >-
+    A citation that does not support the claim is worse than none
 relations:
   - type: kind-of
     target: evaluation

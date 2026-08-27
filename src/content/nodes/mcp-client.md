@@ -31,6 +31,26 @@ useCase:
     context window alongside everything else. The isolation is at the transport,
     not in the prompt, and confusing the two is where trust assumptions go
     wrong.
+flow:
+  scenario: >-
+    One assistant connected to six servers, with six separate connections
+    and no shared state between them.
+  path:
+    - node: harness
+      does: >-
+        the host application, connecting out
+    - node: mcp-client
+      does: >-
+        one dedicated connection per server it talks to
+      self: true
+    - node: mcp
+      does: >-
+        the protocol carried over it
+    - node: mcp-server
+      does: >-
+        at the other end, offering its tools
+  returns: >-
+    One per server, so one server never sees another's traffic
 relations:
   - type: part-of
     target: mcp

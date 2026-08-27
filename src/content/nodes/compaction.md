@@ -34,6 +34,26 @@ useCase:
     state, and the run continues. Anthropic's framing adds the second reason:
     keeping the active context small is worth doing before the window is full,
     because quality falls as it grows.
+flow:
+  scenario: >-
+    A long agent run approaching the context ceiling, with most of the
+    history no longer needed in full.
+  path:
+    - actor: Sixty turns
+      does: >-
+        most of them finished work nobody needs verbatim
+    - node: compaction
+      does: >-
+        replaces the older parts with a summary of them
+      self: true
+    - node: context-window
+      does: >-
+        so what remains still fits under the ceiling
+    - node: context-engineering
+      does: >-
+        the wider job this is one tactic of
+  returns: >-
+    Detail is lost on purpose. Choosing which is the skill.
 relations:
   - type: kind-of
     target: context-engineering

@@ -32,6 +32,26 @@ useCase:
     the real database, returning the result for the model to use. The whole
     value is that the boundary is explicit: the model chooses, your code
     decides, and the two steps can be logged, gated and refused separately.
+flow:
+  scenario: >-
+    A model that has to ask for something to be run, in a format a program
+    can parse without guessing.
+  path:
+    - actor: A request
+      does: >-
+        needs an action, not a sentence
+    - node: function-calling
+      does: >-
+        the API shape: a named function, with typed arguments
+      self: true
+    - node: structured-output
+      does: >-
+        which is what makes the request parseable at all
+    - node: tool-use
+      does: >-
+        the general behaviour this is one vendor's name for
+  returns: >-
+    The model still only emits text. This is text with a schema.
 relations:
   - type: part-of
     target: tool-use

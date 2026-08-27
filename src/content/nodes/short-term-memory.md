@@ -28,6 +28,29 @@ useCase:
     context problems, and the fix is to move the constraint somewhere it is
     re-read rather than merely remembered — a file, a task list, a [system
     prompt](system-prompt).
+flow:
+  scenario: >-
+    Everything an agent knows inside one run, which is the conversation and
+    nothing else.
+  path:
+    - actor: One run
+      does: >-
+        a task, from first message to last
+    - node: memory
+      does: >-
+        what the agent retains at all, since the model retains nothing
+    - node: short-term-memory
+      does: >-
+        the conversation so far, re-sent on every call
+      self: true
+    - node: context-window
+      does: >-
+        and it lasts exactly as long as it fits
+    - node: compaction
+      does: >-
+        which is what happens when it stops fitting
+  returns: >-
+    It ends with the run, unless something writes it down
 relations:
   - type: kind-of
     target: memory

@@ -32,6 +32,26 @@ useCase:
     quadruples the attention cost. That single property is why context windows
     are rationed, why long-context pricing looks the way it does, and why a
     large share of model research is spent on making attention cheaper.
+flow:
+  scenario: >-
+    A product page saying "built on transformer architecture", which is true
+    of nearly everything and rules nothing out.
+  path:
+    - actor: A sequence
+      does: >-
+        the prompt, as positions
+    - node: transformer
+      does: >-
+        a stack of layers, with no recurrence and no convolution
+      self: true
+    - node: attention
+      does: >-
+        each layer relates every position to every other
+    - node: model
+      does: >-
+        what the stack plus its learned numbers add up to
+  returns: >-
+    The alternative is essentially unused, so the claim says nothing
 relations:
   - type: part-of
     target: model

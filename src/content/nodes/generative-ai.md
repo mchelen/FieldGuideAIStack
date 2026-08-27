@@ -33,6 +33,26 @@ useCase:
     capability it cares about — producing text that could be mistaken for a
     person's, or images of identifiable people — is enforceable in a way that
     one naming the category is not.
+flow:
+  scenario: >-
+    A brief asking for three subject lines, handed to a category of system
+    that did not exist commercially five years ago.
+  path:
+    - actor: A brief
+      does: >-
+        "write us three subject lines for this campaign"
+    - node: generative-ai
+      does: >-
+        produces content rather than labelling content that exists
+      self: true
+    - node: large-language-model
+      does: >-
+        the kind of model doing it, for text
+    - node: model
+      does: >-
+        underneath, a next-token predictor with no notion of correct
+  returns: >-
+    No right answer to compare against — which is why evaluating it is hard
 relations:
   - type: contains
     target: large-language-model

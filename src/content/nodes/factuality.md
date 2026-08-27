@@ -31,6 +31,26 @@ useCase:
     whether a judge model thinks it is right — and each proxy is checkable while
     factuality itself is not. Saying which proxy produced the number is the
     difference between a measurement and a reassurance.
+flow:
+  scenario: >-
+    An evaluation reporting 94%, and nobody in the room able to say 94% of
+    what.
+  path:
+    - actor: An answer
+      does: >-
+        fluent, well-formed, and possibly wrong
+    - node: factuality
+      does: >-
+        whether it is true, not whether it sounds right
+      self: true
+    - node: grounding
+      does: >-
+        the design that makes it checkable at all
+    - node: evaluation
+      does: >-
+        and what has to be measured, not assumed
+  returns: >-
+    Sounding right and being right are separate properties
 relations:
   - type: distinguished-from
     target: grounding

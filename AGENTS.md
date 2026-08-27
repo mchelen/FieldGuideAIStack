@@ -136,6 +136,50 @@ any new development work.
   and seven of them turned out to have no canonical term at all — recorded as
   `none` with the reason, which is a finding rather than a blank.
 
+## The applied illustration
+- Every concept should carry a `flow` block: one real request traced through
+  the pieces it touches, with this concept marked as the station it passes
+  through. It is the answer to "show me where this sits", which a definition
+  and a relation list both dodge.
+- A station is either a `node` -- linked, and checked against the graph -- or a
+  bare `actor`, for the parts of a real system this guide has no page for: the
+  person typing, the document, the goal. Exactly one station carries
+  `self: true`, and it must be this page's own id.
+- The path has to be a **walk in the graph**: every node station declares a
+  relation to another node station in the same flow. Checking against the
+  subject's own neighbours instead was the first attempt and it flagged a
+  station that legitimately hung off the step before it. When the walk check
+  fires, look for a missing edge before rewriting the flow -- the first time it
+  ran it found that no node connected `inference-api` to `model`.
+- `returns` is the payoff, drawn as a dashed arrow back up the diagram with its
+  label in HTML underneath. Not inside the SVG: a label wide enough to read
+  needed a gutter that pushed the drawing past 500px, and a phone then scaled
+  15px type down to 7px.
+- **Width is not a taste call.** An SVG scaled by its viewBox renders type at
+  `font-size x scale`, and at a 320px viewport this figure gets 280px. The
+  constants in `src/lib/flow.ts` are what keeps rendered type above the 11px
+  floor `check:layout` enforces; changing them without re-running it is how the
+  diagram becomes unreadable on a phone while every check stays green.
+- `check:layout` also measures every label's bounding box against the box it
+  sits in, on every page that has a flow. SVG text does not affect
+  `scrollWidth`, so the ordinary overflow sweep cannot see it -- "Retrieval-
+  augmented generation" ran clean out of its box and through the return arrow
+  with everything green.
+- `check:output` compares the stations drawn on the page with the stations
+  declared in frontmatter. A picture of the wrong pipeline is worse than no
+  picture, because it looks authoritative.
+- Missing illustrations are one aggregated warning listing the first twelve
+  ids. The backlog started at nearly every page, and a warning nobody can read
+  to the end of is a warning nobody reads.
+- **That backlog is now empty.** All 155 concepts carry one, so the warning
+  firing again means a new page arrived without an illustration -- a regression
+  rather than a known gap.
+- Wrapping is by estimated width, not by character count: a character is not a
+  width, and "which compares models, and answers" is thirty-four of them and
+  far too wide. The advance table in `src/lib/flow.ts` is deliberately
+  conservative -- measured against every label in the guide, it never
+  under-estimates -- and the label check is what makes it safe to approximate.
+
 ## Fieldwork
 - The fictional organisation lives in `src/content/scenarios/` and
   `src/data/organisation.yml`, in its own collections, and **never** in

@@ -48,6 +48,26 @@ useCase:
     them by name. Without one, the same question requires you to find the thread
     and paste it in — which is the difference between an assistant that reaches
     your work and one you feed.
+flow:
+  scenario: >-
+    Asking an assistant what is on your calendar tomorrow, in a product that
+    ships no calendar code of its own.
+  path:
+    - actor: A question
+      does: >-
+        "what is on my calendar tomorrow?"
+    - node: connector
+      does: >-
+        the packaged integration, authorised once by you
+      self: true
+    - node: mcp
+      does: >-
+        the standard underneath it, in most current products
+    - node: harness
+      does: >-
+        which now has a tool it can call, without you writing code
+  returns: >-
+    Authorised once, then used on your behalf every time
 relations:
   - type: implemented-by
     target: mcp

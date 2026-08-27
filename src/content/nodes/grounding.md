@@ -33,6 +33,26 @@ useCase:
     can be used in work with consequences — not because grounding makes the
     model more accurate, but because it makes the answer auditable when it is
     not.
+flow:
+  scenario: >-
+    An answer that has to be checkable by the person reading it, in a domain
+    where being confidently wrong is expensive.
+  path:
+    - actor: A question
+      does: >-
+        one the model would happily answer from memory
+    - node: retrieval-augmented-generation
+      does: >-
+        fetches the passages that bear on it
+    - node: grounding
+      does: >-
+        the answer is built from those, not from what the model recalls
+      self: true
+    - node: citation-precision-and-recall
+      does: >-
+        and every claim points at the passage it rests on
+  returns: >-
+    Checkable by the reader, which recall alone never is
 relations:
   - type: consumes
     target: context-window

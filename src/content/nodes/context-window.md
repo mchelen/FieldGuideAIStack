@@ -33,6 +33,29 @@ useCase:
     quality degrades" — relevant material buried among irrelevant material is
     harder to use than relevant material alone. A bigger window raises the
     limit and does not remove the need to decide what belongs inside it.
+flow:
+  scenario: >-
+    A conversation that was working fine at turn 30 starts dropping details
+    at turn 80, on a model advertised at one million tokens.
+  path:
+    - node: system-prompt
+      does: >-
+        goes first on every call, and never leaves
+    - node: token
+      does: >-
+        everything is counted in these — prompt, history, tool output, reply
+    - node: context-window
+      does: >-
+        the ceiling all of it has to fit under, on every single call
+      self: true
+    - node: compaction
+      does: >-
+        what runs when it does not: finished work replaced by a summary
+    - node: context-engineering
+      does: >-
+        deciding what to summarise is the actual job
+  returns: >-
+    Advertised size is capacity, not attention
 relations:
   - type: part-of
     target: model

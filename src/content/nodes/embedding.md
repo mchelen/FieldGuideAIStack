@@ -33,6 +33,29 @@ useCase:
     the strings are not. This is the retrieval half of every
     retrieval-augmented system, and the reason vector databases exist as a
     product category.
+flow:
+  scenario: >-
+    A search that has to find "annual leave" in a document that only ever
+    says "holiday entitlement".
+  path:
+    - actor: A passage
+      does: >-
+        text, with no words in common with the query
+    - node: token
+      does: >-
+        split up and read as the units the model works in
+    - node: embedding
+      does: >-
+        becomes a list of numbers positioned by meaning
+      self: true
+    - node: vector-database
+      does: >-
+        stored so the near ones can be found quickly
+    - node: semantic-search
+      does: >-
+        the query is embedded the same way, and the near ones come back
+  returns: >-
+    Similar meaning, not matching words
 relations:
   - type: consumes
     target: token

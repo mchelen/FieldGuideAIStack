@@ -32,6 +32,26 @@ useCase:
     which will not leave room for anything else on that machine. The same model
     quantized to 4 bits lands near 4GB and fits comfortably. Reading the
     parameter count first tells you which question you are actually asking.
+flow:
+  scenario: >-
+    Two models, 7B and 70B, and a decision that turns on what that number
+    does and does not tell you.
+  path:
+    - node: model
+      does: >-
+        an architecture plus a set of learned numbers
+    - node: parameter
+      does: >-
+        one of those numbers; the count is the headline spec
+      self: true
+    - node: quantization
+      does: >-
+        the same count stored less precisely, and much smaller
+    - node: mixture-of-experts
+      does: >-
+        or a count where only a fraction is used per token
+  returns: >-
+    A size, not a capability — and not always the size that runs
 relations:
   - type: part-of
     target: model

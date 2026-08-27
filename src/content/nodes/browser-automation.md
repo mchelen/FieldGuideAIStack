@@ -30,6 +30,26 @@ useCase:
     the agent uses your logged-in sessions and saved passwords, or a sandboxed
     browser with none. That single distinction separates a bounded capability
     from an agent acting as you, and vendors document it inconsistently.
+flow:
+  scenario: >-
+    An agent asked to book a flight, on a site with no API, using a browser
+    that may or may not be logged in as you.
+  path:
+    - actor: A task
+      does: >-
+        "find and book the cheapest flight on Tuesday"
+    - node: browser-automation
+      does: >-
+        drives a real browser, because there is no API
+      self: true
+    - node: tool-use
+      does: >-
+        each click and keystroke is a tool call
+    - node: indirect-prompt-injection
+      does: >-
+        and every page it reads is untrusted input
+  returns: >-
+    Whether it is logged in as you is the whole security question
 relations:
   - type: consumed-by
     target: harness

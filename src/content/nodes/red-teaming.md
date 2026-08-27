@@ -33,6 +33,26 @@ useCase:
     sound authorised. Red teaming is the practice of writing those cases
     deliberately, and it finds things no amount of ordinary testing will,
     because ordinary testing is not looking.
+flow:
+  scenario: >-
+    Deliberately trying to make a system misbehave, before somebody who is
+    not on your side does it for free.
+  path:
+    - actor: An attacker's goal
+      does: >-
+        adopted on purpose, by your own team
+    - node: red-teaming
+      does: >-
+        adversarial testing to find failures before users do
+      self: true
+    - node: jailbreak
+      does: >-
+        one of the techniques, run as a test rather than an attack
+    - node: evaluation
+      does: >-
+        which asks the ordinary question: does it work
+  returns: >-
+    Same technique as an attack; only the intent differs
 relations:
   - type: kind-of
     target: evaluation

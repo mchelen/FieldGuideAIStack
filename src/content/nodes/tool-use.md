@@ -30,6 +30,29 @@ useCase:
     boundary — model proposes, caller disposes — is what every permission
     control in this guide attaches to, and it is why tool use is the capability
     that turns a text generator into something that can act at all.
+flow:
+  scenario: >-
+    A model asked for today's exchange rate, which is not in its weights and
+    never will be.
+  path:
+    - actor: A question
+      does: >-
+        needs a fact the model cannot have
+    - node: tool-use
+      does: >-
+        the model emits a structured request to run a named function
+      self: true
+    - node: approval-mode
+      does: >-
+        decides whether that request runs without asking anyone
+    - node: agent
+      does: >-
+        the caller runs it and returns the result as the next input
+    - node: prompt-injection
+      does: >-
+        and whatever comes back is now text the model will read
+  returns: >-
+    The model never runs anything. It only asks.
 relations:
   - type: part-of
     target: inference-api

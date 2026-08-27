@@ -32,6 +32,26 @@ useCase:
     Because the model then reads less, the answer improves and the call gets
     cheaper and faster together — the retrieval pipeline's one genuinely free
     lunch.
+flow:
+  scenario: >-
+    Fifty retrieved passages, three slots worth of context, and no way to
+    send all fifty without paying for all fifty.
+  path:
+    - node: retrieval-augmented-generation
+      does: >-
+        retrieval returns fifty plausible candidates
+    - node: reranking
+      does: >-
+        a second, better model scores them against the question
+      self: true
+    - node: embedding
+      does: >-
+        the first pass was fast and approximate; this one is not
+    - actor: The prompt
+      does: >-
+        carries only the top three, and is paid for accordingly
+  returns: >-
+    Better answers and lower cost, from sending less
 relations:
   - type: consumed-by
     target: retrieval-augmented-generation

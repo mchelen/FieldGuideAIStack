@@ -34,6 +34,26 @@ summary: A model whose parameters you can download and run yourself — which
 fieldMark: If the download page has a bespoke license named after the model
   ("Community License", "Research License"), it is an open-weights release, not
   an open source one. Genuinely open licenses have names you already know.
+flow:
+  scenario: >-
+    A model card says open, the download works, and the licence turns out to
+    decide whether you may ship it.
+  path:
+    - actor: A download
+      does: >-
+        the parameter files, on your disk
+    - node: open-weights
+      does: >-
+        a claim about availability, and only about availability
+      self: true
+    - node: permissive-license
+      does: >-
+        a separate claim, about what you are allowed to do with them
+    - node: open-source-ai
+      does: >-
+        a third claim again, with a definition most releases fail
+  returns: >-
+    Downloadable and permitted are different questions
 relations:
   - type: kind-of
     target: model

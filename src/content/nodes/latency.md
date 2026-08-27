@@ -32,6 +32,29 @@ useCase:
     experience the first as responsive because something is happening, and the
     second as broken. Optimising the total without knowing which half dominates
     is how teams spend a quarter on the wrong number.
+flow:
+  scenario: >-
+    Two deployments benchmark at the same average, and one of them feels
+    noticeably quicker to everyone using it.
+  path:
+    - actor: A request
+      does: >-
+        sent, and then waited on
+    - node: inference-api
+      does: >-
+        the call, and everything the network adds to it
+    - node: time-to-first-token
+      does: >-
+        how long until anything appears — what a person feels
+    - node: latency
+      does: >-
+        end to end, only useful once split into its parts
+      self: true
+    - node: throughput
+      does: >-
+        the same deployment measured for volume rather than for waiting
+  returns: >-
+    One average hides the number users actually notice
 relations:
   - type: part-of
     target: inference-api

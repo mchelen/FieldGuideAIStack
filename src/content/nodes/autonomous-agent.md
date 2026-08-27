@@ -32,6 +32,26 @@ useCase:
     reach, and what stops the loop. Two products both called autonomous can
     differ by everything that matters. Ask for the permission model, not the
     adjective.
+flow:
+  scenario: >-
+    A goal handed over on Friday evening with nobody available to answer a
+    question until Monday.
+  path:
+    - actor: A goal
+      does: >-
+        no steps given, and nobody to ask
+    - node: autonomous-agent
+      does: >-
+        plans, acts and adapts without step-by-step direction
+      self: true
+    - node: autonomy-level
+      does: >-
+        the end of the scale, as a product setting
+    - node: non-human-identity
+      does: >-
+        acting under a credential that is not a person's
+  returns: >-
+    Nobody is asked, so the permissions are the policy
 relations:
   - type: kind-of
     target: agent

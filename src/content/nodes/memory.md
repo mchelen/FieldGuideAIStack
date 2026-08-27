@@ -32,6 +32,29 @@ useCase:
     what gets written down, who can read it, how it is refreshed, and what
     happens when it becomes wrong. Memory is a harness feature that reads to
     users like a model one, which is why disappointment with it is so common.
+flow:
+  scenario: >-
+    An assistant that remembers your project conventions on Monday, having
+    been told them on Friday.
+  path:
+    - actor: A fact
+      does: >-
+        worth keeping past the end of this conversation
+    - node: memory
+      does: >-
+        what the agent retains — the model underneath retains nothing
+      self: true
+    - node: short-term-memory
+      does: >-
+        within the run, this is just the conversation so far
+    - node: long-term-memory
+      does: >-
+        across runs, it is files the harness reads and writes
+    - node: context-window
+      does: >-
+        and either way it is re-sent, and re-paid for, on every call
+  returns: >-
+    A harness feature, every time. Never the model.
 relations:
   - type: part-of
     target: harness

@@ -33,6 +33,26 @@ useCase:
     specify. The examples ride along on every request, so at high volume the
     same consistency is eventually cheaper to buy through fine-tuning — but
     few-shot gets there today, with no training run and nothing to maintain.
+flow:
+  scenario: >-
+    A classification task where describing the labels does not work and
+    showing three examples of them does.
+  path:
+    - actor: A task
+      does: >-
+        described in words, and still done inconsistently
+    - node: few-shot-prompting
+      does: >-
+        three worked examples go into the prompt itself
+      self: true
+    - node: context-window
+      does: >-
+        they occupy it, and are paid for, on every single call
+    - node: prompt-engineering
+      does: >-
+        the family of fixes this is the cheapest member of
+  returns: >-
+    Nothing to train, nothing to maintain, paid for per call
 relations:
   - type: kind-of
     target: prompt-engineering

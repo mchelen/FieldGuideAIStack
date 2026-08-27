@@ -24,6 +24,26 @@ useCase:
     who could retrain the model — rather than who sold you the API call — is
     what identifies the provider, and it is often not the company on the
     invoice.
+flow:
+  scenario: >-
+    A model is deprecated with sixty days notice, and somebody has to work
+    out whose decision that was.
+  path:
+    - node: model-provider
+      does: >-
+        trained the weights, set the licence, chose the deprecation date
+      self: true
+    - node: model
+      does: >-
+        the artifact they own and can retrain
+    - node: model-host
+      does: >-
+        runs that artifact on its own hardware, under its own terms
+    - node: inference-api
+      does: >-
+        the endpoint you actually called, which belongs to the host
+  returns: >-
+    The company you pay is frequently not the one that trained it
 relations:
   - type: distinguished-from
     target: model-host

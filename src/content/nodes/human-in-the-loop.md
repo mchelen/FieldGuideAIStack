@@ -32,6 +32,26 @@ useCase:
     too few and a mistake escapes, too many and the person clicking approve
     stops reading, which is worse than no gate because it manufactures the
     appearance of oversight without the substance.
+flow:
+  scenario: >-
+    An agent that pauses before the one step that spends money, and does not
+    pause before the forty that do not.
+  path:
+    - node: agentic-loop
+      does: >-
+        runs unattended, step after step
+    - node: approval-mode
+      does: >-
+        the policy deciding which steps stop
+    - node: human-in-the-loop
+      does: >-
+        a person answers, and the loop continues
+      self: true
+    - node: scheduled-task
+      does: >-
+        which is where there may be nobody to ask at all
+  returns: >-
+    Ask about everything and the answer stops being read
 relations:
   - type: implemented-by
     target: approval-mode

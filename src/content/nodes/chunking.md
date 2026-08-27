@@ -29,6 +29,26 @@ useCase:
     does not. Splitting discards exactly the context that made the sentence
     findable, and no amount of embedding quality recovers information that is no
     longer in the text.
+flow:
+  scenario: >-
+    A 200-page handbook cut into retrievable pieces, and a sentence whose
+    meaning was in the paragraph before it.
+  path:
+    - actor: A document
+      does: >-
+        200 pages, far too long to retrieve whole
+    - node: chunking
+      does: >-
+        split into pieces small enough to fetch and send
+      self: true
+    - node: token
+      does: >-
+        each piece sized in these, because the budget is
+    - node: retrieval-augmented-generation
+      does: >-
+        and only whole pieces can ever come back
+  returns: >-
+    A piece torn out of context can be retrieved out of context
 relations:
   - type: consumed-by
     target: retrieval-augmented-generation

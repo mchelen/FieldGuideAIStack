@@ -33,6 +33,29 @@ useCase:
     model](foundation-model) moves. Reach for it when the prompt needed to get the behaviour is
     long enough to be expensive on every call, or when instructions keep failing
     to enforce consistency — not before.
+flow:
+  scenario: >-
+    A classifier sits at 71% accuracy, a training run is not on the table,
+    and the deadline is Thursday.
+  path:
+    - actor: 71% accuracy
+      does: >-
+        good enough to demo, not good enough to ship
+    - node: prompt-engineering
+      does: >-
+        change what you send, without touching the weights
+      self: true
+    - node: few-shot-prompting
+      does: >-
+        three labelled examples go into the prompt itself
+    - node: prompt-template
+      does: >-
+        the version that won becomes a file with a history
+    - node: fine-tuning
+      does: >-
+        the alternative — a dataset, a training run, something to maintain
+  returns: >-
+    Minutes to try, and nothing new to maintain
 relations:
   - type: consumes
     target: context-window

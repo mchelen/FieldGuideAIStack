@@ -27,6 +27,27 @@ useCase:
     read what it can do, hand it a task and receive results. That is what A2A
     specifies, and the reason it exists is that the alternative — bespoke
     integration per pair — does not scale past a handful of agents.
+flow:
+  scenario: >-
+    Two agents from different vendors that have to work together without
+    either team having heard of the other.
+  path:
+    - actor: A task
+      does: >-
+        spanning two organisations' agents
+    - node: agent-card
+      does: >-
+        each side publishes what it is and what it can do
+    - node: agent-to-agent-protocol
+      does: >-
+        the open protocol for discovering and delegating across them
+      self: true
+    - node: mcp
+      does: >-
+        the neighbouring standard — tools for an agent, not agents for an
+        agent
+  returns: >-
+    Agents as peers, rather than agents as tools
 relations:
   - type: distinguished-from
     target: mcp

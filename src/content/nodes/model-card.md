@@ -29,6 +29,26 @@ useCase:
     necessarily the worse model, but it is the one you cannot assess without
     running your own evaluation — and knowing that before you commit is the
     point of the document.
+flow:
+  scenario: >-
+    A model download with a licence line, and a document that should say
+    what it is unsuited for.
+  path:
+    - actor: A release
+      does: >-
+        weights, published for others to use
+    - node: model-card
+      does: >-
+        what it is, what it was for, how it was evaluated
+      self: true
+    - node: checkpoint
+      does: >-
+        which exact saved state is being described
+    - node: open-source-ai
+      does: >-
+        and the disclosure most definitions ask for
+  returns: >-
+    Read intended use and limitations before the scores
 relations:
   - type: distinguished-from
     target: checkpoint

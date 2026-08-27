@@ -32,6 +32,26 @@ useCase:
     task. A hook on the post-edit event runs the formatter every time, without
     consulting the model at all. The distinction is the same one that separates
     a permission model's layers: advice versus mechanism.
+flow:
+  scenario: >-
+    A rule that has to hold every time, in a system whose main component is
+    probabilistic.
+  path:
+    - actor: An event
+      does: >-
+        the agent is about to call a tool
+    - node: hook
+      does: >-
+        a deterministic handler that runs on it, every time
+      self: true
+    - node: tool-use
+      does: >-
+        which it can block, alter, or let through
+    - node: harness
+      does: >-
+        the part of the system that guarantees it runs
+  returns: >-
+    Deterministic, which is exactly what a prompt is not
 relations:
   - type: part-of
     target: harness

@@ -34,6 +34,26 @@ useCase:
     construction: the sampler cannot emit a token that would violate the schema.
     The retries, the parse guards and the repair prompts all become unnecessary
     rather than more reliable.
+flow:
+  scenario: >-
+    Output that has to parse as JSON every time, in a system that generates
+    one token at a time.
+  path:
+    - actor: A schema
+      does: >-
+        what the calling program is able to accept
+    - node: inference-api
+      does: >-
+        carries it alongside the messages
+    - node: structured-output
+      does: >-
+        invalid tokens are excluded during decoding, not after
+      self: true
+    - node: function-calling
+      does: >-
+        which is this, applied to naming a function and its arguments
+  returns: >-
+    Valid shape guaranteed. Correct content, not at all.
 relations:
   - type: part-of
     target: inference-api

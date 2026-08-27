@@ -28,6 +28,26 @@ useCase:
     values, the audio waveform, or the choice of tokens — so it survives the
     ordinary handling that removes metadata. What it does not survive is a
     determined adversary, and what it cannot do is prove absence.
+flow:
+  scenario: >-
+    A generated image that needs to be identifiable as generated, months
+    later, after being cropped and re-saved.
+  path:
+    - actor: Generated content
+      does: >-
+        indistinguishable from the alternative by eye
+    - node: watermarking
+      does: >-
+        a mark embedded in the content itself
+      self: true
+    - node: provenance
+      does: >-
+        the wider question of evidence of origin
+    - node: ai-slop
+      does: >-
+        and the volume that made the question urgent
+  returns: >-
+    Survives some edits, and not an adversary
 relations:
   - type: implements
     target: provenance

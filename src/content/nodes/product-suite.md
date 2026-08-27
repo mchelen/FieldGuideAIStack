@@ -30,6 +30,26 @@ useCase:
     actually open, and whether the extensions you depend on are visible from
     both — which is exactly where suites turn out to be less unified than they
     look.
+flow:
+  scenario: >-
+    Three products, one account, one extension system, and one engine that
+    all three are the same underneath.
+  path:
+    - actor: One engine
+      does: >-
+        the same agentic architecture in all of them
+    - node: product-suite
+      does: >-
+        packaged as several products, sold as a family
+      self: true
+    - node: surface
+      does: >-
+        each with different powers, depending on where it runs
+    - node: claude-family
+      does: >-
+        one example of the pattern, from one vendor
+  returns: >-
+    One engine, and capability follows the surface
 relations:
   - type: distinguished-from
     target: surface

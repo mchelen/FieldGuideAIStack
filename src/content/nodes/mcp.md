@@ -25,6 +25,29 @@ summary: An open standard for connecting AI applications to external tools and
   data, so a tool built once works in any client that speaks the protocol.
 fieldMark: Three words give it away — host, client, server. If a doc describes
   an AI app spawning one client per connected server, that is MCP.
+flow:
+  scenario: >-
+    An issue-tracker integration written once, working in four different
+    assistants without being rewritten for each.
+  path:
+    - actor: A tool
+      does: >-
+        your issue tracker, with an API
+    - node: mcp-server
+      does: >-
+        wraps it once, declaring what it offers
+    - node: mcp
+      does: >-
+        the open standard both ends speak
+      self: true
+    - node: mcp-client
+      does: >-
+        one per server, held by the application
+    - node: harness
+      does: >-
+        which now has a tool it never had to write
+  returns: >-
+    One integration, every client that speaks it
 relations:
   - type: distinguished-from
     target: tool-use

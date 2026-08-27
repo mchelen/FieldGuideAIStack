@@ -33,6 +33,26 @@ useCase:
     own, and a failure names the stage that produced it. Written as an agent it
     would sometimes skip the check, sometimes route twice, and cost more to do
     it. Flexibility you do not need is a liability rather than a feature.
+flow:
+  scenario: >-
+    A pipeline where the steps were decided by an engineer and only the
+    content of each is left to the model.
+  path:
+    - actor: A task
+      does: >-
+        with steps that are known in advance
+    - node: workflow
+      does: >-
+        the sequence is laid out in code; the model fills it in
+      self: true
+    - node: agent
+      does: >-
+        the alternative, where the model chooses the steps
+    - node: orchestration
+      does: >-
+        the wider question of who decides what runs next
+  returns: >-
+    Predictable and cheap, and it cannot adapt
 relations:
   - type: distinguished-from
     target: agent

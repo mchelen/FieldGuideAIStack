@@ -30,6 +30,26 @@ useCase:
     published model since sits somewhere on that trade, and the reason a
     7-billion-parameter model today outperforms a much larger one from 2021 is
     largely this.
+flow:
+  scenario: >-
+    A decision about how big to build and how much data to use, made before
+    any of it is trained.
+  path:
+    - actor: A budget
+      does: >-
+        compute, fixed in advance
+    - node: scaling-laws
+      does: >-
+        loss falls as a predictable power law in size, data and compute
+      self: true
+    - node: parameter
+      does: >-
+        which is one of the three terms
+    - node: pretraining
+      does: >-
+        and the run the prediction is being made about
+  returns: >-
+    Predictive enough to plan by, and empirical, not derived
 relations:
   - type: consumed-by
     target: pretraining

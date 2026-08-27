@@ -28,6 +28,26 @@ useCase:
     parallelism is a bonus. Note what is paid for it — the parent never sees
     the sources, only the summaries, so anything a summary dropped is gone.
     Delegation buys capacity with fidelity.
+flow:
+  scenario: >-
+    Forty files to summarise, and a parent that would run out of context
+    long before the fortieth.
+  path:
+    - node: agent
+      does: >-
+        holds the overall goal
+    - node: sub-agent
+      does: >-
+        one child per file, each with its own fresh context
+      self: true
+    - node: orchestration
+      does: >-
+        the parent splits the work and reassembles the results
+    - node: harness
+      does: >-
+        runs them, and only the summaries come back
+  returns: >-
+    The parent pays for forty summaries, not forty files
 relations:
   - type: kind-of
     target: agent

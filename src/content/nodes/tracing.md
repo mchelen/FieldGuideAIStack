@@ -34,6 +34,23 @@ useCase:
     reasoning turned. Agentic systems are non-deterministic enough that
     reproduction is often impossible, which makes recording the run the only
     reliable form of debugging available.
+flow:
+  scenario: >-
+    A run that went wrong somewhere in nineteen steps, and a reviewer who
+    was not watching any of them.
+  path:
+    - node: agentic-loop
+      does: >-
+        nineteen steps, each with a call and a result
+    - node: tracing
+      does: >-
+        each one recorded, so the run can be inspected afterwards
+      self: true
+    - node: evaluation
+      does: >-
+        and the record is what a measurement is computed from
+  returns: >-
+    Not logging — the unit is the step, not the line
 relations:
   - type: part-of
     target: agentic-loop
