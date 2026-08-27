@@ -29,6 +29,29 @@ useCase:
     container with no network and a read-only mount, it holds even if the
     harness is wrong. The three look the same in a demo and differ entirely
     under adversarial input — which is when it matters.
+flow:
+  scenario: >-
+    An incident review asking a simple question — was the agent allowed to
+    do that, and who decided.
+  path:
+    - actor: An action
+      does: >-
+        the agent is about to take it
+    - node: permission-model
+      does: >-
+        what is allowed, who decided, and where it is enforced
+      self: true
+    - node: approval-mode
+      does: >-
+        the part of it a person answers in the moment
+    - node: sandbox
+      does: >-
+        the part enforced by the environment, not by asking
+    - node: non-human-identity
+      does: >-
+        and the credentials it acts under, which are not yours
+  returns: >-
+    A policy you can read beats a promise in a prompt
 relations:
   - type: implemented-by
     target: approval-mode

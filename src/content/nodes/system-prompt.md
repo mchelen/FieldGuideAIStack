@@ -33,6 +33,26 @@ useCase:
     it is applied to every request without being restated. The cost is that it
     is sent every time — so a long system prompt is a fixed charge on every
     call, which is what prompt caching exists to relieve.
+flow:
+  scenario: >-
+    An assistant that answers in the wrong tone, and the fix is a paragraph
+    nobody in the conversation can see.
+  path:
+    - actor: The operator
+      does: >-
+        writes standing rules once: role, format, what to refuse
+    - node: system-prompt
+      does: >-
+        sent ahead of the conversation on every single request
+      self: true
+    - node: harness
+      does: >-
+        prepends it to the messages before each call
+    - node: context-window
+      does: >-
+        it occupies space here permanently, and is billed every time
+  returns: >-
+    Strong guidance, not enforcement — content can argue with it
 relations:
   - type: part-of
     target: context-window

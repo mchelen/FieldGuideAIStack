@@ -188,11 +188,14 @@ figure.diagram figcaption { font-size: 0.82rem; color: var(--ink-faint); margin-
 .flow-does { fill: var(--ink-soft); font-size: 13px; font-family: var(--font); }
 .flow-step { stroke: var(--rule-strong); stroke-width: 1.6; fill: none; }
 .flow-arrowhead { fill: var(--rule-strong); }
-.flow-return-line { stroke: var(--mark); stroke-width: 1.4; fill: none; stroke-dasharray: 5 4; }
-.flow-arrowhead-return { fill: var(--mark); }
+/* The site's own accent, not the green one. `returns` is what the whole path
+   comes back with, and that is not always good news -- prompt-injection's is a
+   warning, and green read as reassurance. */
+.flow-return-line { stroke: var(--accent); stroke-width: 1.4; fill: none; stroke-dasharray: 5 4; }
+.flow-arrowhead-return { fill: var(--accent); }
 .flow-return-note {
   margin: 0.5rem 0 0;
-  color: var(--mark);
+  color: var(--accent);
   font-size: 0.87rem;
   display: flex;
   gap: 0.5rem;
@@ -202,7 +205,7 @@ figure.diagram figcaption { font-size: 0.82rem; color: var(--ink-faint); margin-
   content: '';
   flex: none;
   width: 1.1rem;
-  border-top: 1.5px dashed var(--mark);
+  border-top: 1.5px dashed var(--accent);
   transform: translateY(-0.28em);
 }
 .flow a:hover .flow-box { stroke: var(--accent); stroke-width: 2; }

@@ -24,6 +24,29 @@ useCase:
     your side of the boundary, which explains why cost grows with conversation
     length, why prompt caching exists, and why "the model remembered" is
     almost always a claim about a harness.
+flow:
+  scenario: >-
+    A team swaps one vendor for another and finds that most of the work is
+    in the shape of the request, not the model.
+  path:
+    - node: harness
+      does: >-
+        assembles messages and configuration into one request
+    - node: inference-api
+      does: >-
+        the HTTP contract: post messages, get tokens back
+      self: true
+    - node: temperature
+      does: >-
+        one of the knobs that rides along with the call
+    - node: streaming
+      does: >-
+        tokens come back as they are produced, not at the end
+    - node: rate-limit
+      does: >-
+        and the account, not the model, decides how often you may ask
+  returns: >-
+    The model never sees anything but this
 relations:
   - type: consumed-by
     target: harness

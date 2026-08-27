@@ -30,6 +30,29 @@ useCase:
     waits for a person. Placing it well is the whole skill — too few gates and
     a mistake escapes, too many and whoever is clicking approve stops reading,
     which manufactures the appearance of oversight without the substance.
+flow:
+  scenario: >-
+    The same agent, on the same task, with a setting that decides whether
+    anyone is asked before it acts.
+  path:
+    - node: tool-use
+      does: >-
+        the model asks to run something that changes state outside itself
+    - node: approval-mode
+      does: >-
+        every action, only risky ones, or none at all
+      self: true
+    - node: human-in-the-loop
+      does: >-
+        the setting that turns a step into a question
+    - node: autonomy-level
+      does: >-
+        the label the product puts on the whole arrangement
+    - node: permission-model
+      does: >-
+        and the enforcement underneath, which the setting does not replace
+  returns: >-
+    Approving everything is how approval stops being read
 relations:
   - type: part-of
     target: harness
