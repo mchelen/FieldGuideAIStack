@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Flow from '../../components/Flow.astro';
 import Neighborhood from '../../components/Neighborhood.astro';
 import Icon from '../../components/Icon.astro';
 import PageNav from '../../components/PageNav.astro';
@@ -44,6 +45,7 @@ const sections = [
     label: 'What each vendor calls it',
     icon: 'naming',
   },
+  entry.data.flow && { id: 'in-practice', label: 'In practice', icon: 'usecase' },
   entry.data.useCase && { id: 'use-case', label: 'Example', icon: 'usecase' },
   { id: 'relations', label: 'Relations', icon: 'relations' },
   entry.data.examples.length > 0 && {
@@ -167,6 +169,15 @@ const derived = relations.filter((r) => r.derived);
       )
     }
   </div>
+
+  {
+    entry.data.flow && (
+      <div class="in-practice">
+        <h2 id="in-practice"><Icon name="usecase" /> In practice</h2>
+        <Flow graph={graph} flow={entry.data.flow} title={entry.data.title} />
+      </div>
+    )
+  }
 
   <div id="diagram">
     <Neighborhood graph={graph} id={id} />

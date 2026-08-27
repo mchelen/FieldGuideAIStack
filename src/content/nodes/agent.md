@@ -30,6 +30,29 @@ useCase:
     whole distinction from a chat interface, where every model call is one you
     typed. It is also why the interesting questions about agents are about
     permissions and termination rather than about capability.
+flow:
+  scenario: >-
+    One instruction — find why the nightly job fails and open a fix — and
+    forty steps with nobody watching.
+  path:
+    - actor: A goal
+      does: >-
+        one instruction, with no further input expected
+    - node: agent
+      does: >-
+        a model driven in a loop until the goal is met or abandoned
+      self: true
+    - node: agentic-loop
+      does: >-
+        observe the last result, reason about it, act again
+    - node: tool-use
+      does: >-
+        each act is a tool call, chosen by the model
+    - node: harness
+      does: >-
+        runs the tool and feeds the result back as the next observation
+  returns: >-
+    The loop, not the model, is what makes it an agent
 relations:
   - type: contains
     target: harness

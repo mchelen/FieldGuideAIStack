@@ -32,6 +32,26 @@ useCase:
     in cost by orders of magnitude and in capability by more than that. What
     determines the answer is which model, at what [context length](context-window), driven by
     what harness — three questions the acronym hides.
+flow:
+  scenario: >-
+    A 4,000-word incident report pasted in with "summarise this", and a
+    summary that arrives a word at a time.
+  path:
+    - actor: The report
+      does: >-
+        4,000 words, pasted in with one instruction
+    - node: large-language-model
+      does: >-
+        continues the text one token at a time, from the whole prompt
+      self: true
+    - node: transformer
+      does: >-
+        the architecture underneath — every position attends to every other
+    - node: generative-ai
+      does: >-
+        the category this behaviour put on the front of every product
+  returns: >-
+    No lookup, no database — the next token, repeatedly
 relations:
   - type: kind-of
     target: model

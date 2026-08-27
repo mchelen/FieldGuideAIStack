@@ -128,6 +128,38 @@ const useCase = z.object({
   detail: z.string().min(1),
 });
 
+/**
+ * The applied illustration: one real request, traced through the pieces it
+ * touches, with this concept marked as the station it passes through.
+ *
+ * A station is either a node in this graph -- in which case the diagram links
+ * it and the validator checks it exists -- or a bare `actor`, for the parts of
+ * a real system this guide has no page for: the person typing, the document,
+ * the repository. Exactly one station carries `self: true`.
+ *
+ * `returns` is the payoff arrow: the short answer to "and what did that buy
+ * you", drawn back up the diagram rather than as another step forward.
+ */
+const flowStation = z
+  .object({
+    node: reference('nodes').optional(),
+    actor: z.string().min(1).max(40).optional(),
+    does: z.string().min(1).max(90),
+    self: z.boolean().default(false),
+  })
+  .strict()
+  .refine((s) => Boolean(s.node) !== Boolean(s.actor), {
+    message: 'a station is either a `node` or an `actor`, never both and never neither',
+  });
+
+const flow = z
+  .object({
+    scenario: z.string().min(1).max(160),
+    path: z.array(flowStation).min(3).max(6),
+    returns: z.string().min(1).max(120).optional(),
+  })
+  .strict();
+
 const nodes = defineCollection({
   loader: glob({ base: './src/content/nodes', pattern: '**/*.md' }),
   schema: z.object({
@@ -145,6 +177,7 @@ const nodes = defineCollection({
     aka: z.array(alias).default([]),
     canonical: canonical.optional(),
     useCase: useCase.optional(),
+    flow: flow.optional(),
     tags: z.array(z.string()).min(1),
     zoom: zoom.default(2),
     // One sentence. Shown on cards, in graph tooltips, and in search results.

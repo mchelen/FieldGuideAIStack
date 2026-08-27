@@ -169,6 +169,51 @@ figure.diagram figcaption { font-size: 0.82rem; color: var(--ink-faint); margin-
 .diagram .link-label-bg { fill: var(--bg); }
 .diagram a:hover .box { stroke: var(--accent); stroke-width: 2; }
 
+/* The applied illustration: one request traced through the pieces it touches.
+   Laid out at the width it is read at rather than scaled down from a wide
+   canvas, so 14px text arrives as 14px text on a phone. */
+.flow { margin: 1.6rem 0; }
+.flow svg { display: block; max-width: 100%; height: auto; }
+.flow-scenario {
+  margin: 0 0 0.9rem;
+  color: var(--ink-soft);
+  font-size: 0.94rem;
+  border-left: 3px solid var(--rule-strong);
+  padding-left: 0.8rem;
+}
+.flow-box { fill: var(--bg-raised); stroke: var(--rule-strong); }
+.flow-box.is-actor { fill: var(--bg-sunken); stroke-dasharray: 5 3; }
+.flow-box.is-self { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.8; }
+.flow-title { fill: var(--ink); font-size: 15px; font-family: var(--font); }
+.flow-does { fill: var(--ink-soft); font-size: 13px; font-family: var(--font); }
+.flow-step { stroke: var(--rule-strong); stroke-width: 1.6; fill: none; }
+.flow-arrowhead { fill: var(--rule-strong); }
+.flow-return-line { stroke: var(--mark); stroke-width: 1.4; fill: none; stroke-dasharray: 5 4; }
+.flow-arrowhead-return { fill: var(--mark); }
+.flow-return-note {
+  margin: 0.5rem 0 0;
+  color: var(--mark);
+  font-size: 0.87rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+.flow-return-note::before {
+  content: '';
+  flex: none;
+  width: 1.1rem;
+  border-top: 1.5px dashed var(--mark);
+  transform: translateY(-0.28em);
+}
+.flow a:hover .flow-box { stroke: var(--accent); stroke-width: 2; }
+
+/* One dash-length of travel per second, so the direction of the path reads
+   without a legend. Off by default for anyone who asked for less motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .flow-return-line { animation: flow-dash 1.4s linear infinite; }
+}
+@keyframes flow-dash { to { stroke-dashoffset: -9; } }
+
 table { border-collapse: collapse; width: 100%; margin: 1.2rem 0; font-size: 0.93rem; }
 th, td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
 th { font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
@@ -337,7 +382,7 @@ h2 svg, h3 svg { color: var(--ink-faint); margin-right: 0.15em; }
 }
 
 /* Headings get a little more air now that they carry an icon. */
-.prose h2 { display: flex; align-items: center; gap: 0.4rem; scroll-margin-top: 5rem; }
+.prose h2, .in-practice h2 { display: flex; align-items: center; gap: 0.4rem; scroll-margin-top: 5rem; }
 .prose h3 { scroll-margin-top: 5rem; }
 #diagram { scroll-margin-top: 5rem; }
 

@@ -27,6 +27,11 @@ useCase:
 relations:
   - type: consumed-by
     target: harness
+  - type: implements
+    target: model
+    note: >-
+      The only way to reach a hosted [model](model) is a request to one of
+      these; the API is the model's public surface, not the model itself.
 examples:
   - name: Claude Messages API
     vendor: Anthropic

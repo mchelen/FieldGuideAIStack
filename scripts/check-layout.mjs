@@ -18,7 +18,7 @@
  * failing, and is run wherever Chromium exists -- see AGENTS.md.
  */
 import { createServer } from 'node:http';
-import { readFile, stat } from 'node:fs/promises';
+import { readdir, readFile, stat } from 'node:fs/promises';
 import { join, extname } from 'node:path';
 
 const DIST = new URL('../dist/', import.meta.url).pathname;
@@ -68,7 +68,7 @@ const origin = `http://127.0.0.1:${server.address().port}${BASE}`;
 const PAGES = [
   '/', '/quick-reference/', '/compare/', '/graph/', '/fieldwork/',
   '/fieldwork/the-overnight-run/', '/nodes/harness/',
-  '/nodes/retrieval-augmented-generation/',
+  '/nodes/retrieval-augmented-generation/', '/nodes/prompt-caching/',
 ];
 
 const browser = await chromium.launch();
@@ -154,6 +154,87 @@ const problems = [];
   await page.close();
 }
 
+// The applied illustration is SVG scaled by its viewBox, so its type size is a
+// property of how wide the page let it be -- not of the font-size in the
+// stylesheet, which reads 15px at every width and tells you nothing. Measure
+// what a reader actually gets.
+const MIN_TYPE_PX = 11;
+{
+  const page = await browser.newPage({ viewport: { width: 320, height: 900 } });
+  const res = await page.goto(`${origin}/nodes/prompt-caching/`, { waitUntil: 'load' }).catch(() => null);
+  if (!res || res.status() >= 400) {
+    problems.push('prompt-caching did not load — the illustration check could not run');
+  } else {
+    const seen = await page.evaluate(() => {
+      const svg = document.querySelector('.flow svg');
+      if (!svg) return null;
+      const vb = svg.viewBox.baseVal;
+      const scale = svg.getBoundingClientRect().width / vb.width;
+      const size = (sel) => parseFloat(getComputedStyle(document.querySelector(sel)).fontSize) * scale;
+      return {
+        boxes: document.querySelectorAll('.flow-box').length,
+        linked: document.querySelectorAll('.flow a').length,
+        self: document.querySelectorAll('.flow-box.is-self').length,
+        title: size('.flow-title'),
+        does: size('.flow-does'),
+      };
+    });
+    if (!seen) problems.push('prompt-caching has a flow block but rendered no illustration');
+    else {
+      if (seen.boxes < 3) problems.push(`illustration drew ${seen.boxes} stations, expected at least 3`);
+      if (seen.self !== 1) problems.push(`illustration highlighted ${seen.self} stations as this concept, expected 1`);
+      if (seen.linked < 1) problems.push('illustration linked no station to its page');
+      for (const [what, px] of [['title', seen.title], ['step text', seen.does]]) {
+        if (px < MIN_TYPE_PX) {
+          problems.push(
+            `illustration ${what} renders at ${px.toFixed(1)}px at 320px wide — under the ${MIN_TYPE_PX}px floor`,
+          );
+        }
+      }
+    }
+  }
+  await page.close();
+}
+
+// Every label in every illustration, measured against the box it sits in.
+// A title that overflows is invisible to the HTML overflow sweep -- SVG text
+// does not affect scrollWidth -- and "Retrieval-augmented generation" ran out
+// of its box and straight through the return arrow with every check green.
+{
+  const dir = new URL('../dist/nodes/', import.meta.url).pathname;
+  const withFlows = [];
+  for (const id of await readdir(dir)) {
+    const html = await readFile(join(dir, id, 'index.html'), 'utf8').catch(() => '');
+    if (html.includes('<figure class="flow')) withFlows.push(id);
+  }
+  const page = await browser.newPage({ viewport: { width: 768, height: 900 } });
+  for (const id of withFlows) {
+    const res = await page.goto(`${origin}/nodes/${id}/`, { waitUntil: 'load' }).catch(() => null);
+    if (!res || res.status() >= 400) {
+      problems.push(`${id}: illustration page did not load`);
+      continue;
+    }
+    const spills = await page.evaluate(() => {
+      const out = [];
+      for (const box of document.querySelectorAll('.flow-box')) {
+        const b = box.getBBox();
+        for (const t of box.parentElement.querySelectorAll('text')) {
+          const r = t.getBBox();
+          if (r.x + r.width > b.x + b.width - 4 || r.y + r.height > b.y + b.height) {
+            out.push(t.textContent.trim().slice(0, 40));
+          }
+        }
+      }
+      return out;
+    });
+    for (const label of spills.slice(0, 3)) {
+      problems.push(`${id}: illustration label "${label}" runs outside its box`);
+    }
+  }
+  await page.close();
+  if (!withFlows.length) problems.push('no page carries an applied illustration to check');
+}
+
 for (const width of WIDTHS) {
   const page = await browser.newPage({ viewport: { width, height: 900 } });
   for (const path of PAGES) {
@@ -198,6 +279,6 @@ server.close();
 
 for (const p of problems) console.log(`  FAIL  ${p}`);
 console.log(
-  `${problems.length ? 'FAIL' : 'PASS'}  rendered layout — ${PAGES.length} page(s) at ${WIDTHS.join(', ')}px plus the zoom control, ${problems.length} problem(s)`,
+  `${problems.length ? 'FAIL' : 'PASS'}  rendered layout — ${PAGES.length} page(s) at ${WIDTHS.join(', ')}px plus the zoom control and the applied illustration, ${problems.length} problem(s)`,
 );
 process.exit(problems.length ? 1 : 0);

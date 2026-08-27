@@ -34,6 +34,26 @@ useCase:
     access to. This is why hallucination is caught by running things rather
     than by reading them, and why a [harness](harness) with tool use fails at a different
     rate from a chat window, even on the same model.
+flow:
+  scenario: >-
+    An assistant cites a case that does not exist, in exactly the tone it
+    used for everything it got right.
+  path:
+    - actor: A question
+      does: >-
+        asks which source supports the claim just made
+    - node: model
+      does: >-
+        returns the most probable continuation, which is not the true one
+    - node: hallucination
+      does: >-
+        a plausible citation, produced with full confidence
+      self: true
+    - node: grounding
+      does: >-
+        the fix — answer only from a retrieved document, and cite it
+  returns: >-
+    Nothing in the output marks the difference. Checking is external.
 relations:
   - type: part-of
     target: model

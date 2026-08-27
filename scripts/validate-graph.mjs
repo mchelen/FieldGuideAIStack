@@ -192,6 +192,17 @@ for (const n of nodes) {
 //     without blocking unrelated work; malformed ones are an error.
 const missingCanonical = [];
 const missingUseCase = [];
+const missingFlow = [];
+
+/** Ids one declared hop away, in either direction. */
+const neighbourIndex = new Map(nodes.map((n) => [n.id, new Set()]));
+for (const n of nodes) {
+  for (const rel of n.data.relations ?? []) {
+    neighbourIndex.get(n.id)?.add(rel.target);
+    neighbourIndex.get(rel.target)?.add(n.id);
+  }
+}
+const neighbours = (id) => neighbourIndex.get(id) ?? new Set();
 
 for (const n of nodes) {
   if (n.data.kind === 'product' || n.data.kind === 'suite') continue;
@@ -222,6 +233,45 @@ for (const n of nodes) {
 
   if (!n.data.useCase) missingUseCase.push(n.id);
 
+  // 2c. The applied illustration. It is a claim about how a real request moves
+  //     through real pieces, so every station it names has to be a real node
+  //     and the concept has to actually be on the path -- an illustration that
+  //     does not contain its own subject is a diagram of something else.
+  if (n.data.flow) {
+    const path = n.data.flow.path ?? [];
+    const selves = path.filter((step) => step.self);
+    if (selves.length !== 1) {
+      problems.push(
+        `${n.file}: flow marks ${selves.length} stations \`self\` — exactly one is this concept`,
+      );
+    } else if (selves[0].node !== n.id) {
+      problems.push(
+        `${n.file}: flow marks "${selves[0].node ?? selves[0].actor}" as self, but this page is "${n.id}"`,
+      );
+    }
+    for (const step of path) {
+      if (step.node && !ids.has(step.node)) {
+        problems.push(`${n.file}: flow station "${step.node}" is not a node`);
+      }
+    }
+    // The path should be a walk in the graph, not a list of things that came
+    // to mind: each node station connected to another one in the same flow.
+    // Checking against the concept's own neighbours instead was the first
+    // attempt, and it flagged a station that legitimately hangs off the step
+    // before it rather than off the subject.
+    const named = path.map((step) => step.node).filter(Boolean);
+    for (const id of named) {
+      const near = neighbours(id);
+      if (!named.some((other) => other !== id && near.has(other))) {
+        warnings.push(
+          `${n.file}: flow names "${id}", which declares no relation to anything else on the path`,
+        );
+      }
+    }
+  } else {
+    missingFlow.push(n.id);
+  }
+
   for (const a of n.data.aka ?? []) {
     if (typeof a === 'string') continue;
     // A vendor naming claim is a product claim and needs the same evidence.
@@ -236,6 +286,13 @@ if (missingCanonical.length) {
 }
 if (missingUseCase.length) {
   warnings.push(`no use case recorded yet (${missingUseCase.length}): ${missingUseCase.join(', ')}`);
+}
+if (missingFlow.length) {
+  // Listed short. This backlog starts at nearly every page, and a warning
+  // nobody can read to the end of is a warning nobody reads.
+  const head = missingFlow.slice(0, 12).join(', ');
+  const rest = missingFlow.length > 12 ? `, and ${missingFlow.length - 12} more` : '';
+  warnings.push(`no applied illustration yet (${missingFlow.length}): ${head}${rest}`);
 }
 
 // 3c-bis. Inline citations. A citation that points nowhere is worse than no

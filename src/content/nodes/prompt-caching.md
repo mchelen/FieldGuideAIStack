@@ -33,6 +33,23 @@ useCase:
     input token price. Agent economics rest on this more than on any other
     single feature, because agents are precisely the workload that re-sends an
     unchanged prefix over and over.
+flow:
+  scenario: >-
+    Step 12 of a fifty-step agent task, re-sending the same 30,000-token system
+    prompt and tool schema it sent on step 11.
+  path:
+    - actor: The agent
+      does: re-sends the unchanged prefix, then the new step
+    - node: inference-api
+      does: receives the call and looks at the prefix first
+    - node: prompt-caching
+      does: finds the prefix already stored and stops there
+      self: true
+    - node: kv-cache
+      does: hands back the attention state instead of rebuilding it
+    - node: model
+      does: processes only the new step
+  returns: Prefix read at 0.1x, not processed again
 relations:
   - type: consumes
     target: kv-cache

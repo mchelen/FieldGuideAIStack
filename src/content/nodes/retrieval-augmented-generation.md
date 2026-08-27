@@ -29,6 +29,29 @@ useCase:
     puts it in the prompt, so an edit takes effect immediately and the answer
     can cite the paragraph it rests on. Freshness and [provenance](provenance) are the two
     things retrieval buys that training cannot.
+flow:
+  scenario: >-
+    A support bot answering from a policy handbook that is rewritten every
+    month, without a training run each time.
+  path:
+    - actor: A question
+      does: >-
+        "how many days of carry-over leave do I get?"
+    - node: semantic-search
+      does: >-
+        finds passages that mean the same thing, not ones that match words
+    - node: reranking
+      does: >-
+        cuts fifty candidates down to the three worth the context
+    - node: retrieval-augmented-generation
+      does: >-
+        puts those three in the prompt, then asks the question
+      self: true
+    - node: grounding
+      does: >-
+        the answer cites the paragraph it rests on
+  returns: >-
+    The handbook changes and nothing is retrained
 relations:
   - type: kind-of
     target: grounding

@@ -245,6 +245,45 @@ if (deadAltitude.length) problems.push(`altitude band links to missing pages: ${
 else if (banded === 0) problems.push('no concept page carries an altitude band');
 else ok(`${banded} concept page(s) offer zoom in/out, all targets resolve`);
 
+// The applied illustration is drawn from frontmatter, so the count of stations
+// on the page and the count in the source must agree -- and every station that
+// names a node must actually reach it. A picture of the wrong pipeline is worse
+// than no picture, because it looks authoritative.
+const nodeDir = new URL('../src/content/nodes/', import.meta.url).pathname;
+let drawn = 0;
+const flowProblems = [];
+for (const id of ids) {
+  const src = await readFile(join(nodeDir, `${id}.md`), 'utf8');
+  const block = /^flow:\n([\s\S]*?)(?=^[a-zA-Z]+:)/m.exec(src);
+  const html = await readFile(join(DIST, 'nodes', id, 'index.html'), 'utf8');
+  const figure = /<figure class="flow[\s\S]*?<\/figure>/.exec(html);
+  if (!block) {
+    if (figure) flowProblems.push(`${id}: page draws an illustration its frontmatter does not declare`);
+    continue;
+  }
+  if (!figure) {
+    flowProblems.push(`${id}: frontmatter declares a flow and the page drew nothing`);
+    continue;
+  }
+  drawn += 1;
+  const declared = (block[1].match(/^ {4}- (node|actor):/gm) ?? []).length;
+  const boxes = (figure[0].match(/class="flow-box/g) ?? []).length;
+  if (declared !== boxes) {
+    flowProblems.push(`${id}: ${declared} stations declared, ${boxes} drawn`);
+  }
+  if (!/class="flow-box is-self/.test(figure[0])) {
+    flowProblems.push(`${id}: no station drawn as this concept`);
+  }
+  for (const m of figure[0].matchAll(/href="[^"]*\/nodes\/([a-z0-9-]+)\//g)) {
+    if (!existsSync(join(DIST, 'nodes', m[1], 'index.html'))) {
+      flowProblems.push(`${id}: illustration links to missing page ${m[1]}`);
+    }
+  }
+}
+if (flowProblems.length) problems.push(`applied illustrations: ${flowProblems.slice(0, 5).join('; ')}`);
+else if (drawn === 0) problems.push('no page carries an applied illustration');
+else ok(`${drawn} applied illustration(s) drawn, each matching its frontmatter`);
+
 const bundles = (await readdir(join(DIST, '_astro'))).filter((f) => f.endsWith('.js'));
 if (bundles.length === 0) problems.push('no client bundle emitted for the graph explorer');
 else ok(`${bundles.length} client bundle(s) emitted`);

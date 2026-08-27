@@ -31,6 +31,29 @@ useCase:
     behaviour turn the question into a number, and — more usefully — into a
     list of the specific cases that got worse. This is the single highest-value
     thing to build early and the thing most projects postpone.
+flow:
+  scenario: >-
+    A prompt change looks better on the three cases somebody tried, and now
+    has to be shipped or not.
+  path:
+    - actor: A prompt change
+      does: >-
+        better on the three cases someone happened to try
+    - node: evaluation
+      does: >-
+        runs both versions over the same fixed set of cases
+      self: true
+    - node: llm-as-a-judge
+      does: >-
+        scores which of the two outputs is better, pairwise
+    - node: regression-testing
+      does: >-
+        compares against your own last release, not against other models
+    - node: benchmark
+      does: >-
+        compares models against each other — a different question entirely
+  returns: >-
+    "Seems better" becomes a number someone can argue with
 relations:
   - type: distinguished-from
     target: verification-loop

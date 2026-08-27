@@ -1,0 +1,125 @@
+---
+import { flowDiagram, flowSummary, type FlowInput } from '../lib/flow';
+import type { Graph } from '../lib/graph';
+
+interface Props {
+  graph: Graph;
+  flow: FlowInput;
+  title: string;
+}
+const { graph, flow, title } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const d = flowDiagram(graph, flow);
+const summary = flowSummary(d);
+const arrowGap = 30;
+---
+
+<figure class={`flow${d.returns ? ' has-return' : ''}`}>
+  <p class="flow-scenario">{d.scenario}</p>
+  <svg
+    viewBox={`0 0 ${d.width} ${d.height}`}
+    style={`width:${d.width}px`}
+    role="img"
+    aria-label={summary}
+  >
+    <defs>
+      <marker
+        id="flow-arrow"
+        viewBox="0 0 8 8"
+        refX="7"
+        refY="4"
+        markerWidth="9"
+        markerHeight="9"
+        markerUnits="userSpaceOnUse"
+        orient="auto-start-reverse"
+      >
+        <path class="flow-arrowhead" d="M 0 0 L 8 4 L 0 8 z" />
+      </marker>
+      {/* A second marker rather than a class on the first: a marker is
+          referenced, not nested, so a descendant selector never reaches it. */}
+      <marker
+        id="flow-arrow-return"
+        viewBox="0 0 8 8"
+        refX="7"
+        refY="4"
+        markerWidth="10"
+        markerHeight="10"
+        markerUnits="userSpaceOnUse"
+        orient="auto-start-reverse"
+      >
+        <path class="flow-arrowhead-return" d="M 0 0 L 8 4 L 0 8 z" />
+      </marker>
+    </defs>
+
+    {
+      d.stations.slice(0, -1).map((s) => (
+        <line
+          class="flow-step"
+          x1={s.x + s.w / 2}
+          y1={s.y + s.h}
+          x2={s.x + s.w / 2}
+          y2={s.y + s.h + arrowGap - 4}
+          marker-end="url(#flow-arrow)"
+        />
+      ))
+    }
+
+    {
+      d.returns && (
+        <g class="flow-return">
+          <path
+            class="flow-return-line"
+            d={`M ${d.returns.x - 6} ${d.returns.fromY}
+                H ${d.returns.x + 22}
+                V ${d.returns.toY}
+                H ${d.returns.x - 6}`}
+            marker-end="url(#flow-arrow-return)"
+          />
+        </g>
+      )
+    }
+
+    {
+      d.stations.map((s) => {
+        const box = (
+          <>
+            <rect
+              class={`flow-box${s.self ? ' is-self' : ''}${s.id ? '' : ' is-actor'}`}
+              x={s.x}
+              y={s.y}
+              width={s.w}
+              height={s.h}
+              rx={8}
+            />
+            {s.titleLines.map((line, i) => (
+              <text
+                class="flow-title"
+                x={s.x + 14}
+                y={s.y + 22 + i * 21}
+                font-weight={s.self ? 700 : 560}
+              >
+                {line}
+              </text>
+            ))}
+            {s.lines.map((line, i) => (
+              <text
+                class="flow-does"
+                x={s.x + 14}
+                y={s.y + 22 + (s.titleLines.length - 1) * 21 + 16 + i * 14}
+              >
+                {line}
+              </text>
+            ))}
+          </>
+        );
+        return s.id ? <a href={`${base}/nodes/${s.id}/`}>{box}</a> : <g>{box}</g>;
+      })
+    }
+  </svg>
+  {d.returns && <p class="flow-return-note">{d.returns.label}</p>}
+  <figcaption>
+    One request through <strong>{title}</strong>. Boxes with a link are concepts
+    with their own page; the highlighted one is this page. Drawn at build time
+    from the <code>flow</code> block in this page's frontmatter.
+  </figcaption>
+</figure>
