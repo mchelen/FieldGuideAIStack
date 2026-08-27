@@ -41,17 +41,25 @@ flow:
     An agent that keeps going until the test suite is green, rather than
     until it believes the work is done.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask for the suite to pass, not for a best effort
     - node: agentic-loop
+      where: wherever the product runs
       does: >-
         acts, observes, acts again
     - node: command-execution
+      where: a bounded environment
       does: >-
         runs the suite and returns the real result
     - node: verification-loop
+      where: wherever the product runs
       does: >-
         an external check the model does not author
       self: true
     - node: reflection
+      where: wherever the product runs
       does: >-
         the weaker version, where the model grades its own work
   returns: >-

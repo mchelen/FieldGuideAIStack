@@ -40,16 +40,20 @@ flow:
     worth the wait on some tasks and not others.
   path:
     - actor: A hard problem
+      where: a person, not a system
       does: >-
         one where the first attempt is usually wrong
     - node: reasoning-model
+      where: the provider's servers
       does: >-
         trained to work through it in steps before answering
       self: true
     - node: chain-of-thought-prompting
+      where: the prompt you send
       does: >-
         the same behaviour, previously asked for in the prompt
     - node: test-time-compute
+      where: the provider's servers
       does: >-
         spent by default rather than on request
   returns: >-

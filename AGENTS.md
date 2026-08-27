@@ -151,6 +151,23 @@ any new development work.
   station that legitimately hung off the step before it. When the walk check
   fires, look for a missing edge before rewriting the flow -- the first time it
   ran it found that no node connected `inference-api` to `model`.
+- **Every station carries a `where`** -- whose computer that step happens on.
+  Consecutive stations sharing one answer are drawn inside a labelled band, so
+  the moment a request leaves the reader's machine is a line you can see rather
+  than a fact you have to already know. Either every station in a flow has one
+  or none do; a half-banded diagram reads as though the unlabelled steps happen
+  nowhere.
+- `where` is a **closed list**, in `src/content.config.ts`. The first pass wrote
+  whatever fitted each step and produced 187 different answers, which meant 74
+  flows where every band held exactly one station -- a boundary drawn between
+  two steps on the same machine, with the boundary that matters lost among
+  them. A band is only worth drawing if it groups. Adding a place to the list
+  should be a deliberate decision that the guide has a machine it cannot name.
+- **Start with the person** wherever a request really does start with one. The
+  reader's own position on the diagram is what makes the rest of it legible,
+  and it is the thing that was missing first time round. Not every concept has
+  one -- nobody is present during pretraining, and a licence has parties rather
+  than users -- so this is a judgement, not a rule the validator can make.
 - `returns` is the payoff, drawn as a dashed arrow back up the diagram with its
   label in HTML underneath. Not inside the SVG: a label wide enough to read
   needed a gutter that pushed the drawing past 500px, and a phone then scaled
@@ -161,7 +178,8 @@ any new development work.
   floor `check:layout` enforces; changing them without re-running it is how the
   diagram becomes unreadable on a phone while every check stays green.
 - `check:layout` also measures every label's bounding box against the box it
-  sits in, on every page that has a flow. SVG text does not affect
+  sits in -- and every band label against its band -- on every page that has a
+  flow. SVG text does not affect
   `scrollWidth`, so the ordinary overflow sweep cannot see it -- "Retrieval-
   augmented generation" ran clean out of its box and through the return arrow
   with everything green.
@@ -179,6 +197,10 @@ any new development work.
   far too wide. The advance table in `src/lib/flow.ts` is deliberately
   conservative -- measured against every label in the guide, it never
   under-estimates -- and the label check is what makes it safe to approximate.
+  Titles are semibold and render about 1.14x wider than the weight the table
+  was measured at; leaving that factor out under-estimated every title by a
+  seventh, which stayed invisible until the boxes narrowed to make room for the
+  bands and then six titles ran out of their boxes at once.
 
 ## Fieldwork
 - The fictional organisation lives in `src/content/scenarios/` and

@@ -32,16 +32,24 @@ flow:
     Two replies that take the same eight seconds, one of which starts
     arriving after 300 milliseconds.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask something and watch for the first word
     - actor: A request
+      where: a person, not a system
       does: >-
         sent, with streaming enabled
     - node: inference-api
+      where: the provider's servers
       does: >-
         keeps the connection open instead of buffering
     - node: token
+      where: on the wire
       does: >-
         each one is sent the moment it is produced
     - node: streaming
+      where: what the reader sees
       does: >-
         which is why a chat window feels quick before it is finished
       self: true

@@ -37,19 +37,24 @@ flow:
     appear, and wants to know which part did what.
   path:
     - actor: You
+      where: a person, not a system
       does: >-
         type a question and press enter
     - node: harness
+      where: wherever the product runs
       does: >-
         assembles the system prompt, the history, and your question
     - node: inference-api
+      where: on the wire
       does: >-
         carries the whole thing as one request
     - node: model
+      where: the provider's servers
       does: >-
         returns a probability distribution over the next token, repeatedly
       self: true
     - node: token
+      where: the provider's servers
       does: >-
         the only units that cross the boundary, in either direction
   returns: >-

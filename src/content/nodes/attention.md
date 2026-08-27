@@ -39,16 +39,20 @@ flow:
     where the answer is in the first.
   path:
     - node: token
+      where: inside one model call
       does: >-
         the sequence, one position per unit
     - node: attention
+      where: inside one model call
       does: >-
         every position looks at every other and weighs how much it matters
       self: true
     - node: kv-cache
+      where: inside one model call
       does: >-
         the work it did for earlier positions, saved so it is done once
     - node: transformer
+      where: inside one model call
       does: >-
         the architecture that is mostly this operation, stacked
   returns: >-

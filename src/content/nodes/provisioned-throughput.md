@@ -38,17 +38,25 @@ flow:
     A workload steady enough that paying per token is worse than paying for
     the capacity itself.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        notice your load is steady enough to reserve
     - actor: Steady load
+      where: your machine
       does: >-
         predictable, heavy, and always there
     - node: provisioned-throughput
+      where: the host's own hardware
       does: >-
         capacity bought by the hour instead of by the token
       self: true
     - node: throughput
+      where: the host's own hardware
       does: >-
         which is what is actually being reserved
     - node: token-billing
+      where: your invoice
       does: >-
         the variable alternative, and the one you are leaving
   returns: >-

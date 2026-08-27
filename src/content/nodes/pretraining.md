@@ -38,19 +38,24 @@ flow:
     of that number is one training pass.
   path:
     - actor: A corpus
+      where: a training cluster
       does: >-
         an enormous general collection of text
     - node: pretraining
+      where: a training cluster
       does: >-
         the first and by far the most expensive pass
       self: true
     - node: self-supervised-learning
+      where: a training cluster
       does: >-
         no labels — the next token is the label
     - node: foundation-model
+      where: the weights file
       does: >-
         the artifact that comes out, general and not yet aimed
     - node: post-training
+      where: a training cluster
       does: >-
         what makes it answer questions instead of continuing text
   returns: >-

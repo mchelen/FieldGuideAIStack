@@ -34,17 +34,25 @@ flow:
     A model download with a licence line, and a document that should say
     what it is unsuited for.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        have to decide whether this model suits your job
     - actor: A release
+      where: the host's own hardware
       does: >-
         weights, published for others to use
     - node: model-card
+      where: a contract, not a computer
       does: >-
         what it is, what it was for, how it was evaluated
       self: true
     - node: checkpoint
+      where: the weights file
       does: >-
         which exact saved state is being described
     - node: open-source-ai
+      where: a contract, not a computer
       does: >-
         and the disclosure most definitions ask for
   returns: >-

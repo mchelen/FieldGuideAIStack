@@ -35,17 +35,25 @@ flow:
     An agent that edits files, runs the suite, reads the failure and edits
     again — rather than suggesting a line.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask for the suite to pass, not for a suggestion
     - actor: A failing test
+      where: your machine
       does: >-
         the goal, and the thing that says when it is met
     - node: agentic-coding
+      where: your machine
       does: >-
         the agent writes, runs and fixes rather than suggesting
       self: true
     - node: command-execution
+      where: your machine
       does: >-
         which is what makes running it possible at all
     - node: verification-loop
+      where: your machine
       does: >-
         and what lets the loop stop on evidence
   returns: >-

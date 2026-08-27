@@ -37,14 +37,21 @@ flow:
     A loop where thinking and acting alternate, so what came back from the
     last tool call changes the next thought.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask a question the model cannot answer alone
     - node: chain-of-thought-prompting
+      where: the prompt you send
       does: >-
         reasoning written out as text
     - node: react
+      where: wherever the product runs
       does: >-
         interleaved with tool calls, rather than done all at once
       self: true
     - node: agentic-loop
+      where: wherever the product runs
       does: >-
         which is the shape most agent loops still have
   returns: >-

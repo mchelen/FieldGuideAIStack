@@ -38,16 +38,25 @@ flow:
     Step 12 of a fifty-step agent task, re-sending the same 30,000-token system
     prompt and tool schema it sent on step 11.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        set a fifty-step task going against one long document
     - actor: The agent
+      where: wherever the product runs
       does: re-sends the unchanged prefix, then the new step
     - node: inference-api
+      where: the provider's servers
       does: receives the call and looks at the prefix first
     - node: prompt-caching
+      where: the provider's servers
       does: finds the prefix already stored and stops there
       self: true
     - node: kv-cache
+      where: the provider's servers
       does: hands back the attention state instead of rebuilding it
     - node: model
+      where: the provider's servers
       does: processes only the new step
   returns: Prefix read at 0.1x, not processed again
 relations:

@@ -39,16 +39,20 @@ flow:
     random numbers.
   path:
     - actor: A task
+      where: your machine
       does: >-
         a few thousand labelled examples, and no budget for a training run
     - node: pretrained-model
+      where: a training cluster
       does: >-
         weights that already encode general language
       self: true
     - node: fine-tuning
+      where: a training cluster
       does: >-
         a short second pass, on your examples
     - node: model
+      where: the weights file
       does: >-
         and what you ship is still one artifact
   returns: >-

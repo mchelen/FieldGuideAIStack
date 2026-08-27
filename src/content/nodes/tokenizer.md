@@ -35,16 +35,20 @@ flow:
     paragraph, in two different languages.
   path:
     - actor: Raw text
+      where: a person, not a system
       does: >-
         characters, as typed
     - node: tokenizer
+      where: inside one model call
       does: >-
         splits it into the fragments this model was trained on
       self: true
     - node: token
+      where: inside one model call
       does: >-
         the units that go in, and come back out
     - node: model
+      where: inside one model call
       does: >-
         which has never seen a character in its life
   returns: >-

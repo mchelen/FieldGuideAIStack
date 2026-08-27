@@ -37,17 +37,25 @@ flow:
     One expensive training run, and a dozen products that are all the same
     model underneath.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        notice a dozen products are one model underneath
     - node: pretraining
+      where: a training cluster
       does: >-
         the run that costs almost all of the money
     - node: foundation-model
+      where: the weights file
       does: >-
         what comes out: general, and not yet aimed at anything
       self: true
     - node: large-language-model
+      where: the weights file
       does: >-
         the kind of it this guide is mostly about
     - node: model
+      where: the weights file
       does: >-
         the artifact, before anyone has decided what it is for
   returns: >-

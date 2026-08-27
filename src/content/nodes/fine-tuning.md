@@ -36,16 +36,20 @@ flow:
     system needs, on a few thousand examples.
   path:
     - node: pretrained-model
+      where: a training cluster
       does: >-
         the starting point — someone else's expensive training run
     - node: fine-tuning
+      where: a training cluster
       does: >-
         a second pass, on a much smaller set of task-specific examples
       self: true
     - node: parameter-efficient-fine-tuning
+      where: a training cluster
       does: >-
         usually this, so the base weights are never copied
     - node: parameter
+      where: the weights file
       does: >-
         what actually changes, and how much of it
   returns: >-

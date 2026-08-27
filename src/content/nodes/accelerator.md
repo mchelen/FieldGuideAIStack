@@ -40,17 +40,25 @@ flow:
     A deployment that fits or does not fit, decided by memory capacity
     before anything about speed comes up.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask whether this deployment fits at all
     - node: model
+      where: the host's own hardware
       does: >-
         weights that have to be resident to be served
     - node: kv-cache
+      where: the host's own hardware
       does: >-
         plus per-request state for every concurrent conversation
     - node: accelerator
+      where: the host's own hardware
       does: >-
         and both have to fit in its memory, or nothing runs
       self: true
     - node: throughput
+      where: the host's own hardware
       does: >-
         only then does how fast it goes become the question
   returns: >-

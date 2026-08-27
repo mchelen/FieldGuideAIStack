@@ -36,16 +36,20 @@ flow:
     any of it is trained.
   path:
     - actor: A budget
+      where: a training cluster
       does: >-
         compute, fixed in advance
     - node: scaling-laws
+      where: a training cluster
       does: >-
         loss falls as a predictable power law in size, data and compute
       self: true
     - node: parameter
+      where: the weights file
       does: >-
         which is one of the three terms
     - node: pretraining
+      where: a training cluster
       does: >-
         and the run the prediction is being made about
   returns: >-

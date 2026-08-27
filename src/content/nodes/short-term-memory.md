@@ -33,20 +33,29 @@ flow:
     Everything an agent knows inside one run, which is the conversation and
     nothing else.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        start a task and keep going for eighty turns
     - actor: One run
+      where: wherever the product runs
       does: >-
         a task, from first message to last
     - node: memory
+      where: wherever the product runs
       does: >-
         what the agent retains at all, since the model retains nothing
     - node: short-term-memory
+      where: wherever the product runs
       does: >-
         the conversation so far, re-sent on every call
       self: true
     - node: context-window
+      where: the prompt you send
       does: >-
         and it lasts exactly as long as it fits
     - node: compaction
+      where: wherever the product runs
       does: >-
         which is what happens when it stops fitting
   returns: >-

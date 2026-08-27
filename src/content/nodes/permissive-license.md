@@ -37,17 +37,25 @@ flow:
     A licence with almost no conditions, written for source code, applied to
     a set of weights.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        read a licence written for code, attached to weights
     - actor: A licence file
+      where: your machine
       does: >-
         beside the weights, and short
     - node: permissive-license
+      where: a contract, not a computer
       does: >-
         reuse with minimal conditions — attribution, no warranty
       self: true
     - node: copyleft
+      where: a contract, not a computer
       does: >-
         the other axis, where derivatives must carry the same terms
     - node: open-weights
+      where: a contract, not a computer
       does: >-
         which is a claim about availability, not about either
   returns: >-

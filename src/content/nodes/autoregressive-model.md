@@ -39,16 +39,20 @@ flow:
     chosen given the ones already committed.
   path:
     - node: token
+      where: inside one model call
       does: >-
         one at a time, appended to what came before
     - node: autoregressive-model
+      where: inside one model call
       does: >-
         predicts the next from its own previous predictions
       self: true
     - node: model
+      where: inside one model call
       does: >-
         which is every current large language model
     - node: fill-in-the-middle
+      where: the prompt you send
       does: >-
         and the trick needed to write into a gap instead
   returns: >-

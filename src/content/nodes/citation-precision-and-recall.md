@@ -38,17 +38,25 @@ flow:
     An answer with three citations, one of which does not support the
     sentence it is attached to.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        check whether a citation says what it is cited for
     - actor: An answer
+      where: what the reader sees
       does: >-
         with sources attached to some of its claims
     - node: citation-precision-and-recall
+      where: your evaluation harness
       does: >-
         do the cited sources support the claim, and is anything uncited
       self: true
     - node: grounding
+      where: your infrastructure
       does: >-
         the design that made citation possible at all
     - node: evaluation
+      where: your evaluation harness
       does: >-
         and the measurement, over a fixed set
   returns: >-

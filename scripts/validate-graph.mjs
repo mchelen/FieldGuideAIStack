@@ -193,6 +193,7 @@ for (const n of nodes) {
 const missingCanonical = [];
 const missingUseCase = [];
 const missingFlow = [];
+const missingWhere = [];
 
 /** Ids one declared hop away, in either direction. */
 const neighbourIndex = new Map(nodes.map((n) => [n.id, new Set()]));
@@ -254,6 +255,17 @@ for (const n of nodes) {
         problems.push(`${n.file}: flow station "${step.node}" is not a node`);
       }
     }
+
+    // Whose computer each step happens on. All or nothing: a half-banded
+    // diagram reads as though the unlabelled steps happen nowhere, which is
+    // worse than not answering the question at all.
+    const placed = path.filter((step) => step.where).length;
+    if (placed && placed !== path.length) {
+      problems.push(
+        `${n.file}: flow places ${placed} of ${path.length} stations — either every station carries \`where\` or none do`,
+      );
+    }
+    if (!placed) missingWhere.push(n.id);
     // The path should be a walk in the graph, not a list of things that came
     // to mind: each node station connected to another one in the same flow.
     // Checking against the concept's own neighbours instead was the first
@@ -286,6 +298,11 @@ if (missingCanonical.length) {
 }
 if (missingUseCase.length) {
   warnings.push(`no use case recorded yet (${missingUseCase.length}): ${missingUseCase.join(', ')}`);
+}
+if (missingWhere.length) {
+  const head = missingWhere.slice(0, 12).join(', ');
+  const rest = missingWhere.length > 12 ? `, and ${missingWhere.length - 12} more` : '';
+  warnings.push(`illustration does not say where its steps run (${missingWhere.length}): ${head}${rest}`);
 }
 if (missingFlow.length) {
   // Listed short. This backlog starts at nearly every page, and a warning

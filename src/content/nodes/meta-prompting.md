@@ -36,17 +36,25 @@ flow:
     A prompt about the shape of a problem rather than its content, and a
     second model rewriting the first one's prompt.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        have a prompt that works inconsistently
     - actor: A weak prompt
+      where: your machine
       does: >-
         producing inconsistent output
     - node: meta-prompting
+      where: the prompt you send
       does: >-
         prompt about structure, not content — or have a model rewrite it
       self: true
     - node: few-shot-prompting
+      where: the prompt you send
       does: >-
         the alternative it is usually measured against
     - node: prompt-engineering
+      where: your evaluation harness
       does: >-
         and the evaluation set that says which one won
   returns: >-

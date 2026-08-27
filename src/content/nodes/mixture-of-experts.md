@@ -36,16 +36,20 @@ flow:
     one a fraction of that size.
   path:
     - node: parameter
+      where: the weights file
       does: >-
         the headline count, which is the total
     - node: mixture-of-experts
+      where: inside one model call
       does: >-
         a router sends each token to a small subset of them
       self: true
     - node: transformer
+      where: inside one model call
       does: >-
         the architecture the routing is built into
     - actor: The active count
+      where: your invoice
       does: >-
         a fraction of the total, and the one that decides what it costs
   returns: >-

@@ -37,20 +37,29 @@ flow:
     An assistant that remembers your project conventions on Monday, having
     been told them on Friday.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        tell it how your project does things
     - actor: A fact
+      where: wherever the product runs
       does: >-
         worth keeping past the end of this conversation
     - node: memory
+      where: wherever the product runs
       does: >-
         what the agent retains — the model underneath retains nothing
       self: true
     - node: short-term-memory
+      where: wherever the product runs
       does: >-
         within the run, this is just the conversation so far
     - node: long-term-memory
+      where: wherever the product runs
       does: >-
         across runs, it is files the harness reads and writes
     - node: context-window
+      where: the prompt you send
       does: >-
         and either way it is re-sent, and re-paid for, on every call
   returns: >-

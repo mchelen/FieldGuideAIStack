@@ -39,17 +39,25 @@ flow:
     A deployment sized for a thousand concurrent users, where the number
     that matters is not how fast one reply is.
   path:
+    - actor: A thousand users
+      where: a person, not a system
+      does: >-
+        send requests to the same deployment
     - node: accelerator
+      where: the host's own hardware
       does: >-
         one deployment, with fixed memory and fixed compute
     - node: throughput
+      where: the host's own hardware
       does: >-
         total tokens per second across everyone being served
       self: true
     - node: latency
+      where: what the reader sees
       does: >-
         which trades against it — batching helps one and hurts the other
     - node: provisioned-throughput
+      where: the host's own hardware
       does: >-
         and can be bought by the hour instead of by the token
   returns: >-

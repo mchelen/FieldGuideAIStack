@@ -34,14 +34,21 @@ flow:
     A completion endpoint that takes a prefix and a suffix, because a chat
     endpoint has nowhere to put the suffix.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        need completion inside text, not after it
     - node: fill-in-the-middle
+      where: your machine
       does: >-
         the capability that needs both sides
     - node: fill-in-the-middle-api
+      where: the provider's servers
       does: >-
         an endpoint shaped for it: prefix, suffix, and a gap
       self: true
     - node: inference-api
+      where: the provider's servers
       does: >-
         beside the chat contract, and not portable between vendors
   returns: >-

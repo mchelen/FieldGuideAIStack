@@ -38,16 +38,20 @@ flow:
     next model is built.
   path:
     - node: model
+      where: wherever the product runs
       does: >-
         generates examples, cheaply and at volume
     - node: synthetic-data
+      where: your machine
       does: >-
         used as training data rather than collected
       self: true
     - node: pretraining
+      where: a training cluster
       does: >-
         where it now routinely appears
     - node: ai-slop
+      where: the open web
       does: >-
         and the same output, when nobody checked it
   returns: >-

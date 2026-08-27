@@ -36,17 +36,25 @@ flow:
     Opening an unfamiliar repository in an agent, where the repository
     itself can configure the agent.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        open an unfamiliar repository in an agent
     - actor: A repository
+      where: your machine
       does: >-
         cloned, and not yet vetted by anyone
     - node: project-trust
+      where: your machine
       does: >-
         until it is trusted, its configuration is held back
       self: true
     - node: sandbox
+      where: a bounded environment
       does: >-
         and what does run, runs bounded
     - node: permission-model
+      where: your infrastructure
       does: >-
         the wider policy this is one gate in
   returns: >-

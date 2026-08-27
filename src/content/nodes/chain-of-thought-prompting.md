@@ -34,16 +34,20 @@ flow:
     answer and right when asked for the working.
   path:
     - actor: A problem
+      where: a person, not a system
       does: >-
         several steps, one answer expected
     - node: chain-of-thought-prompting
+      where: the prompt you send
       does: >-
         ask for the intermediate steps, not only the answer
       self: true
     - node: self-consistency
+      where: the prompt you send
       does: >-
         sample it several times and take the majority
     - node: reasoning-model
+      where: the provider's servers
       does: >-
         or buy a model trained to do it without being asked
   returns: >-

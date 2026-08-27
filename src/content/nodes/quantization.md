@@ -37,17 +37,25 @@ flow:
     A 14GB model that has to run on a laptop with 8GB of memory to spare,
     without retraining anything.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        have 8GB free and a 14GB model
     - node: parameter
+      where: the weights file
       does: >-
         the learned numbers, at 16 bits each
     - node: quantization
+      where: the weights file
       does: >-
         stored at 8 or 4 bits instead — the same count, less precision
       self: true
     - node: on-device-inference
+      where: your machine
       does: >-
         which is what makes it fit on hardware you own
     - node: distillation
+      where: a training cluster
       does: >-
         the other way to shrink one, and a genuinely different model
   returns: >-

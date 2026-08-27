@@ -29,20 +29,29 @@ flow:
     A team swaps one vendor for another and finds that most of the work is
     in the shape of the request, not the model.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask a question, in whichever product you use
     - node: harness
+      where: wherever the product runs
       does: >-
         assembles messages and configuration into one request
     - node: inference-api
+      where: the provider's servers
       does: >-
         the HTTP contract: post messages, get tokens back
       self: true
     - node: temperature
+      where: the provider's servers
       does: >-
         one of the knobs that rides along with the call
     - node: streaming
+      where: on the wire
       does: >-
         tokens come back as they are produced, not at the end
     - node: rate-limit
+      where: a contract, not a computer
       does: >-
         and the account, not the model, decides how often you may ask
   returns: >-

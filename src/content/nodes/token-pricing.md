@@ -37,17 +37,25 @@ flow:
     Four rates on one invoice for what looks like one thing, and a prompt
     whose layout decides which apply.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        find four rates for what looked like one thing
     - node: token-billing
+      where: your invoice
       does: >-
         charges by consumption, counted separately in and out
     - node: token-pricing
+      where: a contract, not a computer
       does: >-
         input, output and cached input all priced differently
       self: true
     - node: prompt-caching
+      where: the provider's servers
       does: >-
         which is the cheapest of them, by an order of magnitude
     - node: cost-per-task
+      where: your invoice
       does: >-
         and the number that actually matters, once retries are counted
   returns: >-

@@ -38,16 +38,20 @@ flow:
     badly, split into three that are done well.
   path:
     - actor: A composite task
+      where: a person, not a system
       does: >-
         three jobs asked for in one prompt
     - node: prompt-chaining
+      where: the prompt you send
       does: >-
         split it: each prompt's output feeds the next
       self: true
     - node: prompt-engineering
+      where: your machine
       does: >-
         each link simple enough to evaluate on its own
     - node: agent
+      where: wherever the product runs
       does: >-
         the difference being that the steps are fixed in advance
   returns: >-

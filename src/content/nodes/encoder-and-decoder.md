@@ -39,13 +39,16 @@ flow:
     for ever after.
   path:
     - node: transformer
+      where: inside one model call
       does: >-
         the original had both halves, for translation
     - node: encoder-and-decoder
+      where: inside one model call
       does: >-
         and later models mostly kept one
       self: true
     - node: embedding
+      where: inside one model call
       does: >-
         the encoder half is what produces those
   returns: >-

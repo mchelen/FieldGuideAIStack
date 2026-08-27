@@ -32,16 +32,20 @@ flow:
     and one of which did not.
   path:
     - actor: A request
+      where: a person, not a system
       does: >-
         sent, and then waited on in silence
     - node: time-to-first-token
+      where: what the reader sees
       does: >-
         how long until anything appears at all
       self: true
     - node: token
+      where: on the wire
       does: >-
         after which the rest arrive at their own rate
     - node: latency
+      where: what the reader sees
       does: >-
         of which this is the half a person actually experiences
   returns: >-

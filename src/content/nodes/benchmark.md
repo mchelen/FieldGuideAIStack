@@ -38,17 +38,25 @@ flow:
     A model release quoting a benchmark score, and a decision about whether
     that number describes your work.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        read a score in a release announcement
     - node: benchmark
+      where: your evaluation harness
       does: >-
         a shared test, so results are comparable across models
       self: true
     - node: leaderboard
+      where: the open web
       does: >-
         where the comparison is published and ranked
     - node: data-contamination
+      where: a training cluster
       does: >-
         and the risk that the test was in the training data
     - node: regression-testing
+      where: your machine
       does: >-
         which is the different question: better than your last release?
   returns: >-

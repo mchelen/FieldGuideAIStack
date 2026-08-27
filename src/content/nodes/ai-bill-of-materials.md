@@ -39,17 +39,25 @@ flow:
     An incident in a dependency, and a question nobody can answer: which of
     our systems used that model.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        need to know which systems used the affected model
     - actor: A system
+      where: your infrastructure
       does: >-
         built from models, tools, datasets and servers
     - node: ai-bill-of-materials
+      where: your infrastructure
       does: >-
         an inventory of every one of them
       self: true
     - node: provenance
+      where: your infrastructure
       does: >-
         which is what each entry is evidence about
     - node: permission-model
+      where: your infrastructure
       does: >-
         and what each of them was allowed to reach
   returns: >-

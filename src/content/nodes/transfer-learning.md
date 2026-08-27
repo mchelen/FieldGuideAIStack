@@ -37,13 +37,16 @@ flow:
     for, better than one trained from scratch.
   path:
     - node: pretraining
+      where: a training cluster
       does: >-
         learns general structure from an enormous corpus
     - node: transfer-learning
+      where: the weights file
       does: >-
         that structure is reused for a task it never saw
       self: true
     - node: fine-tuning
+      where: a training cluster
       does: >-
         the practical form: a short second pass
   returns: >-

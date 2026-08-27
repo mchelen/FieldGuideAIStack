@@ -36,19 +36,24 @@ flow:
     anyone is asked before it acts.
   path:
     - node: tool-use
+      where: wherever the product runs
       does: >-
         the model asks to run something that changes state outside itself
     - node: approval-mode
+      where: wherever the product runs
       does: >-
         every action, only risky ones, or none at all
       self: true
     - node: human-in-the-loop
+      where: a person, not a system
       does: >-
         the setting that turns a step into a question
     - node: autonomy-level
+      where: wherever the product runs
       does: >-
         the label the product puts on the whole arrangement
     - node: permission-model
+      where: a bounded environment
       does: >-
         and the enforcement underneath, which the setting does not replace
   returns: >-

@@ -34,20 +34,29 @@ flow:
     Step 7 of 30 in a run to make a test suite pass, with the last command's
     output as the only new information.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask for the test suite to be made green, and then wait
     - node: agent
+      where: wherever the product runs
       does: >-
         holds the goal across the whole run
     - node: agentic-loop
+      where: wherever the product runs
       does: >-
         observe the last result, reason about it, act again
       self: true
     - node: inference-api
+      where: the provider's servers
       does: >-
         one call per pass — the loop belongs to the harness, not the model
     - node: turn
+      where: wherever the product runs
       does: >-
         each pass is one of these, billed and logged separately
     - node: verification-loop
+      where: wherever the product runs
       does: >-
         running the test is what lets the loop stop on something real
   returns: >-

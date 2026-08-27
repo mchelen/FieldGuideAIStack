@@ -38,19 +38,24 @@ flow:
     noticeably quicker to everyone using it.
   path:
     - actor: A request
+      where: a person, not a system
       does: >-
         sent, and then waited on
     - node: inference-api
+      where: on the wire
       does: >-
         the call, and everything the network adds to it
     - node: time-to-first-token
+      where: what the reader sees
       does: >-
         how long until anything appears — what a person feels
     - node: latency
+      where: what the reader sees
       does: >-
         end to end, only useful once split into its parts
       self: true
     - node: throughput
+      where: the provider's servers
       does: >-
         the same deployment measured for volume rather than for waiting
   returns: >-

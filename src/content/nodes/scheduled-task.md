@@ -38,16 +38,20 @@ flow:
     approve anything it decides to do.
   path:
     - actor: A timetable
+      where: nobody, at 3am
       does: >-
         not a request — nobody is asking
     - node: scheduled-task
+      where: the vendor's cloud
       does: >-
         the run starts on a clock
       self: true
     - node: background-execution
+      where: the vendor's cloud
       does: >-
         and continues with no surface open
     - node: human-in-the-loop
+      where: nobody, at 3am
       does: >-
         which is the thing that is missing at 3am
   returns: >-

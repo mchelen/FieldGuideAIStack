@@ -39,17 +39,25 @@ flow:
     Ten thousand documents to classify by Thursday, with nobody waiting on
     any single answer.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        have ten thousand documents and until Thursday
     - actor: Ten thousand jobs
+      where: your machine
       does: >-
         no interactive user, and a deadline in days
     - node: batch-inference
+      where: the provider's servers
       does: >-
         submitted to run whenever there is spare capacity
       self: true
     - node: inference-api
+      where: the provider's servers
       does: >-
         the same model, a different endpoint and a different price
     - node: streaming
+      where: the provider's servers
       does: >-
         the opposite trade — perceived speed instead of unit cost
   returns: >-

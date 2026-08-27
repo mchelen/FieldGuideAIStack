@@ -181,6 +181,16 @@ figure.diagram figcaption { font-size: 0.82rem; color: var(--ink-faint); margin-
   border-left: 3px solid var(--rule-strong);
   padding-left: 0.8rem;
 }
+/* Whose computer a run of steps happens on. Drawn behind the boxes so the
+   moment a request leaves the reader's machine is a visible edge rather than
+   something you have to already know. */
+.flow-band-box { fill: var(--bg-sunken); stroke: var(--rule); }
+.flow-band-label {
+  fill: var(--ink-faint);
+  font-size: 10.5px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+}
 .flow-box { fill: var(--bg-raised); stroke: var(--rule-strong); }
 .flow-box.is-actor { fill: var(--bg-sunken); stroke-dasharray: 5 3; }
 .flow-box.is-self { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.8; }

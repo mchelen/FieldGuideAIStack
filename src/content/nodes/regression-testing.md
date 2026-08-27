@@ -38,17 +38,25 @@ flow:
     A prompt change that fixed one case and quietly broke four others nobody
     thought to re-check.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        fix one case and wonder what else moved
     - actor: A change
+      where: your machine
       does: >-
         an improvement, on the case it was made for
     - node: regression-testing
+      where: your evaluation harness
       does: >-
         re-runs what already worked, against your own last release
       self: true
     - node: evaluation
+      where: your evaluation harness
       does: >-
         over a fixed set, so "unchanged" means something
     - node: benchmark
+      where: your evaluation harness
       does: >-
         which compares models, and answers a different question
   returns: >-

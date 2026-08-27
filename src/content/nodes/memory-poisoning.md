@@ -35,14 +35,21 @@ flow:
     A false fact written into an agent's notes on Tuesday and reasoned from
     as true every day after.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask it to read something you did not write
     - node: prompt-injection
+      where: the open web
       does: >-
         gets one instruction in, once
     - node: memory-poisoning
+      where: wherever the product runs
       does: >-
         which is to write something false into what persists
       self: true
     - node: memory
+      where: wherever the product runs
       does: >-
         and it is read back as established fact on every later run
   returns: >-

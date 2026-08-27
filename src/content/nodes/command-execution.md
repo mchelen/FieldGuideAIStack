@@ -32,17 +32,25 @@ flow:
     An agent that says the test passes, having actually run it, on a machine
     somebody has to decide about.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask for the failing test to be fixed
     - actor: A command
+      where: wherever the product runs
       does: >-
         the model asked for it; nothing has run yet
     - node: sandbox
+      where: a bounded environment
       does: >-
         bounds where it runs and what it can reach
     - node: command-execution
+      where: a bounded environment
       does: >-
         runs it and captures the output
       self: true
     - node: verification-loop
+      where: a bounded environment
       does: >-
         the output is evidence, which is why the loop can stop
   returns: >-

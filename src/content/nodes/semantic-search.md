@@ -39,17 +39,25 @@ flow:
     A search for "can I expense a taxi" over a policy that only uses the
     words "ground transportation".
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask whether you can expense a taxi
     - actor: A query
+      where: a person, not a system
       does: >-
         words that appear nowhere in the answer
     - node: embedding
+      where: your infrastructure
       does: >-
         query and documents both become positions in the same space
     - node: semantic-search
+      where: your infrastructure
       does: >-
         returns the nearest, which is the closest in meaning
       self: true
     - node: retrieval-augmented-generation
+      where: the prompt you send
       does: >-
         and the nearest few go into the prompt
   returns: >-

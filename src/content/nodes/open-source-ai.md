@@ -33,17 +33,25 @@ flow:
     A release described as open source, measured against a definition that
     asks for three things rather than one.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        read "open source" on a release announcement
     - actor: A release
+      where: the open web
       does: >-
         described as open, in a press announcement
     - node: open-weights
+      where: your machine
       does: >-
         the parameters are downloadable — one of the three
     - node: open-source-ai
+      where: a contract, not a computer
       does: >-
         which also asks for the code and for data information
       self: true
     - node: model-card
+      where: a contract, not a computer
       does: >-
         where most of the required disclosure would have to live
   returns: >-

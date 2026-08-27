@@ -38,17 +38,25 @@ flow:
     An agent that knows on Monday what it was told on Friday, in a system
     whose model remembers nothing at all.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        say something worth keeping past this conversation
     - node: memory
+      where: wherever the product runs
       does: >-
         what the agent retains, at all
     - node: long-term-memory
+      where: wherever the product runs
       does: >-
         in practice a directory of files it writes and reads
       self: true
     - node: short-term-memory
+      where: wherever the product runs
       does: >-
         as distinct from the conversation, which ends
     - node: memory-poisoning
+      where: wherever the product runs
       does: >-
         and a file anything can write to is a file anything can lie in
   returns: >-

@@ -40,16 +40,20 @@ flow:
     thousand of those choices.
   path:
     - actor: A preference
+      where: a person, not a system
       does: >-
         one of two answers, chosen by a person
     - node: reinforcement-learning-from-human-feedback
+      where: a training cluster
       does: >-
         trained against what people preferred, not a written answer
       self: true
     - node: post-training
+      where: a training cluster
       does: >-
         the stage it belongs to
     - node: model
+      where: the weights file
       does: >-
         whose refusals and tone mostly come from here
   returns: >-

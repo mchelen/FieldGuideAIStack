@@ -35,17 +35,25 @@ flow:
     An agent asked to book a flight, on a site with no API, using a browser
     that may or may not be logged in as you.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask for a flight booked on a site with no API
     - actor: A task
+      where: a person, not a system
       does: >-
         "find and book the cheapest flight on Tuesday"
     - node: browser-automation
+      where: a bounded environment
       does: >-
         drives a real browser, because there is no API
       self: true
     - node: tool-use
+      where: wherever the product runs
       does: >-
         each click and keystroke is a tool call
     - node: indirect-prompt-injection
+      where: the open web
       does: >-
         and every page it reads is untrusted input
   returns: >-

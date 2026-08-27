@@ -39,17 +39,25 @@ flow:
     A benchmark score that jumped, on a model that is not better at anything
     the benchmark was meant to measure.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        see a score jump with nothing else improving
     - node: pretraining
+      where: a training cluster
       does: >-
         scrapes an enormous general collection of text
     - node: data-contamination
+      where: a training cluster
       does: >-
         which can include the test set itself
       self: true
     - node: benchmark
+      where: your evaluation harness
       does: >-
         whose score now measures memory rather than ability
     - node: leaderboard
+      where: the open web
       does: >-
         and the ranking moves for no real reason
   returns: >-

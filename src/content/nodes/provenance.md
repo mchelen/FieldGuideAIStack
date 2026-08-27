@@ -37,17 +37,25 @@ flow:
     An image, a model, and a dataset, each of which needs an answer to the
     same question: where did this come from.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask where a model, dataset or image came from
     - actor: An artifact
+      where: the open web
       does: >-
         a file, with no history attached to it
     - node: provenance
+      where: the open web
       does: >-
         evidence of origin, attached to the artifact rather than claimed
       self: true
     - node: watermarking
+      where: the open web
       does: >-
         one mechanism, embedded in the content itself
     - node: ai-bill-of-materials
+      where: your infrastructure
       does: >-
         another, listing what a system was built from
   returns: >-

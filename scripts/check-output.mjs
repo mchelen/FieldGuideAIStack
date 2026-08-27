@@ -271,6 +271,18 @@ for (const id of ids) {
   if (declared !== boxes) {
     flowProblems.push(`${id}: ${declared} stations declared, ${boxes} drawn`);
   }
+  // Every distinct run of `where` should have produced a band. Counting the
+  // runs rather than the values is the point: two separated stretches on the
+  // same machine are two crossings, and the reader is owed both edges.
+  const wheres = [...block[1].matchAll(/^ {6}where: (.+)$/gm)].map((m) => m[1].trim());
+  if (wheres.length && wheres.length !== declared) {
+    flowProblems.push(`${id}: ${declared} stations but ${wheres.length} carry \`where\``);
+  }
+  const runs = wheres.filter((w, i) => w !== wheres[i - 1]).length;
+  const bands = (figure[0].match(/class="flow-band"/g) ?? []).length;
+  if (runs !== bands) {
+    flowProblems.push(`${id}: ${runs} machine(s) named, ${bands} band(s) drawn`);
+  }
   if (!/class="flow-box is-self/.test(figure[0])) {
     flowProblems.push(`${id}: no station drawn as this concept`);
   }

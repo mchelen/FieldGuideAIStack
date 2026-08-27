@@ -38,17 +38,25 @@ flow:
     Five agents on one problem, and a coordination cost that is larger than
     any of the five subtasks.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        hand over one problem too big for one agent
     - node: agent
+      where: wherever the product runs
       does: >-
         one of several, each with a piece of the work
     - node: multi-agent-system
+      where: wherever the product runs
       does: >-
         several coordinating, with delegation and communication overhead
       self: true
     - node: orchestration
+      where: wherever the product runs
       does: >-
         the parent's job: split, dispatch, and reassemble
     - node: agent-card
+      where: on the wire
       does: >-
         and how one agent learns what another can do
   returns: >-

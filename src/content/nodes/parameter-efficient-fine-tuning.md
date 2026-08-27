@@ -39,13 +39,16 @@ flow:
     copies of its weights.
   path:
     - node: fine-tuning
+      where: a training cluster
       does: >-
         the goal — a model adapted to one task
     - node: parameter-efficient-fine-tuning
+      where: a training cluster
       does: >-
         freeze the base, train a small number of new weights
       self: true
     - node: parameter
+      where: the weights file
       does: >-
         so what is stored per variant is megabytes, not gigabytes
   returns: >-

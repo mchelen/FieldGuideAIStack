@@ -39,14 +39,21 @@ flow:
     An audit log full of actions, all of them attributed to a person who was
     asleep at the time.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        read an audit log full of your own name
     - node: autonomous-agent
+      where: wherever the product runs
       does: >-
         acts without anyone being asked in the moment
     - node: non-human-identity
+      where: your infrastructure
       does: >-
         the credential it acts under, which should not be a person's
       self: true
     - node: permission-model
+      where: your infrastructure
       does: >-
         what that credential is allowed to do, decided separately
   returns: >-

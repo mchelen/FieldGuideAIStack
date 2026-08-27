@@ -34,17 +34,25 @@ flow:
     Two thousand outputs to compare and a budget that does not stretch to
     two thousand human ratings.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        have two thousand outputs and no rating budget
     - actor: Two outputs
+      where: your evaluation harness
       does: >-
         for the same input, from two versions of a system
     - node: llm-as-a-judge
+      where: the provider's servers
       does: >-
         a model scores which is better, pairwise
       self: true
     - node: evaluation
+      where: your evaluation harness
       does: >-
         run over a fixed set, so the score means something
     - node: factuality
+      where: your evaluation harness
       does: >-
         which it is notably worse at than at preference
   returns: >-

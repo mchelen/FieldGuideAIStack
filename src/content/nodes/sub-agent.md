@@ -33,17 +33,25 @@ flow:
     Forty files to summarise, and a parent that would run out of context
     long before the fortieth.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask for forty files to be summarised
     - node: agent
+      where: wherever the product runs
       does: >-
         holds the overall goal
     - node: sub-agent
+      where: wherever the product runs
       does: >-
         one child per file, each with its own fresh context
       self: true
     - node: orchestration
+      where: wherever the product runs
       does: >-
         the parent splits the work and reassembles the results
     - node: harness
+      where: wherever the product runs
       does: >-
         runs them, and only the summaries come back
   returns: >-

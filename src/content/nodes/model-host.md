@@ -30,17 +30,25 @@ flow:
     The same open-weights model bought from two vendors, with different
     latency, different terms, and the same weights.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        buy the same open model from two vendors
     - node: model-provider
+      where: a training cluster
       does: >-
         trained the weights and licensed them for others to run
     - node: model-host
+      where: the host's own hardware
       does: >-
         runs them on its own hardware, under its own contract
       self: true
     - node: accelerator
+      where: the host's own hardware
       does: >-
         the GPUs that deployment actually sits on
     - node: inference-api
+      where: the provider's servers
       does: >-
         what you call — the host's endpoint, not the provider's
   returns: >-

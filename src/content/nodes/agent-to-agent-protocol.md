@@ -32,17 +32,25 @@ flow:
     Two agents from different vendors that have to work together without
     either team having heard of the other.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        need two vendors' agents to work together
     - actor: A task
+      where: on the wire
       does: >-
         spanning two organisations' agents
     - node: agent-card
+      where: on the wire
       does: >-
         each side publishes what it is and what it can do
     - node: agent-to-agent-protocol
+      where: on the wire
       does: >-
         the open protocol for discovering and delegating across them
       self: true
     - node: mcp
+      where: on the wire
       does: >-
         the neighbouring standard — tools for an agent, not agents for an
         agent

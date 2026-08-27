@@ -37,16 +37,20 @@ flow:
     internet.
   path:
     - node: pretraining
+      where: a training cluster
       does: >-
         leaves a model that continues text, and nothing else
     - node: post-training
+      where: a training cluster
       does: >-
         everything done after that to make it useful
       self: true
     - node: instruction-tuning
+      where: a training cluster
       does: >-
         teaches following an instruction rather than continuing it
     - node: reinforcement-learning-from-human-feedback
+      where: a training cluster
       does: >-
         teaches which of two answers people preferred
   returns: >-

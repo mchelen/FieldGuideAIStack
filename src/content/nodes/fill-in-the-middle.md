@@ -37,17 +37,25 @@ flow:
     A cursor in the middle of a function, with code above it and code below
     it that both have to be honoured.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        put the cursor in the middle of a function
     - actor: A cursor
+      where: your machine
       does: >-
         text before it, and text after it
     - node: autoregressive-model
+      where: the provider's servers
       does: >-
         which by default only continues forwards
     - node: fill-in-the-middle
+      where: the provider's servers
       does: >-
         generate given both sides, by reordering the training data
       self: true
     - node: agentic-coding
+      where: your machine
       does: >-
         the capability behind every inline code completion
   returns: >-

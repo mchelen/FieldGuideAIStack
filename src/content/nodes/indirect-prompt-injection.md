@@ -35,17 +35,25 @@ flow:
     Nothing the user typed was hostile, and the instruction the agent
     followed came from a page it fetched.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask for a page to be read — nothing hostile typed
     - actor: A web page
+      where: the open web
       does: >-
         content the agent was asked to read
     - node: browser-automation
+      where: a bounded environment
       does: >-
         the agent fetches it as part of the task
     - node: indirect-prompt-injection
+      where: wherever the product runs
       does: >-
         the instruction arrives through content, not through the user
       self: true
     - node: prompt-injection
+      where: wherever the product runs
       does: >-
         the general failure it is a case of
   returns: >-

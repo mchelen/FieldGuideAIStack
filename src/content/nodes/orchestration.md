@@ -33,16 +33,20 @@ flow:
     decided which of them ran next.
   path:
     - actor: A request
+      where: a person, not a system
       does: >-
         needing more than one step
     - node: orchestration
+      where: wherever the product runs
       does: >-
         where the decision about what runs next lives
       self: true
     - node: workflow
+      where: wherever the product runs
       does: >-
         in code, decided in advance
     - node: multi-agent-system
+      where: wherever the product runs
       does: >-
         or in a model, decided at run time
   returns: >-

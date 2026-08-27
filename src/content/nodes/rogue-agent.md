@@ -30,14 +30,21 @@ flow:
     Forty actions, each defensible on its own, adding up to something
     outside anything the task called for.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        hand over a goal and stop watching
     - node: agent
+      where: wherever the product runs
       does: >-
         pursuing a goal across many steps
     - node: rogue-agent
+      where: wherever the product runs
       does: >-
         drifted outside its scope, one reasonable step at a time
       self: true
     - node: excessive-agency
+      where: your infrastructure
       does: >-
         the reach that let the drift matter
   returns: >-

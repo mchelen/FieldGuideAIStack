@@ -37,17 +37,25 @@ flow:
     A licence that follows the work downstream, applied to an artifact
     nobody agreed was software.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        build something on top and wonder what follows it
     - actor: A derivative
+      where: your machine
       does: >-
         something built from a licensed thing
     - node: copyleft
+      where: a contract, not a computer
       does: >-
         requires the derivative to carry the same terms
       self: true
     - node: permissive-license
+      where: a contract, not a computer
       does: >-
         the alternative, which requires almost nothing
     - node: open-source-ai
+      where: a contract, not a computer
       does: >-
         and the argument about what a derivative even is for weights
   returns: >-

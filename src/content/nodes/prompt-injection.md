@@ -37,18 +37,26 @@ flow:
     A web page the agent was asked to summarise contains a line addressed to
     the agent instead of the reader.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask for a web page to be summarised
     - actor: A fetched page
+      where: the open web
       does: >-
         content, with an instruction hidden in it
     - node: tool-use
+      where: wherever the product runs
       does: >-
         the agent fetched it, so it arrives as ordinary tool output
     - node: prompt-injection
+      where: the provider's servers
       does: >-
         the model reads content as instruction, because it cannot tell them
         apart
       self: true
     - node: data-exfiltration
+      where: your infrastructure
       does: >-
         and the instruction asks it to send something somewhere
   returns: >-

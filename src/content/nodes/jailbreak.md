@@ -30,16 +30,20 @@ flow:
     request is dressed as fiction.
   path:
     - actor: A user
+      where: a person, not a system
       does: >-
         asking for something the model was trained to refuse
     - node: jailbreak
+      where: the prompt you send
       does: >-
         persuading it anyway, by reframing the request
       self: true
     - node: model
+      where: the provider's servers
       does: >-
         which has guidance from training, not a rule engine
     - node: red-teaming
+      where: your evaluation harness
       does: >-
         the same technique, run deliberately, to find where it gives
   returns: >-

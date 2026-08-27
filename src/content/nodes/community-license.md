@@ -37,17 +37,25 @@ flow:
     Downloadable weights under terms written by the vendor rather than by
     anyone in the licence-approval business.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        download weights under terms the vendor wrote
     - actor: A download
+      where: your machine
       does: >-
         weights, with a licence file beside them
     - node: community-license
+      where: a contract, not a computer
       does: >-
         the vendor's own terms, not an approved open-source licence
       self: true
     - node: acceptable-use-policy
+      where: a contract, not a computer
       does: >-
         incorporated by reference, and changeable later
     - node: open-source-ai
+      where: a contract, not a computer
       does: >-
         the definition these terms are usually written to miss
   returns: >-

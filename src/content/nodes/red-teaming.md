@@ -39,16 +39,20 @@ flow:
     not on your side does it for free.
   path:
     - actor: An attacker's goal
+      where: a person, not a system
       does: >-
         adopted on purpose, by your own team
     - node: red-teaming
+      where: your evaluation harness
       does: >-
         adversarial testing to find failures before users do
       self: true
     - node: jailbreak
+      where: the prompt you send
       does: >-
         one of the techniques, run as a test rather than an attack
     - node: evaluation
+      where: your evaluation harness
       does: >-
         which asks the ordinary question: does it work
   returns: >-

@@ -36,20 +36,29 @@ flow:
     A prompt change looks better on the three cases somebody tried, and now
     has to be shipped or not.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        have to decide whether to ship a prompt change
     - actor: A prompt change
+      where: your machine
       does: >-
         better on the three cases someone happened to try
     - node: evaluation
+      where: your evaluation harness
       does: >-
         runs both versions over the same fixed set of cases
       self: true
     - node: llm-as-a-judge
+      where: the provider's servers
       does: >-
         scores which of the two outputs is better, pairwise
     - node: regression-testing
+      where: your evaluation harness
       does: >-
         compares against your own last release, not against other models
     - node: benchmark
+      where: your evaluation harness
       does: >-
         compares models against each other — a different question entirely
   returns: >-

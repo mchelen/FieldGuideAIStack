@@ -39,16 +39,20 @@ flow:
     that did not exist commercially five years ago.
   path:
     - actor: A brief
+      where: a person, not a system
       does: >-
         "write us three subject lines for this campaign"
     - node: generative-ai
+      where: the provider's servers
       does: >-
         produces content rather than labelling content that exists
       self: true
     - node: large-language-model
+      where: the provider's servers
       does: >-
         the kind of model doing it, for text
     - node: model
+      where: the provider's servers
       does: >-
         underneath, a next-token predictor with no notion of correct
   returns: >-

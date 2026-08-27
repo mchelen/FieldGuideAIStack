@@ -38,20 +38,29 @@ flow:
     A classifier sits at 71% accuracy, a training run is not on the table,
     and the deadline is Thursday.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        need better results by Thursday, without retraining
     - actor: 71% accuracy
+      where: your evaluation harness
       does: >-
         good enough to demo, not good enough to ship
     - node: prompt-engineering
+      where: the prompt you send
       does: >-
         change what you send, without touching the weights
       self: true
     - node: few-shot-prompting
+      where: the prompt you send
       does: >-
         three labelled examples go into the prompt itself
     - node: prompt-template
+      where: your machine
       does: >-
         the version that won becomes a file with a history
     - node: fine-tuning
+      where: a training cluster
       does: >-
         the alternative — a dataset, a training run, something to maintain
   returns: >-

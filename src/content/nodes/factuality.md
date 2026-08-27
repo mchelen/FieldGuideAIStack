@@ -36,17 +36,25 @@ flow:
     An evaluation reporting 94%, and nobody in the room able to say 94% of
     what.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        see 94% and ask 94% of what
     - actor: An answer
+      where: what the reader sees
       does: >-
         fluent, well-formed, and possibly wrong
     - node: factuality
+      where: your evaluation harness
       does: >-
         whether it is true, not whether it sounds right
       self: true
     - node: grounding
+      where: your infrastructure
       does: >-
         the design that makes it checkable at all
     - node: evaluation
+      where: your evaluation harness
       does: >-
         and what has to be measured, not assumed
   returns: >-

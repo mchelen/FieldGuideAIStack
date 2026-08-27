@@ -39,17 +39,25 @@ flow:
     Output that has to parse as JSON every time, in a system that generates
     one token at a time.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        need the answer to parse, every single time
     - actor: A schema
+      where: wherever the product runs
       does: >-
         what the calling program is able to accept
     - node: inference-api
+      where: on the wire
       does: >-
         carries it alongside the messages
     - node: structured-output
+      where: inside one model call
       does: >-
         invalid tokens are excluded during decoding, not after
       self: true
     - node: function-calling
+      where: inside one model call
       does: >-
         which is this, applied to naming a function and its arguments
   returns: >-

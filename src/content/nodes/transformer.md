@@ -38,16 +38,20 @@ flow:
     of nearly everything and rules nothing out.
   path:
     - actor: A sequence
+      where: the prompt you send
       does: >-
         the prompt, as positions
     - node: transformer
+      where: inside one model call
       does: >-
         a stack of layers, with no recurrence and no convolution
       self: true
     - node: attention
+      where: inside one model call
       does: >-
         each layer relates every position to every other
     - node: model
+      where: the weights file
       does: >-
         what the stack plus its learned numbers add up to
   returns: >-

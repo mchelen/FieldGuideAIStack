@@ -39,16 +39,20 @@ flow:
     nobody in the conversation can see.
   path:
     - actor: The operator
+      where: a person, not a system
       does: >-
         writes standing rules once: role, format, what to refuse
     - node: system-prompt
+      where: the prompt you send
       does: >-
         sent ahead of the conversation on every single request
       self: true
     - node: harness
+      where: wherever the product runs
       does: >-
         prepends it to the messages before each call
     - node: context-window
+      where: the prompt you send
       does: >-
         it occupies space here permanently, and is billed every time
   returns: >-

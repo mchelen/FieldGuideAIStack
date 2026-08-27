@@ -35,16 +35,20 @@ flow:
     only ever reads tokens.
   path:
     - actor: An image
+      where: a person, not a system
       does: >-
         pixels, pasted alongside a question about them
     - node: tokenizer
+      where: the provider's servers
       does: >-
         turns it into tokens too — the model reads nothing else
     - node: multimodal-model
+      where: the provider's servers
       does: >-
         inputs or outputs covering more than one modality
       self: true
     - node: model
+      where: inside one model call
       does: >-
         underneath, the same next-token contract
   returns: >-

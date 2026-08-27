@@ -32,17 +32,25 @@ flow:
     A prompt that used to live in three source files and now lives in one,
     with a history.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        find the same prompt copied into three files
     - actor: A prompt
+      where: your machine
       does: >-
         copied into three places, and drifting
     - node: prompt-template
+      where: your machine
       does: >-
         one reusable text with slots for what varies
       self: true
     - node: prompt-engineering
+      where: your machine
       does: >-
         versioned, evaluated, and reviewed like code
     - node: prompt-injection
+      where: wherever the product runs
       does: >-
         and a slot is exactly where untrusted text arrives
   returns: >-

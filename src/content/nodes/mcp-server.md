@@ -30,17 +30,25 @@ flow:
     One wrapper around an internal API, used by four assistants nobody wrote
     any code for.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        want an internal API reachable from four assistants
     - actor: An internal API
+      where: your infrastructure
       does: >-
         the thing you actually want reachable
     - node: mcp-server
+      where: your infrastructure
       does: >-
         declares what it offers, in one standard shape
       self: true
     - node: mcp
+      where: on the wire
       does: >-
         the protocol both ends agreed on
     - node: mcp-client
+      where: wherever the product runs
       does: >-
         one per server, held by whichever application connects
   returns: >-

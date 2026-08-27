@@ -35,17 +35,25 @@ flow:
     A draft passed back to the same model with one instruction: find what is
     wrong with this.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask for a draft, and get one back to check
     - actor: A draft
+      where: wherever the product runs
       does: >-
         the first output, not yet passed on
     - node: reflection
+      where: wherever the product runs
       does: >-
         the same model examines it in a critical role
       self: true
     - node: agentic-loop
+      where: wherever the product runs
       does: >-
         and the revision becomes the next step
     - node: verification-loop
+      where: a bounded environment
       does: >-
         as opposed to an external check it did not author
   returns: >-

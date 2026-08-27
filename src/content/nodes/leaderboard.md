@@ -38,14 +38,21 @@ flow:
     A public ranking that changed this week, and a procurement decision that
     should probably not turn on it.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        read a ranking that moved this week
     - node: benchmark
+      where: your evaluation harness
       does: >-
         a shared test, so scores are comparable
     - node: leaderboard
+      where: the open web
       does: >-
         the ranking published from those scores
       self: true
     - node: data-contamination
+      where: a training cluster
       does: >-
         and the reason a score can rise with nothing improving
   returns: >-

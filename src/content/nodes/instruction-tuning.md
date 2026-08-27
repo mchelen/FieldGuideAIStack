@@ -36,16 +36,20 @@ flow:
     prompts about rain instead of a haiku.
   path:
     - actor: An instruction
+      where: a person, not a system
       does: >-
         "write a haiku about rain"
     - node: instruction-tuning
+      where: a training cluster
       does: >-
         fine-tuning on following instructions in general, not one task
       self: true
     - node: fine-tuning
+      where: a training cluster
       does: >-
         the mechanism — a second pass on curated examples
     - node: post-training
+      where: a training cluster
       does: >-
         the stage it belongs to, usually first in it
   returns: >-

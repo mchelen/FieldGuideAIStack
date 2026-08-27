@@ -30,17 +30,25 @@ flow:
     An assistant asked to reconcile two spreadsheets that live on your disk,
     in a product that may never see them.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask it to reconcile two spreadsheets you have open
     - actor: Two files
+      where: your machine
       does: >-
         on your machine, not uploaded anywhere
     - node: local-file-access
+      where: your machine
       does: >-
         the agent reads and writes them where they are
       self: true
     - node: command-execution
+      where: your machine
       does: >-
         and can run things against them in place
     - node: harness
+      where: your machine
       does: >-
         all of it on this side of the model, which sees only text
   returns: >-

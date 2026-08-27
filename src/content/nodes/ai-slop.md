@@ -37,18 +37,26 @@ flow:
     A search result page where six of the ten results were generated to
     exist rather than to be read.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        open a search page and read six of ten results
     - actor: A publishing cost
+      where: the open web
       does: >-
         which fell to near zero
     - node: ai-slop
+      where: the open web
       does: >-
         low-quality generated content, produced at volume because it is
         cheap
       self: true
     - node: synthetic-data
+      where: a training cluster
       does: >-
         which then becomes training data for the next model
     - node: watermarking
+      where: the open web
       does: >-
         and the attempt to tell the two apart afterwards
   returns: >-

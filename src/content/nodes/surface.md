@@ -36,17 +36,25 @@ flow:
     The same assistant in a browser tab, a terminal and a desktop app, with
     different powers in each.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        use the same assistant in a tab, a terminal and an app
     - actor: One engine
+      where: wherever the product runs
       does: >-
         the same model and the same product
     - node: surface
+      where: wherever the product runs
       does: >-
         where it runs — web, desktop, terminal, mobile
       self: true
     - node: harness
+      where: wherever the product runs
       does: >-
         whose front end this is, not a separate system
     - node: product-suite
+      where: wherever the product runs
       does: >-
         the family the surfaces are sold as
   returns: >-

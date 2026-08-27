@@ -38,14 +38,21 @@ flow:
     Types, retries and streaming that every caller would otherwise write
     again, shipped by the vendor instead.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        start writing against the API, and stop
     - node: inference-api
+      where: the provider's servers
       does: >-
         the HTTP contract underneath
     - node: software-development-kit
+      where: your machine
       does: >-
         the vendor library wrapping it
       self: true
     - node: harness
+      where: wherever the product runs
       does: >-
         which uses it rather than writing HTTP by hand
   returns: >-

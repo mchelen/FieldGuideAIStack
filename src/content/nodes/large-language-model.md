@@ -38,16 +38,20 @@ flow:
     summary that arrives a word at a time.
   path:
     - actor: The report
+      where: a person, not a system
       does: >-
         4,000 words, pasted in with one instruction
     - node: large-language-model
+      where: the provider's servers
       does: >-
         continues the text one token at a time, from the whole prompt
       self: true
     - node: transformer
+      where: inside one model call
       does: >-
         the architecture underneath — every position attends to every other
     - node: generative-ai
+      where: wherever the product runs
       does: >-
         the category this behaviour put on the front of every product
   returns: >-

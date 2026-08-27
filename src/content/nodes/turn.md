@@ -37,17 +37,25 @@ flow:
     A billing line showing 340 items for one conversation, and a question
     about what an item is.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        read a bill listing 340 items for one conversation
     - actor: One exchange
+      where: a person, not a system
       does: >-
         a message, and the reply to it
     - node: turn
+      where: your invoice
       does: >-
         the unit a conversation is counted and logged in
       self: true
     - node: inference-api
+      where: the provider's servers
       does: >-
         one call per turn, each carrying the whole history again
     - node: session
+      where: wherever the product runs
       does: >-
         which is all of them, held together and resumable
   returns: >-

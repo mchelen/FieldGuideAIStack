@@ -29,17 +29,25 @@ flow:
     Every action allowed, every tool used as designed, and an outcome nobody
     would have approved.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        give it a tool, and a reason to use it
     - node: tool-use
+      where: your infrastructure
       does: >-
         the agent calls something it is permitted to call
     - node: tool-misuse
+      where: your infrastructure
       does: >-
         used exactly as designed, toward something harmful
       self: true
     - node: excessive-agency
+      where: your infrastructure
       does: >-
         which is usually why the tool was reachable at all
     - node: data-exfiltration
+      where: the vendor's cloud
       does: >-
         the common shape it takes
   returns: >-
