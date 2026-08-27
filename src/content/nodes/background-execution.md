@@ -24,6 +24,29 @@ useCase:
     approval, so either its permissions are narrower than an interactive run's
     or the review happens after the fact. Products differ on this and rarely
     say so on the page advertising the feature.
+flow:
+  scenario: >-
+    Closing the laptop on a task that takes forty minutes, and finding it
+    finished rather than abandoned.
+  path:
+    - actor: A long task
+      does: >-
+        forty minutes of work, no further input needed
+    - node: agent
+      does: >-
+        holds the goal across the whole run
+    - node: background-execution
+      does: >-
+        the loop survives you leaving the surface
+      self: true
+    - node: harness
+      does: >-
+        which is running somewhere that is not your laptop
+    - node: scheduled-task
+      does: >-
+        and can be started by a clock rather than by you
+  returns: >-
+    Nobody is watching, so what it may do matters more
 relations:
   - type: consumed-by
     target: harness

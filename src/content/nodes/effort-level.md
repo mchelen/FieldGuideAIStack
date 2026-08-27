@@ -33,6 +33,26 @@ useCase:
     than per deployment lets one model serve both, and makes the routing
     decision explicit — which requests deserve the spend — rather than leaving
     it to a model tier chosen months ago.
+flow:
+  scenario: >-
+    The same request, sent twice, with one knob deciding how long the model
+    is allowed to think about it.
+  path:
+    - actor: A request
+      does: >-
+        one that would reward more thinking
+    - node: inference-api
+      does: >-
+        carries the setting alongside the messages
+    - node: effort-level
+      does: >-
+        how much the model may spend before answering
+      self: true
+    - node: test-time-compute
+      does: >-
+        the thing being bought, under a vendor's name for it
+  returns: >-
+    Thoroughness against tokens and waiting, per request
 relations:
   - type: kind-of
     target: test-time-compute

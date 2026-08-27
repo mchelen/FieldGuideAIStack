@@ -34,6 +34,26 @@ useCase:
     other in embedding space even though the strings do not overlap. Reverse the
     case and it flips: a user searching for error code E4021 wants a literal
     match, and semantic similarity will happily return E4022.
+flow:
+  scenario: >-
+    A search for "can I expense a taxi" over a policy that only uses the
+    words "ground transportation".
+  path:
+    - actor: A query
+      does: >-
+        words that appear nowhere in the answer
+    - node: embedding
+      does: >-
+        query and documents both become positions in the same space
+    - node: semantic-search
+      does: >-
+        returns the nearest, which is the closest in meaning
+      self: true
+    - node: retrieval-augmented-generation
+      does: >-
+        and the nearest few go into the prompt
+  returns: >-
+    Finds what you meant, and can confidently find nothing
 relations:
   - type: consumes
     target: embedding

@@ -31,6 +31,26 @@ useCase:
     can reach — local sessions read your files and settings, cloud sessions
     start from a fresh clone. Asking which surface, rather than which product,
     is usually the question that resolves a contradiction.
+flow:
+  scenario: >-
+    The same assistant in a browser tab, a terminal and a desktop app, with
+    different powers in each.
+  path:
+    - actor: One engine
+      does: >-
+        the same model and the same product
+    - node: surface
+      does: >-
+        where it runs — web, desktop, terminal, mobile
+      self: true
+    - node: harness
+      does: >-
+        whose front end this is, not a separate system
+    - node: product-suite
+      does: >-
+        the family the surfaces are sold as
+  returns: >-
+    Capability follows the surface, not the brand
 relations:
   - type: part-of
     target: harness

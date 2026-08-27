@@ -28,6 +28,26 @@ useCase:
     marketing description, and they are what a review can actually act on. That
     no vendor publishes them in a common form is the reason this comparison is
     still manual.
+flow:
+  scenario: >-
+    Two products described as "autonomous", meaning two quite different
+    things about who is asked before an action.
+  path:
+    - actor: A product claim
+      does: >-
+        "autonomous", with no scale attached
+    - node: autonomy-level
+      does: >-
+        the label — how much runs without anyone being asked
+      self: true
+    - node: approval-mode
+      does: >-
+        the setting underneath that actually decides it
+    - node: autonomous-agent
+      does: >-
+        the end of the scale, where nobody is asked at all
+  returns: >-
+    A label applied to a setting. Read the setting.
 relations:
   - type: implemented-by
     target: approval-mode

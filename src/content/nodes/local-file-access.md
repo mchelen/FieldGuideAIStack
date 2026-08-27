@@ -25,6 +25,26 @@ useCase:
     Direct local access is a desktop-app capability, usually gated on a folder
     you explicitly grant. The difference decides where the data lives, what a
     sandbox can bound, and whether the answer to a compliance question is yes.
+flow:
+  scenario: >-
+    An assistant asked to reconcile two spreadsheets that live on your disk,
+    in a product that may never see them.
+  path:
+    - actor: Two files
+      does: >-
+        on your machine, not uploaded anywhere
+    - node: local-file-access
+      does: >-
+        the agent reads and writes them where they are
+      self: true
+    - node: command-execution
+      does: >-
+        and can run things against them in place
+    - node: harness
+      does: >-
+        all of it on this side of the model, which sees only text
+  returns: >-
+    Splits along surface, not brand — the web version cannot
 relations:
   - type: consumed-by
     target: harness

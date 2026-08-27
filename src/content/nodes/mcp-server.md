@@ -25,6 +25,26 @@ useCase:
     connects to it — the alternative being three bespoke integrations that drift
     apart. This is the whole argument for a protocol here: the N-by-M problem of
     every host needing custom code for every tool collapses into N plus M.
+flow:
+  scenario: >-
+    One wrapper around an internal API, used by four assistants nobody wrote
+    any code for.
+  path:
+    - actor: An internal API
+      does: >-
+        the thing you actually want reachable
+    - node: mcp-server
+      does: >-
+        declares what it offers, in one standard shape
+      self: true
+    - node: mcp
+      does: >-
+        the protocol both ends agreed on
+    - node: mcp-client
+      does: >-
+        one per server, held by whichever application connects
+  returns: >-
+    Written once, and every client that speaks it can use it
 relations:
   - type: part-of
     target: mcp

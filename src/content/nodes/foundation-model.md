@@ -32,6 +32,26 @@ useCase:
     expensive, general work of learning language was already done and paid for
     by someone else. This is the property the name is pointing at: the model is
     a foundation, and the adaptation is small compared to what it rests on.
+flow:
+  scenario: >-
+    One expensive training run, and a dozen products that are all the same
+    model underneath.
+  path:
+    - node: pretraining
+      does: >-
+        the run that costs almost all of the money
+    - node: foundation-model
+      does: >-
+        what comes out: general, and not yet aimed at anything
+      self: true
+    - node: large-language-model
+      does: >-
+        the kind of it this guide is mostly about
+    - node: model
+      does: >-
+        the artifact, before anyone has decided what it is for
+  returns: >-
+    Adapted many times, trained once
 relations:
   - type: kind-of
     target: model

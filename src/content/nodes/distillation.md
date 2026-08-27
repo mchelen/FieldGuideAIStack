@@ -28,6 +28,26 @@ useCase:
     this narrow job while costing a fraction to run — a trade that works
     precisely because the task is narrow. The student does not become generally
     capable; it becomes a cheap imitation on the distribution it was shown.
+flow:
+  scenario: >-
+    A model too slow and too expensive for the job, and a smaller one
+    trained to imitate its answers.
+  path:
+    - node: model
+      does: >-
+        the large one, whose outputs are the training signal
+    - node: distillation
+      does: >-
+        a smaller model trained to match what it produced
+      self: true
+    - node: fine-tuning
+      does: >-
+        the mechanism, with the teacher's outputs as the data
+    - node: quantization
+      does: >-
+        the other way to shrink one, which changes no behaviour on purpose
+  returns: >-
+    A genuinely different, smaller model — not a compressed one
 relations:
   - type: consumes
     target: model
