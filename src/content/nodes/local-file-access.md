@@ -30,6 +30,10 @@ flow:
     An assistant asked to reconcile two spreadsheets that live on your disk,
     in a product that may never see them.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask it to reconcile two spreadsheets you have open
     - actor: Two files
       where: your machine
       does: >-

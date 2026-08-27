@@ -37,6 +37,10 @@ flow:
     An agent needing to know whether another agent, built by someone else,
     can do the thing it wants to delegate.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        want your agent to use somebody else's
     - actor: A delegation
       where: wherever the product runs
       does: >-

@@ -37,6 +37,10 @@ flow:
     A licence with almost no conditions, written for source code, applied to
     a set of weights.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        read a licence written for code, attached to weights
     - actor: A licence file
       where: your machine
       does: >-

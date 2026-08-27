@@ -34,6 +34,10 @@ flow:
     Two accounts on the same product where one has a capability the other
     cannot buy at any usage level.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        find a feature your account cannot buy
     - actor: A capability
       where: a contract, not a computer
       does: >-

@@ -36,6 +36,10 @@ flow:
     Opening an unfamiliar repository in an agent, where the repository
     itself can configure the agent.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        open an unfamiliar repository in an agent
     - actor: A repository
       where: your machine
       does: >-

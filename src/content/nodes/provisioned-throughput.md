@@ -38,6 +38,10 @@ flow:
     A workload steady enough that paying per token is worse than paying for
     the capacity itself.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        notice your load is steady enough to reserve
     - actor: Steady load
       where: your machine
       does: >-

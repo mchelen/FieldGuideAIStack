@@ -33,6 +33,10 @@ flow:
     A model that has to run on a laptop, where the frontier model is not an
     option at any price.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        need it to run on a laptop, not a data centre
     - actor: A constraint
       where: your machine
       does: >-

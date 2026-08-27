@@ -37,6 +37,10 @@ flow:
     A model running on a phone in aeroplane mode, answering with no network
     and no per-token bill.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        want it working with the network off
     - actor: A device
       where: your machine
       does: >-

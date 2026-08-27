@@ -39,6 +39,10 @@ flow:
     A benchmark score that jumped, on a model that is not better at anything
     the benchmark was meant to measure.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        see a score jump with nothing else improving
     - node: pretraining
       where: a training cluster
       does: >-

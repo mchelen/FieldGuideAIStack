@@ -36,6 +36,10 @@ flow:
     A batch job that worked yesterday and now returns 429s at the same
     volume, on an account nothing changed about.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        run yesterday's job and start getting 429s
     - actor: A burst
       where: your machine
       does: >-

@@ -38,6 +38,10 @@ flow:
     A prompt change that fixed one case and quietly broke four others nobody
     thought to re-check.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        fix one case and wonder what else moved
     - actor: A change
       where: your machine
       does: >-

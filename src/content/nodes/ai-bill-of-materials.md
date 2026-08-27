@@ -39,6 +39,10 @@ flow:
     An incident in a dependency, and a question nobody can answer: which of
     our systems used that model.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        need to know which systems used the affected model
     - actor: A system
       where: your infrastructure
       does: >-

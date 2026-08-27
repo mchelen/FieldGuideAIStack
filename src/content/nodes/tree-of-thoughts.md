@@ -35,6 +35,10 @@ flow:
     A puzzle where the first plausible line of reasoning is wrong, and
     committing to it early is the whole failure.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        pose a puzzle where the first idea is usually wrong
     - node: chain-of-thought-prompting
       where: the prompt you send
       does: >-

@@ -37,6 +37,10 @@ flow:
     Downloadable weights under terms written by the vendor rather than by
     anyone in the licence-approval business.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        download weights under terms the vendor wrote
     - actor: A download
       where: your machine
       does: >-

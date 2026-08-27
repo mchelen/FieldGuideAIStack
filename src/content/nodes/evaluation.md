@@ -36,6 +36,10 @@ flow:
     A prompt change looks better on the three cases somebody tried, and now
     has to be shipped or not.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        have to decide whether to ship a prompt change
     - actor: A prompt change
       where: your machine
       does: >-

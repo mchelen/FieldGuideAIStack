@@ -33,6 +33,10 @@ flow:
     The same question asked five times with different sampling, and an
     answer chosen by vote rather than by luck.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask a question the model gets right only sometimes
     - node: chain-of-thought-prompting
       where: the prompt you send
       does: >-

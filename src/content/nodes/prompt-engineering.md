@@ -38,6 +38,10 @@ flow:
     A classifier sits at 71% accuracy, a training run is not on the table,
     and the deadline is Thursday.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        need better results by Thursday, without retraining
     - actor: 71% accuracy
       where: your evaluation harness
       does: >-

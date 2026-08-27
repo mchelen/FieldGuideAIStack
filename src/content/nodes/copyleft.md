@@ -37,6 +37,10 @@ flow:
     A licence that follows the work downstream, applied to an artifact
     nobody agreed was software.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        build something on top and wonder what follows it
     - actor: A derivative
       where: your machine
       does: >-

@@ -31,6 +31,10 @@ flow:
     A per-token price that looks cheap, and a finished job that took
     nineteen calls and two retries.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask what one finished job actually costs
     - node: agentic-loop
       where: wherever the product runs
       does: >-

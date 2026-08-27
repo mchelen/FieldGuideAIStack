@@ -39,6 +39,10 @@ flow:
     A search for "can I expense a taxi" over a policy that only uses the
     words "ground transportation".
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask whether you can expense a taxi
     - actor: A query
       where: a person, not a system
       does: >-

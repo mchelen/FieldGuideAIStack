@@ -40,6 +40,10 @@ flow:
     An invoice that goes up because usage went up, on a product with no
     seats to count.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        open an invoice with no seats on it
     - node: token
       where: your invoice
       does: >-

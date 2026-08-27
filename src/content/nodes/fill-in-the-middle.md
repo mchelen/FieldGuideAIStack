@@ -37,6 +37,10 @@ flow:
     A cursor in the middle of a function, with code above it and code below
     it that both have to be honoured.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        put the cursor in the middle of a function
     - actor: A cursor
       where: your machine
       does: >-

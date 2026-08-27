@@ -32,6 +32,10 @@ flow:
     Two replies that take the same eight seconds, one of which starts
     arriving after 300 milliseconds.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask something and watch for the first word
     - actor: A request
       where: a person, not a system
       does: >-

@@ -38,6 +38,10 @@ flow:
     A model release quoting a benchmark score, and a decision about whether
     that number describes your work.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        read a score in a release announcement
     - node: benchmark
       where: your evaluation harness
       does: >-

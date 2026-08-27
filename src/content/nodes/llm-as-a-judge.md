@@ -34,6 +34,10 @@ flow:
     Two thousand outputs to compare and a budget that does not stretch to
     two thousand human ratings.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        have two thousand outputs and no rating budget
     - actor: Two outputs
       where: your evaluation harness
       does: >-

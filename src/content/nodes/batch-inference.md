@@ -39,6 +39,10 @@ flow:
     Ten thousand documents to classify by Thursday, with nobody waiting on
     any single answer.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        have ten thousand documents and until Thursday
     - actor: Ten thousand jobs
       where: your machine
       does: >-

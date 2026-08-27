@@ -37,6 +37,10 @@ flow:
     A 14GB model that has to run on a laptop with 8GB of memory to spare,
     without retraining anything.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        have 8GB free and a 14GB model
     - node: parameter
       where: the weights file
       does: >-

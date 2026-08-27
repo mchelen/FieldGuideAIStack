@@ -37,6 +37,10 @@ flow:
     One expensive training run, and a dozen products that are all the same
     model underneath.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        notice a dozen products are one model underneath
     - node: pretraining
       where: a training cluster
       does: >-

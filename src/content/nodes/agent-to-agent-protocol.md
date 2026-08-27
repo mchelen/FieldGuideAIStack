@@ -32,6 +32,10 @@ flow:
     Two agents from different vendors that have to work together without
     either team having heard of the other.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        need two vendors' agents to work together
     - actor: A task
       where: on the wire
       does: >-

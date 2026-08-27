@@ -38,6 +38,10 @@ flow:
     An answer with three citations, one of which does not support the
     sentence it is attached to.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        check whether a citation says what it is cited for
     - actor: An answer
       where: what the reader sees
       does: >-

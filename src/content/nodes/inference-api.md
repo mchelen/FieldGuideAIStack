@@ -29,6 +29,10 @@ flow:
     A team swaps one vendor for another and finds that most of the work is
     in the shape of the request, not the model.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask a question, in whichever product you use
     - node: harness
       where: wherever the product runs
       does: >-

@@ -34,6 +34,10 @@ flow:
     A completion endpoint that takes a prefix and a suffix, because a chat
     endpoint has nowhere to put the suffix.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        need completion inside text, not after it
     - node: fill-in-the-middle
       where: your machine
       does: >-

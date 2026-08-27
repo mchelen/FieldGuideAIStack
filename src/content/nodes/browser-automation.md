@@ -35,6 +35,10 @@ flow:
     An agent asked to book a flight, on a site with no API, using a browser
     that may or may not be logged in as you.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask for a flight booked on a site with no API
     - actor: A task
       where: a person, not a system
       does: >-

@@ -53,6 +53,10 @@ flow:
     Asking an assistant what is on your calendar tomorrow, in a product that
     ships no calendar code of its own.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        authorise the integration once, and forget about it
     - actor: A question
       where: a person, not a system
       does: >-

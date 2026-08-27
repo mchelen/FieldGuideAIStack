@@ -33,6 +33,10 @@ flow:
     Two products described as "autonomous", meaning two quite different
     things about who is asked before an action.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        compare two products both described as autonomous
     - actor: A product claim
       where: the open web
       does: >-

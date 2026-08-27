@@ -37,6 +37,10 @@ flow:
     An image, a model, and a dataset, each of which needs an answer to the
     same question: where did this come from.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask where a model, dataset or image came from
     - actor: An artifact
       where: the open web
       does: >-

@@ -30,6 +30,10 @@ flow:
     One wrapper around an internal API, used by four assistants nobody wrote
     any code for.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        want an internal API reachable from four assistants
     - actor: An internal API
       where: your infrastructure
       does: >-

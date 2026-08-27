@@ -37,6 +37,10 @@ flow:
     A model that has to ask for something to be run, in a format a program
     can parse without guessing.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask for today's exchange rate
     - actor: A request
       where: a person, not a system
       does: >-

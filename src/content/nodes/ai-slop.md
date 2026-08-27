@@ -37,6 +37,10 @@ flow:
     A search result page where six of the ten results were generated to
     exist rather than to be read.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        open a search page and read six of ten results
     - actor: A publishing cost
       where: the open web
       does: >-

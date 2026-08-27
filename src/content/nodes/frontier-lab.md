@@ -40,6 +40,10 @@ flow:
     A small set of organisations whose training runs cost more than most
     companies are worth.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        read that a training run cost more than your company
     - node: frontier-lab
       where: the host's own hardware
       does: >-

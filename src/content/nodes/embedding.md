@@ -38,6 +38,10 @@ flow:
     A search that has to find "annual leave" in a document that only ever
     says "holiday entitlement".
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        search for words the document never uses
     - actor: A passage
       where: your machine
       does: >-

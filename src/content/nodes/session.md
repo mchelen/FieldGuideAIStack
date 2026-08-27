@@ -38,6 +38,10 @@ flow:
     Closing a terminal on a half-finished task and picking it up an hour
     later with everything still in place.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        start a task, close the terminal, come back later
     - actor: One run
       where: a person, not a system
       does: >-

@@ -38,6 +38,10 @@ flow:
     Types, retries and streaming that every caller would otherwise write
     again, shipped by the vendor instead.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        start writing against the API, and stop
     - node: inference-api
       where: the provider's servers
       does: >-

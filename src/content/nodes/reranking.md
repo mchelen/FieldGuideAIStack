@@ -37,6 +37,10 @@ flow:
     Fifty retrieved passages, three slots worth of context, and no way to
     send all fifty without paying for all fifty.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask something fifty passages might answer
     - node: retrieval-augmented-generation
       where: your infrastructure
       does: >-

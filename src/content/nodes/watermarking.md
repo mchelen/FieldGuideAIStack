@@ -33,6 +33,10 @@ flow:
     A generated image that needs to be identifiable as generated, months
     later, after being cropped and re-saved.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        need to know months later whether this was generated
     - actor: Generated content
       where: the open web
       does: >-

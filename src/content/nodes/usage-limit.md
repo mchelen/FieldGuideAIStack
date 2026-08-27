@@ -39,6 +39,10 @@ flow:
     A plan that stops working on the twenty-eighth of the month, having
     worked fine on the twenty-seventh.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        get cut off on the twenty-eighth of the month
     - node: subscription-tier
       where: a contract, not a computer
       does: >-

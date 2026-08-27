@@ -39,6 +39,10 @@ flow:
     Output that has to parse as JSON every time, in a system that generates
     one token at a time.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        need the answer to parse, every single time
     - actor: A schema
       where: wherever the product runs
       does: >-

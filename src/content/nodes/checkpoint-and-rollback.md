@@ -38,6 +38,10 @@ flow:
     An agent four steps past the point where it went wrong, with the files
     already changed.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        notice four steps too late that it went wrong
     - actor: A bad step
       where: your machine
       does: >-

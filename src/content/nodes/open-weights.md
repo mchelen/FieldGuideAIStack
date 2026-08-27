@@ -39,6 +39,10 @@ flow:
     A model card says open, the download works, and the licence turns out to
     decide whether you may ship it.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        download a model and open the licence file
     - actor: A download
       where: your machine
       does: >-

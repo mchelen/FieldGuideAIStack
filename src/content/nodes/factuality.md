@@ -36,6 +36,10 @@ flow:
     An evaluation reporting 94%, and nobody in the room able to say 94% of
     what.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        see 94% and ask 94% of what
     - actor: An answer
       where: what the reader sees
       does: >-

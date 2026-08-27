@@ -32,6 +32,10 @@ flow:
     A prompt that used to live in three source files and now lives in one,
     with a history.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        find the same prompt copied into three files
     - actor: A prompt
       where: your machine
       does: >-

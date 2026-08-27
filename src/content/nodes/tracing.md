@@ -39,6 +39,10 @@ flow:
     A run that went wrong somewhere in nineteen steps, and a reviewer who
     was not watching any of them.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        come back to a run that went wrong somewhere
     - node: agentic-loop
       where: wherever the product runs
       does: >-

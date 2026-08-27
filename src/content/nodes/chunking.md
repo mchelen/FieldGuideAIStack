@@ -34,6 +34,10 @@ flow:
     A 200-page handbook cut into retrievable pieces, and a sentence whose
     meaning was in the paragraph before it.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        need a 200-page handbook to be searchable
     - actor: A document
       where: your machine
       does: >-

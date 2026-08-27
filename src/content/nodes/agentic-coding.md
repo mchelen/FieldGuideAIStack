@@ -35,6 +35,10 @@ flow:
     An agent that edits files, runs the suite, reads the failure and edits
     again — rather than suggesting a line.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask for the suite to pass, not for a suggestion
     - actor: A failing test
       where: your machine
       does: >-

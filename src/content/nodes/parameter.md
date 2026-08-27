@@ -37,6 +37,10 @@ flow:
     Two models, 7B and 70B, and a decision that turns on what that number
     does and does not tell you.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        choose between a 7B and a 70B
     - node: model
       where: the weights file
       does: >-

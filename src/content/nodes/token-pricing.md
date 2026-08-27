@@ -37,6 +37,10 @@ flow:
     Four rates on one invoice for what looks like one thing, and a prompt
     whose layout decides which apply.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        find four rates for what looked like one thing
     - node: token-billing
       where: your invoice
       does: >-

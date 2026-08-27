@@ -34,6 +34,10 @@ flow:
     Running the weights yourself, on hardware you control, and taking on
     everything a host was doing for you.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        decide to run the weights yourself
     - node: model-host
       where: the host's own hardware
       does: >-

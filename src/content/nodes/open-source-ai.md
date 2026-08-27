@@ -33,6 +33,10 @@ flow:
     A release described as open source, measured against a definition that
     asks for three things rather than one.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        read "open source" on a release announcement
     - actor: A release
       where: the open web
       does: >-

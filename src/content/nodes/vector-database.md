@@ -38,6 +38,10 @@ flow:
     Sixty thousand support articles, and a query that has to find the three
     closest in meaning in under 50 milliseconds.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask a question of sixty thousand articles
     - actor: A corpus
       where: your machine
       does: >-
