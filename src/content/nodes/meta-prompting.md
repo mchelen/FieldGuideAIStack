@@ -80,6 +80,8 @@ sources:
     url: https://www.promptingguide.ai/techniques/meta-prompting
     title: Meta Prompting — Prompt Engineering Guide
     verifiedOn: 2026-08-22
+    quote: >-
+      Abstract examples: Employs abstracted examples as frameworks, illustrating the structure of problems and solutions without focusing on specific details.
   - id: promptguide-fewshot
     url: https://www.promptingguide.ai/techniques/fewshot
     title: Few-Shot Prompting — Prompt Engineering Guide

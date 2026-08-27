@@ -85,6 +85,8 @@ sources:
     url: https://huggingface.co/meta-llama/Llama-3.1-8B
     title: meta-llama/Llama-3.1-8B — Hugging Face
     verifiedOn: 2026-08-22
+    quote: >-
+      Use in any other way that is prohibited by the Acceptable Use Policy and Llama 3.1 Community License.
     note: >-
       Licence text read from the model card on this page, which reproduces the
       Llama 3.1 Community License in full.
@@ -92,6 +94,8 @@ sources:
     url: https://opensource.org/licenses
     title: OSI Approved Licenses — Open Source Initiative
     verifiedOn: 2026-08-22
+    quote: >-
+      To be approved by the Open Source Initiative (also known as the OSI) a license must go through the Open Source Initiative's license review process.
 ---
 
 A community licence is a vendor's own terms for its own weights. The Llama 3.1

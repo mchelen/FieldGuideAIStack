@@ -79,6 +79,8 @@ sources:
     url: https://www.anthropic.com/engineering/contextual-retrieval
     title: Introducing Contextual Retrieval — Anthropic
     verifiedOn: 2026-08-22
+    quote: >-
+      While this approach works well for many applications, it can lead to problems when individual chunks lack sufficient context.
 ---
 
 Retrieval needs pieces small enough to be precise and self-contained enough to

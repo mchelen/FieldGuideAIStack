@@ -89,6 +89,8 @@ sources:
     url: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html
     title: What is Amazon Bedrock? — AWS documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      Available in all AWS Regions where Amazon Bedrock is offered.
 ---
 
 Latency is "the time it takes for a model to process input and generate a

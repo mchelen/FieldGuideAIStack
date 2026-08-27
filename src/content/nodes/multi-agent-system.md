@@ -89,6 +89,8 @@ sources:
     url: https://www.anthropic.com/engineering/building-effective-agents
     title: Building effective agents — Anthropic
     verifiedOn: 2026-08-22
+    quote: >-
+      Example where orchestrator-workers is useful: Coding products that make complex changes to multiple files each time.
 ---
 
 A multi-agent system "is a computational system composed of multiple interacting

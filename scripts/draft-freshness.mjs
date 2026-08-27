@@ -23,7 +23,10 @@ import { join } from 'node:path';
 import { loadNodes, asDate, NODES_DIR } from './lib/nodes.mjs';
 
 const args = process.argv.slice(2);
-const maxAge = Number(args[args.indexOf('--max-age') + 1]) || 180;
+// `|| 180` here meant `--max-age 0` silently ran at 180 days and reported
+// "nothing older than 180 days" -- a check that looks like it ran and did not.
+const maxAgeArg = Number(args[args.indexOf('--max-age') + 1]);
+const maxAge = args.includes('--max-age') && Number.isFinite(maxAgeArg) ? maxAgeArg : 180;
 const write = args.includes('--write');
 const asJson = args.includes('--json');
 
@@ -58,6 +61,11 @@ const textOf = (html) =>
       .replace(/&quot;/g, '"')
       .replace(/&#39;|&rsquo;|&lsquo;/g, "'")
       .replace(/&mdash;|&ndash;/g, '-')
+      // Angle brackets too. Without them a page documenting a "<FILL_ME>"
+      // token can only be quoted by storing "&lt;FILL_ME>", which is not what
+      // the page says and not what anyone would copy.
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
       // Numeric entities too. Without this a page writing &#34; forces the
       // stored quote to carry the entity rather than the character, which is
       // wrong on the page even though it would still match.

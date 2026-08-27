@@ -90,10 +90,14 @@ sources:
     url: https://opensource.org/licenses
     title: OSI Approved Licenses — Open Source Initiative
     verifiedOn: 2026-08-22
+    quote: >-
+      To be approved by the Open Source Initiative (also known as the OSI) a license must go through the Open Source Initiative's license review process.
   - id: wikipedia-permissive
     url: https://en.wikipedia.org/wiki/Permissive_software_license
     title: Permissive software license — Wikipedia
     verifiedOn: 2026-08-22
+    quote: >-
+      Permissive licenses (BSD, MIT, X11, Apache, Zope) are generally compatible and interoperable with most other licenses
 ---
 
 A permissive licence "instead of copyleft protections, carries only minimal

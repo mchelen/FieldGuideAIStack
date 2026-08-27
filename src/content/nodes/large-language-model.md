@@ -89,6 +89,8 @@ sources:
     url: https://huggingface.co/mistralai/Mistral-7B-v0.1
     title: mistralai/Mistral-7B-v0.1 — Hugging Face
     verifiedOn: 2026-08-22
+    quote: >-
+      The Mistral-7B-v0.1 Large Language Model (LLM) is a pretrained generative text model with 7 billion parameters
   - id: gpt3-paper
     url: https://arxiv.org/abs/2005.14165
     title: Language Models are Few-Shot Learners — Brown et al.

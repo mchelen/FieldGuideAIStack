@@ -93,6 +93,8 @@ sources:
     url: https://huggingface.co/mistralai/Mistral-7B-v0.1
     title: mistralai/Mistral-7B-v0.1 — Hugging Face
     verifiedOn: 2026-08-22
+    quote: >-
+      The Mistral-7B-v0.1 Large Language Model (LLM) is a pretrained generative text model with 7 billion parameters
     note: >-
       Figures read from the model card and the tensor summary on that page:
       7,241,732,096 BF16 parameters, 14,483,523,165 bytes of weight files.

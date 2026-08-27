@@ -87,6 +87,8 @@ sources:
     url: https://platform.claude.com/docs/en/build-with-claude/compaction
     title: Compaction — Claude Platform documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      Compaction extends the effective context length for long-running conversations and tasks by automatically summarizing older context when approaching the context window limit.
 ---
 
 The [context window](context-window) is a per-call ceiling, and the

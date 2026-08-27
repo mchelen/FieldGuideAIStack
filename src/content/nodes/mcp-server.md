@@ -72,6 +72,8 @@ sources:
     url: https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture
     title: Architecture overview — Model Context Protocol
     verifiedOn: 2026-08-22
+    quote: >-
+      Local MCP servers that use the STDIO transport typically serve a single MCP client, whereas remote MCP servers that use the Streamable HTTP transport will typically serve many MCP clients.
 ---
 "MCP follows a client-server architecture where an MCP host — an AI application
 like [Claude Code](claude-code) or Claude Desktop — establishes connections to

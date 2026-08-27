@@ -77,10 +77,14 @@ sources:
     url: https://www.anthropic.com/engineering/building-effective-agents
     title: Building effective agents — Anthropic
     verifiedOn: 2026-08-22
+    quote: >-
+      Prioritize transparency by explicitly showing the agent's planning steps.
   - id: google-glossary
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      The cycle typically consists of the following four stages: Observe Reason Act Feedback
 ---
 
 Google's definition of an [autonomous agent](autonomous-agent) puts planning

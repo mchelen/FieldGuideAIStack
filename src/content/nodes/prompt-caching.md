@@ -79,6 +79,8 @@ sources:
     url: https://platform.claude.com/docs/en/build-with-claude/prompt-caching
     title: Prompt caching — Claude Platform documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      Otherwise, it processes the full prompt and caches the prefix once the response begins.
     note: >-
       Pricing multipliers, minimum cacheable lengths and retention behaviour
       read from this page on the date shown. All are vendor policy and move.
@@ -86,6 +88,8 @@ sources:
     url: https://arxiv.org/abs/2309.06180
     title: Efficient Memory Management for Large Language Model Serving with PagedAttention — Kwon et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      near-zero waste in KV cache memory and (2) flexible sharing of KV cache within and across requests
 ---
 
 Prompt caching "optimizes your API usage by allowing resuming from specific

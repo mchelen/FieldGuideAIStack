@@ -82,6 +82,8 @@ sources:
     url: https://arxiv.org/abs/2203.02155
     title: Training language models to follow instructions with human feedback — Ouyang et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      In human evaluations on our prompt distribution, outputs from the 1.3B parameter InstructGPT model are preferred to outputs from the 175B GPT-3, despite having 100x fewer parameters.
 ---
 
 Instruction tuning is "a form of [fine-tuning](fine-tuning) that improves a

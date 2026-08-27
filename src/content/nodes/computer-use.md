@@ -82,6 +82,8 @@ sources:
     url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool
     title: Computer use tool — Claude Platform documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      Claude responds with one or more member tool_use blocks, such as screenshot, left_click, or type
 ---
 
 Computer use gives a model "screenshot capabilities and mouse/keyboard control

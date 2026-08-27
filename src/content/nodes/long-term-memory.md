@@ -83,10 +83,14 @@ sources:
     url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/memory-tool
     title: Memory tool — Claude Platform documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      Claude can create, read, update, and delete files that persist between sessions, building up knowledge over time without keeping everything in the context window.
   - id: reflexion-paper
     url: https://arxiv.org/abs/2303.11366
     title: "Reflexion: Language Agents with Verbal Reinforcement Learning — Shinn et al."
     verifiedOn: 2026-08-22
+    quote: >-
+      We propose Reflexion, a novel framework to reinforce language agents not by updating weights, but instead through linguistic feedback.
 ---
 
 Anthropic's memory tool "lets Claude store and retrieve information across

@@ -77,6 +77,8 @@ sources:
     url: https://arxiv.org/abs/2201.11903
     title: Chain-of-Thought Prompting Elicits Reasoning in Large Language Models — Wei et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      Experiments on three large language models show that chain of thought prompting improves performance on a range of arithmetic, commonsense, and symbolic reasoning tasks.
     note: Submitted 28 January 2022, last revised 10 January 2023.
   - id: google-glossary
     url: https://developers.google.com/machine-learning/glossary
@@ -88,6 +90,8 @@ sources:
     url: https://www.promptingguide.ai/techniques/cot
     title: Chain-of-Thought Prompting — Prompt Engineering Guide
     verifiedOn: 2026-08-22
+    quote: >-
+      essentially involves adding "Let's think step by step" to the original prompt.
 ---
 
 Chain-of-thought prompting is "a [prompt engineering](prompt-engineering) technique that encourages a

@@ -111,6 +111,8 @@ sources:
     url: https://claude.com/docs/connectors/overview
     title: Connectors overview — Anthropic
     verifiedOn: 2026-08-22
+    quote: >-
+      The Connectors Directory is an open catalog of MCP servers from Anthropic and third-party developers, available across all Claude products.
   - id: google-use-manage
     url: https://support.google.com/gemini/answer/13695044
     title: Use & manage Connected Apps in Gemini — Google
@@ -132,10 +134,14 @@ sources:
     url: https://learn.chatgpt.com/docs/enterprise/chatgpt-work-overview
     title: ChatGPT Work overview — OpenAI
     verifiedOn: 2026-08-22
+    quote: >-
+      ChatGPT Work can complete multi-step tasks using the information, files, applications, and tools available to an authorized workspace member.
   - id: google-gemini-app
     url: https://gemini.google/overview/
     title: Gemini app overview — Google
     verifiedOn: 2026-08-22
+    quote: >-
+      controls that allow you to turn on/off access to extensions (e.g., Workspace, Maps, YouTube)
 ---
 
 A connector is the product-level packaging of [tool use](tool-use). The model

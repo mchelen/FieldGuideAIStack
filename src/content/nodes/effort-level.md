@@ -84,6 +84,8 @@ sources:
     url: https://platform.claude.com/docs/en/build-with-claude/effort
     title: Effort — Claude Platform documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      Max effort: For tasks requiring the absolute highest capability with no constraints on token spending.
   - id: claude-code-glossary
     url: https://code.claude.com/docs/en/glossary
     title: Glossary — Claude Code documentation

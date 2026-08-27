@@ -90,6 +90,8 @@ sources:
     url: https://arxiv.org/abs/2306.05685
     title: Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena — Zheng et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      We then verify the agreement between LLM judges and human preferences by introducing two benchmarks: MT-bench, a multi-turn question set; and Chatbot Arena, a crowdsourced battle platform.
 ---
 
 Two things get called a leaderboard, and they fail differently.

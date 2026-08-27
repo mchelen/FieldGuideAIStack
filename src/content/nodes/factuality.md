@@ -89,6 +89,8 @@ sources:
     url: https://arxiv.org/abs/2509.04664
     title: Why Language Models Hallucinate — Kalai, Nachum, Vempala and Zhang
     verifiedOn: 2026-08-22
+    quote: >-
+      We argue that language models hallucinate because the training and evaluation procedures reward guessing over acknowledging uncertainty
 ---
 
 Factuality is "a property describing a model whose output is based on reality",

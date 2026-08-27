@@ -88,6 +88,8 @@ sources:
     url: https://code.claude.com/docs/en/hooks
     title: Hooks reference — Claude Code documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      This page uses specific terms for each level: hook event for the lifecycle point, matcher group for the filter, and hook handler for the shell command
 ---
 A hook is "a user-defined handler that executes automatically at a specific
 point in [Claude Code](claude-code)'s lifecycle, such as before a tool runs,

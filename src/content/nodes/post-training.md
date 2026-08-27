@@ -83,11 +83,15 @@ sources:
     url: https://arxiv.org/abs/2203.02155
     title: Training language models to follow instructions with human feedback — Ouyang et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      In other words, these models are not aligned with their users.
     note: Submitted 4 March 2022. The InstructGPT paper.
   - id: google-glossary
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      Instruction tuning involves training a model on a series of instruction prompts, typically covering a wide variety of tasks.
 ---
 
 [Pretraining](pretraining) produces a model that continues text. Post-training

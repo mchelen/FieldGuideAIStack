@@ -91,6 +91,8 @@ sources:
     url: https://platform.claude.com/docs/en/build-with-claude/embeddings
     title: Embeddings — Claude Platform documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      Anthropic does not offer its own embedding model.
 ---
 
 An embedding vector is "an array of floating-point numbers … that describe the

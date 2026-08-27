@@ -81,10 +81,14 @@ sources:
     url: https://www.gov.uk/government/publications/frontier-ai-capabilities-and-risks-discussion-paper/frontier-ai-capabilities-and-risks-discussion-paper
     title: Frontier AI — capabilities and risks discussion paper
     verifiedOn: 2026-08-22
+    quote: >-
+      Frontier AI: AI models that can perform a wide variety of tasks and match or exceed the capabilities present in today's most advanced models.
   - id: chinchilla
     url: https://arxiv.org/abs/2203.15556
     title: Training Compute-Optimal Large Language Models — Hoffmann et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      This also means that Chinchilla uses substantially less compute for fine-tuning and inference, greatly facilitating downstream usage.
 ---
 
 The adjective has an official definition and the noun does not. The UK

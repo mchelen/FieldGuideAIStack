@@ -81,6 +81,8 @@ sources:
     url: https://gemini.google/overview/
     title: Gemini app overview — Google
     verifiedOn: 2026-08-22
+    quote: >-
+      Gemini is an interface to a multimodal LLM (handling text, audio, images and more).
 ---
 
 A multimodal model is "a model whose inputs, outputs, or both include more than

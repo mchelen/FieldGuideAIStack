@@ -85,11 +85,15 @@ sources:
     url: https://arxiv.org/abs/2009.03300
     title: Measuring Massive Multitask Language Understanding — Hendrycks et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      The test covers 57 tasks including elementary mathematics, US history, computer science, law, and more.
     note: Submitted 7 September 2020, last revised 12 January 2021.
   - id: helm-paper
     url: https://arxiv.org/abs/2211.09110
     title: Holistic Evaluation of Language Models — Liang et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      Then we select a broad subset based on coverage and feasibility, noting what's missing or underrepresented
 ---
 
 A benchmark is an [evaluation](evaluation) that many people run on many models,

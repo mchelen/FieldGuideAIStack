@@ -84,10 +84,14 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      The process of measuring a model's quality or comparing different models against each other
   - id: helm-paper
     url: https://arxiv.org/abs/2211.09110
     title: Holistic Evaluation of Language Models — Liang et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      Second, we adopt a multi-metric approach: We measure 7 metrics (accuracy, calibration, robustness, fairness, bias, toxicity, and efficiency) for each of 16 core scenarios when possible
     note: Submitted 16 November 2022, last revised 1 October 2023.
 ---
 

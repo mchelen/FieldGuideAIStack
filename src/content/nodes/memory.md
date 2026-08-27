@@ -84,6 +84,8 @@ sources:
     url: https://code.claude.com/docs/en/overview
     title: Claude Code overview — Anthropic
     verifiedOn: 2026-08-22
+    quote: >-
+      Claude also builds auto memory as it works, saving learnings across sessions without you writing anything.
 ---
 
 The [model](model) remembers nothing. The [inference API](inference-api) is

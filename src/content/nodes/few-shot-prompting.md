@@ -87,6 +87,8 @@ sources:
     url: https://arxiv.org/abs/2005.14165
     title: Language Models are Few-Shot Learners — Brown et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      By contrast, humans can generally perform a new language task from only a few examples or from simple instructions - something which current NLP systems still largely struggle to do.
   - id: promptguide-fewshot
     url: https://www.promptingguide.ai/techniques/fewshot
     title: Few-Shot Prompting — Prompt Engineering Guide

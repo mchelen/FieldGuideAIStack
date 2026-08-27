@@ -48,10 +48,14 @@ sources:
     url: https://claude.com/docs/cowork/overview
     title: Cowork overview — Anthropic
     verifiedOn: 2026-08-22
+    quote: >-
+      Cowork loads the ones enabled for your claude.ai account, synced at session start, and doesn't read the Claude Code CLI's ~/.claude directory on your machine.
   - id: anthropic-get-started
     url: https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork
     title: Get started with Claude Cowork — Anthropic Help Center
     verifiedOn: 2026-08-22
+    quote: >-
+      For local file access, browser use, and computer use: The Claude Desktop app for macOS or Windows, open and connected.
 ---
 Cowork is the clearest illustration in this guide of why [surface](surface) is
 worth separating from engine. Anthropic's documentation states it plainly:

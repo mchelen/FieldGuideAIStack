@@ -86,6 +86,8 @@ sources:
     url: https://www.anthropic.com/legal/aup
     title: Usage Policy — Anthropic
     verifiedOn: 2026-08-22
+    quote: >-
+      The Usage Policy is categorized according to who can use our products and for what purposes.
   - id: hf-llama
     url: https://huggingface.co/meta-llama/Llama-3.1-8B
     title: meta-llama/Llama-3.1-8B — Hugging Face
@@ -96,6 +98,8 @@ sources:
     url: https://opensource.org/licenses
     title: OSI Approved Licenses — Open Source Initiative
     verifiedOn: 2026-08-22
+    quote: >-
+      To be approved by the Open Source Initiative (also known as the OSI) a license must go through the Open Source Initiative's license review process.
 ---
 
 An acceptable use policy lists what a model may not be used for. Every

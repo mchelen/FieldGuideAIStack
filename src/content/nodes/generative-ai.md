@@ -83,6 +83,8 @@ sources:
     url: https://arxiv.org/abs/2005.14165
     title: Language Models are Few-Shot Learners — Brown et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      Here we show that scaling up language models greatly improves task-agnostic, few-shot performance, sometimes even reaching competitiveness with prior state-of-the-art fine-tuning approaches.
 ---
 
 Google's glossary is unusually direct: generative AI is "an emerging

@@ -87,6 +87,8 @@ sources:
     url: https://code.claude.com/docs/en/security
     title: Security — Claude Code documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      We encourage either writing your own MCP servers or using MCP servers from providers that you trust.
 ---
 Project trust is "a dialog accepting a directory before [Claude Code](claude-code) loads its configuration."[[cite:claude-code-glossary]] The word
 *configuration* is the whole point.
