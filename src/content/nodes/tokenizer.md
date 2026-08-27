@@ -29,6 +29,26 @@ useCase:
     and it gives the exact number the API will charge for. Estimating from word
     or character counts instead is where budgeting for long-document work
     usually goes wrong, because the ratio is not constant across formats.
+flow:
+  scenario: >-
+    A word count and a token count that disagree by 40%, on the same
+    paragraph, in two different languages.
+  path:
+    - actor: Raw text
+      does: >-
+        characters, as typed
+    - node: tokenizer
+      does: >-
+        splits it into the fragments this model was trained on
+      self: true
+    - node: token
+      does: >-
+        the units that go in, and come back out
+    - node: model
+      does: >-
+        which has never seen a character in its life
+  returns: >-
+    Different tokenizer, different count, same text
 relations:
   - type: part-of
     target: model

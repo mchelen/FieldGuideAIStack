@@ -33,6 +33,26 @@ useCase:
     matches in roughly constant time, trading exactness for speed. The word
     "approximate" is the trade: results are near-best rather than best, which
     for retrieval feeding a [language model](large-language-model) is almost always the right call.
+flow:
+  scenario: >-
+    Sixty thousand support articles, and a query that has to find the three
+    closest in meaning in under 50 milliseconds.
+  path:
+    - actor: A corpus
+      does: >-
+        sixty thousand articles, chunked
+    - node: embedding
+      does: >-
+        each chunk becomes a list of numbers positioned by meaning
+    - node: vector-database
+      does: >-
+        stores them indexed for nearness, not for exact match
+      self: true
+    - node: retrieval-augmented-generation
+      does: >-
+        the query embeds the same way, and the nearest come back
+  returns: >-
+    Similarity search, not a lookup — there is no exact answer
 relations:
   - type: consumes
     target: embedding

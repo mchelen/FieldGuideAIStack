@@ -30,6 +30,26 @@ useCase:
     instruction-response pairs until responding became the likely continuation.
     Picking the wrong variant from a model hub is one of the most common first
     mistakes in [self-hosting](self-hosting).
+flow:
+  scenario: >-
+    A base model asked "write a haiku about rain" that returns three more
+    prompts about rain instead of a haiku.
+  path:
+    - actor: An instruction
+      does: >-
+        "write a haiku about rain"
+    - node: instruction-tuning
+      does: >-
+        fine-tuning on following instructions in general, not one task
+      self: true
+    - node: fine-tuning
+      does: >-
+        the mechanism — a second pass on curated examples
+    - node: post-training
+      does: >-
+        the stage it belongs to, usually first in it
+  returns: >-
+    The difference between a base model and one you can talk to
 relations:
   - type: kind-of
     target: fine-tuning

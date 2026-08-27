@@ -29,6 +29,26 @@ useCase:
     consume it many times faster. Capacity planning for model serving is mostly
     cache planning, and the number to compute is not how big the model is but
     how many tokens will be live at once.
+flow:
+  scenario: >-
+    Generating the two-thousandth token of a reply without redoing the work
+    for the previous 1,999.
+  path:
+    - node: attention
+      does: >-
+        relates every position to every other, which is quadratic
+    - node: kv-cache
+      does: >-
+        keeps the state for positions already processed
+      self: true
+    - node: accelerator
+      does: >-
+        it lives in GPU memory, competing with the weights for room
+    - node: prompt-caching
+      does: >-
+        and surviving past the end of a request is what that feature is
+  returns: >-
+    Per request, and it grows with every token generated
 relations:
   - type: part-of
     target: attention

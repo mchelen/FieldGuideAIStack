@@ -30,6 +30,29 @@ useCase:
     latency and accuracy a dial rather than a procurement question — and it
     makes [benchmark](benchmark) comparisons slippery, since two scores for one model may
     reflect very different spending.
+flow:
+  scenario: >-
+    The same model, the same question, and an accuracy that moves because of
+    how long it was allowed to spend answering.
+  path:
+    - actor: A hard question
+      does: >-
+        one the first attempt tends to get wrong
+    - node: test-time-compute
+      does: >-
+        spend more while answering rather than more while training
+      self: true
+    - node: effort-level
+      does: >-
+        the dial a vendor exposes for it
+    - node: token
+      does: >-
+        what it is actually spent in, and billed in
+    - node: reasoning-model
+      does: >-
+        a model trained to spend it without being asked
+  returns: >-
+    Accuracy becomes a dial, and benchmarks become slippery
 relations:
   - type: consumes
     target: token

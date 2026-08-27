@@ -26,6 +26,26 @@ useCase:
     scoped by it. The habit worth building is sizing the credential to the task
     rather than to convenience, because the blast radius of an agent is set at
     provisioning time and nothing at run time can shrink it.
+flow:
+  scenario: >-
+    An agent set up to triage bug reports that also holds write access to
+    the repository, because that was the default.
+  path:
+    - actor: A task
+      does: >-
+        read issues, label them, nothing more
+    - node: excessive-agency
+      does: >-
+        permission, autonomy or reach beyond what the task needs
+      self: true
+    - node: approval-mode
+      does: >-
+        the setting that decides whether anyone is asked first
+    - node: tool-misuse
+      does: >-
+        and what the surplus turns into when something goes wrong
+  returns: >-
+    No exploit required — the reach was granted
 relations:
   - type: consumes
     target: approval-mode

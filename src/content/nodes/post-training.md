@@ -30,6 +30,27 @@ useCase:
     preferences they optimised against, what they taught the model to refuse.
     Base weights are increasingly a commodity; post-training is where a vendor's
     judgment, and its liability, actually sit.
+flow:
+  scenario: >-
+    A text-continuation engine that answers questions, refuses some
+    requests, and follows a format — none of which it learned from the
+    internet.
+  path:
+    - node: pretraining
+      does: >-
+        leaves a model that continues text, and nothing else
+    - node: post-training
+      does: >-
+        everything done after that to make it useful
+      self: true
+    - node: instruction-tuning
+      does: >-
+        teaches following an instruction rather than continuing it
+    - node: reinforcement-learning-from-human-feedback
+      does: >-
+        teaches which of two answers people preferred
+  returns: >-
+    Where a vendor's judgement about behaviour is applied
 relations:
   - type: distinguished-from
     target: pretraining

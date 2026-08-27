@@ -33,6 +33,26 @@ useCase:
     string regardless of what the model decided, and cannot be argued with
     because it is not participating in the conversation. That independence is
     the entire property being bought.
+flow:
+  scenario: >-
+    A request the model would have answered, stopped by something that is
+    not the model and does not need to be asked.
+  path:
+    - actor: Input or output
+      does: >-
+        on its way in, or on its way back
+    - node: guardrails
+      does: >-
+        checks around the model that block what is disallowed
+      self: true
+    - node: acceptable-use-policy
+      does: >-
+        which is where the list of disallowed things comes from
+    - node: permission-model
+      does: >-
+        the other half — what the system may do, not what it may say
+  returns: >-
+    External to the model, so it can be audited and changed
 relations:
   - type: part-of
     target: permission-model

@@ -28,6 +28,26 @@ useCase:
     Writing the steps first means each one becomes context for the next. The
     scratch space is the whole mechanism, and it is why this technique
     eventually became something models were trained to do unprompted.
+flow:
+  scenario: >-
+    An arithmetic word problem the model gets wrong when asked for the
+    answer and right when asked for the working.
+  path:
+    - actor: A problem
+      does: >-
+        several steps, one answer expected
+    - node: chain-of-thought-prompting
+      does: >-
+        ask for the intermediate steps, not only the answer
+      self: true
+    - node: self-consistency
+      does: >-
+        sample it several times and take the majority
+    - node: reasoning-model
+      does: >-
+        or buy a model trained to do it without being asked
+  returns: >-
+    The steps are tokens, and tokens are the budget
 relations:
   - type: kind-of
     target: prompt-engineering

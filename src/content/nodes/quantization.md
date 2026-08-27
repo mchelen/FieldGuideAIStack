@@ -32,6 +32,26 @@ useCase:
     empirical question for your task, and the only honest way to answer it is
     to evaluate both. The alternative is not a better-quality large model; it
     is no local model at all.
+flow:
+  scenario: >-
+    A 14GB model that has to run on a laptop with 8GB of memory to spare,
+    without retraining anything.
+  path:
+    - node: parameter
+      does: >-
+        the learned numbers, at 16 bits each
+    - node: quantization
+      does: >-
+        stored at 8 or 4 bits instead — the same count, less precision
+      self: true
+    - node: on-device-inference
+      does: >-
+        which is what makes it fit on hardware you own
+    - node: distillation
+      does: >-
+        the other way to shrink one, and a genuinely different model
+  returns: >-
+    Smaller and faster, at some accuracy you have to measure
 relations:
   - type: consumes
     target: parameter

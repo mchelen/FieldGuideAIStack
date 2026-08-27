@@ -31,6 +31,26 @@ useCase:
     one correct answer — extraction, classification, routing — the randomness
     is pure cost, and turning it down is a one-line change. For drafting,
     naming and brainstorming it is the point.
+flow:
+  scenario: >-
+    The same prompt run twice returning different answers, and a config
+    value that explains exactly how much.
+  path:
+    - node: model
+      does: >-
+        produces a probability distribution over the next token
+    - node: temperature
+      does: >-
+        flattens or sharpens it before one is picked
+      self: true
+    - node: inference-api
+      does: >-
+        set per request, alongside the rest of the configuration
+    - node: parameter
+      does: >-
+        and not one of these — it changes nothing inside the model
+  returns: >-
+    Sampling, not thinking. Zero is not deterministic either.
 relations:
   - type: part-of
     target: inference-api
