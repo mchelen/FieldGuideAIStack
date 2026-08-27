@@ -34,6 +34,26 @@ useCase:
     after Log4j, applied to a dependency graph that now includes models,
     prompts, tool definitions and third-party servers — none of which appear in
     a package manifest.
+flow:
+  scenario: >-
+    An incident in a dependency, and a question nobody can answer: which of
+    our systems used that model.
+  path:
+    - actor: A system
+      does: >-
+        built from models, tools, datasets and servers
+    - node: ai-bill-of-materials
+      does: >-
+        an inventory of every one of them
+      self: true
+    - node: provenance
+      does: >-
+        which is what each entry is evidence about
+    - node: permission-model
+      does: >-
+        and what each of them was allowed to reach
+  returns: >-
+    You cannot audit what you have never listed
 relations:
   - type: consumes
     target: provenance

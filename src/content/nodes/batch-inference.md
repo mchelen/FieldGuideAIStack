@@ -34,6 +34,26 @@ useCase:
     result lands — and for a backlog, that was never worth anything. Recognising
     which workloads are genuinely [latency](latency)-insensitive is one of the largest
     single levers on an inference bill.
+flow:
+  scenario: >-
+    Ten thousand documents to classify by Thursday, with nobody waiting on
+    any single answer.
+  path:
+    - actor: Ten thousand jobs
+      does: >-
+        no interactive user, and a deadline in days
+    - node: batch-inference
+      does: >-
+        submitted to run whenever there is spare capacity
+      self: true
+    - node: inference-api
+      does: >-
+        the same model, a different endpoint and a different price
+    - node: streaming
+      does: >-
+        the opposite trade — perceived speed instead of unit cost
+  returns: >-
+    Roughly half price, for giving up when it happens
 relations:
   - type: part-of
     target: inference-api

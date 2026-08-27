@@ -32,6 +32,26 @@ useCase:
     modified files, some reach the whole combined work, and some reach across a
     network boundary. Reading which flavour applies is the entire question, and
     the differences between them are larger than the shared label suggests.
+flow:
+  scenario: >-
+    A licence that follows the work downstream, applied to an artifact
+    nobody agreed was software.
+  path:
+    - actor: A derivative
+      does: >-
+        something built from a licensed thing
+    - node: copyleft
+      does: >-
+        requires the derivative to carry the same terms
+      self: true
+    - node: permissive-license
+      does: >-
+        the alternative, which requires almost nothing
+    - node: open-source-ai
+      does: >-
+        and the argument about what a derivative even is for weights
+  returns: >-
+    "Derivative work" was written for code, not for weights
 relations:
   - type: consumed-by
     target: open-source-ai

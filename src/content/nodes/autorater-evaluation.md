@@ -33,6 +33,26 @@ useCase:
     internet's. It costs a labelling exercise and pays back on every subsequent
     [evaluation](evaluation) run, which makes it worth doing exactly when evaluation is
     continuous rather than occasional.
+flow:
+  scenario: >-
+    Human ratings that cost weeks to collect, compressed into a model that
+    scores the next ten thousand in an hour.
+  path:
+    - actor: Human ratings
+      does: >-
+        expensive, slow, and the thing being approximated
+    - node: fine-tuning
+      does: >-
+        a model trained on them
+    - node: autorater-evaluation
+      does: >-
+        which then scores new output automatically
+      self: true
+    - node: evaluation
+      does: >-
+        over a fixed set, so the scores compare
+  returns: >-
+    Human judgement, compressed — and frozen at that moment
 relations:
   - type: kind-of
     target: evaluation

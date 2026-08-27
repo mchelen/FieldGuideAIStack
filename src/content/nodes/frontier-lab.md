@@ -35,6 +35,23 @@ useCase:
     exactly what it did last year. Regulations that need a stable boundary
     usually reach for training compute instead, which is measurable and only
     loosely related to capability.
+flow:
+  scenario: >-
+    A small set of organisations whose training runs cost more than most
+    companies are worth.
+  path:
+    - node: frontier-lab
+      does: >-
+        trains at the leading edge of scale
+      self: true
+    - node: pretraining
+      does: >-
+        the run that is most of the expenditure
+    - node: model-provider
+      does: >-
+        the wider role: anyone who trains and licenses a model
+  returns: >-
+    Defined by scale, so membership changes with the frontier
 relations:
   - type: kind-of
     target: model-provider

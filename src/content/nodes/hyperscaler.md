@@ -34,6 +34,23 @@ useCase:
     which role each party plays is a prerequisite for answering the question at
     all, and the roles are obscured by every one of them describing itself as an
     AI company.
+flow:
+  scenario: >-
+    Three model hosts, two model providers, and one company whose data
+    centres all of them are sitting in.
+  path:
+    - node: model-host
+      does: >-
+        sells you access to a model it runs
+    - node: hyperscaler
+      does: >-
+        the cloud platform underneath, at a scale few can match
+      self: true
+    - node: accelerator
+      does: >-
+        whose supply is the thing actually being allocated
+  returns: >-
+    The same company is frequently two of the three roles
 relations:
   - type: kind-of
     target: model-host

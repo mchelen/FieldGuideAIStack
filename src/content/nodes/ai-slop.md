@@ -32,6 +32,27 @@ useCase:
     is the ratio, not the artifact. The practical consequence is that finding
     the good source is now the expensive step, and the corpus this material sits
     in is the same corpus the next model trains on.
+flow:
+  scenario: >-
+    A search result page where six of the ten results were generated to
+    exist rather than to be read.
+  path:
+    - actor: A publishing cost
+      does: >-
+        which fell to near zero
+    - node: ai-slop
+      does: >-
+        low-quality generated content, produced at volume because it is
+        cheap
+      self: true
+    - node: synthetic-data
+      does: >-
+        which then becomes training data for the next model
+    - node: watermarking
+      does: >-
+        and the attempt to tell the two apart afterwards
+  returns: >-
+    Cheap to produce, expensive to filter, and self-feeding
 relations:
   - type: consumed-by
     target: synthetic-data

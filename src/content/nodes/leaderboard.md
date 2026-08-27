@@ -33,6 +33,23 @@ useCase:
     specific. The ranking is real evidence about the thing it measured, and
     almost none about yours, which is why every serious adoption decision ends
     at your own eval set regardless of what the ranking said.
+flow:
+  scenario: >-
+    A public ranking that changed this week, and a procurement decision that
+    should probably not turn on it.
+  path:
+    - node: benchmark
+      does: >-
+        a shared test, so scores are comparable
+    - node: leaderboard
+      does: >-
+        the ranking published from those scores
+      self: true
+    - node: data-contamination
+      does: >-
+        and the reason a score can rise with nothing improving
+  returns: >-
+    Shared, published, and therefore optimised against
 relations:
   - type: consumes
     target: benchmark

@@ -32,6 +32,26 @@ useCase:
     enough to fit in the memory a phone will spare — which is why the
     capability of small models matters far more here than anywhere else in the
     stack.
+flow:
+  scenario: >-
+    A model running on a phone in aeroplane mode, answering with no network
+    and no per-token bill.
+  path:
+    - actor: A device
+      does: >-
+        a phone, with a few gigabytes to spare
+    - node: quantization
+      does: >-
+        shrinks the weights enough to fit
+    - node: on-device-inference
+      does: >-
+        runs it locally, with no request leaving the device
+      self: true
+    - node: self-hosting
+      does: >-
+        the same argument at a different scale
+  returns: >-
+    No network, no bill, no audit trail either
 relations:
   - type: kind-of
     target: self-hosting

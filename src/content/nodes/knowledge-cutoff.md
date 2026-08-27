@@ -33,6 +33,26 @@ useCase:
     prompting makes it aware of what happened afterwards. The fix is to put the
     current documentation in the prompt — retrieval, a fetched page, a pasted
     file — because the alternative is asking it to know something it cannot.
+flow:
+  scenario: >-
+    A model confidently describing a library version released after it
+    stopped learning anything first-hand.
+  path:
+    - actor: A question
+      does: >-
+        about something that changed last month
+    - node: knowledge-cutoff
+      does: >-
+        the date after which the model knows nothing first-hand
+      self: true
+    - node: model
+      does: >-
+        which has no way to tell that it is past that date
+    - node: retrieval-augmented-generation
+      does: >-
+        the fix — fetch the current thing and put it in the prompt
+  returns: >-
+    It does not know what it does not know
 relations:
   - type: part-of
     target: model

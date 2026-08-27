@@ -29,6 +29,23 @@ useCase:
     arrangement of prefix, suffix and middle. Using the shape the model was
     trained on is the difference between a completion that fits and one that
     plausibly could have.
+flow:
+  scenario: >-
+    A completion endpoint that takes a prefix and a suffix, because a chat
+    endpoint has nowhere to put the suffix.
+  path:
+    - node: fill-in-the-middle
+      does: >-
+        the capability that needs both sides
+    - node: fill-in-the-middle-api
+      does: >-
+        an endpoint shaped for it: prefix, suffix, and a gap
+      self: true
+    - node: inference-api
+      does: >-
+        beside the chat contract, and not portable between vendors
+  returns: >-
+    The field names differ per provider. Every time.
 relations:
   - type: implements
     target: fill-in-the-middle

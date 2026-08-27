@@ -32,6 +32,26 @@ useCase:
     runs, at a fraction of the speed and with none of the peripheral vision.
     It is the right tool when the alternative is a human doing it by hand, and
     the wrong tool whenever an API exists.
+flow:
+  scenario: >-
+    A desktop application with no API and no plans for one, and work that
+    has to happen inside it anyway.
+  path:
+    - actor: A screen
+      does: >-
+        pixels, with no API behind them
+    - node: computer-use
+      does: >-
+        the agent takes screenshots and moves a mouse
+      self: true
+    - node: tool-use
+      does: >-
+        each click is a tool call like any other
+    - node: browser-automation
+      does: >-
+        the narrower case, where the surface is a browser
+  returns: >-
+    Anything a person can do, at a person's error rate
 relations:
   - type: kind-of
     target: tool-use

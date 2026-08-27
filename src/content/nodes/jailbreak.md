@@ -24,6 +24,26 @@ useCase:
     one context and as [evaluation](evaluation) in another: the text is identical and only the
     intent differs, so no filter can separate them and the question is always
     about who is asking rather than what they typed.
+flow:
+  scenario: >-
+    A refusal that holds for a direct request and does not hold once the
+    request is dressed as fiction.
+  path:
+    - actor: A user
+      does: >-
+        asking for something the model was trained to refuse
+    - node: jailbreak
+      does: >-
+        persuading it anyway, by reframing the request
+      self: true
+    - node: model
+      does: >-
+        which has guidance from training, not a rule engine
+    - node: red-teaming
+      does: >-
+        the same technique, run deliberately, to find where it gives
+  returns: >-
+    The user is the attacker here — unlike injection
 relations:
   - type: consumes
     target: model

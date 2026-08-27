@@ -29,6 +29,26 @@ useCase:
     token stream the text would have been. This is also what makes browser
     automation and screen understanding possible without a separate vision
     pipeline bolted on.
+flow:
+  scenario: >-
+    A screenshot pasted into a chat window and described, by a system that
+    only ever reads tokens.
+  path:
+    - actor: An image
+      does: >-
+        pixels, pasted alongside a question about them
+    - node: tokenizer
+      does: >-
+        turns it into tokens too — the model reads nothing else
+    - node: multimodal-model
+      does: >-
+        inputs or outputs covering more than one modality
+      self: true
+    - node: model
+      does: >-
+        underneath, the same next-token contract
+  returns: >-
+    Everything becomes tokens. There is no second mechanism.
 relations:
   - type: kind-of
     target: model

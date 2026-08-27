@@ -33,6 +33,26 @@ useCase:
     the next step. Rewinding both the files and the transcript to the point
     before the mistake removes it from the context as well as from the disk,
     which is the part a manual revert cannot do.
+flow:
+  scenario: >-
+    An agent four steps past the point where it went wrong, with the files
+    already changed.
+  path:
+    - actor: A bad step
+      does: >-
+        already applied, to real files
+    - node: checkpoint-and-rollback
+      does: >-
+        restore points, taken before each edit
+      self: true
+    - node: session
+      does: >-
+        the conversation is restored alongside the files
+    - node: checkpoint
+      does: >-
+        a different thing with the same name — a saved set of weights
+  returns: >-
+    Undo for an agent, which is not the same as version control
 relations:
   - type: part-of
     target: session

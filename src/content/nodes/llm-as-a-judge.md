@@ -29,6 +29,26 @@ useCase:
     documented: it does so while carrying position, verbosity and
     self-enhancement biases that have to be controlled for rather than hoped
     away.
+flow:
+  scenario: >-
+    Two thousand outputs to compare and a budget that does not stretch to
+    two thousand human ratings.
+  path:
+    - actor: Two outputs
+      does: >-
+        for the same input, from two versions of a system
+    - node: llm-as-a-judge
+      does: >-
+        a model scores which is better, pairwise
+      self: true
+    - node: evaluation
+      does: >-
+        run over a fixed set, so the score means something
+    - node: factuality
+      does: >-
+        which it is notably worse at than at preference
+  returns: >-
+    Strong at "which of these two", weak at "rate this 1-10"
 relations:
   - type: kind-of
     target: evaluation

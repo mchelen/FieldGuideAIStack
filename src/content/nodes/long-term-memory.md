@@ -33,6 +33,26 @@ useCase:
     test runner, the convention it got corrected on — and read it back later.
     The payoff is real and so is the failure mode: a wrong note is now a wrong
     note that gets loaded confidently for months.
+flow:
+  scenario: >-
+    An agent that knows on Monday what it was told on Friday, in a system
+    whose model remembers nothing at all.
+  path:
+    - node: memory
+      does: >-
+        what the agent retains, at all
+    - node: long-term-memory
+      does: >-
+        in practice a directory of files it writes and reads
+      self: true
+    - node: short-term-memory
+      does: >-
+        as distinct from the conversation, which ends
+    - node: memory-poisoning
+      does: >-
+        and a file anything can write to is a file anything can lie in
+  returns: >-
+    Files. Not weights, not a database, not a faculty.
 relations:
   - type: kind-of
     target: memory

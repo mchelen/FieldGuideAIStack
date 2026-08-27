@@ -34,6 +34,26 @@ useCase:
     rarely deliberate — nobody trained on the test set on purpose — but the
     effect on the number is the same, and it is why a private held-out set is
     worth more than any published score.
+flow:
+  scenario: >-
+    A benchmark score that jumped, on a model that is not better at anything
+    the benchmark was meant to measure.
+  path:
+    - node: pretraining
+      does: >-
+        scrapes an enormous general collection of text
+    - node: data-contamination
+      does: >-
+        which can include the test set itself
+      self: true
+    - node: benchmark
+      does: >-
+        whose score now measures memory rather than ability
+    - node: leaderboard
+      does: >-
+        and the ranking moves for no real reason
+  returns: >-
+    The score rises; nothing it was measuring does
 relations:
   - type: consumed-by
     target: benchmark

@@ -33,6 +33,26 @@ useCase:
     windows are the point. Note what was paid for it — the parent never sees
     the sources, only twenty summaries, and anything a summary dropped is gone.
     Multi-agent designs buy capacity with fidelity.
+flow:
+  scenario: >-
+    Five agents on one problem, and a coordination cost that is larger than
+    any of the five subtasks.
+  path:
+    - node: agent
+      does: >-
+        one of several, each with a piece of the work
+    - node: multi-agent-system
+      does: >-
+        several coordinating, with delegation and communication overhead
+      self: true
+    - node: orchestration
+      does: >-
+        the parent's job: split, dispatch, and reassemble
+    - node: agent-card
+      does: >-
+        and how one agent learns what another can do
+  returns: >-
+    Reassembly is harder than any subtask, and least designed
 relations:
   - type: contains
     target: agent

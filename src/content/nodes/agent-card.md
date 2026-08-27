@@ -32,6 +32,26 @@ useCase:
     documentation, and without a bespoke integration written per pair. The card
     is doing the job an OpenAPI document does for a service, for a counterparty
     that has judgment rather than endpoints.
+flow:
+  scenario: >-
+    An agent needing to know whether another agent, built by someone else,
+    can do the thing it wants to delegate.
+  path:
+    - actor: A delegation
+      does: >-
+        one agent wants another to do something
+    - node: agent-card
+      does: >-
+        a machine-readable declaration of identity and capability
+      self: true
+    - node: agent-to-agent-protocol
+      does: >-
+        the protocol it is published under
+    - node: multi-agent-system
+      does: >-
+        which is the arrangement this makes possible between vendors
+  returns: >-
+    Discovery without a prior integration
 relations:
   - type: consumed-by
     target: multi-agent-system
