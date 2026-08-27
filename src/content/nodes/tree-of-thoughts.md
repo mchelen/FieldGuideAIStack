@@ -29,7 +29,7 @@ useCase:
     back. Tree of thoughts generates several candidate first moves, evaluates
     how promising each looks, expands the good ones and abandons the dead ends.
     It is ordinary search, with the model supplying both the candidate moves and
-    the position evaluation.
+    the position [evaluation](evaluation).
 relations:
   - type: consumes
     target: chain-of-thought-prompting

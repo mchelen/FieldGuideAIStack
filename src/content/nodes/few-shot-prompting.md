@@ -21,7 +21,7 @@ zoom: 2
 summary: Putting a few worked examples in the prompt so the model infers the
   task and the output format from them rather than from a description.
 fieldMark: The examples are paid for on every call, forever. Few-shot is a
-  recurring token cost traded against a one-off fine-tuning cost, and which is
+  recurring token cost traded against a one-off [fine-tuning](fine-tuning) cost, and which is
   cheaper depends entirely on volume.
 useCase:
   scenario: >-

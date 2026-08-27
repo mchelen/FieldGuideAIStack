@@ -91,8 +91,8 @@ where the capability comes from.
 
 ## Why it is the expensive half
 
-Pretraining is measured in trillions of tokens and thousands of accelerator-days.
-Everything after it — [fine-tuning](fine-tuning), alignment, safety work — is
+Pretraining is measured in trillions of tokens and thousands of [accelerator](accelerator)-days.
+Everything after it — [fine-tuning](fine-tuning), [alignment](post-training), safety work — is
 orders of magnitude cheaper, and works precisely because the hard part is
 already done.
 

@@ -24,7 +24,7 @@ fieldMark: An eval is yours; a benchmark is everyone's. If a team cannot say
   than an eval.
 useCase:
   scenario: >-
-    Someone rewrites a system prompt and asks whether it is an improvement.
+    Someone rewrites a [system prompt](system-prompt) and asks whether it is an improvement.
   detail: >-
     Without an eval set the answer is whichever examples each person happens to
     remember, and both sides can produce one. Fifty saved cases with expected

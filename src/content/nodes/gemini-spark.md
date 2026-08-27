@@ -53,7 +53,7 @@ or complete payments", these are opposite answers to the same design question.
 
 Neither is wrong. They are different points on a trade-off between reach and
 blast radius, and knowing which one you are holding matters more than any
-benchmark.
+[benchmark](benchmark).
 
 ## What follows from that choice
 

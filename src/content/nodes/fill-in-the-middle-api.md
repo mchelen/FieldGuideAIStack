@@ -20,7 +20,7 @@ fieldMark: A chat endpoint cannot do this properly. If a product offers inline
   surrounding code into a prompt and hoping.
 useCase:
   scenario: >-
-    An editor plugin needs a completion at the cursor that respects the fifty
+    An editor [plugin](connector) needs a completion at the cursor that respects the fifty
     lines below it.
   detail: >-
     A chat request can describe the situation in prose — "here is the code

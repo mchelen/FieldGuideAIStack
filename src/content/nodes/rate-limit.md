@@ -101,7 +101,7 @@ product, sold as [provisioned throughput](provisioned-throughput).
 
 ## Working within them
 
-Move latency-insensitive work to [batch inference](batch-inference), which has
+Move [latency](latency)-insensitive work to [batch inference](batch-inference), which has
 its own separate limits.[[cite:anthropic-batch]] Send fewer tokens where the
 constraint is tokens. And treat 429 as an expected condition to handle rather
 than an error to log, because at any real volume it will happen.

@@ -7,7 +7,7 @@ canonical:
     No standard term. "Asynchronous agent", "cloud sessions" and "long-running
     tasks" all describe it. Named here because it changes the oversight
     question — work that continues while nobody is watching cannot fall back to
-    a human in the loop.
+    a [human in the loop](human-in-the-loop).
 tags: [capability, product-anatomy]
 zoom: 2
 summary: The work continues after you look away — running in the vendor's cloud
@@ -48,7 +48,7 @@ sources:
 An [agent](agent) loops without you for many turns. Background execution is a
 stronger claim: the loop survives you leaving.
 
-Anthropic's Cowork documentation describes sessions that run in the cloud and
+Anthropic's [Cowork](claude-cowork) documentation describes sessions that run in the cloud and
 continue while you are offline. [Gemini Spark](gemini-spark) is described as running on Google's
 cloud infrastructure "even after you close your laptop or lock your phone." Both
 are the same architectural move — the session is not your window, it is a

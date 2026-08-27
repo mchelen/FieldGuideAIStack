@@ -19,7 +19,7 @@ tags: [evaluation, safety]
 zoom: 2
 summary: Adversarial testing to find failures before users do — deliberately
   trying to make a system misbehave, rather than checking that it behaves.
-fieldMark: Ordinary evaluation asks whether the system works. Red teaming asks
+fieldMark: Ordinary [evaluation](evaluation) asks whether the system works. Red teaming asks
   what it takes to break it. A team that has only done the first does not know
   the answer to the second.
 useCase:

@@ -39,7 +39,7 @@ relations:
     note: The vendor control for it, exposed as one parameter.
   - type: part-of
     target: inference-api
-    note: Set per request, alongside temperature and the rest.
+    note: Set per request, alongside [temperature](temperature) and the rest.
 examples:
   - name: The effort parameter
     vendor: Anthropic

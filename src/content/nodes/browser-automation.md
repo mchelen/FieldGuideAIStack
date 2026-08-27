@@ -23,7 +23,7 @@ fieldMark: The tell is credentials. Ask whether it can use your logged-in
   cloud browser from an agent acting as you.
 useCase:
   scenario: >-
-    A workflow depends on a web application with no API.
+    A [workflow](workflow) depends on a web application with no API.
   detail: >-
     Driving the browser is the fallback, and it works on things nothing else
     can reach. The question worth asking first is about credentials: whether
@@ -62,7 +62,7 @@ matters is **whose session the browser is in**.
 | --- | --- |
 | [ChatGPT Work](chatgpt-work)'s cloud browser | No — documented as unable to "accept credentials, use a password manager or saved form entries, sign in to a website, or complete payments" |
 | [Gemini Spark](gemini-spark) in Chrome | Yes — documented as able to use "your logged-in accounts and saved passwords" with permission |
-| Cowork with Claude in Chrome | Pairs with Claude in Chrome to "automate your tasks on any website" |
+| [Cowork](claude-cowork) with Claude in Chrome | Pairs with Claude in Chrome to "automate your tasks on any website" |
 
 An uncredentialed cloud browser can research. A credentialed one can act as you.
 Those are different risk profiles wearing the same feature name, which is

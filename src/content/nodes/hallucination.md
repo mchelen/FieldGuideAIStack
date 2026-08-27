@@ -32,7 +32,7 @@ useCase:
     shape of the API, reads like its siblings, and fits the surrounding code.
     The one property it lacks — existing — is not something the model has
     access to. This is why hallucination is caught by running things rather
-    than by reading them, and why a harness with tool use fails at a different
+    than by reading them, and why a [harness](harness) with tool use fails at a different
     rate from a chat window, even on the same model.
 relations:
   - type: part-of
@@ -93,12 +93,12 @@ that fires on one and not the other.
 The 2025 analysis puts the cause further upstream still, in how models are
 trained and graded: models "hallucinate because the training and evaluation
 procedures reward guessing over acknowledging
-uncertainty."[[cite:why-hallucinate]] A benchmark that scores a wrong answer the
+uncertainty."[[cite:why-hallucinate]] A [benchmark](benchmark) that scores a wrong answer the
 same as "I don't know" — zero — makes guessing strictly better than abstaining.
 The paper's analogy is a student facing a hard exam question.
 
 That reframing matters for what to expect. If the incentive is in the
-evaluation, then scaling alone does not fix it; changing what gets rewarded
+[evaluation](evaluation), then scaling alone does not fix it; changing what gets rewarded
 might.
 
 ## Where it shows up hardest
@@ -114,7 +114,7 @@ might.
 ## What actually reduces it
 
 Not [temperature](temperature), which changes dispersion rather than
-grounding. Not asking the model to be careful.
+[grounding](grounding). Not asking the model to be careful.
 
 What helps is putting the fact in front of the model instead of asking it to
 recall one — retrieval, a document in the [context window](context-window), a

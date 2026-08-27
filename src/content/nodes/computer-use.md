@@ -24,7 +24,7 @@ fieldMark: Computer use is the fallback for software with no API. It is slower,
   nothing else can reach.
 useCase:
   scenario: >-
-    A workflow depends on a desktop application with no API and no automation
+    A [workflow](workflow) depends on a desktop application with no API and no automation
     interface.
   detail: >-
     Every other integration route is closed. Computer use takes a screenshot,

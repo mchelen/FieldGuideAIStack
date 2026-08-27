@@ -21,7 +21,7 @@ useCase:
   detail: >-
     Jailbreaks are how that gets measured, which is why red teams write them
     deliberately. It also explains why the same technique reads as an attack in
-    one context and as evaluation in another: the text is identical and only the
+    one context and as [evaluation](evaluation) in another: the text is identical and only the
     intent differs, so no filter can separate them and the question is always
     about who is asking rather than what they typed.
 relations:

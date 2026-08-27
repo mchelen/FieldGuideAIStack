@@ -22,7 +22,7 @@ zoom: 3
 summary: An inventory of the models, tools, datasets and servers a system
   depends on — the supply-chain question applied to AI components.
 fieldMark: Ask what is in the inventory. A list of Python packages is an SBOM.
-  If it does not name the models, the prompts and the MCP servers, it is not
+  If it does not name the models, the prompts and the [MCP](mcp) servers, it is not
   describing the AI system.
 useCase:
   scenario: >-

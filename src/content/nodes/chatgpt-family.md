@@ -7,7 +7,7 @@ tags: [suite, product]
 zoom: 1
 summary: OpenAI's family — ChatGPT itself, the Work agentic mode, and Codex —
   sold as modes and surfaces within one product rather than separate ones.
-fieldMark: OpenAI packages the family as modes inside ChatGPT, so the product
+fieldMark: OpenAI packages the family as modes inside [ChatGPT](chatgpt), so the product
   name tells you less than the mode does. "In ChatGPT" is not an answer to a
   capability question.
 relations:
@@ -41,7 +41,7 @@ mechanisms" with [Codex](openai-codex).
 Selling modes rather than products has a real consequence: **the product name
 stops carrying capability information.** "We use ChatGPT" tells you almost
 nothing — the same subscription spans a chat window that cannot touch your
-files and an agent that runs shell commands in a cloud sandbox.
+files and an agent that runs shell commands in a cloud [sandbox](sandbox).
 
 Anthropic's separate names make the boundary visible in conversation. OpenAI's
 modes make it invisible, which is convenient for adoption and inconvenient for

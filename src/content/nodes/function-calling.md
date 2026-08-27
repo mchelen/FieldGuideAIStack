@@ -92,7 +92,7 @@ was about to do, and on any deviation from the example.
 
 A typed block removes that entire class of failure and, more importantly, makes
 the decision point explicit. Step 3 is where an
-[approval mode](approval-mode) intervenes, where an allowlist applies, and where
+[approval mode](approval-mode) intervenes, where an [allowlist](permission-model) applies, and where
 a [hook](hook) fires. None of it would be possible if the model's intent
 arrived as prose.
 

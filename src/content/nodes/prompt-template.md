@@ -24,7 +24,7 @@ useCase:
   detail: >-
     A template makes the prompt one artifact with one version, filled with
     different content at each call site. That is ordinary software hygiene, and
-    it is what makes evaluation possible at all — you cannot measure whether a
+    it is what makes [evaluation](evaluation) possible at all — you cannot measure whether a
     change helped if every caller is running a different prompt. The discipline
     that follows is the point: version it, test it, and change it in one place.
 relations:

@@ -24,7 +24,7 @@ fieldMark: A single latency figure on a vendor page is close to meaningless
   total scales with how much the model was asked to say.
 useCase:
   scenario: >-
-    Two models benchmark at the same average latency and one feels far quicker
+    Two models [benchmark](benchmark) at the same average latency and one feels far quicker
     to use.
   detail: >-
     The averages hide the split. One starts producing text in 300ms and streams

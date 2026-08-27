@@ -7,7 +7,7 @@ aka:
 canonical:
   status: de-facto
   term: Checkpoint
-  body: Anthropic, in the Claude Code glossary
+  body: Anthropic, in the [Claude Code](claude-code) glossary
   url: https://code.claude.com/docs/en/glossary
   title: Glossary — Claude Code documentation
   verifiedOn: 2026-08-22
@@ -64,7 +64,7 @@ sources:
 ---
 
 A checkpoint is "a restore point created at each prompt you send", with the
-harness snapshotting "files before every edit so a checkpoint can revert
+[harness](harness) snapshotting "files before every edit so a checkpoint can revert
 them."[[cite:claude-code-glossary]]
 
 The rewind action offers a choice worth noticing: restore "code, conversation,
@@ -84,7 +84,7 @@ transcript, so rewinding it is how you make the agent stop believing something.
 ## What it does not cover
 
 Anthropic is explicit about the boundaries: checkpoints are "separate from git
-and don't track changes made through the Bash tool", subagent edits are not
+and don't track changes made through the Bash tool", [subagent](sub-agent) edits are not
 restored, and external changes are not
 tracked.[[cite:claude-code-checkpointing]] They are also "not a replacement for
 version control."[[cite:claude-code-checkpointing]]

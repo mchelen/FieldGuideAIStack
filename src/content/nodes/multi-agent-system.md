@@ -101,7 +101,7 @@ The characteristic failures follow:
 
 ## Where it does work
 
-Anthropic's orchestrator-workers pattern fits tasks "where you can't predict the
+Anthropic's [orchestrator-workers](orchestration) pattern fits tasks "where you can't predict the
 subtasks needed", giving the example of a coding change where "the number of
 files that need to be changed and the nature of the change in each file likely
 depend on the task."[[cite:anthropic-agents]]

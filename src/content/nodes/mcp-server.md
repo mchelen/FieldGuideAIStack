@@ -21,7 +21,7 @@ useCase:
     Three different AI applications in a team all need access to the same
     internal ticketing system.
   detail: >-
-    Written as an MCP server, the integration is built once and each application
+    Written as an [MCP](mcp) server, the integration is built once and each application
     connects to it — the alternative being three bespoke integrations that drift
     apart. This is the whole argument for a protocol here: the N-by-M problem of
     every host needing custom code for every tool collapses into N plus M.

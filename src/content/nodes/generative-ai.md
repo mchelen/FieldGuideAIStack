@@ -91,7 +91,7 @@ advance: is this spam, which of these five categories, what is the price. A
 generative model produces an artifact you did not specify in advance.
 
 That is a real difference, and it is the one that changed what these systems are
-used for. It also explains why evaluation is so much harder: there is no correct
+used for. It also explains why [evaluation](evaluation) is so much harder: there is no correct
 answer to compare against.
 
 ## What falls inside

@@ -7,7 +7,7 @@ aka:
 canonical:
   status: de-facto
   term: Turn
-  body: Anthropic, in the Claude Code glossary
+  body: Anthropic, in the [Claude Code](claude-code) glossary
   url: https://code.claude.com/docs/en/glossary
   title: Glossary — Claude Code documentation
   verifiedOn: 2026-08-22
@@ -70,7 +70,7 @@ one."[[cite:claude-code-glossary]]
 ## Why the unit matters
 
 A turn is what a person experiences as one interaction — ask, wait, read. It is
-also the unit at which most things worth measuring are measured: latency as
+also the unit at which most things worth measuring are measured: [latency](latency) as
 felt, cost per exchange, and where lifecycle [hooks](hook) fire.
 
 But it is emphatically not an [inference API](inference-api) call. Inside one

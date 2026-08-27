@@ -11,8 +11,8 @@ canonical:
   note: >-
     Used at two levels, consistently enough to be worth separating. Google
     defines the model property — "the number of tokens a model can process in a
-    given prompt". Anthropic's Claude Code glossary defines the harness's view:
-    "the working memory for a session", holding history, file contents and
+    given prompt". Anthropic's [Claude Code](claude-code) glossary defines the harness's view:
+    "the [working memory](short-term-memory) for a session", holding history, file contents and
     loaded skills, and points readers at the platform glossary "for the
     underlying model concept". This page covers the first; the second is
     context engineering.
@@ -29,7 +29,7 @@ useCase:
     conversation still degrades.
   detail: >-
     The number is a ceiling, not a promise about quality. Anthropic's own
-    compaction documentation notes that "as a conversation grows, response
+    [compaction](compaction) documentation notes that "as a conversation grows, response
     quality degrades" — relevant material buried among irrelevant material is
     harder to use than relevant material alone. A bigger window raises the
     limit and does not remove the need to decide what belongs inside it.

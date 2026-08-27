@@ -20,7 +20,7 @@ aka:
     usedBy: Anthropic (Claude)
     url: https://claude.com/docs/connectors/overview
     verifiedOn: 2026-08-22
-    note: Documented as powered by MCP, with prebuilt integrations and a Connectors Directory.
+    note: Documented as powered by [MCP](mcp), with prebuilt integrations and a Connectors Directory.
   - term: Connected Apps
     usedBy: Google (Gemini)
     url: https://support.google.com/gemini/answer/13695044
@@ -30,7 +30,7 @@ aka:
     usedBy: OpenAI (ChatGPT)
     url: https://help.openai.com/en/articles/11487775-connectors-in-chatgpt
     verifiedOn: 2026-08-22
-    note: Renamed from "connectors" in December 2025. The help article's URL slug still reads connectors-in-chatgpt.
+    note: Renamed from "connectors" in December 2025. The help article's URL slug still reads connectors-in-[chatgpt](chatgpt).
 tags: [capability, interface, product-anatomy]
 zoom: 2
 summary: A packaged link between an assistant and an outside service, so it can
@@ -114,10 +114,10 @@ A connector is the product-level packaging of [tool use](tool-use). The model
 still just asks to call a function; the connector is what makes that function
 exist, authenticated, without you writing code.
 
-Cowork's documentation describes connecting Claude to tools and data sources
+[Cowork](claude-cowork)'s documentation describes connecting Claude to tools and data sources
 "using MCP", alongside skills and plugins, managed from a Customize panel and
 synced from your account at session start.[[cite:anthropic-connectors-overview]] [ChatGPT Work](chatgpt-work) describes connected
-apps under admin-controlled permissions.[[cite:openai-chatgpt-work]] Gemini describes extensions into
+apps under admin-controlled permissions.[[cite:openai-chatgpt-work]] [Gemini](gemini-app) describes extensions into
 Workspace, Maps, YouTube and others.[[cite:google-gemini-app]]
 
 The same shape, three vocabularies.
@@ -126,7 +126,7 @@ The same shape, three vocabularies.
 
 Connectors are attached to an *account*, not to a machine, and the boundary is
 sharper than it looks. Anthropic's documentation notes that Cowork loads the
-connectors, skills and plugins enabled for your claude.ai account and
+connectors, skills and plugins enabled for your [claude.ai](claude-app) account and
 deliberately does **not** read the [Claude Code](claude-code) CLI's `~/.claude` directory —
 so a skill that exists only on your machine is invisible to Cowork until you
 add it in Customize.[[cite:anthropic-connectors-overview]]

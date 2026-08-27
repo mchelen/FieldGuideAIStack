@@ -4,7 +4,7 @@ aka: [permission mode, confirmation prompt]
 canonical:
   status: de-facto
   term: Permission mode
-  body: Anthropic, in the Claude Code glossary
+  body: Anthropic, in the [Claude Code](claude-code) glossary
   url: https://code.claude.com/docs/en/glossary
   title: Glossary — Claude Code documentation
   verifiedOn: 2026-08-22
@@ -35,7 +35,7 @@ relations:
     target: harness
   - type: consumes
     target: tool-use
-    note: The gate sits between the model asking and the harness doing.
+    note: The gate sits between the model asking and the [harness](harness) doing.
 sources:
   - id: anthropic-get-started
     url: https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork
@@ -51,7 +51,7 @@ sources:
 something actually being done. Approval mode is the policy that fills the gap,
 and it is where a product's real safety posture lives.
 
-Anthropic's Cowork documentation describes three settings: **manual**, pausing
+Anthropic's [Cowork](claude-cowork) documentation describes three settings: **manual**, pausing
 for approval on every action; **auto**, running autonomously with safety checks
 that block risky actions; and **skip**, with no prompts or checks. It also notes
 that auto consumes more usage, because the safety verification is itself work.
@@ -68,7 +68,7 @@ running while you sleep — the agent stops at the first prompt and waits for
 someone who is not there. So products that run unattended need a middle tier,
 and the interesting question becomes *which actions land in it*.
 
-Google's Spark announcement draws that line at payments and other sensitive
+Google's [Spark](gemini-spark) announcement draws that line at payments and other sensitive
 transactions, keeping user approval for those while allowing routine web errands
 to proceed. Every vendor draws it somewhere. Where they draw it tells you more
 about the product than the feature list does.

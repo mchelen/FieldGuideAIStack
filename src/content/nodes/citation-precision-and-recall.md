@@ -107,7 +107,7 @@ becomes a number, because the question changes from "is this true" — which
 needs the world — to "does the cited passage say this", which needs only the
 passage.
 
-Which is also why [grounding](grounding) and citation evaluation belong
+Which is also why [grounding](grounding) and citation [evaluation](evaluation) belong
 together: grounding is the design, and this is the check that the design held.
 
 ## The practical version

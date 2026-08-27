@@ -34,7 +34,7 @@ useCase:
 relations:
   - type: part-of
     target: harness
-    note: The surface is the harness's front end, not a separate system.
+    note: The surface is the [harness](harness)'s front end, not a separate system.
 sources:
   - id: anthropic-claude-code
     url: https://code.claude.com/docs/en/overview
@@ -54,7 +54,7 @@ work.
 
 Anthropic's own documentation is explicit that [Claude Code](claude-code) runs on several
 surfaces — terminal, IDE extensions, desktop app, web — and that "each surface
-connects to the same underlying Claude Code engine." Cowork's docs go further:
+connects to the same underlying Claude Code engine." [Cowork](claude-cowork)'s docs go further:
 Cowork "uses the same agentic architecture that powers Claude Code, accessible
 within Claude Desktop without opening the terminal."
 
@@ -70,7 +70,7 @@ mysterious:
 - **Same engine, different surface** — a repackaging, aimed at a new audience.
 - **Different engine, same surface** — a genuine capability difference hiding
   behind a familiar window.
-- **Different sandbox per surface** — the same product can have different
+- **Different [sandbox](sandbox) per surface** — the same product can have different
   powers depending on where it runs. [ChatGPT Work](chatgpt-work)'s documentation is direct
   about this: on the web it "operates in isolated cloud environments and cannot
   directly access local files or apps," while the desktop app can reach local

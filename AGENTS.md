@@ -122,6 +122,12 @@ any new development work.
   - **A use case** in `useCase`: one scenario line, one paragraph of detail.
     Generic for now; these are the natural hook for the fictional organisation
     when it arrives.
+- The reader-facing headings are named for what they answer, not for the field
+  they come from: `fieldMark` prints as **How to spot it**, `useCase` as
+  **Example**, and `aka` as an **Also called** chip row above the summary. The
+  earlier labels — "Field mark", "In use", "What it looks like in use" — were
+  named after the schema, and "field mark" in particular is birding jargon most
+  readers do not have. Rename the heading, keep the field name.
 - Missing sections are warnings rather than errors, so the backlog stays visible
   in CI without blocking unrelated work. Malformed ones are errors.
 - **That backlog is now empty.** Every page carries all four, so a warning about
@@ -399,9 +405,30 @@ any new development work.
 - If prose leans on a term that has no page and the sentence would be worse
   without it, that is the signal to write the page. A term worth explaining in
   passing is usually worth explaining properly.
-- The validator warns about unlinked mentions, but only for terms of two or
-  more words. Single common words — model, agent, surface, Claude — appear as
-  ordinary prose constantly, and flagging them would bury the signal.
+- The validator warns about unlinked mentions. Single-word terms are checked
+  too, minus an explicit list of words — model, agent, surface, Claude, token,
+  run — that this guide also uses in their ordinary English sense several times
+  a page. Skipping every one-word term was the earlier rule, and it let
+  `hyperscaler` sit unlinked in a paragraph about hyperscalers.
+- A term two nodes both answer to is nobody's to claim. `function calling` is
+  this guide's own node and OpenAI's name for tool use, so reporting it could
+  only ever produce a coin flip; ambiguous terms are skipped.
+- Frontmatter prose is prose. `fieldMark`, `canonical.note`, `useCase.scenario`
+  and `.detail`, and every relation and alias `note` render on the page, so
+  they carry links and the checker reads them. They render through
+  `Prose.astro`, not the markdown pipeline — bare `[label](node-id)` and
+  nothing else. `canonical.body` is an attribution line and is deliberately
+  outside the link check: pulling a word out of "OWASP GenAI Security Project"
+  reads the organisation's name as a claim. `sources[].note` and
+  `examples[].note` are not rendered at all; a batch edit put six links there,
+  two inside quoted source titles, and every check stayed green.
+- A link is never planted inside a quotation, a citation marker, or another
+  link's target. Each of those was a false positive once: `[[cite:aws-prov-
+  throughput]]` reported an unlinked `throughput`, and
+  `[Checkpoints](checkpoint-and-rollback)` reported an unlinked `checkpoint`.
+- YAML plain scalars cannot start with `[`. A link at the very start of a
+  frontmatter value turns the value into a flow sequence and the file stops
+  parsing — reword so the link is not first.
 - Spaces in a term match any run of whitespace, and a mention inside another
   link's text does not count. Both were wrong before: re-wrapping a paragraph
   could hide `Claude Code` by splitting it across lines, and `[indirect prompt

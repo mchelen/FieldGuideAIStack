@@ -31,7 +31,7 @@ useCase:
   detail: >-
     Under a per-seat licence the marginal user is free and the marginal query
     is free. Under token billing neither is, and cost becomes something product
-    decisions move directly — a longer system prompt, an extra reasoning step,
+    decisions move directly — a longer [system prompt](system-prompt), an extra reasoning step,
     a retry policy. That makes cost an engineering concern owned by the people
     writing prompts, which is a genuinely new arrangement and one most teams
     discover late.

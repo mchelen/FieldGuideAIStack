@@ -48,7 +48,7 @@ sources:
 it by its parts rather than its vibe. An agent is the *composition* of a
 [model](model), a [harness](harness) that loops, and a set of tools the model can
 invoke. Remove any one and the word stops applying: a model alone answers; a
-harness with no tools is a chat client; tools with no loop is a plugin system.
+harness with no tools is a chat client; tools with no loop is a [plugin](connector) system.
 
 ## The useful axis: how many turns between humans
 
@@ -58,7 +58,7 @@ model calls happen between one human input and the next.
 | Human inputs per model call | What it is usually called |
 | --- | --- |
 | One to one | Chat, completion, autocomplete |
-| One to a handful | Assisted workflow, "copilot" |
+| One to a handful | Assisted [workflow](workflow), "copilot" |
 | One to dozens or hundreds | Agent |
 
 The interesting engineering problems — [context management](context-engineering), permissioning, error recovery, cost control — all appear as you

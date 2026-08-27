@@ -95,7 +95,7 @@ Anthropic catalogues five, and they compose:
   and delegates. Topographically like parallelization, but "subtasks aren't
   pre-defined, but determined by the orchestrator based on the specific
   input."[[cite:anthropic-agents]]
-- **Evaluator-optimizer** — one call generates, another critiques, in a loop.
+- **[Evaluator-optimizer](reflection)** — one call generates, another critiques, in a loop.
   Fits "when we have clear evaluation criteria, and when iterative refinement
   provides measurable value."[[cite:anthropic-agents]]
 

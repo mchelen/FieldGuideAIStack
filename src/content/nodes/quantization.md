@@ -16,7 +16,7 @@ canonical:
     reducing the bits used to store a model's parameters — and flags that the
     word means something else in older machine-learning writing.
 tags: [training, runtime]
-zoom: 3
+zoom: 2
 summary: Storing a model's weights at lower precision — 4 or 8 bits instead of
   16 — so it fits in less memory and runs faster, at some cost in quality.
 fieldMark: Quantization is why the same model appears on a hub in a dozen sizes

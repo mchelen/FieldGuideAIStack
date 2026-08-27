@@ -34,7 +34,7 @@ useCase:
     Reading the code again would not catch it — the invented method has exactly
     the right shape, which is what makes hallucinated APIs so persuasive.
     Running it catches it immediately and unambiguously, and the error message
-    tells the agent what to fix. This is why agentic coding works at all, and
+    tells the agent what to fix. This is why [agentic coding](agentic-coding) works at all, and
     why the same agent given no way to execute anything is a much weaker tool.
 relations:
   - type: part-of

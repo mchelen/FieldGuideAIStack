@@ -33,7 +33,7 @@ sources:
     verifiedOn: 2026-08-22
 ---
 
-Three products, one engine. Anthropic's own documentation says Cowork "uses the
+Three products, one engine. Anthropic's own documentation says [Cowork](claude-cowork) "uses the
 same agentic architecture that powers [Claude Code](claude-code)", and its docs say
 its terminal, IDE, desktop and web surfaces all "connect to the same underlying
 Claude Code engine".

@@ -16,7 +16,7 @@ tags: [runtime, constraint]
 zoom: 2
 summary: Compute spent while answering rather than while training — the second
   dial for making a model perform better, and the one you pay for per request.
-fieldMark: Any control that trades latency for quality on a single request is
+fieldMark: Any control that trades [latency](latency) for quality on a single request is
   this. It is the only performance dial the person calling the model actually
   holds.
 useCase:
@@ -28,7 +28,7 @@ useCase:
     computation went into producing them, and that is now a per-request
     decision rather than a property of the model you chose. It makes cost,
     latency and accuracy a dial rather than a procurement question — and it
-    makes benchmark comparisons slippery, since two scores for one model may
+    makes [benchmark](benchmark) comparisons slippery, since two scores for one model may
     reflect very different spending.
 relations:
   - type: consumes

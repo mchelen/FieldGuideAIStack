@@ -101,7 +101,7 @@ many adaptations.
 ## Why it changed who can fine-tune
 
 Full [fine-tuning](fine-tuning) of a mid-sized model needs a cluster; a LoRA
-adapter for the same model can be trained on a single consumer accelerator and
+adapter for the same model can be trained on a single consumer [accelerator](accelerator) and
 shipped as a file measured in megabytes. That collapse in cost is why fine-tunes
 of open-weight models are shared the way plugins are, and why the practice
 exists outside well-funded labs at all.

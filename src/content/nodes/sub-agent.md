@@ -4,13 +4,13 @@ aka: [subagent, agent delegation, parallel workstreams]
 canonical:
   status: de-facto
   term: Subagent
-  body: Anthropic, in the Claude Code glossary
+  body: Anthropic, in the [Claude Code](claude-code) glossary
   url: https://code.claude.com/docs/en/glossary
   title: Glossary — Claude Code documentation
   verifiedOn: 2026-08-22
   note: >-
     Written both ways. Anthropic closes it up as "subagent"; the hyphenated
-    form is common elsewhere. Distinct from a multi-agent system, where the
+    form is common elsewhere. Distinct from a [multi-agent system](multi-agent-system), where the
     agents are independent rather than delegated to.
 tags: [capability, runtime]
 zoom: 3
@@ -52,7 +52,7 @@ reading forty files spends its whole window on file contents. Forty sub-agents
 each reading one file spend forty separate windows and return forty summaries,
 and the parent only pays for the summaries.
 
-Cowork's documentation describes complex work "divided into smaller tasks with
+[Cowork](claude-cowork)'s documentation describes complex work "divided into smaller tasks with
 parallel workstreams for faster results." Speed is the visible benefit; context
 economy is the structural one.
 

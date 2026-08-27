@@ -24,7 +24,7 @@ useCase:
     Running the code is the difference between a suggestion and a checked
     answer. An invented library method survives any amount of re-reading and
     dies instantly on execution, which is why this capability — rather than
-    code quality — is what separates agentic coding from autocomplete. The
+    code quality — is what separates [agentic coding](agentic-coding) from autocomplete. The
     second question is always where the command runs: your machine, or a
     sandbox somewhere else.
 relations:

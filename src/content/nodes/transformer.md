@@ -21,7 +21,7 @@ summary: The neural network architecture nearly every current language model is
   convolution.
 fieldMark: If a product says "based on transformer architecture" it has told
   you almost nothing, because the alternative is essentially unused. What
-  differs between models is scale, training and tokenizer, not this.
+  differs between models is scale, training and [tokenizer](tokenizer), not this.
 useCase:
   scenario: >-
     You are asked why context is expensive when disk and memory are cheap.
@@ -38,7 +38,7 @@ relations:
     note: The architecture half of "an architecture plus a set of learned weights".
   - type: contains
     target: attention
-    note: Self-attention layers are the component the architecture is built from.
+    note: The stack is built from [self-attention](attention) layers.
 examples:
   - name: Hugging Face Transformers
     vendor: Hugging Face

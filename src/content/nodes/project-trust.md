@@ -63,7 +63,7 @@ sources:
 Project trust is "a dialog accepting a directory before [Claude Code](claude-code) loads its configuration."[[cite:claude-code-glossary]] The word
 *configuration* is the whole point.
 
-Until a directory is trusted, the harness "holds back some of the content its
+Until a directory is trusted, the [harness](harness) "holds back some of the content its
 repository supplies, such as project allow rules and marketplaces from
 `.claude/settings.json`."[[cite:claude-code-glossary]] A repository does not
 merely contain code to read; it contains settings that change what the agent may

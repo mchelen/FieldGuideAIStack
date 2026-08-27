@@ -7,7 +7,7 @@ aka:
   - thinking model
 canonical:
   status: contested
-  body: Wikipedia, which records both "reasoning language model" and "large reasoning model" in use
+  body: Wikipedia, which records both "reasoning [language model](large-language-model)" and "large reasoning model" in use
   url: https://en.wikipedia.org/wiki/Reasoning_language_model
   title: Reasoning language model — Wikipedia
   verifiedOn: 2026-08-22
@@ -31,13 +31,13 @@ useCase:
     Producing an answer token by token gives the model no scratch space. Writing
     the intermediate steps out gives it one, since each step becomes context for
     the next. A reasoning model does this by default rather than on request,
-    having been trained to. The cost is latency and tokens; the gain shows up on
+    having been trained to. The cost is [latency](latency) and tokens; the gain shows up on
     exactly the tasks where the first token commits you to an answer you have
     not worked out yet.
 relations:
   - type: kind-of
     target: model
-    note: Distinguished by post-training and by how it spends compute at answer time.
+    note: Distinguished by [post-training](post-training) and by how it spends compute at answer time.
   - type: consumes
     target: test-time-compute
     note: Spending more at answer time is the mechanism, not a side effect.

@@ -94,8 +94,8 @@ make obvious.
 ## Reading the claim carefully
 
 "Multimodal" on a product page usually means image input. Audio in, image out,
-video in and real-time streaming are separate capabilities that arrive
+video in and real-time [streaming](streaming) are separate capabilities that arrive
 separately, are priced separately, and are often served by different models
-behind one name. Google's own overview describes Gemini as "an interface to a
+behind one name. Google's own overview describes [Gemini](gemini-app) as "an interface to a
 multimodal LLM (handling text, audio, images and more)" — an accurate sentence
 that leaves every one of those questions open.[[cite:google-gemini-app]]

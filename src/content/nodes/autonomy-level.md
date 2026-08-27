@@ -31,7 +31,7 @@ useCase:
 relations:
   - type: implemented-by
     target: approval-mode
-    note: The setting where a level becomes a policy the harness enforces.
+    note: The setting where a level becomes a policy the [harness](harness) enforces.
   - type: distinguished-from
     target: autonomous-agent
     note: >-

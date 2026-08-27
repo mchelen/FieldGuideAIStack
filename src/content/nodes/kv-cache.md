@@ -7,7 +7,7 @@ aka:
 canonical:
   status: de-facto
   term: KV cache
-  body: Kwon et al., "Efficient Memory Management for Large Language Model Serving with PagedAttention" (2023), and universal in serving practice
+  body: Kwon et al., "Efficient Memory Management for [Large Language Model](large-language-model) Serving with PagedAttention" (2023), and universal in serving practice
   url: https://arxiv.org/abs/2309.06180
   title: Efficient Memory Management for Large Language Model Serving with PagedAttention — Kwon et al.
   verifiedOn: 2026-08-22
@@ -35,7 +35,7 @@ relations:
     note: Stores the keys and values attention has already computed, so they are not recomputed.
   - type: consumes
     target: accelerator
-    note: It lives in accelerator memory alongside the weights, and competes with them for it.
+    note: It lives in [accelerator](accelerator) memory alongside the weights, and competes with them for it.
 examples:
   - name: PagedAttention and vLLM
     url: https://arxiv.org/abs/2309.06180

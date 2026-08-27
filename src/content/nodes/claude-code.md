@@ -83,4 +83,4 @@ Not a capability question. Both run the same engine. Ask instead:
 - Do you want a **terminal**? That is the barrier Cowork removes, and the reason
   it exists as a separate product.
 - Whose **extensions** do you need? Claude Code reads `~/.claude`; Cowork reads
-  your claude.ai account and deliberately does not read `~/.claude`.
+  your [claude.ai](claude-app) account and deliberately does not read `~/.claude`.

@@ -24,7 +24,7 @@ fieldMark: Factuality and groundedness are different claims, and Google
   grounded and wrong.
 useCase:
   scenario: >-
-    An evaluation reports 94% and nobody can say 94% of what.
+    An [evaluation](evaluation) reports 94% and nobody can say 94% of what.
   detail: >-
     Factuality has no formula. What gets measured is always a proxy — agreement
     with a reference answer, whether claims are supported by cited sources,
@@ -105,7 +105,7 @@ and truth is not among the quantities it computes — which is
 
 The 2025 analysis puts the incentive upstream: models "hallucinate because the
 training and evaluation procedures reward guessing over acknowledging
-uncertainty."[[cite:why-hallucinate]] A benchmark scoring a wrong answer and "I
+uncertainty."[[cite:why-hallucinate]] A [benchmark](benchmark) scoring a wrong answer and "I
 don't know" identically makes guessing strictly better, and factuality is what
 loses.
 

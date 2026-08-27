@@ -101,7 +101,7 @@ they have never seen.
 
 - **Limits.** The [context window](context-window) is measured in them.
 - **Price.** Inference is billed per million input and output tokens.
-- **Latency.** Output tokens are produced serially, so a long answer takes
+- **[Latency](latency).** Output tokens are produced serially, so a long answer takes
   proportionally longer than a short one regardless of how hard the question was.
 - **Failure.** Truncation, mid-word cut-offs and "maximum length exceeded" are
   all token-boundary events.

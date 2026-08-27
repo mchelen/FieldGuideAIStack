@@ -28,10 +28,10 @@ useCase:
     actually think is good.
   detail: >-
     A general model brings general taste, and your task may not want it. Having
-    reviewers rate a few hundred outputs and fine-tuning a rater on those labels
+    reviewers rate a few hundred outputs and [fine-tuning](fine-tuning) a rater on those labels
     produces an instrument calibrated to your standard rather than to the
     internet's. It costs a labelling exercise and pays back on every subsequent
-    evaluation run, which makes it worth doing exactly when evaluation is
+    [evaluation](evaluation) run, which makes it worth doing exactly when evaluation is
     continuous rather than occasional.
 relations:
   - type: kind-of

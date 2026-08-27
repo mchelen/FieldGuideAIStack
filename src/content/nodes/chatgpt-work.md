@@ -7,7 +7,7 @@ tags: [product, agent]
 zoom: 1
 summary: OpenAI's agentic mode for multi-step work inside Business and
   Enterprise workspaces, producing documents, spreadsheets and presentations.
-fieldMark: There is no "ChatGPT Cowork". OpenAI shipped Work, and calls it a
+fieldMark: There is no "[ChatGPT](chatgpt) Cowork". OpenAI shipped Work, and calls it a
   mode within ChatGPT rather than a separate product — the naming near-collision
   with Claude Cowork is the thing to watch for.
 relations:

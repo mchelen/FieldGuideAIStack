@@ -14,7 +14,7 @@ tags: [economics]
 zoom: 2
 summary: What one completed job costs once retries, tool calls and failures are
   counted — as opposed to what one API call costs.
-fieldMark: Per-token pricing is the vendor's unit. Cost per task is yours, and
+fieldMark: Per-[token pricing](token-pricing) is the vendor's unit. Cost per task is yours, and
   the ratio between them is where agentic systems surprise people.
 useCase:
   scenario: >-

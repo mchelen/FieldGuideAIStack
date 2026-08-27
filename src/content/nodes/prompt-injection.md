@@ -38,7 +38,7 @@ relations:
     note: Injection matters in proportion to what the model can ask to be done.
   - type: distinguished-from
     target: jailbreak
-    note: Injection comes from data the system reads; a jailbreak comes from the user.
+    note: Injection comes from data the system reads; a [jailbreak](jailbreak) comes from the user.
 sources:
   - id: owasp-agentic-top
     url: https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/

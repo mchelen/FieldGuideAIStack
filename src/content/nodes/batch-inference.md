@@ -32,7 +32,7 @@ useCase:
     a batch, it costs half as much on the Claude API and the provider schedules
     it against spare capacity. The only thing given up is knowing when each
     result lands — and for a backlog, that was never worth anything. Recognising
-    which workloads are genuinely latency-insensitive is one of the largest
+    which workloads are genuinely [latency](latency)-insensitive is one of the largest
     single levers on an inference bill.
 relations:
   - type: part-of
@@ -41,7 +41,7 @@ relations:
   - type: distinguished-from
     target: streaming
     note: >-
-      Opposite ends of the same trade. Streaming buys perceived speed;
+      Opposite ends of the same trade. [Streaming](streaming) buys perceived speed;
       batching sells it.
 examples:
   - name: Message Batches API
@@ -115,8 +115,8 @@ not available to it.
 
 ## What fits
 
-Classification and extraction over a backlog, evaluation runs, dataset
-generation, embedding a corpus, periodic reporting. What does not: anything a
+Classification and extraction over a backlog, [evaluation](evaluation) runs, dataset
+generation, [embedding](embedding) a corpus, periodic reporting. What does not: anything a
 person is waiting on, and anything inside an [agent](agent) loop, where the next
 step depends on this one.
 

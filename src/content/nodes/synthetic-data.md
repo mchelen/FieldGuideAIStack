@@ -106,4 +106,4 @@ their predecessors' output without anyone choosing that.
 Where the synthetic data is deliberate, curated and checked, results are good.
 Where it is [low-quality generated content](ai-slop) scraped back in unnoticed,
 the effect is unmeasured and the direction is not encouraging — and telling the
-two apart is what provenance work exists for.
+two apart is what [provenance](provenance) work exists for.

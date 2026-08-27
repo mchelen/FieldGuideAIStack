@@ -27,8 +27,8 @@ useCase:
     A company wants a model that writes in its house voice and does not want to
     train a model from scratch.
   detail: >-
-    It starts from a foundation model and adapts it — fine-tuning on its own
-    documents, or more often just describing the voice in a system prompt. The
+    It starts from a foundation model and adapts it — [fine-tuning](fine-tuning) on its own
+    documents, or more often just describing the voice in a [system prompt](system-prompt). The
     expensive, general work of learning language was already done and paid for
     by someone else. This is the property the name is pointing at: the model is
     a foundation, and the adaptation is small compared to what it rests on.
@@ -124,7 +124,7 @@ side by side.[[cite:crfm-site]]
 ## Base model versus the thing you actually use
 
 A raw foundation model continues text; it does not answer questions, follow
-instructions or decline requests. Those behaviours come from post-training. The
+instructions or decline requests. Those behaviours come from [post-training](post-training). The
 model a product exposes has usually been instruction-tuned on top of the
 foundation, which is why open-weight releases often ship in pairs — a base
 version to build on, and an instruct version to use.

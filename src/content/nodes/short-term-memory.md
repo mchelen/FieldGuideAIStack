@@ -26,8 +26,8 @@ useCase:
     the context window, or survived compaction only as a summarised phrase, or
     is still present and outweighed by everything added since. All three are
     context problems, and the fix is to move the constraint somewhere it is
-    re-read rather than merely remembered — a file, a task list, a system
-    prompt.
+    re-read rather than merely remembered — a file, a task list, a [system
+    prompt](system-prompt).
 relations:
   - type: kind-of
     target: memory

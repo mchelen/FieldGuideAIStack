@@ -86,7 +86,7 @@ window is not remembered weakly — it is not there at all.
 
 ## Self-attention, and why the paper's title was literal
 
-Earlier architectures used attention as a supplement, connecting an encoder to a
+Earlier architectures used attention as a supplement, connecting an [encoder](tokenizer) to a
 decoder while recurrence did the sequential work. The 2017 paper dispensed with
 recurrence and convolutions entirely and built the whole
 [transformer](transformer) from attention alone.[[cite:attention-paper]]

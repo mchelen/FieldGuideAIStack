@@ -63,7 +63,7 @@ which the definition spells out as all three of:
 
 | Component | What must be released |
 | --- | --- |
-| **Data Information** | Enough detail that a skilled person could build a substantially equivalent system: complete description of all training data (including unshareable data), provenance, scope, how it was obtained and selected, labeling procedures, and processing and filtering methodology; plus listings of publicly available and third-party-obtainable data and where to get each. Under OSI-approved terms. |
+| **Data Information** | Enough detail that a skilled person could build a substantially equivalent system: complete description of all training data (including unshareable data), [provenance](provenance), scope, how it was obtained and selected, labeling procedures, and processing and filtering methodology; plus listings of publicly available and third-party-obtainable data and where to get each. Under OSI-approved terms. |
 | **Code** | The complete source used to train *and* run the system — data processing and filtering, training arguments and settings, validation and testing, tokenizers, hyperparameter search, inference code, model architecture. Under OSI-approved licenses. |
 | **Parameters** | The weights and other configuration settings, under OSI-approved terms. Possibly including intermediate checkpoints and final optimizer state. |
 

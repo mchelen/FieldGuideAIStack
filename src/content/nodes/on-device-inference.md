@@ -26,7 +26,7 @@ useCase:
   scenario: >-
     A feature needs a model call on every keystroke, offline, on a phone.
   detail: >-
-    Latency and connectivity disqualify a hosted model before cost is even
+    [Latency](latency) and connectivity disqualify a hosted model before cost is even
     discussed, and the privacy question disappears entirely because nothing
     leaves the device. What makes it possible is a small model quantized hard
     enough to fit in the memory a phone will spare — which is why the

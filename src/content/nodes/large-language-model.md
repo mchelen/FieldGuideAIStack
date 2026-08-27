@@ -30,7 +30,7 @@ useCase:
     It does not settle anything. The term covers a 7-billion-parameter model
     running on a laptop and a frontier model behind a metered API, which differ
     in cost by orders of magnitude and in capability by more than that. What
-    determines the answer is which model, at what context length, driven by
+    determines the answer is which model, at what [context length](context-window), driven by
     what harness — three questions the acronym hides.
 relations:
   - type: kind-of
@@ -102,7 +102,7 @@ is meant, the count tells you the rest.
 It predicts the next [token](token) given the tokens so far. Repeatedly. That is
 the whole mechanism, and everything else — answering questions, writing code,
 refusing a request — is that mechanism under a prompt and a round of
-post-training.
+[post-training](post-training).
 
 Keeping this in view explains most of the surprising behaviour. A model that
 [hallucinates](hallucination) is not malfunctioning; it is doing exactly what it

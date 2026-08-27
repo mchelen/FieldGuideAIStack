@@ -99,7 +99,7 @@ Read the vendor's published figure.[[cite:anthropic-models]]
   [system prompt](system-prompt)** — the model does not otherwise know what
   today is.
 
-## Why retrieval is the answer and fine-tuning is not
+## Why retrieval is the answer and [fine-tuning](fine-tuning) is not
 
 A cutoff is a property of the weights, so moving it means training. Retrieval
 does not move it — it sidesteps it, by putting current text in the

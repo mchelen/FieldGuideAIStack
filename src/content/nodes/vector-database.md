@@ -32,7 +32,7 @@ useCase:
     builds an approximate nearest-neighbour index that returns the closest
     matches in roughly constant time, trading exactness for speed. The word
     "approximate" is the trade: results are near-best rather than best, which
-    for retrieval feeding a language model is almost always the right call.
+    for retrieval feeding a [language model](large-language-model) is almost always the right call.
 relations:
   - type: consumes
     target: embedding
