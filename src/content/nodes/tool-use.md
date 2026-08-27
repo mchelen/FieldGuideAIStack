@@ -11,8 +11,8 @@ canonical:
   note: >-
     Anthropic's phrasing is "tool use (also called function calling)". The
     older name is narrower — it assumed the thing being called was one of your
-    functions — and lost ground as the category widened to search, code
-    execution and whole toolsets.
+    functions — and lost ground as the category widened to search, [code
+    execution](command-execution) and whole toolsets.
 tags: [capability, interface]
 zoom: 2
 summary: The model emits a structured request to run a named function with

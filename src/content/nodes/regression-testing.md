@@ -40,7 +40,7 @@ relations:
   - type: distinguished-from
     target: benchmark
     note: >-
-      A benchmark compares models against each other. Regression testing
+      A [benchmark](benchmark) compares models against each other. Regression testing
       compares your system against its own previous version.
 examples:
   - name: Regression testing

@@ -21,8 +21,8 @@ fieldMark: It lives next to the weights as its own file — `tokenizer.json` or 
   mismatched tokenizer is the first thing to check.
 useCase:
   scenario: >-
-    You need to know whether a 40-page contract will fit in a model's context
-    window before you pay to find out.
+    You need to know whether a 40-page contract will fit in a model's [context
+    window](context-window) before you pay to find out.
   detail: >-
     Run the model's own tokenizer over the document locally. It is a small,
     fast, dependency-light piece of software published alongside the weights,
@@ -90,7 +90,7 @@ reason about exactly.
 
 ## It is trained, not written
 
-The vocabulary is fitted to a corpus: the segmentation algorithm learns which
+The vocabulary is fitted to a corpus: the [segmentation](chunking) algorithm learns which
 character sequences occur often enough to deserve their own entry. The 2015
 subword-units work established the approach that most current tokenizers
 descend from.[[cite:bpe-paper]] SentencePiece went further and trained directly

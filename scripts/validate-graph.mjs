@@ -54,6 +54,43 @@ const colonHint = (n) => {
   }
   return '';
 };
+/**
+ * Prose does not only live in the body. `fieldMark`, the canonical note, the use
+ * case and relation notes are all sentences a reader reads, and until they were
+ * checked here a term could be named in one and left unlinked with nothing
+ * complaining — model-provider discussed hyperscalers in its canonical note and
+ * never linked the page.
+ */
+const frontmatterProse = (d) =>
+  [
+    d.fieldMark,
+    d.canonical?.note,
+    d.canonical?.body,
+    d.useCase?.scenario,
+    d.useCase?.detail,
+    ...(d.relations ?? []).map((r) => r.note),
+    ...(d.aka ?? []).map((a) => (typeof a === 'string' ? null : a.note)),
+  ]
+    .filter(Boolean)
+    .join('\n\n');
+
+/**
+ * The subset of that prose a cross-link belongs in. `canonical.body` is an
+ * attribution line -- "OWASP GenAI Security Project" -- and linking a word out
+ * of an organisation's name misreads the name as a claim.
+ */
+const frontmatterLinkable = (d) =>
+  [
+    d.fieldMark,
+    d.canonical?.note,
+    d.useCase?.scenario,
+    d.useCase?.detail,
+    ...(d.relations ?? []).map((r) => r.note),
+    ...(d.aka ?? []).map((a) => (typeof a === 'string' ? null : a.note)),
+  ]
+    .filter(Boolean)
+    .join('\n\n');
+
 const problems = broken.map(
   (n) => `${n.file}: frontmatter does not parse — ${n.parseError}${colonHint(n)}`,
 );
@@ -64,7 +101,7 @@ const bump = (id) => degree.set(id, (degree.get(id) ?? 0) + 1);
 
 for (const n of nodes) {
   // 1. Prose cross-links must resolve. These bypass reference() entirely.
-  for (const [, target] of n.content.matchAll(BARE_LINK)) {
+  for (const [, target] of `${n.content}\n${frontmatterProse(n.data)}`.matchAll(BARE_LINK)) {
     if (!ids.has(target)) {
       problems.push(`${n.file}: prose links to "${target}", which is not a node`);
     }
@@ -267,18 +304,72 @@ for (const n of nodes) {
   if (sources.length) citedTotals.cited += used.size > 0 ? 1 : 0;
 }
 
+// 3c-bis. A markdown link only works where the page renders prose. `aka` is a
+//     list of terms, `title` and `summary` are plain strings, and a link
+//     written into one of them ships as literal "[text](id)" on the page.
+//     A batch edit put one into an aka list and nothing complained, which is
+//     why this exists.
+{
+  const PROSE_KEYS = new Set(['fieldMark', 'note', 'scenario', 'detail', 'body']);
+  for (const n of nodes) {
+    if (!n.raw && !n.data) continue;
+    const raw = n.raw ?? '';
+    const fm = raw.split(/^---$/m)[1] ?? '';
+    let key = null;
+    fm.split('\n').forEach((line, i) => {
+      const k = /^\s*-?\s*([a-zA-Z]+):/.exec(line);
+      if (k) key = k[1];
+      if (/\]\([a-z0-9-]+\)/.test(line) && !PROSE_KEYS.has(key)) {
+        problems.push(
+          `${n.file}: line ${i + 2} writes a markdown link in \`${key}\`, which renders as literal text — only ${[...PROSE_KEYS].join(', ')} are prose`,
+        );
+      }
+    });
+  }
+}
+
 // 3d. Wiki-style cross-linking. A term that has its own page should be linked
 //     the first time another page uses it -- an unlinked mention is a dead end
 //     for a reader who does not already know the word.
 //
-//     Only multi-word terms are checked. Single common words like "model",
-//     "agent" and "Claude" appear as ordinary prose constantly, and flagging
-//     them would bury the real signal in noise nobody reads twice.
 //     Vendor-attributed aliases are proper nouns and are matched case
 //     sensitively: Google's "Connected Apps" is a product name, while
 //     "connected apps" is an ordinary phrase that appears in prose about
 //     entirely different products. Titles and informal synonyms match
 //     case-insensitively, since "context window" is usually written lowercase.
+//
+//     Single-word terms are checked too, but only the jargon ones. The rule
+//     used to skip every one-word term, which is why "hyperscaler" could sit
+//     unlinked in the middle of a paragraph about hyperscalers. The words
+//     below are the other half of that set: each is also an ordinary English
+//     word this guide uses in its ordinary sense several times a page, so
+//     flagging them buries the real signal in noise nobody reads twice.
+const AMBIGUOUS_SINGLE_WORDS = new Set([
+  'adaptation', 'agent', 'apps', 'attention', 'claude', 'client', 'container',
+  'conversation', 'coordination', 'ecosystem', 'exchange', 'integration',
+  'memory', 'model', 'parameter', 'permissions', 'piece', 'pipeline', 'plan',
+  'planning', 'prompting', 'quota', 'reflection', 'round', 'routine', 'run', 'session',
+  'skill', 'span', 'surface', 'token', 'turn', 'weight', 'weights',
+]);
+
+//     A term two nodes both answer to cannot be auto-linked, because there is
+//     no single right target -- "function calling" is this guide's own node
+//     and OpenAI's name for tool use. Reporting it would only ever produce a
+//     coin flip, so an ambiguous term is nobody's to claim.
+const claims = new Map();
+for (const n of nodes) {
+  for (const t of [n.data.title, ...(n.data.aka ?? []).map((a) => (typeof a === 'string' ? a : a.term))]) {
+    if (!t) continue;
+    const key = t.toLowerCase();
+    claims.set(key, (claims.get(key) ?? new Set()).add(n.id));
+  }
+}
+const linkable = (term) => {
+  const key = term.toLowerCase();
+  if (claims.get(key)?.size > 1) return false;
+  return term.split(/\s+/).length >= 2 || !AMBIGUOUS_SINGLE_WORDS.has(key);
+};
+
 const lexicon = nodes.map((n) => ({
   id: n.id,
   terms: [
@@ -286,7 +377,7 @@ const lexicon = nodes.map((n) => ({
     ...(n.data.aka ?? []).map((a) =>
       typeof a === 'string' ? { term: a, exact: false } : { term: a.term, exact: true },
     ),
-  ].filter((t) => t.term && t.term.split(/\s+/).length >= 2),
+  ].filter((t) => t.term && linkable(t.term)),
   own: new Set(
     [n.data.title, ...(n.data.aka ?? []).map((a) => (typeof a === 'string' ? a : a.term))]
       .filter(Boolean)
@@ -295,20 +386,35 @@ const lexicon = nodes.map((n) => ({
 }));
 
 for (const n of nodes) {
-  const prose = n.content
+  const prose = [n.content, frontmatterLinkable(n.data)]
+    .join('\n\n')
     .replace(/```[\s\S]*?```/g, '')
-    .replace(/`[^`]*`/g, '');
+    .replace(/`[^`]*`/g, '')
+    // Citation markers carry source ids, not prose. "[[cite:aws-prov-throughput]]"
+    // reported token-billing for an unlinked "throughput" that no reader sees.
+    .replace(/\[\[cite:[^\]]*\]\]/g, '');
   const linked = new Set([...prose.matchAll(/\]\(([a-z0-9-]+)\)/g)].map((m) => m[1]));
   const self = lexicon.find((l) => l.id === n.id);
 
-  // Spans already inside a markdown link's text. "Prompt injection" sits inside
-  // "[indirect prompt injection](...)", and flagging that as an unlinked mention
-  // sends you to add a link where one is already doing the job.
-  const linkTextSpans = [...prose.matchAll(/\[([^\]]*)\]\([a-z0-9-]+\)/g)].map((m) => [
-    m.index + 1,
-    m.index + 1 + m[1].length,
+  // Whole markdown links, target included. "Prompt injection" sits inside
+  // "[indirect prompt injection](...)", and flagging that as an unlinked
+  // mention sends you to add a link where one is already doing the job. The
+  // target counts too: "checkpoint" is a substring of
+  // "[Checkpoints](checkpoint-and-rollback)"'s id, and matching there reported
+  // a page that links the term as one that does not.
+  const linkTextSpans = [...prose.matchAll(/\[[^\]]*\]\([a-z0-9-]+\)/g)].map((m) => [
+    m.index,
+    m.index + m[0].length,
   ]);
-  const insideLink = (i) => linkTextSpans.some(([a, b]) => i >= a && i < b);
+  // Quoted source material. A term inside a quotation is not editable -- you
+  // cannot put a link inside someone else's sentence -- so reporting it asks
+  // for an edit that must not be made.
+  const quoteSpans = [...prose.matchAll(/\u201c[^\u201d]*\u201d|"[^"]*"/g)].map((m) => [
+    m.index,
+    m.index + m[0].length,
+  ]);
+  const insideLink = (i) =>
+    linkTextSpans.concat(quoteSpans).some(([a, b]) => i >= a && i < b);
 
   for (const entry of lexicon) {
     if (entry.id === n.id || linked.has(entry.id)) continue;

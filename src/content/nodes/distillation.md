@@ -35,7 +35,7 @@ relations:
   - type: distinguished-from
     target: quantization
     note: >-
-      Both shrink a model. Quantization stores the same weights less precisely;
+      Both shrink a model. [Quantization](quantization) stores the same weights less precisely;
       distillation trains a different, smaller set of weights.
 examples:
   - name: Distilling the Knowledge in a Neural Network

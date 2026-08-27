@@ -31,7 +31,7 @@ useCase:
     alone cannot either, because the second query is not knowable in advance.
     Interleaving lets the model decide the next action from the last
     observation, and revise the plan when an observation contradicts it. Nearly
-    every agent framework in use implements some version of this loop.
+    every [agent framework](harness) in use implements some version of this loop.
 relations:
   - type: kind-of
     target: agentic-loop

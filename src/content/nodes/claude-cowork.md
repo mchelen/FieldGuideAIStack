@@ -70,7 +70,7 @@ The engine did not change. The audience did.
 - **[Background execution](background-execution)** — sessions run in the cloud
   and continue while you are offline.
 - **[Approval modes](approval-mode)** — manual, auto, or skip.
-- **[Connectors](connector)**, skills and plugins, from your claude.ai account.
+- **[Connectors](connector)**, skills and plugins, from your [claude.ai](claude-app) account.
 
 Requires a paid plan and, for local file and computer access, the desktop app on
 macOS or Windows.[[cite:anthropic-get-started]]

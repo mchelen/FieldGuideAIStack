@@ -76,7 +76,7 @@ of affairs, and transfer was the exception.
 
 ## It is now the default
 
-The LoRA paper states the modern paradigm in one sentence: "an important
+The [LoRA](parameter-efficient-fine-tuning) paper states the modern paradigm in one sentence: "an important
 paradigm of natural language processing consists of large-scale pre-training on
 general domain data and adaptation to particular tasks or
 domains."[[cite:lora-paper]]

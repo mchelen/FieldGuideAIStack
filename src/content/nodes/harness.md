@@ -25,8 +25,8 @@ useCase:
     Two products built on the same model behave completely differently.
   detail: >-
     The model is identical; everything else is not. The harness supplies the
-    system prompt, the tools, the permission gating, what stays in the context
-    window and what gets dropped. When a comparison of two AI products turns
+    [system prompt](system-prompt), the tools, the permission gating, what stays in the [context
+    window](context-window) and what gets dropped. When a comparison of two AI products turns
     out to be a comparison of two harnesses, the model name in the marketing
     was the least informative thing on the page.
 relations:
@@ -92,5 +92,5 @@ comparing products.
 
 - [Agent](agent) — what you get when a harness drives a model in a loop. The
   harness is the machinery; the agent is the behaviour.
-- **Framework/SDK** — a library for *building* a harness rather than a harness
+- **Framework/[SDK](software-development-kit)** — a library for *building* a harness rather than a harness
   you run.

@@ -71,7 +71,7 @@ they were simply already present in the data rather than added by anyone.
 ## The trick
 
 Hide part of the input and predict it. For a [language model](large-language-model), hide the next [token](token) — the correct answer is the token that was
-there. For an encoder-style model like BERT, hide a token in the middle and
+there. For an [encoder](tokenizer)-style model like BERT, hide a token in the middle and
 predict it from both sides.
 
 Either way the supervision is free, exact, and available at every position of

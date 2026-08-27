@@ -8,7 +8,7 @@ aka:
 canonical:
   status: de-facto
   term: System prompt
-  body: Anthropic, in the Claude Platform documentation, where it is the `system` parameter of the Messages API
+  body: Anthropic, in the Claude Platform documentation, where it is the `system` parameter of the [Messages API](inference-api)
   url: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
   title: Prompting best practices — Claude Platform documentation
   verifiedOn: 2026-08-22
@@ -73,7 +73,7 @@ sentence makes a difference."[[cite:anthropic-prompting]]
 
 Google's glossary describes the same move under prompt categories, as a role
 prompt.[[cite:google-glossary]] What the separate field adds is position and
-provenance: it always comes first, and it always comes from the operator.
+[provenance](provenance): it always comes first, and it always comes from the operator.
 
 ## What lives in it
 

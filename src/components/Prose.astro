@@ -1,0 +1,35 @@
+---
+/**
+ * Frontmatter prose, with its cross-links working.
+ *
+ * `fieldMark`, the canonical note and the use case are sentences a reader
+ * reads, but they are frontmatter strings — they never pass through the
+ * markdown pipeline, so the rehype plugin that turns `[harness](harness)` into
+ * a link never sees them. The result was prose that named a concept and left it
+ * a dead end: model-provider discussed hyperscalers in its canonical note with
+ * no way to reach the page.
+ *
+ * Deliberately the same authored syntax as the body rather than automatic
+ * linking of any known term. Auto-linking would decide for the author where a
+ * mention is worth a link and would fire inside quotations and product names.
+ * `npm run validate` now checks these fields too, so an unlinked mention here
+ * is reported exactly as one in the body is.
+ */
+interface Props {
+  text: string;
+  class?: string;
+}
+const { text, class: className } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const esc = (s: string) =>
+  s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+// One pass: everything outside a link is escaped, the link itself is built.
+const html = esc(text).replace(
+  /\[([^\]]+)\]\(([a-z0-9-]+)\)/g,
+  (_, label, id) => `<a href="${base}/nodes/${id}/">${label}</a>`,
+);
+---
+
+<span class={className} set:html={html} />

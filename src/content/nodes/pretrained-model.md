@@ -15,7 +15,7 @@ canonical:
     Google notes the term has drifted: it "could refer to any trained model or
     trained embedding vector" but "now typically refers to a trained large
     language model or other form of trained generative AI model", pointing at
-    base model and foundation model as neighbours.
+    base model and [foundation model](model) as neighbours.
 tags: [models, artifact]
 zoom: 3
 summary: A model released after pretraining and before any task-specific
@@ -100,6 +100,6 @@ then arguing with them through prompts.
   [instruction tuning](instruction-tuning), your own preference data, your own
   refusal policy.
 
-Fine-tuning an instruct model on top of its existing post-training works and is
+[Fine-tuning](fine-tuning) an instruct model on top of its existing post-training works and is
 common; it just means two sets of behaviour interacting, and the vendor's is the
 one you cannot inspect.

@@ -29,7 +29,7 @@ useCase:
     obvious candidates are the ones everybody talks about.
   detail: >-
     The chat models are decoder-only and built to continue text. An embedding
-    model is typically encoder-only and built to compress a whole input into a
+    model is typically [encoder](tokenizer)-only and built to compress a whole input into a
     representation, which is exactly the job. Using the wrong half is a common
     early mistake in retrieval work, and it produces something that technically
     runs and retrieves badly.

@@ -40,7 +40,7 @@ relations:
     target: prompt-caching
     note: >-
       Cached reads are priced far below base input, which is what makes caching
-      an economic decision rather than a latency optimisation.
+      an economic decision rather than a [latency](latency) optimisation.
 examples:
   - name: Claude pricing
     vendor: Anthropic

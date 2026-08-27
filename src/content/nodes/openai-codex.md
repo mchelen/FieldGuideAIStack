@@ -7,7 +7,7 @@ tags: [product, agent, coding]
 zoom: 1
 summary: OpenAI's coding agent, running across a CLI, IDE extension, web, the
   ChatGPT desktop app and a cloud environment.
-fieldMark: Codex is the coding surface of the ChatGPT family — the counterpart
+fieldMark: Codex is the coding surface of the [ChatGPT](chatgpt) family — the counterpart
   to Claude Code rather than to Cowork.
 relations:
   - type: variant-of

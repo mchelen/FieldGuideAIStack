@@ -21,15 +21,15 @@ fieldMark: Open-weight releases usually ship in pairs, a base and an "instruct"
   training your own.
 useCase:
   scenario: >-
-    You download a base model, ask it a question, and it replies with three more
+    You download a [base model](foundation-model), ask it a question, and it replies with three more
     questions instead of an answer.
   detail: >-
-    Nothing is broken. A base model completes documents, and a document that
+    Nothing is broken. A [base model](model) completes documents, and a document that
     starts with a question plausibly continues with related questions. The
     instruct variant of the same weights answers, because it was trained on
     instruction-response pairs until responding became the likely continuation.
     Picking the wrong variant from a model hub is one of the most common first
-    mistakes in self-hosting.
+    mistakes in [self-hosting](self-hosting).
 relations:
   - type: kind-of
     target: fine-tuning
@@ -37,7 +37,7 @@ relations:
   - type: distinguished-from
     target: reinforcement-learning-from-human-feedback
     note: >-
-      Instruction tuning imitates a written answer. RLHF optimises against which
+      Instruction tuning imitates a written answer. [RLHF](reinforcement-learning-from-human-feedback) optimises against which
       of several answers people preferred.
 examples:
   - name: InstructGPT

@@ -36,7 +36,7 @@ useCase:
 relations:
   - type: part-of
     target: permission-model
-    note: The output-side layer, alongside what the harness will and will not execute.
+    note: The output-side layer, alongside what the [harness](harness) will and will not execute.
   - type: distinguished-from
     target: approval-mode
     note: >-

@@ -19,7 +19,7 @@ tags: [serving, economics]
 zoom: 3
 summary: Paying for guaranteed capacity by the hour rather than per token —
   which converts a variable cost into a fixed one, in both directions.
-fieldMark: Rate limits are ceilings, not reservations. Provisioned throughput
+fieldMark: Rate limits are ceilings, not reservations. Provisioned [throughput](throughput)
   is the product you buy when you need the floor, and it bills whether or not
   you reach it.
 useCase:

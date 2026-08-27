@@ -87,7 +87,7 @@ independently of anyone training a bigger model.
 
 ## What you actually gain
 
-- **Latency** — tens of milliseconds locally against a network round trip.
+- **[Latency](latency)** — tens of milliseconds locally against a network round trip.
 - **Cost** — no per-token bill at all once the model is on the device.
 - **Privacy** — input that never leaves the machine raises no question about
   where it was sent.

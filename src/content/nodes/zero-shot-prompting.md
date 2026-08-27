@@ -24,12 +24,12 @@ useCase:
     Google's own example. Every answer is correct and none of them is the one
     format a caller can parse. Zero-shot leaves output shape unspecified, so the
     model picks a plausible one each time. This is the exact failure that
-    one example in the prompt fixes, and it is why few-shot prompting exists as
+    one example in the prompt fixes, and it is why [few-shot prompting](few-shot-prompting) exists as
     a technique rather than as a curiosity.
 relations:
   - type: kind-of
     target: prompt-engineering
-    note: The baseline case — no examples, no scaffolding.
+    note: The baseline case — no examples, no [scaffolding](harness).
   - type: distinguished-from
     target: few-shot-prompting
     note: >-

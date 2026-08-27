@@ -83,7 +83,7 @@ limits are set per tier, with organisations placed on one and moving between
 them as usage history accumulates — and on some platforms not moving
 automatically at all.[[cite:anthropic-rate-limits]]
 
-So "which tier" answers questions about throughput as well as about features,
+So "which tier" answers questions about [throughput](throughput) as well as about features,
 which is worth knowing when a capacity problem looks technical and is
 commercial.
 

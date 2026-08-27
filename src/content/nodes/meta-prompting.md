@@ -23,7 +23,7 @@ fieldMark: Ask which sense is meant before agreeing about it. "We use
   meta-prompting" describes two quite different practices with different costs.
 useCase:
   scenario: >-
-    A few-shot prompt with long worked examples is eating the context window and
+    A few-shot prompt with long worked examples is eating the [context window](context-window) and
     the examples keep biasing the answer toward their own specifics.
   detail: >-
     Supplying the abstract shape of the problem and its solution instead —
@@ -79,7 +79,7 @@ viewed as a form of [zero-shot prompting](zero-shot-prompting), where the influe
 examples is minimized."[[cite:promptguide-meta]]
 
 The second is a research argument rather than a product one, and it is the
-interesting one. A model's score on a few-shot benchmark partly measures how
+interesting one. A model's score on a few-shot [benchmark](benchmark) partly measures how
 well the chosen examples suited it. Removing the examples removes that
 confound.[[cite:promptguide-fewshot]]
 
@@ -92,7 +92,7 @@ model the failures, have it revise.
 This is a different practice with a different economics, and it is closer to an
 optimisation loop than to a prompting style. It works, within limits: a model is
 good at rewriting instructions to be clearer and poor at knowing which rewrite
-will actually score better, so the loop needs a real evaluation set to close
+will actually score better, so the loop needs a real [evaluation](evaluation) set to close
 around or it optimises for plausibility.
 
 ## Which to say

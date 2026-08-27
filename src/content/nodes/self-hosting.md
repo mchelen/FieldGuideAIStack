@@ -17,7 +17,7 @@ summary: Running the model on infrastructure you control — the alternative to
   calling somebody's inference API, and a hardware decision before a software
   one.
 fieldMark: Ask what the workload actually needs. Self-hosting wins on privacy,
-  latency floor and unit cost at high steady volume, and loses on almost
+  [latency](latency) floor and unit cost at high steady volume, and loses on almost
   everything else at low or spiky volume.
 useCase:
   scenario: >-
@@ -33,7 +33,7 @@ relations:
   - type: distinguished-from
     target: model-host
     note: >-
-      The same job, done by you. A model host rents you capacity; self-hosting
+      The same job, done by you. A [model host](model-host) rents you capacity; self-hosting
       means you own the capacity and the operations.
   - type: consumes
     target: accelerator
@@ -89,7 +89,7 @@ server-grade equipment at all.
   keep serving the version you tested against.
 - **Version stability.** A hosted model can change under you; a
   [checkpoint](checkpoint) on your disk cannot.
-- **Unit cost at high steady volume**, where a rented accelerator is busy rather
+- **Unit cost at high steady volume**, where a rented [accelerator](accelerator) is busy rather
   than idle.
 
 ## The honest case against

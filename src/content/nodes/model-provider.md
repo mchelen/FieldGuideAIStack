@@ -5,9 +5,9 @@ canonical:
   status: none
   note: >-
     No glossary defines the role. "Model developer" and "AI lab" are used for
-    the same thing, and policy writing prefers "frontier AI developer" for the
+    the same thing, and policy writing prefers "[frontier AI developer](frontier-lab)" for the
     subset operating at the leading edge. This guide separates provider, host
-    and hyperscaler because the same company is frequently two of the three.
+    and [hyperscaler](hyperscaler) because the same company is frequently two of the three.
 tags: [core, org]
 zoom: 1
 summary: The organization that trains a model and owns its weights, sets its
@@ -19,7 +19,7 @@ useCase:
     A contract question asks who is responsible for a model's behaviour.
   detail: >-
     The answer depends on which role each party holds. The provider trained the
-    weights, sets the licence and the acceptable use policy; a model host may
+    weights, sets the licence and the [acceptable use policy](acceptable-use-policy); a model host may
     only be serving them; a hyperscaler may only own the hardware. Working out
     who could retrain the model — rather than who sold you the API call — is
     what identifies the provider, and it is often not the company on the
@@ -46,7 +46,7 @@ sources:
 ---
 
 The provider is the party with the weights. They chose the training data,
-paid for the compute, ran the post-training, and hold whatever rights exist over
+paid for the compute, ran the [post-training](post-training), and hold whatever rights exist over
 the resulting artifact. They set the license, the acceptable-use policy, and the
 deprecation schedule.
 

@@ -79,7 +79,7 @@ Putting the source text in front of it changes the task from recall to reading,
 and reading is something these systems do well. Google records
 [retrieval-augmented generation](retrieval-augmented-generation) as "a common
 grounding technique",[[cite:google-glossary]] and the RAG paper frames the same
-motive as making provenance possible at all.[[cite:rag-paper]]
+motive as making [provenance](provenance) possible at all.[[cite:rag-paper]]
 
 ## Grounded is not the same as correct
 

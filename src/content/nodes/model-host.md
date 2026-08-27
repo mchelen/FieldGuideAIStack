@@ -23,7 +23,7 @@ useCase:
     identity system, which is real operational value and the main reason hosts
     exist. What it changes is that the party who can alter terms, regions or
     availability is now further from the model than it appears — and the
-    latency you measure is a property of that deployment rather than of the
+    [latency](latency) you measure is a property of that deployment rather than of the
     model.
 relations:
   - type: hosts

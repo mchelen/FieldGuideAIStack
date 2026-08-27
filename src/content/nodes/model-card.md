@@ -16,7 +16,7 @@ zoom: 3
 summary: A short document published with a model saying what it is, what it was
   meant for, how it was evaluated and where it should not be used.
 fieldMark: Read the intended-use and limitations sections first. A card that
-  lists benchmark scores and says nothing about what the model is unsuited for
+  lists [benchmark](benchmark) scores and says nothing about what the model is unsuited for
   is marketing wearing the form of documentation.
 useCase:
   scenario: >-
@@ -25,7 +25,7 @@ useCase:
   detail: >-
     The card is where the difference usually shows. One states its training
     data, the populations it was evaluated across, its licence and what it is
-    not suitable for; the other states a leaderboard position. The second is not
+    not suitable for; the other states a [leaderboard](leaderboard) position. The second is not
     necessarily the worse model, but it is the one you cannot assess without
     running your own evaluation — and knowing that before you commit is the
     point of the document.
@@ -91,7 +91,7 @@ number.[[cite:model-cards-paper]] In current practice a card typically carries:
 - Architecture, [parameter](parameter) count and
   [context window](context-window).
 - Training data, in whatever detail the publisher will give.
-- Evaluation results, ideally disaggregated rather than averaged.
+- [Evaluation](evaluation) results, ideally disaggregated rather than averaged.
 - Known limitations and biases.
 - Licence and citation.
 
@@ -114,5 +114,5 @@ survives review because there is no review.
 
 This matters for [open weights](open-weights) in particular. A card is the only
 place training-data information is usually published at all, which makes it both
-the best available evidence about a model's provenance and evidence of a kind
+the best available evidence about a model's [provenance](provenance) and evidence of a kind
 nobody has audited.

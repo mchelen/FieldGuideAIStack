@@ -8,7 +8,7 @@ canonical:
   status: none
   note: >-
     Coined around 2025 and not carried by any surveyed glossary. It names work
-    that was previously scattered across prompt engineering, retrieval and
+    that was previously scattered across [prompt engineering](prompt-engineering), retrieval and
     memory, and is used because the older terms describe the parts rather than
     the discipline.
 tags: [context, technique]
@@ -74,7 +74,7 @@ of any single prompt.[[cite:promptguide-ctxeng]]
 
 Two reasons, and only the first is about capacity.
 
-**Cost and latency scale with what you send.** Every [token](token) in the
+**Cost and [latency](latency) scale with what you send.** Every [token](token) in the
 prompt is paid for on every call and adds to
 [time to first token](time-to-first-token). Filling a large window because it is
 there is expensive by the hour.

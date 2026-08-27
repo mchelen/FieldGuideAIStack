@@ -51,7 +51,7 @@ A request typically carries:
 - **messages** — the full conversation so far, every time.
 - **model** — which weights to run.
 - **tools** — schemas the model may ask you to invoke. See [tool use](tool-use).
-- **sampling parameters** — temperature, max tokens, stop sequences.
+- **sampling parameters** — [temperature](temperature), max tokens, stop sequences.
 
 The response carries generated tokens, a stop reason, and a usage count.
 

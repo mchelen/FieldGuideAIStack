@@ -28,9 +28,9 @@ useCase:
   detail: >-
     Prompting is the first thing to exhaust, because it costs an afternoon
     rather than a training budget, and because a prompt is a string in version
-    control that anyone can read, change and revert. Fine-tuning produces an
-    artifact that must be evaluated, hosted and re-made every time the base
-    model moves. Reach for it when the prompt needed to get the behaviour is
+    control that anyone can read, change and revert. [Fine-tuning](fine-tuning) produces an
+    artifact that must be evaluated, hosted and re-made every time the [base
+    model](foundation-model) moves. Reach for it when the prompt needed to get the behaviour is
     long enough to be expensive on every call, or when instructions keep failing
     to enforce consistency — not before.
 relations:
@@ -122,6 +122,6 @@ There is no theory that predicts which wording works. Practitioners try things,
 measure, and keep what scores better — which is closer to empirical tuning than
 to engineering, and is why the field's advice ages so quickly.
 
-What makes it work anyway is the measuring. Prompting without an evaluation set
+What makes it work anyway is the measuring. Prompting without an [evaluation](evaluation) set
 is guessing with extra steps, and the difference between the two is the only
 part of the discipline that has stayed true across model generations.

@@ -11,9 +11,9 @@ canonical:
 useCase:
   scenario: >-
     You write one integration for your issue tracker and it works in Claude, in
-    ChatGPT, in VS Code and in Cursor without being rewritten for each.
+    [ChatGPT](chatgpt), in VS Code and in Cursor without being rewritten for each.
   detail: >-
-    Before a shared protocol, every AI application needed its own plugin format,
+    Before a shared protocol, every AI application needed its own [plugin](connector) format,
     so an integration was written once per client and maintained N times. MCP
     turns that into one server speaking a documented protocol, which any client
     can discover through `tools/list` and call through `tools/call`. The
@@ -28,7 +28,7 @@ fieldMark: Three words give it away — host, client, server. If a doc describes
 relations:
   - type: distinguished-from
     target: tool-use
-    note: MCP supplies tools; tool use is how the model invokes them.
+    note: MCP supplies tools; [tool use](tool-use) is how the model invokes them.
   - type: consumed-by
     target: harness
 examples:

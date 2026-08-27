@@ -44,7 +44,7 @@ sources:
 This is the sharpest dividing line between a chat product and an agentic one,
 and it splits along surface rather than brand.
 
-Cowork's documentation describes Claude reading and writing local files "without
+[Cowork](claude-cowork)'s documentation describes Claude reading and writing local files "without
 requiring manual uploads or downloads." [ChatGPT Work](chatgpt-work)'s
 documentation describes the opposite arrangement on the web: it "operates in
 isolated cloud environments and cannot directly access local files or apps," so

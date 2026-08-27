@@ -105,7 +105,7 @@ buffer is.
 
 ## The productised form
 
-Anthropic's evaluator-optimizer workflow is this pattern with the roles split
+Anthropic's evaluator-optimizer [workflow](workflow) is this pattern with the roles split
 across calls: "one LLM call generates a response while another provides
 evaluation and feedback in a loop."[[cite:anthropic-agents]]
 
@@ -116,7 +116,7 @@ a human's critique would not help, a model's will not either.
 
 ## What makes it much stronger
 
-Grounding the critique in something external. A model reviewing its own code is
+[Grounding](grounding) the critique in something external. A model reviewing its own code is
 reflection; a model reading the test failure its code produced is a
 [verification loop](verification-loop), and the second is worth considerably
 more because the feedback did not come from the model.

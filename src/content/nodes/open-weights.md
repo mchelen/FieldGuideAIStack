@@ -24,7 +24,7 @@ useCase:
     Meta's Llama 4 Community Licence, for instance, permits self-hosting while
     requiring "Built with Llama" attribution, prefixing derivative model names
     with "Llama", and a separate licence above 700 million monthly active users.
-    Self-hosting and licence freedom are two questions; open weights answers
+    [Self-hosting](self-hosting) and licence freedom are two questions; open weights answers
     only the first.
 tags: [licensing, openness, artifact]
 zoom: 2

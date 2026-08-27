@@ -87,7 +87,7 @@ another server to be called, or simply carry an
 [indirect prompt injection](indirect-prompt-injection). The transport is
 isolated; the prompt is not, and the prompt is where the decisions get made.
 
-## Why this matters when reading MCP documentation
+## Why this matters when reading [MCP](mcp) documentation
 
 "Client" in most protocol writing means the application. Here it means a
 connection, and "host" means the application. Getting the vocabulary backwards

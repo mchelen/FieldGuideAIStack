@@ -17,7 +17,7 @@ canonical:
     request, and total tokens per second a deployment serves across all
     requests. Optimising for one trades against the other.
 tags: [runtime, constraint]
-zoom: 3
+zoom: 2
 summary: How fast tokens come out once they start — per request, or across a
   whole deployment, and the two numbers pull against each other.
 fieldMark: Per-request throughput is bounded by memory bandwidth, not by

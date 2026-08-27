@@ -20,7 +20,7 @@ zoom: 3
 summary: The vendor library wrapping an inference API — types, retries and
   streaming, so you are not assembling HTTP requests by hand.
 fieldMark: An SDK gives you the call. A harness gives you the loop. If a
-  library manages conversation state, tools and a permission model, it is the
+  library manages conversation state, tools and a [permission model](permission-model), it is the
   second thing wearing the first thing's name.
 useCase:
   scenario: >-

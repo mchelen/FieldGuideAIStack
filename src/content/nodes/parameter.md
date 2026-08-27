@@ -85,7 +85,7 @@ when you download [open weights](open-weights).
 ## Why the count is the headline number
 
 It is the only spec that is both public and comparable. Architecture details
-vary, training data is usually undisclosed, and benchmark scores move; the
+vary, training data is usually undisclosed, and [benchmark](benchmark) scores move; the
 parameter count is a single integer that everyone reports. The GPT-3 paper made
 it a headline by scaling to 175 billion and showing that capability arrived with
 scale.[[cite:gpt3-paper]]
@@ -103,7 +103,7 @@ weight files totalling 14,483,523,165 bytes.[[cite:hf-mistral]] Two bytes per
 parameter, with nothing else of significance in the file.
 
 Halving the bits per parameter halves the download and roughly halves the memory
-needed to serve it. That trade is the whole of quantization, and it is why the
+needed to serve it. That trade is the whole of [quantization](quantization), and it is why the
 same model appears in a dozen sizes on a model hub.
 
 ## Not to be confused with hyperparameters

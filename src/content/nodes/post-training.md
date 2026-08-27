@@ -17,12 +17,12 @@ zoom: 2
 summary: Everything done to a model after pretraining to turn a text
   continuation engine into something that answers, follows instructions and
   declines.
-fieldMark: The gap between a base model and the product built on it is almost
-  entirely here. Two products on the same open weights can behave very
+fieldMark: The gap between a [base model](foundation-model) and the product built on it is almost
+  entirely here. Two products on the same [open weights](open-weights) can behave very
   differently, and post-training is where the difference lives.
 useCase:
   scenario: >-
-    Two vendors ship products built on the same open-weight base model, and they
+    Two vendors ship products built on the same open-weight [base model](model), and they
     behave nothing alike.
   detail: >-
     The weights they started from are byte-identical and public. What differs is

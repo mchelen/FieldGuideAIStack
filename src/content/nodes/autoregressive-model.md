@@ -36,7 +36,7 @@ useCase:
 relations:
   - type: kind-of
     target: model
-    note: A property of how it generates, shared by every current language model.
+    note: A property of how it generates, shared by every current [language model](large-language-model).
   - type: consumes
     target: token
     note: Each one is predicted from the sequence so far, its own output included.

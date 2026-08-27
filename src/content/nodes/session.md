@@ -7,7 +7,7 @@ aka:
 canonical:
   status: de-facto
   term: Session
-  body: Anthropic, in the Claude Code glossary
+  body: Anthropic, in the [Claude Code](claude-code) glossary
   url: https://code.claude.com/docs/en/glossary
   title: Glossary — Claude Code documentation
   verifiedOn: 2026-08-22

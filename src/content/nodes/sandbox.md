@@ -14,7 +14,7 @@ canonical:
   note: >-
     The security meaning — a bounded environment where untrusted code runs
     without reaching what matters — transfers without modification, which is why
-    nobody redefined it. Anthropic's Claude Code glossary carries it as
+    nobody redefined it. Anthropic's [Claude Code](claude-code) glossary carries it as
     "Sandboxing", scoped to one tool: "OS-level filesystem and network isolation
     for the Bash tool". This page originally said no surveyed glossary carried
     it, which was wrong.

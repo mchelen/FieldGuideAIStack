@@ -7,6 +7,7 @@ import PageNav from '../../components/PageNav.astro';
 import { loadGraph } from '../../lib/graph';
 import FictionMark from '../../components/FictionMark.astro';
 import Altitude from '../../components/Altitude.astro';
+import Prose from '../../components/Prose.astro';
 import { scenariosByConcept } from '../../lib/fieldwork';
 
 export async function getStaticPaths() {
@@ -43,7 +44,7 @@ const sections = [
     label: 'What each vendor calls it',
     icon: 'naming',
   },
-  entry.data.useCase && { id: 'use-case', label: 'In use', icon: 'usecase' },
+  entry.data.useCase && { id: 'use-case', label: 'Example', icon: 'usecase' },
   { id: 'relations', label: 'Relations', icon: 'relations' },
   entry.data.examples.length > 0 && {
     id: 'in-the-wild',
@@ -98,8 +99,9 @@ const derived = relations.filter((r) => r.derived);
     </p>
     {
       plainAliases.length > 0 && (
-        <p class="lede" style="font-size:0.95rem;margin-bottom:0.8rem">
-          Also called: {plainAliases.join(', ')}
+        <p class="also-called">
+          <span class="also-label">Also called</span>
+          {plainAliases.map((a) => <span class="also-term">{a}</span>)}
         </p>
       )
     }
@@ -131,11 +133,11 @@ const derived = relations.filter((r) => r.derived);
             entry.data.canonical.term && (
               <p class="term">
                 “{entry.data.canonical.term}”
-                {entry.data.canonical.body && <span class="body"> · {entry.data.canonical.body}</span>}
+                {entry.data.canonical.body && <span class="body"> · <Prose text={entry.data.canonical.body} /></span>}
               </p>
             )
           }
-          {entry.data.canonical.note && <p class="note">{entry.data.canonical.note}</p>}
+          {entry.data.canonical.note && <p class="note"><Prose text={entry.data.canonical.note} /></p>}
           {
             entry.data.canonical.url && (
               <p class="ref">
@@ -159,8 +161,8 @@ const derived = relations.filter((r) => r.derived);
     {
       entry.data.fieldMark && (
         <div class="fieldmark">
-          <strong>Field mark</strong>
-          {entry.data.fieldMark}
+          <strong>How to spot it</strong>
+          <Prose text={entry.data.fieldMark} />
         </div>
       )
     }
@@ -214,10 +216,10 @@ const derived = relations.filter((r) => r.derived);
     {
       entry.data.useCase && (
         <>
-          <h2 id="use-case"><Icon name="usecase" /> What it looks like in use</h2>
+          <h2 id="use-case"><Icon name="usecase" /> Example</h2>
           <div class="usecase">
-            <p class="scenario">{entry.data.useCase.scenario}</p>
-            <p class="detail">{entry.data.useCase.detail}</p>
+            <p class="scenario"><Prose text={entry.data.useCase.scenario} /></p>
+            <p class="detail"><Prose text={entry.data.useCase.detail} /></p>
           </div>
         </>
       )
@@ -230,7 +232,7 @@ const derived = relations.filter((r) => r.derived);
           <span class="rel-verb">{r.label}</span>
           <a href={`${base}/nodes/${r.to}/`}>{graph.byId.get(r.to)!.data.title}</a>
           {r.support === 'partial' && <span class="partial-flag">partial</span>}
-          {r.note && <span class="rel-note">{r.note}</span>}
+          {r.note && <span class="rel-note"><Prose text={r.note} /></span>}
         </li>
       ))}
     </ul>

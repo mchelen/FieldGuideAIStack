@@ -16,7 +16,7 @@ zoom: 2
 summary: Using a model to score another model's output — cheap enough to run on
   everything, with biases the paper that named it documented in detail.
 fieldMark: Ask which order the candidates were shown in. Position bias is real
-  and large, and an evaluation that does not swap the order is measuring
+  and large, and an [evaluation](evaluation) that does not swap the order is measuring
   something other than quality.
 useCase:
   scenario: >-

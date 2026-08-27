@@ -29,7 +29,7 @@ useCase:
     An extraction pipeline fails once every few hundred calls on malformed JSON.
   detail: >-
     Prompting for a format gets it right nearly every time, and "nearly" is what
-    the error handling exists for — a stray sentence of preamble, a trailing
+    the error handling exists for — a stray sentence of [preamble](system-prompt), a trailing
     comma, a missing field. Constrained decoding removes the failure by
     construction: the sampler cannot emit a token that would violate the schema.
     The retries, the parse guards and the repair prompts all become unnecessary

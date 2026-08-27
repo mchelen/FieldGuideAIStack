@@ -27,7 +27,7 @@ useCase:
     a longer prompt will not — format compliance is the classic case where
     fine-tuning beats instruction. The trade is that the behaviour is now baked
     into a model artifact that has to be versioned, evaluated and re-made
-    whenever the base model moves, whereas a prompt is a string you can edit.
+    whenever the [base model](model) moves, whereas a prompt is a string you can edit.
     Try the prompt first; reach for fine-tuning when the failures are about
     form rather than knowledge.
 relations:
@@ -37,7 +37,7 @@ relations:
   - type: distinguished-from
     target: distillation
     note: >-
-      Fine-tuning specialises one model. Distillation trains a smaller model to
+      Fine-tuning specialises one model. [Distillation](distillation) trains a smaller model to
       imitate a larger one — different goal, different artifact.
 examples:
   - name: InstructGPT

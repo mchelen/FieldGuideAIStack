@@ -23,11 +23,11 @@ useCase:
   scenario: >-
     An assistant needs to answer from a company handbook that changes monthly.
   detail: >-
-    Fine-tuning on the handbook would bake a snapshot into weights that have to
+    [Fine-tuning](fine-tuning) on the handbook would bake a snapshot into weights that have to
     be re-made on every revision, and would still give no way to show where an
     answer came from. Retrieval fetches the current passage at question time and
     puts it in the prompt, so an edit takes effect immediately and the answer
-    can cite the paragraph it rests on. Freshness and provenance are the two
+    can cite the paragraph it rests on. Freshness and [provenance](provenance) are the two
     things retrieval buys that training cannot.
 relations:
   - type: kind-of
