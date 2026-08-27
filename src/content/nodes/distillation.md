@@ -79,6 +79,8 @@ sources:
     url: https://arxiv.org/abs/1503.02531
     title: Distilling the Knowledge in a Neural Network — Hinton, Vinyals and Dean
     verifiedOn: 2026-08-22
+    quote: >-
+      Unfortunately, making predictions using a whole ensemble of models is cumbersome and may be too computationally expensive to allow deployment to a large number of users
     note: Submitted 9 March 2015.
 ---
 

@@ -80,6 +80,8 @@ sources:
     url: https://arxiv.org/abs/2203.02155
     title: Training language models to follow instructions with human feedback — Ouyang et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      In this paper, we show an avenue for aligning language models with user intent on a wide range of tasks by fine-tuning with human feedback.
 ---
 Fine-tuning is "a second, task-specific training pass performed on a [pre-
 trained model](pretrained-model) to refine its parameters for a specific use

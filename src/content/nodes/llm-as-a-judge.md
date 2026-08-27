@@ -85,6 +85,8 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      An autorater is an ML model trained on data created by human evaluation.
 ---
 The problem it solves is stated in the paper's first line: "evaluating [large
 language model](large-language-model) based chat assistants is challenging due

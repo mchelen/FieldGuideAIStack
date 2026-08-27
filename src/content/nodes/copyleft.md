@@ -84,10 +84,14 @@ sources:
     url: https://en.wikipedia.org/wiki/Copyleft
     title: Copyleft — Wikipedia
     verifiedOn: 2026-08-22
+    quote: >-
+      Copyleft licenses are designed to ensure that the same rights granted to users by the work's authors are preserved when that work (or modified versions of it) are redistributed.
   - id: osi-licenses
     url: https://opensource.org/licenses
     title: OSI Approved Licenses — Open Source Initiative
     verifiedOn: 2026-08-22
+    quote: >-
+      To be approved by the Open Source Initiative (also known as the OSI) a license must go through the Open Source Initiative's license review process.
 ---
 
 Copyleft is "the legal technique of granting certain freedoms over copies of

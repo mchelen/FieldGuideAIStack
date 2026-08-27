@@ -73,10 +73,14 @@ sources:
     url: https://huggingface.co/docs/transformers/en/model_doc/code_llama
     title: Code Llama — Hugging Face Transformers documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      Code Llama models can generate, explain, and even fill in missing parts of your code (called "infilling").
   - id: fim-paper
     url: https://arxiv.org/abs/2207.14255
     title: Efficient Training of Language Models to Fill in the Middle — Bavarian et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      Given the usefulness, simplicity, and efficiency of training models to fill-in-the-middle (FIM), we suggest that future autoregressive language models be trained with FIM by default.
 ---
 
 [Fill in the middle](fill-in-the-middle) is a training transformation. This page

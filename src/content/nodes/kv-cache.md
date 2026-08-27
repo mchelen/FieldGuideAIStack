@@ -83,6 +83,8 @@ sources:
     url: https://platform.claude.com/docs/en/build-with-claude/prompt-caching
     title: Prompt caching — Claude Platform documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      KV (key-value) cache representations and cryptographic hashes of cached content are held in memory only and are not stored at rest.
     note: >-
       States that "KV (key-value) cache representations and cryptographic
       hashes of cached content are held in memory only and are not stored at

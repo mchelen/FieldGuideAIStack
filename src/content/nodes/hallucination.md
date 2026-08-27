@@ -94,6 +94,8 @@ sources:
     url: https://arxiv.org/abs/2509.04664
     title: Why Language Models Hallucinate — Kalai, Nachum, Vempala and Zhang
     verifiedOn: 2026-08-22
+    quote: >-
+      We then argue that hallucinations persist due to the way most evaluations are graded
     note: Submitted 4 September 2025.
   - id: wikipedia-hallucination
     url: https://en.wikipedia.org/wiki/Hallucination_(artificial_intelligence)

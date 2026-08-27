@@ -87,6 +87,8 @@ sources:
     url: https://www.anthropic.com/engineering/building-effective-agents
     title: Building effective agents — Anthropic
     verifiedOn: 2026-08-22
+    quote: >-
+      They are typically just LLMs using tools based on environmental feedback in a loop.
 ---
 
 An agentic loop is "a cycle that an agent iterates through until a termination

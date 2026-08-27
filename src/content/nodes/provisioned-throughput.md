@@ -87,6 +87,8 @@ sources:
     url: https://platform.claude.com/docs/en/api/rate-limits
     title: Rate limits — Claude Platform documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      All limits described here represent maximum allowed usage, not guaranteed minimums.
 ---
 
 "Throughput refers to the number and rate of inputs and outputs that a model

@@ -84,6 +84,8 @@ sources:
     url: https://a2a-protocol.org/latest/specification/
     title: A2A Protocol Specification
     verifiedOn: 2026-08-22
+    quote: >-
+      Clients use this information for discovering suitable agents and configuring interactions.
 ---
 
 "The Agent2Agent (A2A) Protocol is an open standard for seamless communication

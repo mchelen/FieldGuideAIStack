@@ -82,6 +82,8 @@ sources:
     url: https://arxiv.org/abs/2005.11401
     title: Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks — Lewis et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      For language generation tasks, we find that RAG models generate more specific, diverse and factual language than a state-of-the-art parametric-only seq2seq baseline.
 ---
 
 Grounding is "the process of basing all or part of an LLM's response on

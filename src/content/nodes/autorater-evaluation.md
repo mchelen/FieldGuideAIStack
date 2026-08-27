@@ -83,6 +83,8 @@ sources:
     url: https://arxiv.org/abs/2306.05685
     title: Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena — Zheng et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      Hence, LLM-as-a-judge is a scalable and explainable way to approximate human preferences, which are otherwise very expensive to obtain.
 ---
 Autorater evaluation is "a hybrid mechanism for judging the quality of a
 [generative AI](generative-ai) model's output that combines human evaluation

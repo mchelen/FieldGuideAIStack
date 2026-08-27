@@ -77,6 +77,8 @@ sources:
     url: https://www.promptingguide.ai/techniques/prompt_chaining
     title: Prompt Chaining — Prompt Engineering Guide
     verifiedOn: 2026-08-22
+    quote: >-
+      Besides achieving better performance, prompt chaining helps to boost the transparency of your LLM application, increases controllability, and reliability.
 ---
 "To improve the reliability and performance of LLMs, one of the important
 [prompt engineering](prompt-engineering) techniques is to break tasks into its

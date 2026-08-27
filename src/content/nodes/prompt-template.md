@@ -76,10 +76,14 @@ sources:
     url: https://www.promptingguide.ai/techniques/prompt_chaining
     title: Prompt Chaining — Prompt Engineering Guide
     verifiedOn: 2026-08-22
+    quote: >-
+      This is what's referred to as prompt chaining, where a task is split into subtasks with the idea to create a chain of prompt operations.
   - id: google-glossary
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      In a typical prompt-based learning paradigm, a large language model responds to a prompt by generating text.
 ---
 
 A prompt is "any text entered as input to a

@@ -78,6 +78,8 @@ sources:
     url: https://arxiv.org/abs/1706.03762
     title: Attention Is All You Need — Vaswani et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely.
   - id: google-glossary
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers

@@ -92,6 +92,8 @@ sources:
     url: https://arxiv.org/abs/2404.07503
     title: Best Practices and Lessons Learned on Synthetic Data — Liu et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      We present empirical evidence from prior art to demonstrate its effectiveness and highlight the importance of ensuring its factuality, fidelity, and unbiasedness.
 ---
 AI slop is "output from a [generative AI](generative-ai) system that favors
 quantity over quality", the example being "a web page with AI slop … filled with

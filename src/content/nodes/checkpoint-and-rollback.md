@@ -89,6 +89,8 @@ sources:
     url: https://code.claude.com/docs/en/checkpointing
     title: Checkpointing — Claude Code documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      A subagent makes edits with Claude's file editing tools, but Claude Code usually doesn't capture those edits in your session's checkpoints.
 ---
 
 A checkpoint is "a restore point created at each prompt you send", with the

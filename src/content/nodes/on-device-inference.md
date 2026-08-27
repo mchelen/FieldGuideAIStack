@@ -85,6 +85,8 @@ sources:
     url: https://arxiv.org/abs/2306.11644
     title: Textbooks Are All You Need — Gunasekar et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      Despite this small scale, phi-1 attains pass@1 accuracy 50.6% on HumanEval and 55.5% on MBPP.
 ---
 
 On-device inference is [self-hosting](self-hosting) taken to its limit: the

@@ -95,6 +95,8 @@ sources:
     url: https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html
     title: What is Amazon Bedrock? — AWS documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      Daybreak Red and Daybreak Blue from OpenAI now available in Amazon Bedrock
 ---
 
 Hyperscale is "the ability of an architecture to scale appropriately as

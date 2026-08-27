@@ -76,6 +76,8 @@ sources:
     url: https://www.anthropic.com/engineering/building-effective-agents
     title: Building effective agents — Anthropic
     verifiedOn: 2026-08-22
+    quote: >-
+      However, whereas automated testing helps verify functionality, human review remains crucial for ensuring solutions align with broader system requirements.
 ---
 
 Everything else in the safety toolkit is probabilistic. A

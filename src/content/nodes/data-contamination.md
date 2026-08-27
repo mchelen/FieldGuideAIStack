@@ -87,6 +87,8 @@ sources:
     url: https://arxiv.org/abs/2311.09783
     title: Investigating Data Contamination in Modern Benchmarks for Large Language Models — Deng et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      This issue is especially critical for closed-source models and certain open-source models where training data transparency is lacking.
     note: Submitted 16 November 2023, last revised 3 April 2024.
   - id: black-box-contamination
     url: https://arxiv.org/abs/2310.17623

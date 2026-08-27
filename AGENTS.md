@@ -445,6 +445,33 @@ any new development work.
   for what it could not. It lives in `.github/workflows/`, which is code-owned:
   a change to it needs the owner's approval and must not auto-merge.
 
+## Quoting a source
+- A source with a stored `quote` can be re-verified by machine: the weekly job
+  re-fetches the page and confirms the sentence is still on it. A source
+  without one needs a human to reopen the page, forever. That is the whole
+  reason to add them, and why coverage is worth pushing.
+- **Quote the claim, not the concept.** The earlier passes searched each source
+  for a sentence mentioning the concept and stalled at 31%, because a source is
+  cited *at a claim* and the sentence that supports it frequently never names
+  the concept. Read the prose around `[[cite:id]]` first, then look for the
+  sentence that bears it.
+- Extract candidates through the **same** flattening `draft:freshness` uses, so
+  anything picked is re-verifiable by construction rather than by hope. A
+  substring of a matching sentence still matches, so trimming a heading or a
+  stray fragment off the front is safe.
+- Entities have to survive that flattening. `&lt;` and `&gt;` were not decoded,
+  so a page documenting a `<FILL_ME>` token could only be quoted by storing
+  `&lt;FILL_ME>` -- which is not what the page says and not what anyone would
+  copy. Decode anything that would otherwise force a quote to carry markup.
+- Some cited pages cannot be quoted at all: a landing page for a PDF, or one
+  whose substance arrives by JavaScript. `check:links` warns when a live page
+  yields under 4,000 characters of readable text. The fix is to cite the
+  document that carries the claim, not to leave the citation pointing at
+  navigation.
+- Verify a batch by running `draft:freshness --max-age 0`, which re-fetches
+  every page and reports how many quotes are still on them. Zero "no longer on
+  the page" is the pass condition.
+
 ## Search
 - The charter's framing is lookup — *"you may see a bird in the wild and want to
   check the field guide"* — so search indexes **`aka`, not just titles**. The

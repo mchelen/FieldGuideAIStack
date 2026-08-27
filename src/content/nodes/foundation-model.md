@@ -99,14 +99,20 @@ sources:
     url: https://developers.google.com/machine-learning/glossary
     title: Machine Learning Glossary — Google for Developers
     verifiedOn: 2026-08-22
+    quote: >-
+      A foundation model can do both of the following: Respond well to a wide range of requests.
   - id: crfm-site
     url: https://crfm.stanford.edu/
     title: Stanford Center for Research on Foundation Models
     verifiedOn: 2026-08-22
+    quote: >-
+      Foundation models present novel capabilities and risks that are poorly understood.
   - id: gpt3-paper
     url: https://arxiv.org/abs/2005.14165
     title: Language Models are Few-Shot Learners — Brown et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      For all tasks, GPT-3 is applied without any gradient updates or fine-tuning, with tasks and few-shot demonstrations specified purely via text interaction with the model.
   - id: hf-mistral
     url: https://huggingface.co/mistralai/Mistral-7B-v0.1
     title: mistralai/Mistral-7B-v0.1 — Hugging Face

@@ -78,6 +78,8 @@ sources:
     url: https://www.anthropic.com/engineering/building-effective-agents
     title: Building effective agents — Anthropic
     verifiedOn: 2026-08-22
+    quote: >-
+      Agents' autonomy makes them ideal for scaling tasks in trusted environments.
 ---
 
 "Autonomous" is used as though it were a category and behaves as a range. An

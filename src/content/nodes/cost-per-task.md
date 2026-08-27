@@ -72,10 +72,14 @@ sources:
     url: https://platform.claude.com/docs/en/build-with-claude/batch-processing
     title: Batch processing — Claude Platform documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      The pricing discounts from prompt caching and Message Batches can stack, providing even greater cost savings when both features are used together.
   - id: anthropic-pricing
     url: https://platform.claude.com/docs/en/about-claude/pricing
     title: Pricing — Claude Platform documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      A cache hit costs 10% of the standard input price, which means caching pays off after one cache read for the 5-minute duration (1.25x write), or after two cache reads for the 1-hour duration (2x write).
 ---
 
 The vendor bills per [token](token). Nobody's product is a token. The number

@@ -78,6 +78,8 @@ sources:
     url: https://a2a-protocol.org/latest/specification/
     title: A2A Protocol Specification
     verifiedOn: 2026-08-22
+    quote: >-
+      Agent Card: A JSON metadata document published by an A2A Server, describing its identity, capabilities, skills, service endpoint, and authentication requirements.
 ---
 
 "A2A Servers MUST make an Agent Card available. The Agent Card describes the

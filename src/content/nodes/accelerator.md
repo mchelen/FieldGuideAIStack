@@ -96,10 +96,14 @@ sources:
     url: https://arxiv.org/abs/2309.06180
     title: Efficient Memory Management for Large Language Model Serving with PagedAttention — Kwon et al.
     verifiedOn: 2026-08-22
+    quote: >-
+      However, existing systems struggle because the key-value cache (KV cache) memory for each request is huge and grows and shrinks dynamically.
   - id: aws-prov-throughput
     url: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
     title: Increase model invocation capacity with Provisioned Throughput — AWS documentation
     verifiedOn: 2026-08-22
+    quote: >-
+      You're billed hourly for a Provisioned Throughput that you purchase.
 ---
 
 An accelerator chip is "a category of specialized hardware components designed
