@@ -39,16 +39,20 @@ flow:
     later with everything still in place.
   path:
     - actor: One run
+      where: a person, not a system
       does: >-
         started, interrupted, and resumed
     - node: session
+      where: wherever the product runs
       does: >-
         the state scoped to it — conversation, context, working files
       self: true
     - node: turn
+      where: wherever the product runs
       does: >-
         each exchange inside it, counted separately
     - node: checkpoint-and-rollback
+      where: your machine
       does: >-
         and the restore points taken along the way
   returns: >-

@@ -40,16 +40,20 @@ flow:
     any single answer.
   path:
     - actor: Ten thousand jobs
+      where: your machine
       does: >-
         no interactive user, and a deadline in days
     - node: batch-inference
+      where: the provider's servers
       does: >-
         submitted to run whenever there is spare capacity
       self: true
     - node: inference-api
+      where: the provider's servers
       does: >-
         the same model, a different endpoint and a different price
     - node: streaming
+      where: the provider's servers
       does: >-
         the opposite trade — perceived speed instead of unit cost
   returns: >-

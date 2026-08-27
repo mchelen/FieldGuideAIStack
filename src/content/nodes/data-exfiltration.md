@@ -37,14 +37,21 @@ flow:
     An agent with legitimate access to a mailbox and legitimate access to
     the web, and one instruction joining them.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask it to read your mail and summarise it
     - node: prompt-injection
+      where: the open web
       does: >-
         an instruction arrives inside content the agent reads
     - node: data-exfiltration
+      where: your infrastructure
       does: >-
         it asks the agent to send something out, using its own access
       self: true
     - node: tool-misuse
+      where: your infrastructure
       does: >-
         every call it makes is one it was allowed to make
   returns: >-

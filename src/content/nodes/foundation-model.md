@@ -38,16 +38,20 @@ flow:
     model underneath.
   path:
     - node: pretraining
+      where: a training cluster
       does: >-
         the run that costs almost all of the money
     - node: foundation-model
+      where: the weights file
       does: >-
         what comes out: general, and not yet aimed at anything
       self: true
     - node: large-language-model
+      where: the weights file
       does: >-
         the kind of it this guide is mostly about
     - node: model
+      where: the weights file
       does: >-
         the artifact, before anyone has decided what it is for
   returns: >-

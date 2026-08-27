@@ -10,8 +10,7 @@ interface Props {
 const { graph, flow, title } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const d = flowDiagram(graph, flow);
-const summary = flowSummary(d);
-const arrowGap = 30;
+const summary = flowSummary(d, flow.path);
 ---
 
 <figure class={`flow${d.returns ? ' has-return' : ''}`}>
@@ -51,14 +50,26 @@ const arrowGap = 30;
       </marker>
     </defs>
 
+    {/* Behind everything: the machine each run of steps happens on. */}
     {
-      d.stations.slice(0, -1).map((s) => (
+      d.bands.map((b) => (
+        <g class="flow-band">
+          <rect class="flow-band-box" x={b.x} y={b.y} width={b.w} height={b.h} rx={10} />
+          <text class="flow-band-label" x={b.x + 11} y={b.y + 13}>
+            {b.label}
+          </text>
+        </g>
+      ))
+    }
+
+    {
+      d.stations.slice(0, -1).map((s, i) => (
         <line
           class="flow-step"
           x1={s.x + s.w / 2}
           y1={s.y + s.h}
           x2={s.x + s.w / 2}
-          y2={s.y + s.h + arrowGap - 4}
+          y2={(d.stations[i + 1].bandTop ?? d.stations[i + 1].y) - 5}
           marker-end="url(#flow-arrow)"
         />
       ))
@@ -70,7 +81,7 @@ const arrowGap = 30;
           <path
             class="flow-return-line"
             d={`M ${d.returns.x - 6} ${d.returns.fromY}
-                H ${d.returns.x + 22}
+                H ${d.returns.legX}
                 V ${d.returns.toY}
                 H ${d.returns.x - 6}`}
             marker-end="url(#flow-arrow-return)"
@@ -118,8 +129,11 @@ const arrowGap = 30;
   </svg>
   {d.returns && <p class="flow-return-note">{d.returns.label}</p>}
   <figcaption>
-    One request through <strong>{title}</strong>. Boxes with a link are concepts
-    with their own page; the highlighted one is this page. Drawn at build time
-    from the <code>flow</code> block in this page's frontmatter.
+    One request through <strong>{title}</strong>, end to end. Boxes with a link
+    are concepts with their own page; the highlighted one is this page.{
+      d.bands.length > 1 &&
+        ' The grey bands are whose computer each run of steps happens on, so a boundary crossed is a boundary drawn.'
+    } Generated at build time from the <code>flow</code> block in this page's
+    frontmatter.
   </figcaption>
 </figure>

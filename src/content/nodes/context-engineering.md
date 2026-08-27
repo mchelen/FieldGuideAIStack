@@ -34,17 +34,25 @@ flow:
     An agent forty turns into a task starts losing track of what it was
     doing, and the context window is nearly full.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        keep working; the history keeps growing
     - actor: Forty turns of history
+      where: wherever the product runs
       does: >-
         tool output, file contents, half-finished plans
     - node: context-engineering
+      where: wherever the product runs
       does: >-
         decides what stays, what is dropped, what is summarised
       self: true
     - node: compaction
+      where: wherever the product runs
       does: >-
         replaces finished work with a summary of it
     - node: context-window
+      where: the prompt you send
       does: >-
         what survives has to fit here, on every single call
   returns: >-

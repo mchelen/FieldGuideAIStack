@@ -34,16 +34,20 @@ flow:
     option at any price.
   path:
     - actor: A constraint
+      where: your machine
       does: >-
         a laptop, offline, with a few gigabytes
     - node: small-language-model
+      where: your machine
       does: >-
         small enough to run where a frontier model cannot
       self: true
     - node: large-language-model
+      where: the provider's servers
       does: >-
         the comparison it always loses on open-ended work
     - node: model
+      where: the weights file
       does: >-
         and the same contract, at a different size
   returns: >-

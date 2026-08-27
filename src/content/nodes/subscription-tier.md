@@ -35,16 +35,20 @@ flow:
     cannot buy at any usage level.
   path:
     - actor: A capability
+      where: a contract, not a computer
       does: >-
         present in the product, absent from your account
     - node: subscription-tier
+      where: a contract, not a computer
       does: >-
         the packaging that decides what you get at all
       self: true
     - node: usage-limit
+      where: a contract, not a computer
       does: >-
         and how much of it, over a period
     - node: token-billing
+      where: your invoice
       does: >-
         as opposed to paying for what you actually used
   returns: >-

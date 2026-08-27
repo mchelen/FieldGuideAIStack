@@ -35,17 +35,25 @@ flow:
     Three products, one account, one extension system, and one engine that
     all three are the same underneath.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        buy one thing and get three
     - actor: One engine
+      where: wherever the product runs
       does: >-
         the same agentic architecture in all of them
     - node: product-suite
+      where: wherever the product runs
       does: >-
         packaged as several products, sold as a family
       self: true
     - node: surface
+      where: wherever the product runs
       does: >-
         each with different powers, depending on where it runs
     - node: claude-family
+      where: wherever the product runs
       does: >-
         one example of the pattern, from one vendor
   returns: >-

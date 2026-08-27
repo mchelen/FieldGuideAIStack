@@ -35,19 +35,24 @@ flow:
     do that, and who decided.
   path:
     - actor: An action
+      where: wherever the product runs
       does: >-
         the agent is about to take it
     - node: permission-model
+      where: your infrastructure
       does: >-
         what is allowed, who decided, and where it is enforced
       self: true
     - node: approval-mode
+      where: a person, not a system
       does: >-
         the part of it a person answers in the moment
     - node: sandbox
+      where: a bounded environment
       does: >-
         the part enforced by the environment, not by asking
     - node: non-human-identity
+      where: your infrastructure
       does: >-
         and the credentials it acts under, which are not yours
   returns: >-

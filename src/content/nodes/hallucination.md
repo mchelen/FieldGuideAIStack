@@ -40,16 +40,20 @@ flow:
     used for everything it got right.
   path:
     - actor: A question
+      where: a person, not a system
       does: >-
         asks which source supports the claim just made
     - node: model
+      where: the provider's servers
       does: >-
         returns the most probable continuation, which is not the true one
     - node: hallucination
+      where: what the reader sees
       does: >-
         a plausible citation, produced with full confidence
       self: true
     - node: grounding
+      where: your infrastructure
       does: >-
         the fix — answer only from a retrieved document, and cite it
   returns: >-

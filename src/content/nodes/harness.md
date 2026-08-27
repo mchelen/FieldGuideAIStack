@@ -35,19 +35,24 @@ flow:
     model cannot do by itself.
   path:
     - actor: You
+      where: a person, not a system
       does: >-
         ask for the failing test to be fixed
     - node: harness
+      where: wherever the product runs
       does: >-
         builds the prompt, calls the model, executes what it asks for
       self: true
     - node: inference-api
+      where: the provider's servers
       does: >-
         the only channel to the model, and the only thing it sees
     - node: approval-mode
+      where: wherever the product runs
       does: >-
         decides whether the next command runs without asking you
     - node: command-execution
+      where: a bounded environment
       does: >-
         runs the test and hands the output back as the next input
   returns: >-

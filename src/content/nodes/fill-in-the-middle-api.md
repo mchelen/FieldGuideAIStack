@@ -35,13 +35,16 @@ flow:
     endpoint has nowhere to put the suffix.
   path:
     - node: fill-in-the-middle
+      where: your machine
       does: >-
         the capability that needs both sides
     - node: fill-in-the-middle-api
+      where: the provider's servers
       does: >-
         an endpoint shaped for it: prefix, suffix, and a gap
       self: true
     - node: inference-api
+      where: the provider's servers
       does: >-
         beside the chat contract, and not portable between vendors
   returns: >-

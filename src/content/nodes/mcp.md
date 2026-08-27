@@ -27,27 +27,36 @@ fieldMark: Three words give it away — host, client, server. If a doc describes
   an AI app spawning one client per connected server, that is MCP.
 flow:
   scenario: >-
-    An issue-tracker integration written once, working in four different
-    assistants without being rewritten for each.
+    Someone asks their assistant to close the issue they just fixed, in a
+    product that ships no issue-tracker code at all.
   path:
-    - actor: A tool
+    - actor: You
       does: >-
-        your issue tracker, with an API
-    - node: mcp-server
-      does: >-
-        wraps it once, declaring what it offers
-    - node: mcp
-      does: >-
-        the open standard both ends speak
-      self: true
-    - node: mcp-client
-      does: >-
-        one per server, held by the application
+        "close FG-412, the flaky test is fixed"
+      where: your machine
     - node: harness
       does: >-
-        which now has a tool it never had to write
+        builds the prompt and decides a tool is needed
+      where: your machine
+    - node: mcp-client
+      does: >-
+        one dedicated connection per server it has been given
+      where: your machine
+    - node: mcp
+      does: >-
+        the open standard both ends speak, over that connection
+      self: true
+      where: on the wire
+    - node: mcp-server
+      does: >-
+        declares what it offers, and does the work when asked
+      where: your infrastructure
+    - actor: Your issue tracker
+      does: >-
+        its ordinary API, called with your credentials
+      where: the vendor's cloud
   returns: >-
-    One integration, every client that speaks it
+    One integration, and every client that speaks it
 relations:
   - type: distinguished-from
     target: tool-use

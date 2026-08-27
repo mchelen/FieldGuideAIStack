@@ -38,16 +38,20 @@ flow:
     can do the thing it wants to delegate.
   path:
     - actor: A delegation
+      where: wherever the product runs
       does: >-
         one agent wants another to do something
     - node: agent-card
+      where: on the wire
       does: >-
         a machine-readable declaration of identity and capability
       self: true
     - node: agent-to-agent-protocol
+      where: on the wire
       does: >-
         the protocol it is published under
     - node: multi-agent-system
+      where: on the wire
       does: >-
         which is the arrangement this makes possible between vendors
   returns: >-

@@ -33,16 +33,20 @@ flow:
     of numbers is being served.
   path:
     - actor: A training run
+      where: a training cluster
       does: >-
         long, and saved periodically as it goes
     - node: checkpoint
+      where: a training cluster
       does: >-
         one saved set of weights, at one point in that run
       self: true
     - node: parameter
+      where: the weights file
       does: >-
         the numbers themselves, at that moment
     - node: model-card
+      where: a contract, not a computer
       does: >-
         which should say which one you are actually getting
   returns: >-

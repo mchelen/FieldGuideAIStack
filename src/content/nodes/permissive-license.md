@@ -38,16 +38,20 @@ flow:
     a set of weights.
   path:
     - actor: A licence file
+      where: your machine
       does: >-
         beside the weights, and short
     - node: permissive-license
+      where: a contract, not a computer
       does: >-
         reuse with minimal conditions — attribution, no warranty
       self: true
     - node: copyleft
+      where: a contract, not a computer
       does: >-
         the other axis, where derivatives must carry the same terms
     - node: open-weights
+      where: a contract, not a computer
       does: >-
         which is a claim about availability, not about either
   returns: >-

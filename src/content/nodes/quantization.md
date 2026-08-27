@@ -38,16 +38,20 @@ flow:
     without retraining anything.
   path:
     - node: parameter
+      where: the weights file
       does: >-
         the learned numbers, at 16 bits each
     - node: quantization
+      where: the weights file
       does: >-
         stored at 8 or 4 bits instead — the same count, less precision
       self: true
     - node: on-device-inference
+      where: your machine
       does: >-
         which is what makes it fit on hardware you own
     - node: distillation
+      where: a training cluster
       does: >-
         the other way to shrink one, and a genuinely different model
   returns: >-

@@ -37,17 +37,25 @@ flow:
     A rule that has to hold every time, in a system whose main component is
     probabilistic.
   path:
+    - actor: You
+      where: your machine
+      does: >-
+        write down a rule that has to hold every time
     - actor: An event
+      where: wherever the product runs
       does: >-
         the agent is about to call a tool
     - node: hook
+      where: wherever the product runs
       does: >-
         a deterministic handler that runs on it, every time
       self: true
     - node: tool-use
+      where: wherever the product runs
       does: >-
         which it can block, alter, or let through
     - node: harness
+      where: wherever the product runs
       does: >-
         the part of the system that guarantees it runs
   returns: >-

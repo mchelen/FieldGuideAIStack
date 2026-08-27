@@ -122,6 +122,29 @@ const canonical = z
   })
   .strict();
 
+/** The machines a request can be on, coarsest-useful first. */
+export const WHERE = [
+  'a person, not a system',
+  'your machine',
+  'wherever the product runs',
+  'a bounded environment',
+  'your infrastructure',
+  'on the wire',
+  "the provider's servers",
+  "the host's own hardware",
+  'inside one model call',
+  'the weights file',
+  'a training cluster',
+  'the prompt you send',
+  'your evaluation harness',
+  "the vendor's cloud",
+  'the open web',
+  'what the reader sees',
+  'your invoice',
+  'a contract, not a computer',
+  'nobody, at 3am',
+] as const;
+
 /** A concrete situation the concept shows up in. Generic for now. */
 const useCase = z.object({
   scenario: z.string().min(1),
@@ -146,6 +169,22 @@ const flowStation = z
     actor: z.string().min(1).max(40).optional(),
     does: z.string().min(1).max(90),
     self: z.boolean().default(false),
+    /**
+     * Whose computer this step happens on. Consecutive stations sharing one
+     * answer are drawn inside a labelled band, so the moment a request leaves
+     * the reader's machine is a line you can see rather than a fact you have
+     * to already know. Either every station in a flow carries it or none do --
+     * enforced by scripts/validate-graph.mjs, because a half-banded diagram
+     * reads as though the unlabelled steps happen nowhere.
+     *
+     * A closed list, because a band is only worth drawing if it groups. The
+     * first pass wrote whatever fitted each step and produced 187 different
+     * answers, which meant 74 flows where every band held exactly one station
+     * -- a boundary drawn between two steps on the same machine, and the
+     * boundary that matters lost among them. Adding a place here should be a
+     * deliberate decision that the guide has a machine it cannot yet name.
+     */
+    where: z.enum(WHERE).optional(),
   })
   .strict()
   .refine((s) => Boolean(s.node) !== Boolean(s.actor), {
@@ -155,7 +194,9 @@ const flowStation = z
 const flow = z
   .object({
     scenario: z.string().min(1).max(160),
-    path: z.array(flowStation).min(3).max(6),
+    // Eight, not six. End to end means the person at one end and the thing
+    // being reached at the other, and six ran out before both fitted.
+    path: z.array(flowStation).min(3).max(8),
     returns: z.string().min(1).max(120).optional(),
   })
   .strict();

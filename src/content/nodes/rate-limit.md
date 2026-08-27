@@ -37,16 +37,20 @@ flow:
     volume, on an account nothing changed about.
   path:
     - actor: A burst
+      where: your machine
       does: >-
         more requests than usual, in less time than usual
     - node: inference-api
+      where: the provider's servers
       does: >-
         accepts them until the account's ceiling is reached
     - node: rate-limit
+      where: a contract, not a computer
       does: >-
         the ceiling — requests and tokens per minute, per account
       self: true
     - node: token
+      where: a contract, not a computer
       does: >-
         which is what most of the ceilings are actually counted in
   returns: >-

@@ -34,17 +34,25 @@ flow:
     Generating the two-thousandth token of a reply without redoing the work
     for the previous 1,999.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask for something long enough to notice the cost
     - node: attention
+      where: inside one model call
       does: >-
         relates every position to every other, which is quadratic
     - node: kv-cache
+      where: the provider's servers
       does: >-
         keeps the state for positions already processed
       self: true
     - node: accelerator
+      where: the provider's servers
       does: >-
         it lives in GPU memory, competing with the weights for room
     - node: prompt-caching
+      where: the provider's servers
       does: >-
         and surviving past the end of a request is what that feature is
   returns: >-

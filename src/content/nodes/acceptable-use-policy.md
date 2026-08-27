@@ -39,16 +39,20 @@ flow:
     incorporated by reference into a licence nobody read.
   path:
     - actor: A use
+      where: a person, not a system
       does: >-
         something someone wants to build
     - node: acceptable-use-policy
+      where: a contract, not a computer
       does: >-
         the vendor's list of what may not be done
       self: true
     - node: community-license
+      where: a contract, not a computer
       does: >-
         which incorporates it by reference, and can change
     - node: guardrails
+      where: the provider's servers
       does: >-
         the enforcement, which is a different thing from the rule
   returns: >-

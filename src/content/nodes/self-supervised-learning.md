@@ -34,16 +34,20 @@ flow:
     because the next word is the label.
   path:
     - actor: Unlabelled text
+      where: a training cluster
       does: >-
         an enormous amount of it, and no annotators
     - node: self-supervised-learning
+      where: a training cluster
       does: >-
         the labels come from the data's own structure
       self: true
     - node: pretraining
+      where: a training cluster
       does: >-
         which is this, at the largest scale anyone runs
     - node: fine-tuning
+      where: a training cluster
       does: >-
         and where labelled data comes back in, in far smaller amounts
   returns: >-

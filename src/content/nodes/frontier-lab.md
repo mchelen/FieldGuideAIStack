@@ -41,13 +41,16 @@ flow:
     companies are worth.
   path:
     - node: frontier-lab
+      where: the host's own hardware
       does: >-
         trains at the leading edge of scale
       self: true
     - node: pretraining
+      where: a training cluster
       does: >-
         the run that is most of the expenditure
     - node: model-provider
+      where: the host's own hardware
       does: >-
         the wider role: anyone who trains and licenses a model
   returns: >-

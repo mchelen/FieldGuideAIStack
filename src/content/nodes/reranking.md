@@ -38,16 +38,20 @@ flow:
     send all fifty without paying for all fifty.
   path:
     - node: retrieval-augmented-generation
+      where: your infrastructure
       does: >-
         retrieval returns fifty plausible candidates
     - node: reranking
+      where: wherever the product runs
       does: >-
         a second, better model scores them against the question
       self: true
     - node: embedding
+      where: your infrastructure
       does: >-
         the first pass was fast and approximate; this one is not
     - actor: The prompt
+      where: the prompt you send
       does: >-
         carries only the top three, and is paid for accordingly
   returns: >-

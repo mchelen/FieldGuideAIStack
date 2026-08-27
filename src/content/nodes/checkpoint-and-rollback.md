@@ -39,16 +39,20 @@ flow:
     already changed.
   path:
     - actor: A bad step
+      where: your machine
       does: >-
         already applied, to real files
     - node: checkpoint-and-rollback
+      where: your machine
       does: >-
         restore points, taken before each edit
       self: true
     - node: session
+      where: your machine
       does: >-
         the conversation is restored alongside the files
     - node: checkpoint
+      where: a training cluster
       does: >-
         a different thing with the same name — a saved set of weights
   returns: >-

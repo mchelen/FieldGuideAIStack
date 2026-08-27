@@ -175,6 +175,7 @@ const MIN_TYPE_PX = 11;
         boxes: document.querySelectorAll('.flow-box').length,
         linked: document.querySelectorAll('.flow a').length,
         self: document.querySelectorAll('.flow-box.is-self').length,
+        bands: document.querySelectorAll('.flow-band').length,
         title: size('.flow-title'),
         does: size('.flow-does'),
       };
@@ -184,6 +185,9 @@ const MIN_TYPE_PX = 11;
       if (seen.boxes < 3) problems.push(`illustration drew ${seen.boxes} stations, expected at least 3`);
       if (seen.self !== 1) problems.push(`illustration highlighted ${seen.self} stations as this concept, expected 1`);
       if (seen.linked < 1) problems.push('illustration linked no station to its page');
+      if (seen.bands < 2) {
+        problems.push(`illustration drew ${seen.bands} machine band(s) — prompt-caching's flow crosses more than one`);
+      }
       for (const [what, px] of [['title', seen.title], ['step text', seen.does]]) {
         if (px < MIN_TYPE_PX) {
           problems.push(
@@ -216,14 +220,21 @@ const MIN_TYPE_PX = 11;
     }
     const spills = await page.evaluate(() => {
       const out = [];
+      const fits = (text, frame, slack) => {
+        const r = text.getBBox();
+        return r.x + r.width <= frame.x + frame.width - slack && r.y + r.height <= frame.y + frame.height;
+      };
       for (const box of document.querySelectorAll('.flow-box')) {
         const b = box.getBBox();
         for (const t of box.parentElement.querySelectorAll('text')) {
-          const r = t.getBBox();
-          if (r.x + r.width > b.x + b.width - 4 || r.y + r.height > b.y + b.height) {
-            out.push(t.textContent.trim().slice(0, 40));
-          }
+          if (!fits(t, b, 4)) out.push(t.textContent.trim().slice(0, 40));
         }
+      }
+      // Band labels sit outside any box, so the sweep above never sees them.
+      for (const band of document.querySelectorAll('.flow-band')) {
+        const rect = band.querySelector('.flow-band-box').getBBox();
+        const label = band.querySelector('.flow-band-label');
+        if (!fits(label, rect, 8)) out.push(label.textContent.trim().slice(0, 40));
       }
       return out;
     });

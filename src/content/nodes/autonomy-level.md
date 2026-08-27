@@ -34,16 +34,20 @@ flow:
     things about who is asked before an action.
   path:
     - actor: A product claim
+      where: the open web
       does: >-
         "autonomous", with no scale attached
     - node: autonomy-level
+      where: wherever the product runs
       does: >-
         the label — how much runs without anyone being asked
       self: true
     - node: approval-mode
+      where: wherever the product runs
       does: >-
         the setting underneath that actually decides it
     - node: autonomous-agent
+      where: wherever the product runs
       does: >-
         the end of the scale, where nobody is asked at all
   returns: >-

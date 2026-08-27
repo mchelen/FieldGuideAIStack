@@ -40,16 +40,20 @@ flow:
     one token at a time.
   path:
     - actor: A schema
+      where: wherever the product runs
       does: >-
         what the calling program is able to accept
     - node: inference-api
+      where: on the wire
       does: >-
         carries it alongside the messages
     - node: structured-output
+      where: inside one model call
       does: >-
         invalid tokens are excluded during decoding, not after
       self: true
     - node: function-calling
+      where: inside one model call
       does: >-
         which is this, applied to naming a function and its arguments
   returns: >-

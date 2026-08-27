@@ -38,16 +38,20 @@ flow:
     can parse without guessing.
   path:
     - actor: A request
+      where: a person, not a system
       does: >-
         needs an action, not a sentence
     - node: function-calling
+      where: the provider's servers
       does: >-
         the API shape: a named function, with typed arguments
       self: true
     - node: structured-output
+      where: the provider's servers
       does: >-
         which is what makes the request parseable at all
     - node: tool-use
+      where: wherever the product runs
       does: >-
         the general behaviour this is one vendor's name for
   returns: >-

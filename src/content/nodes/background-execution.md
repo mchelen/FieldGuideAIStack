@@ -30,19 +30,24 @@ flow:
     finished rather than abandoned.
   path:
     - actor: A long task
+      where: a person, not a system
       does: >-
         forty minutes of work, no further input needed
     - node: agent
+      where: the vendor's cloud
       does: >-
         holds the goal across the whole run
     - node: background-execution
+      where: the vendor's cloud
       does: >-
         the loop survives you leaving the surface
       self: true
     - node: harness
+      where: the vendor's cloud
       does: >-
         which is running somewhere that is not your laptop
     - node: scheduled-task
+      where: nobody, at 3am
       does: >-
         and can be started by a clock rather than by you
   returns: >-

@@ -37,19 +37,24 @@ flow:
     to be counted in something other than pages.
   path:
     - actor: The contract
+      where: a person, not a system
       does: >-
         40 pages of plain text, pasted in whole
     - node: tokenizer
+      where: the provider's servers
       does: >-
         splits it into word fragments, not words
     - node: token
+      where: inside one model call
       does: >-
         68,000 of them — the unit every limit and price is counted in
       self: true
     - node: context-window
+      where: the prompt you send
       does: >-
         holds 200,000, so it fits, with room for the conversation
     - node: token-billing
+      where: your invoice
       does: >-
         charges for all 68,000, again on every following turn
   returns: >-

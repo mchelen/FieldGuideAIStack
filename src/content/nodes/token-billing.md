@@ -41,16 +41,20 @@ flow:
     seats to count.
   path:
     - node: token
+      where: your invoice
       does: >-
         the unit of consumption, in and out
     - node: token-billing
+      where: your invoice
       does: >-
         charged by what you used, not by who has a licence
       self: true
     - node: token-pricing
+      where: a contract, not a computer
       does: >-
         at different rates for input, output and cache reads
     - node: provisioned-throughput
+      where: the host's own hardware
       does: >-
         or by the hour, if variable cost is the problem
   returns: >-

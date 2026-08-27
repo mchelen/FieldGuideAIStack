@@ -38,17 +38,25 @@ flow:
     A request the model would have answered, stopped by something that is
     not the model and does not need to be asked.
   path:
+    - actor: Someone
+      where: a person, not a system
+      does: >-
+        asks for something the model would answer
     - actor: Input or output
+      where: wherever the product runs
       does: >-
         on its way in, or on its way back
     - node: guardrails
+      where: wherever the product runs
       does: >-
         checks around the model that block what is disallowed
       self: true
     - node: acceptable-use-policy
+      where: a contract, not a computer
       does: >-
         which is where the list of disallowed things comes from
     - node: permission-model
+      where: a bounded environment
       does: >-
         the other half — what the system may do, not what it may say
   returns: >-

@@ -39,16 +39,20 @@ flow:
     content of each is left to the model.
   path:
     - actor: A task
+      where: a person, not a system
       does: >-
         with steps that are known in advance
     - node: workflow
+      where: wherever the product runs
       does: >-
         the sequence is laid out in code; the model fills it in
       self: true
     - node: agent
+      where: wherever the product runs
       does: >-
         the alternative, where the model chooses the steps
     - node: orchestration
+      where: wherever the product runs
       does: >-
         the wider question of who decides what runs next
   returns: >-

@@ -39,19 +39,24 @@ flow:
     says "holiday entitlement".
   path:
     - actor: A passage
+      where: your machine
       does: >-
         text, with no words in common with the query
     - node: token
+      where: your infrastructure
       does: >-
         split up and read as the units the model works in
     - node: embedding
+      where: wherever the product runs
       does: >-
         becomes a list of numbers positioned by meaning
       self: true
     - node: vector-database
+      where: your infrastructure
       does: >-
         stored so the near ones can be found quickly
     - node: semantic-search
+      where: your infrastructure
       does: >-
         the query is embedded the same way, and the near ones come back
   returns: >-

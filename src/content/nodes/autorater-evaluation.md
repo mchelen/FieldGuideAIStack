@@ -39,16 +39,20 @@ flow:
     scores the next ten thousand in an hour.
   path:
     - actor: Human ratings
+      where: a person, not a system
       does: >-
         expensive, slow, and the thing being approximated
     - node: fine-tuning
+      where: a training cluster
       does: >-
         a model trained on them
     - node: autorater-evaluation
+      where: your evaluation harness
       does: >-
         which then scores new output automatically
       self: true
     - node: evaluation
+      where: your evaluation harness
       does: >-
         over a fixed set, so the scores compare
   returns: >-

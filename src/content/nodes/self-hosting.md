@@ -35,16 +35,20 @@ flow:
     everything a host was doing for you.
   path:
     - node: model-host
+      where: the host's own hardware
       does: >-
         the alternative — someone else's hardware and contract
     - node: self-hosting
+      where: your machine
       does: >-
         your infrastructure, your operations, your capacity planning
       self: true
     - node: accelerator
+      where: your machine
       does: >-
         which you now have to size, buy and keep busy
     - node: on-device-inference
+      where: your machine
       does: >-
         the same argument, at the scale of one device
   returns: >-

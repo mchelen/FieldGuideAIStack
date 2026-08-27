@@ -34,16 +34,20 @@ flow:
     later, after being cropped and re-saved.
   path:
     - actor: Generated content
+      where: the open web
       does: >-
         indistinguishable from the alternative by eye
     - node: watermarking
+      where: the open web
       does: >-
         a mark embedded in the content itself
       self: true
     - node: provenance
+      where: the open web
       does: >-
         the wider question of evidence of origin
     - node: ai-slop
+      where: the open web
       does: >-
         and the volume that made the question urgent
   returns: >-

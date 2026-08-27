@@ -40,13 +40,16 @@ flow:
     was not watching any of them.
   path:
     - node: agentic-loop
+      where: wherever the product runs
       does: >-
         nineteen steps, each with a call and a result
     - node: tracing
+      where: wherever the product runs
       does: >-
         each one recorded, so the run can be inspected afterwards
       self: true
     - node: evaluation
+      where: your evaluation harness
       does: >-
         and the record is what a measurement is computed from
   returns: >-

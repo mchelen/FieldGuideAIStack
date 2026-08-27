@@ -37,16 +37,20 @@ flow:
     second model rewriting the first one's prompt.
   path:
     - actor: A weak prompt
+      where: your machine
       does: >-
         producing inconsistent output
     - node: meta-prompting
+      where: the prompt you send
       does: >-
         prompt about structure, not content — or have a model rewrite it
       self: true
     - node: few-shot-prompting
+      where: the prompt you send
       does: >-
         the alternative it is usually measured against
     - node: prompt-engineering
+      where: your evaluation harness
       does: >-
         and the evaluation set that says which one won
   returns: >-

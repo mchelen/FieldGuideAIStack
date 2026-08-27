@@ -39,16 +39,20 @@ flow:
     stopped learning anything first-hand.
   path:
     - actor: A question
+      where: a person, not a system
       does: >-
         about something that changed last month
     - node: knowledge-cutoff
+      where: inside one model call
       does: >-
         the date after which the model knows nothing first-hand
       self: true
     - node: model
+      where: the provider's servers
       does: >-
         which has no way to tell that it is past that date
     - node: retrieval-augmented-generation
+      where: your infrastructure
       does: >-
         the fix — fetch the current thing and put it in the prompt
   returns: >-

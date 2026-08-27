@@ -36,17 +36,25 @@ flow:
     One assistant connected to six servers, with six separate connections
     and no shared state between them.
   path:
+    - actor: You
+      where: your machine
+      does: >-
+        ask for something only an external tool can do
     - node: harness
+      where: wherever the product runs
       does: >-
         the host application, connecting out
     - node: mcp-client
+      where: wherever the product runs
       does: >-
         one dedicated connection per server it talks to
       self: true
     - node: mcp
+      where: on the wire
       does: >-
         the protocol carried over it
     - node: mcp-server
+      where: your infrastructure
       does: >-
         at the other end, offering its tools
   returns: >-

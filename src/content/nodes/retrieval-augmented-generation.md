@@ -35,19 +35,24 @@ flow:
     month, without a training run each time.
   path:
     - actor: A question
+      where: a person, not a system
       does: >-
         "how many days of carry-over leave do I get?"
     - node: semantic-search
+      where: your infrastructure
       does: >-
         finds passages that mean the same thing, not ones that match words
     - node: reranking
+      where: wherever the product runs
       does: >-
         cuts fifty candidates down to the three worth the context
     - node: retrieval-augmented-generation
+      where: the prompt you send
       does: >-
         puts those three in the prompt, then asks the question
       self: true
     - node: grounding
+      where: what the reader sees
       does: >-
         the answer cites the paragraph it rests on
   returns: >-

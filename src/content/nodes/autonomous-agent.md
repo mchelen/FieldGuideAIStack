@@ -38,16 +38,20 @@ flow:
     question until Monday.
   path:
     - actor: A goal
+      where: a person, not a system
       does: >-
         no steps given, and nobody to ask
     - node: autonomous-agent
+      where: wherever the product runs
       does: >-
         plans, acts and adapts without step-by-step direction
       self: true
     - node: autonomy-level
+      where: wherever the product runs
       does: >-
         the end of the scale, as a product setting
     - node: non-human-identity
+      where: your infrastructure
       does: >-
         acting under a credential that is not a person's
   returns: >-

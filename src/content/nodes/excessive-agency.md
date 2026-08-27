@@ -31,17 +31,25 @@ flow:
     An agent set up to triage bug reports that also holds write access to
     the repository, because that was the default.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        grant the agent access, once, and move on
     - actor: A task
+      where: a person, not a system
       does: >-
         read issues, label them, nothing more
     - node: excessive-agency
+      where: your infrastructure
       does: >-
         permission, autonomy or reach beyond what the task needs
       self: true
     - node: approval-mode
+      where: wherever the product runs
       does: >-
         the setting that decides whether anyone is asked first
     - node: tool-misuse
+      where: your infrastructure
       does: >-
         and what the surplus turns into when something goes wrong
   returns: >-

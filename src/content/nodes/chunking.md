@@ -35,16 +35,20 @@ flow:
     meaning was in the paragraph before it.
   path:
     - actor: A document
+      where: your machine
       does: >-
         200 pages, far too long to retrieve whole
     - node: chunking
+      where: your infrastructure
       does: >-
         split into pieces small enough to fetch and send
       self: true
     - node: token
+      where: your infrastructure
       does: >-
         each piece sized in these, because the budget is
     - node: retrieval-augmented-generation
+      where: the prompt you send
       does: >-
         and only whole pieces can ever come back
   returns: >-

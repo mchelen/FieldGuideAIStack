@@ -36,17 +36,25 @@ flow:
     A procedure your team does the same way every time, taught to an agent
     once rather than pasted in each time.
   path:
+    - actor: You
+      where: your machine
+      does: >-
+        write the procedure down once, in a file
     - actor: A procedure
+      where: your machine
       does: >-
         repeatable, and specific to how you work
     - node: skill
+      where: wherever the product runs
       does: >-
         packaged instructions, loaded when they are relevant
       self: true
     - node: context-window
+      where: wherever the product runs
       does: >-
         so it occupies space only when it is needed
     - node: agent
+      where: wherever the product runs
       does: >-
         which now follows it without being reminded
   returns: >-

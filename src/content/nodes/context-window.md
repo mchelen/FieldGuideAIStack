@@ -38,20 +38,29 @@ flow:
     A conversation that was working fine at turn 30 starts dropping details
     at turn 80, on a model advertised at one million tokens.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        paste a long document and keep talking
     - node: system-prompt
+      where: the prompt you send
       does: >-
         goes first on every call, and never leaves
     - node: token
+      where: the prompt you send
       does: >-
         everything is counted in these — prompt, history, tool output, reply
     - node: context-window
+      where: the provider's servers
       does: >-
         the ceiling all of it has to fit under, on every single call
       self: true
     - node: compaction
+      where: wherever the product runs
       does: >-
         what runs when it does not: finished work replaced by a summary
     - node: context-engineering
+      where: wherever the product runs
       does: >-
         deciding what to summarise is the actual job
   returns: >-

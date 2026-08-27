@@ -15,6 +15,20 @@ export interface FlowStation {
   titleLines: string[];
   /** `does`, wrapped to the box width. */
   lines: string[];
+  /** Top edge of the band this station opens, when it opens one. The step
+   *  arrow stops there rather than at the box, so the arrowhead reads as the
+   *  request crossing onto a different machine -- and does not run through the
+   *  band's label on the way. */
+  bandTop?: number;
+}
+
+/** A run of consecutive stations that happen on the same machine. */
+export interface FlowBand {
+  label: string;
+  x: number;
+  y: number;
+  w: number;
+  h: number;
 }
 
 export interface FlowDiagram {
@@ -22,12 +36,19 @@ export interface FlowDiagram {
   height: number;
   scenario: string;
   stations: FlowStation[];
-  returns?: { label: string; fromY: number; toY: number; x: number };
+  bands: FlowBand[];
+  returns?: { label: string; fromY: number; toY: number; x: number; legX: number };
 }
 
 export interface FlowInput {
   scenario: string;
-  path: { node?: { id: string }; actor?: string; does: string; self: boolean }[];
+  path: {
+    node?: { id: string };
+    actor?: string;
+    does: string;
+    self: boolean;
+    where?: string;
+  }[];
   returns?: string;
 }
 
@@ -40,11 +61,16 @@ export interface FlowInput {
  */
 const WIDTH = 286;
 const PAD = 10;
-const BOX_W = WIDTH - PAD * 2;
+/** Room for a band to sit behind the boxes and still show at their edges. */
+const BAND_INSET = 6;
+const BOX_W = WIDTH - PAD * 2 - BAND_INSET * 2;
 const GAP = 30;
 const TITLE_H = 21;
 const LINE_H = 14;
 const BOX_PAD_Y = 9;
+/** Height of a band's label strip, above the first box it holds. */
+const BAND_LABEL_H = 18;
+const BAND_PAD_Y = 8;
 
 /**
  * Wrapping is by estimated width, not by character count. Counting characters
@@ -65,11 +91,18 @@ const advance = (ch: string, size: number) => {
   if (/[A-Z0-9]/.test(ch)) return 0.73 * size;
   return 0.64 * size;
 };
-const textWidth = (s: string, size: number) =>
-  [...s].reduce((w, ch) => w + advance(ch, size), 0);
+/**
+ * Semibold and bold both render about 1.14x wider than the weight the table
+ * was measured at. Titles are semibold, so leaving this out under-estimated
+ * every one of them by a seventh -- invisible until the boxes narrowed to make
+ * room for the machine bands, and then six titles ran out at once.
+ */
+const BOLD = 1.15;
+const textWidth = (s: string, size: number, weight = 1) =>
+  [...s].reduce((w, ch) => w + advance(ch, size), 0) * weight;
 
 /** Inner width of a station box, after the 14px text inset on each side. */
-const TEXT_W = WIDTH - PAD * 2 - 28;
+const TEXT_W = BOX_W - 28;
 const DOES_SIZE = 13;
 const TITLE_SIZE = 15;
 /** Width of the gutter the return arrow is drawn in. Its label is HTML below
@@ -78,12 +111,12 @@ const TITLE_SIZE = 15;
  *  15px type down to 7px. */
 const RETURN_GUTTER = 28;
 
-function wrap(text: string, size: number): string[] {
+function wrap(text: string, size: number, weight = 1): string[] {
   const lines: string[] = [];
   let line = '';
   for (const word of text.split(/\s+/)) {
     if (!line) line = word;
-    else if (textWidth(`${line} ${word}`, size) <= TEXT_W) line += ` ${word}`;
+    else if (textWidth(`${line} ${word}`, size, weight) <= TEXT_W) line += ` ${word}`;
     else {
       lines.push(line);
       line = word;
@@ -103,35 +136,64 @@ function wrap(text: string, size: number): string[] {
  */
 export function flowDiagram(graph: Graph, input: FlowInput): FlowDiagram {
   const stations: FlowStation[] = [];
+  const bands: FlowBand[] = [];
+  const boxX = PAD + BAND_INSET;
   let y = PAD;
+  let open: { label: string; top: number } | null = null;
 
-  for (const step of input.path) {
+  const closeBand = (bottom: number) => {
+    if (!open) return;
+    bands.push({
+      label: open.label,
+      x: PAD,
+      y: open.top,
+      w: WIDTH - PAD * 2,
+      h: bottom + BAND_PAD_Y - open.top,
+    });
+    open = null;
+  };
+
+  input.path.forEach((step, i) => {
+    // A band opens when `where` changes, so a run of steps on one machine is
+    // one labelled region and the boundary between two is a drawn edge.
+    if (step.where !== input.path[i - 1]?.where) {
+      closeBand(stations[stations.length - 1] ? y - GAP : y);
+      if (step.where) {
+        y += BAND_PAD_Y;
+        open = { label: step.where, top: y };
+        y += BAND_LABEL_H;
+      }
+    }
+
     const id = step.node?.id;
     const title = id ? (graph.byId.get(id)?.data.title ?? id) : step.actor!;
     const lines = wrap(step.does, DOES_SIZE);
-    const titleLines = wrap(title, TITLE_SIZE);
+    const titleLines = wrap(title, TITLE_SIZE, BOLD);
     const h = TITLE_H * titleLines.length + lines.length * LINE_H + BOX_PAD_Y * 2;
     stations.push({
       id,
       title,
       does: step.does,
       self: step.self,
-      x: PAD,
+      x: boxX,
       y,
       w: BOX_W,
       h,
       titleLines,
       lines,
+      bandTop: open?.top === y - BAND_LABEL_H ? open.top : undefined,
     });
     y += h + GAP;
-  }
+  });
+  closeBand(y - GAP);
 
-  const height = y - GAP + PAD + (input.returns ? 0 : 0);
+  const height = y - GAP + PAD + (bands.length ? BAND_PAD_Y : 0);
   const diagram: FlowDiagram = {
     width: WIDTH,
     height,
     scenario: input.scenario,
     stations,
+    bands,
   };
 
   if (input.returns) {
@@ -141,7 +203,10 @@ export function flowDiagram(graph: Graph, input: FlowInput): FlowDiagram {
       label: input.returns,
       fromY: last.y + last.h / 2,
       toY: first.y + first.h / 2,
-      x: PAD + BOX_W,
+      // Leaves the boxes, but its vertical leg runs clear of the bands -- it
+      // is about the whole path, not about any one machine on it.
+      x: boxX + BOX_W,
+      legX: WIDTH - PAD + 12,
     };
     diagram.width = WIDTH + RETURN_GUTTER;
   }
@@ -149,8 +214,20 @@ export function flowDiagram(graph: Graph, input: FlowInput): FlowDiagram {
   return diagram;
 }
 
-/** Plain-text equivalent, so the figure is not the only way to read it. */
-export function flowSummary(d: FlowDiagram): string {
-  const path = d.stations.map((s) => `${s.title} — ${s.does}`).join('; then ');
-  return d.returns ? `${path}. ${d.returns.label}` : `${path}.`;
+/**
+ * Plain-text equivalent, so the figure is not the only way to read it. The
+ * machine each step runs on is named the first time it changes, exactly where
+ * the drawing puts a band -- a reader who cannot see the bands still gets the
+ * boundary, and gets it in the same place.
+ */
+export function flowSummary(d: FlowDiagram, path: FlowInput['path'] = []): string {
+  const steps = d.stations.map((s, i) => {
+    const where = path[i]?.where;
+    const opens = where && where !== path[i - 1]?.where;
+    // No preposition: several of the places already begin with one, and "On on
+    // the wire" is what that produced.
+    return `${opens ? `${where}: ` : ''}${s.title} — ${s.does}`;
+  });
+  const joined = steps.join('; then ');
+  return d.returns ? `${joined}. ${d.returns.label}` : `${joined}.`;
 }

@@ -31,16 +31,20 @@ flow:
     any code for.
   path:
     - actor: An internal API
+      where: your infrastructure
       does: >-
         the thing you actually want reachable
     - node: mcp-server
+      where: your infrastructure
       does: >-
         declares what it offers, in one standard shape
       self: true
     - node: mcp
+      where: on the wire
       does: >-
         the protocol both ends agreed on
     - node: mcp-client
+      where: wherever the product runs
       does: >-
         one per server, held by whichever application connects
   returns: >-

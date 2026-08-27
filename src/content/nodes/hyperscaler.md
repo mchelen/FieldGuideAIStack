@@ -39,14 +39,21 @@ flow:
     Three model hosts, two model providers, and one company whose data
     centres all of them are sitting in.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        count the vendors, and find fewer than you expected
     - node: model-host
+      where: the host's own hardware
       does: >-
         sells you access to a model it runs
     - node: hyperscaler
+      where: the host's own hardware
       does: >-
         the cloud platform underneath, at a scale few can match
       self: true
     - node: accelerator
+      where: the host's own hardware
       does: >-
         whose supply is the thing actually being allocated
   returns: >-

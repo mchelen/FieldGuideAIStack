@@ -54,16 +54,20 @@ flow:
     ships no calendar code of its own.
   path:
     - actor: A question
+      where: a person, not a system
       does: >-
         "what is on my calendar tomorrow?"
     - node: connector
+      where: wherever the product runs
       does: >-
         the packaged integration, authorised once by you
       self: true
     - node: mcp
+      where: on the wire
       does: >-
         the standard underneath it, in most current products
     - node: harness
+      where: wherever the product runs
       does: >-
         which now has a tool it can call, without you writing code
   returns: >-

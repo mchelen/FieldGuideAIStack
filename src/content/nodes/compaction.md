@@ -39,17 +39,25 @@ flow:
     A long agent run approaching the context ceiling, with most of the
     history no longer needed in full.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        keep a long run going past the point it fits
     - actor: Sixty turns
+      where: wherever the product runs
       does: >-
         most of them finished work nobody needs verbatim
     - node: compaction
+      where: wherever the product runs
       does: >-
         replaces the older parts with a summary of them
       self: true
     - node: context-window
+      where: the prompt you send
       does: >-
         so what remains still fits under the ceiling
     - node: context-engineering
+      where: wherever the product runs
       does: >-
         the wider job this is one tactic of
   returns: >-

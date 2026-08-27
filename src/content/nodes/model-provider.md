@@ -29,17 +29,25 @@ flow:
     A model is deprecated with sixty days notice, and somebody has to work
     out whose decision that was.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        need to work out who to call
     - node: model-provider
+      where: the host's own hardware
       does: >-
         trained the weights, set the licence, chose the deprecation date
       self: true
     - node: model
+      where: the weights file
       does: >-
         the artifact they own and can retrain
     - node: model-host
+      where: the host's own hardware
       does: >-
         runs that artifact on its own hardware, under its own terms
     - node: inference-api
+      where: the provider's servers
       does: >-
         the endpoint you actually called, which belongs to the host
   returns: >-

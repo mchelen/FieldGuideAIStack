@@ -36,16 +36,20 @@ flow:
     read and stop before anything runs.
   path:
     - actor: A goal
+      where: a person, not a system
       does: >-
         several steps, none of them taken yet
     - node: planning
+      where: wherever the product runs
       does: >-
         the agent works out the steps and writes them down
       self: true
     - node: agentic-loop
+      where: wherever the product runs
       does: >-
         then executes them, revising as results come back
     - node: test-time-compute
+      where: the provider's servers
       does: >-
         and the plan itself is tokens spent before the work
   returns: >-

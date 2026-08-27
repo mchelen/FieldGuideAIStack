@@ -39,16 +39,20 @@ flow:
     showing three examples of them does.
   path:
     - actor: A task
+      where: a person, not a system
       does: >-
         described in words, and still done inconsistently
     - node: few-shot-prompting
+      where: the prompt you send
       does: >-
         three worked examples go into the prompt itself
       self: true
     - node: context-window
+      where: the prompt you send
       does: >-
         they occupy it, and are paid for, on every single call
     - node: prompt-engineering
+      where: your machine
       does: >-
         the family of fixes this is the cheapest member of
   returns: >-

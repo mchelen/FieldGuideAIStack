@@ -36,13 +36,16 @@ flow:
     committing to it early is the whole failure.
   path:
     - node: chain-of-thought-prompting
+      where: the prompt you send
       does: >-
         one line of reasoning, followed to the end
     - node: tree-of-thoughts
+      where: wherever the product runs
       does: >-
         several branches, evaluated, with backtracking
       self: true
     - node: self-consistency
+      where: the provider's servers
       does: >-
         the cheaper cousin — sample several, take the majority
   returns: >-

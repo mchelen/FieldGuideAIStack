@@ -36,19 +36,24 @@ flow:
     forty steps with nobody watching.
   path:
     - actor: A goal
+      where: a person, not a system
       does: >-
         one instruction, with no further input expected
     - node: agent
+      where: wherever the product runs
       does: >-
         a model driven in a loop until the goal is met or abandoned
       self: true
     - node: agentic-loop
+      where: wherever the product runs
       does: >-
         observe the last result, reason about it, act again
     - node: tool-use
+      where: wherever the product runs
       does: >-
         each act is a tool call, chosen by the model
     - node: harness
+      where: wherever the product runs
       does: >-
         runs the tool and feeds the result back as the next observation
   returns: >-

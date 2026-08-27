@@ -40,16 +40,20 @@ flow:
     words "ground transportation".
   path:
     - actor: A query
+      where: a person, not a system
       does: >-
         words that appear nowhere in the answer
     - node: embedding
+      where: your infrastructure
       does: >-
         query and documents both become positions in the same space
     - node: semantic-search
+      where: your infrastructure
       does: >-
         returns the nearest, which is the closest in meaning
       self: true
     - node: retrieval-augmented-generation
+      where: the prompt you send
       does: >-
         and the nearest few go into the prompt
   returns: >-

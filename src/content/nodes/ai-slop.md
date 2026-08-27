@@ -38,17 +38,21 @@ flow:
     exist rather than to be read.
   path:
     - actor: A publishing cost
+      where: the open web
       does: >-
         which fell to near zero
     - node: ai-slop
+      where: the open web
       does: >-
         low-quality generated content, produced at volume because it is
         cheap
       self: true
     - node: synthetic-data
+      where: a training cluster
       does: >-
         which then becomes training data for the next model
     - node: watermarking
+      where: the open web
       does: >-
         and the attempt to tell the two apart afterwards
   returns: >-

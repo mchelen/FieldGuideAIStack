@@ -40,16 +40,20 @@ flow:
     decide whether you may ship it.
   path:
     - actor: A download
+      where: your machine
       does: >-
         the parameter files, on your disk
     - node: open-weights
+      where: your machine
       does: >-
         a claim about availability, and only about availability
       self: true
     - node: permissive-license
+      where: a contract, not a computer
       does: >-
         a separate claim, about what you are allowed to do with them
     - node: open-source-ai
+      where: a contract, not a computer
       does: >-
         a third claim again, with a definition most releases fail
   returns: >-

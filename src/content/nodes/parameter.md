@@ -38,16 +38,20 @@ flow:
     does and does not tell you.
   path:
     - node: model
+      where: the weights file
       does: >-
         an architecture plus a set of learned numbers
     - node: parameter
+      where: the weights file
       does: >-
         one of those numbers; the count is the headline spec
       self: true
     - node: quantization
+      where: the weights file
       does: >-
         the same count stored less precisely, and much smaller
     - node: mixture-of-experts
+      where: inside one model call
       does: >-
         or a count where only a fraction is used per token
   returns: >-

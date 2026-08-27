@@ -32,16 +32,20 @@ flow:
     the instruction, and nothing else.
   path:
     - actor: An instruction
+      where: a person, not a system
       does: >-
         no examples, no worked reasoning, no scaffolding
     - node: zero-shot-prompting
+      where: the prompt you send
       does: >-
         the baseline case, and often good enough
       self: true
     - node: few-shot-prompting
+      where: the prompt you send
       does: >-
         the next thing to try when it is not
     - node: prompt-engineering
+      where: your evaluation harness
       does: >-
         and the measurement that says whether it helped
   returns: >-

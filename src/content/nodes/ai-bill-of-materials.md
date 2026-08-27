@@ -40,16 +40,20 @@ flow:
     our systems used that model.
   path:
     - actor: A system
+      where: your infrastructure
       does: >-
         built from models, tools, datasets and servers
     - node: ai-bill-of-materials
+      where: your infrastructure
       does: >-
         an inventory of every one of them
       self: true
     - node: provenance
+      where: your infrastructure
       does: >-
         which is what each entry is evidence about
     - node: permission-model
+      where: your infrastructure
       does: >-
         and what each of them was allowed to reach
   returns: >-

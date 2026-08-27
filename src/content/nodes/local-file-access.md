@@ -31,16 +31,20 @@ flow:
     in a product that may never see them.
   path:
     - actor: Two files
+      where: your machine
       does: >-
         on your machine, not uploaded anywhere
     - node: local-file-access
+      where: your machine
       does: >-
         the agent reads and writes them where they are
       self: true
     - node: command-execution
+      where: your machine
       does: >-
         and can run things against them in place
     - node: harness
+      where: your machine
       does: >-
         all of it on this side of the model, which sees only text
   returns: >-

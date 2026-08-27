@@ -33,16 +33,20 @@ flow:
     either team having heard of the other.
   path:
     - actor: A task
+      where: on the wire
       does: >-
         spanning two organisations' agents
     - node: agent-card
+      where: on the wire
       does: >-
         each side publishes what it is and what it can do
     - node: agent-to-agent-protocol
+      where: on the wire
       does: >-
         the open protocol for discovering and delegating across them
       self: true
     - node: mcp
+      where: on the wire
       does: >-
         the neighbouring standard — tools for an agent, not agents for an
         agent

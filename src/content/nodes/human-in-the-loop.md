@@ -38,16 +38,20 @@ flow:
     pause before the forty that do not.
   path:
     - node: agentic-loop
+      where: wherever the product runs
       does: >-
         runs unattended, step after step
     - node: approval-mode
+      where: wherever the product runs
       does: >-
         the policy deciding which steps stop
     - node: human-in-the-loop
+      where: a person, not a system
       does: >-
         a person answers, and the loop continues
       self: true
     - node: scheduled-task
+      where: nobody, at 3am
       does: >-
         which is where there may be nobody to ask at all
   returns: >-

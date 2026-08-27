@@ -39,13 +39,16 @@ flow:
     again, shipped by the vendor instead.
   path:
     - node: inference-api
+      where: the provider's servers
       does: >-
         the HTTP contract underneath
     - node: software-development-kit
+      where: your machine
       does: >-
         the vendor library wrapping it
       self: true
     - node: harness
+      where: wherever the product runs
       does: >-
         which uses it rather than writing HTTP by hand
   returns: >-

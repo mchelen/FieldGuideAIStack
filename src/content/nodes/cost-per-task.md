@@ -32,12 +32,15 @@ flow:
     nineteen calls and two retries.
   path:
     - node: agentic-loop
+      where: wherever the product runs
       does: >-
         one instruction becomes many calls
     - node: token-pricing
+      where: a contract, not a computer
       does: >-
         each call is priced per token, which looks small
     - node: cost-per-task
+      where: your invoice
       does: >-
         what one completed job costs once retries are counted
       self: true

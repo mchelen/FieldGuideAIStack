@@ -36,19 +36,24 @@ flow:
     never will be.
   path:
     - actor: A question
+      where: a person, not a system
       does: >-
         needs a fact the model cannot have
     - node: tool-use
+      where: the provider's servers
       does: >-
         the model emits a structured request to run a named function
       self: true
     - node: approval-mode
+      where: wherever the product runs
       does: >-
         decides whether that request runs without asking anyone
     - node: agent
+      where: wherever the product runs
       does: >-
         the caller runs it and returns the result as the next input
     - node: prompt-injection
+      where: wherever the product runs
       does: >-
         and whatever comes back is now text the model will read
   returns: >-

@@ -36,16 +36,20 @@ flow:
     again — rather than suggesting a line.
   path:
     - actor: A failing test
+      where: your machine
       does: >-
         the goal, and the thing that says when it is met
     - node: agentic-coding
+      where: your machine
       does: >-
         the agent writes, runs and fixes rather than suggesting
       self: true
     - node: command-execution
+      where: your machine
       does: >-
         which is what makes running it possible at all
     - node: verification-loop
+      where: your machine
       does: >-
         and what lets the loop stop on evidence
   returns: >-

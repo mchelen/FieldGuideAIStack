@@ -36,17 +36,25 @@ flow:
     The same prompt run twice returning different answers, and a config
     value that explains exactly how much.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        send the same prompt and get two different answers
     - node: model
+      where: inside one model call
       does: >-
         produces a probability distribution over the next token
     - node: temperature
+      where: the provider's servers
       does: >-
         flattens or sharpens it before one is picked
       self: true
     - node: inference-api
+      where: the provider's servers
       does: >-
         set per request, alongside the rest of the configuration
     - node: parameter
+      where: the weights file
       does: >-
         and not one of these — it changes nothing inside the model
   returns: >-

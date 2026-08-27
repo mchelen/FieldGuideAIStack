@@ -34,16 +34,20 @@ flow:
     trained to imitate its answers.
   path:
     - node: model
+      where: wherever the product runs
       does: >-
         the large one, whose outputs are the training signal
     - node: distillation
+      where: a training cluster
       does: >-
         a smaller model trained to match what it produced
       self: true
     - node: fine-tuning
+      where: a training cluster
       does: >-
         the mechanism, with the teacher's outputs as the data
     - node: quantization
+      where: the weights file
       does: >-
         the other way to shrink one, which changes no behaviour on purpose
   returns: >-

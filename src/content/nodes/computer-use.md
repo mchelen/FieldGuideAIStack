@@ -37,17 +37,25 @@ flow:
     A desktop application with no API and no plans for one, and work that
     has to happen inside it anyway.
   path:
+    - actor: You
+      where: a person, not a system
+      does: >-
+        ask for work done in an app with no API
     - actor: A screen
+      where: a bounded environment
       does: >-
         pixels, with no API behind them
     - node: computer-use
+      where: a bounded environment
       does: >-
         the agent takes screenshots and moves a mouse
       self: true
     - node: tool-use
+      where: wherever the product runs
       does: >-
         each click is a tool call like any other
     - node: browser-automation
+      where: a bounded environment
       does: >-
         the narrower case, where the surface is a browser
   returns: >-

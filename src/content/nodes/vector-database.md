@@ -39,16 +39,20 @@ flow:
     closest in meaning in under 50 milliseconds.
   path:
     - actor: A corpus
+      where: your machine
       does: >-
         sixty thousand articles, chunked
     - node: embedding
+      where: your infrastructure
       does: >-
         each chunk becomes a list of numbers positioned by meaning
     - node: vector-database
+      where: your infrastructure
       does: >-
         stores them indexed for nearness, not for exact match
       self: true
     - node: retrieval-augmented-generation
+      where: the prompt you send
       does: >-
         the query embeds the same way, and the nearest come back
   returns: >-

@@ -36,19 +36,24 @@ flow:
     how long it was allowed to spend answering.
   path:
     - actor: A hard question
+      where: a person, not a system
       does: >-
         one the first attempt tends to get wrong
     - node: test-time-compute
+      where: the provider's servers
       does: >-
         spend more while answering rather than more while training
       self: true
     - node: effort-level
+      where: the provider's servers
       does: >-
         the dial a vendor exposes for it
     - node: token
+      where: your invoice
       does: >-
         what it is actually spent in, and billed in
     - node: reasoning-model
+      where: the provider's servers
       does: >-
         a model trained to spend it without being asked
   returns: >-

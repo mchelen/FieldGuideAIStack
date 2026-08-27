@@ -39,16 +39,20 @@ flow:
     is allowed to think about it.
   path:
     - actor: A request
+      where: a person, not a system
       does: >-
         one that would reward more thinking
     - node: inference-api
+      where: on the wire
       does: >-
         carries the setting alongside the messages
     - node: effort-level
+      where: the provider's servers
       does: >-
         how much the model may spend before answering
       self: true
     - node: test-time-compute
+      where: the provider's servers
       does: >-
         the thing being bought, under a vendor's name for it
   returns: >-

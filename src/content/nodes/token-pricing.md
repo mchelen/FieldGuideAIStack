@@ -38,16 +38,20 @@ flow:
     whose layout decides which apply.
   path:
     - node: token-billing
+      where: your invoice
       does: >-
         charges by consumption, counted separately in and out
     - node: token-pricing
+      where: a contract, not a computer
       does: >-
         input, output and cached input all priced differently
       self: true
     - node: prompt-caching
+      where: the provider's servers
       does: >-
         which is the cheapest of them, by an order of magnitude
     - node: cost-per-task
+      where: your invoice
       does: >-
         and the number that actually matters, once retries are counted
   returns: >-

@@ -40,13 +40,16 @@ flow:
     worked fine on the twenty-seventh.
   path:
     - node: subscription-tier
+      where: a contract, not a computer
       does: >-
         the plan, and what it includes
     - node: usage-limit
+      where: a contract, not a computer
       does: >-
         the ceiling on consumption over a period
       self: true
     - node: rate-limit
+      where: a contract, not a computer
       does: >-
         the other ceiling, which shapes traffic rather than total
   returns: >-

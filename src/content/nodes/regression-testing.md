@@ -39,16 +39,20 @@ flow:
     thought to re-check.
   path:
     - actor: A change
+      where: your machine
       does: >-
         an improvement, on the case it was made for
     - node: regression-testing
+      where: your evaluation harness
       does: >-
         re-runs what already worked, against your own last release
       self: true
     - node: evaluation
+      where: your evaluation harness
       does: >-
         over a fixed set, so "unchanged" means something
     - node: benchmark
+      where: your evaluation harness
       does: >-
         which compares models, and answers a different question
   returns: >-

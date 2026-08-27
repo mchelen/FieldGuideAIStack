@@ -39,16 +39,20 @@ flow:
     where being confidently wrong is expensive.
   path:
     - actor: A question
+      where: a person, not a system
       does: >-
         one the model would happily answer from memory
     - node: retrieval-augmented-generation
+      where: your infrastructure
       does: >-
         fetches the passages that bear on it
     - node: grounding
+      where: the prompt you send
       does: >-
         the answer is built from those, not from what the model recalls
       self: true
     - node: citation-precision-and-recall
+      where: what the reader sees
       does: >-
         and every claim points at the passage it rests on
   returns: >-

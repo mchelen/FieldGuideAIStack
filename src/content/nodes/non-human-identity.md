@@ -40,13 +40,16 @@ flow:
     asleep at the time.
   path:
     - node: autonomous-agent
+      where: wherever the product runs
       does: >-
         acts without anyone being asked in the moment
     - node: non-human-identity
+      where: your infrastructure
       does: >-
         the credential it acts under, which should not be a person's
       self: true
     - node: permission-model
+      where: your infrastructure
       does: >-
         what that credential is allowed to do, decided separately
   returns: >-
