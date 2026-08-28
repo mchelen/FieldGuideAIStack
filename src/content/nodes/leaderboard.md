@@ -86,6 +86,20 @@ sources:
     url: https://crfm.stanford.edu/helm/
     title: HELM — Stanford Center for Research on Foundation Models
     verifiedOn: 2026-08-22
+    note: >-
+      Listed to back the example above, not cited at a claim. The site is a
+      JavaScript app, so there is nothing on it a fetcher can quote — which is
+      fine for "go and look at this" and not fine for "this page says so".
+  - id: helm-paper
+    url: https://arxiv.org/abs/2211.09110
+    title: Holistic Evaluation of Language Models — Liang et al.
+    verifiedOn: 2026-08-28
+    quote: >-
+      Second, we adopt a multi-metric approach: We measure 7 metrics (accuracy, calibration, robustness, fairness, bias, toxicity, and efficiency) for each of 16 core scenarios when possible
+    note: >-
+      Cited here instead of the HELM site, which serves a fetcher an empty
+      frame — the multi-metric design this claim rests on is stated in the
+      paper and nowhere a reader can check on the site.
   - id: judge-paper
     url: https://arxiv.org/abs/2306.05685
     title: Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena — Zheng et al.
@@ -137,7 +151,7 @@ discriminate.
 This is not cynicism about anyone's conduct — it is the ordinary consequence of
 publishing a shared measure. HELM's multi-metric design is one response:
 several scores across several scenarios resist collapsing into a single thing to
-climb.[[cite:helm-site]]
+climb.[[cite:helm-paper]]
 
 ## How to use one
 

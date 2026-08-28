@@ -463,11 +463,21 @@ any new development work.
   so a page documenting a `<FILL_ME>` token could only be quoted by storing
   `&lt;FILL_ME>` -- which is not what the page says and not what anyone would
   copy. Decode anything that would otherwise force a quote to carry markup.
-- Some cited pages cannot be quoted at all: a landing page for a PDF, or one
-  whose substance arrives by JavaScript. `check:links` warns when a live page
-  yields under 4,000 characters of readable text. The fix is to cite the
-  document that carries the claim, not to leave the citation pointing at
-  navigation.
+- Some cited pages cannot be quoted at all, because a fetcher gets an empty
+  JavaScript frame. `check:links` warns when a page cited **at a claim** serves
+  under 400 characters of prose. The fix is to cite the document that carries
+  the claim.
+- That threshold is deliberately tiny, and the scope is deliberately narrow,
+  because the first version of the check was wrong in both. It counted all
+  readable text, warned under 4,000 characters, and flagged thirteen pages —
+  five of which already carried quotes that re-verify on every run. Volume does
+  not separate the two: Stanford's CRFM page is quotable at 1,309 characters of
+  prose and Hugging Face's tokenizers index is not at 2,239.
+- A source listed only to back an `examples` entry is exempt. That source is
+  evidence the thing exists at that URL, which the URL itself supplies — HELM's
+  leaderboard is a JavaScript app and is still exactly where to send someone
+  who wants to look at leaderboards. A source cited at a claim makes a
+  different promise: that the page says something.
 - Verify a batch by running `draft:freshness --max-age 0`, which re-fetches
   every page and reports how many quotes are still on them. Zero "no longer on
   the page" is the pass condition.
