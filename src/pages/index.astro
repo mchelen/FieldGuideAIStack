@@ -84,45 +84,6 @@ const LEVELS = [
   </div>
 
   <div class="wrap">
-    <section style="margin-top:2.6rem">
-      <h2 style="margin-bottom:0.2rem"><Icon name="product" /> Product families</h2>
-      <p style="color:var(--ink-soft);margin:0">
-        Every vendor here sells several products off one engine. Start with the
-        family to see what is shared before comparing the members.
-      </p>
-      <ul class="cards">
-        {suites.map((n) => (
-          <li class="card is-suite">
-            <a class="title" href={`${base}/nodes/${n.id}/`}>{n.title}</a>
-            <p>{n.summary}</p>
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <section style="margin-top:2.6rem">
-      <h2 style="margin-bottom:0.2rem"><Icon name="product" /> Products</h2>
-      <p style="color:var(--ink-soft);margin:0">
-        The things you can actually buy or install, decomposed into the
-        capabilities they ship. <a href={`${base}/compare`}>See them side by side.</a>
-      </p>
-      {
-        byVendor.map((group) => (
-          <>
-            <h3 style="margin-bottom:0.2rem">{group.vendor}</h3>
-            <ul class="cards">
-              {group.nodes.map((n) => (
-                <li class="card is-product">
-                  <a class="title" href={`${base}/nodes/${n.id}/`}>{n.title}</a>
-                  <p>{n.summary}</p>
-                </li>
-              ))}
-            </ul>
-          </>
-        ))
-      }
-    </section>
-
     <section style="margin-top:2.6rem" id="concepts">
       <h2 style="margin-bottom:0.2rem"><Icon name="concept" /> The concepts</h2>
       {/* Every card is rendered; the control hides the finer ones. Without
@@ -160,6 +121,46 @@ const LEVELS = [
           </>
         ))}
       </ul>
+    </section>
+
+    <section style="margin-top:2.6rem">
+      <h2 style="margin-bottom:0.2rem"><Icon name="product" /> Product families</h2>
+      <p style="color:var(--ink-soft);margin:0">
+        The concepts above, assembled and sold. Every vendor here ships several
+        products off one engine, so start with the family to see what is shared
+        before comparing the members.
+      </p>
+      <ul class="cards">
+        {suites.map((n) => (
+          <li class="card is-suite">
+            <a class="title" href={`${base}/nodes/${n.id}/`}>{n.title}</a>
+            <p>{n.summary}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section style="margin-top:2.6rem">
+      <h2 style="margin-bottom:0.2rem"><Icon name="product" /> Products</h2>
+      <p style="color:var(--ink-soft);margin:0">
+        The things you can actually buy or install, decomposed into the
+        capabilities they ship. <a href={`${base}/compare`}>See them side by side.</a>
+      </p>
+      {
+        byVendor.map((group) => (
+          <>
+            <h3 style="margin-bottom:0.2rem">{group.vendor}</h3>
+            <ul class="cards">
+              {group.nodes.map((n) => (
+                <li class="card is-product">
+                  <a class="title" href={`${base}/nodes/${n.id}/`}>{n.title}</a>
+                  <p>{n.summary}</p>
+                </li>
+              ))}
+            </ul>
+          </>
+        ))
+      }
     </section>
 
     <section style="margin-top:3rem">
