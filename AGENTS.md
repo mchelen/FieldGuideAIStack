@@ -333,6 +333,18 @@ any new development work.
   the real findings; the check skips anything with a scrolling or clipping
   ancestor for exactly this reason.
 
+## The index order
+- Concepts first, then product families, then products, then tags. The guide is
+  155 concepts and 8 products, and a reader arriving at a vendor catalogue has
+  to scroll past it to reach what the guide is for. Products led for a long
+  time, which cost a phone reader 3,154px — three and a half screens — before
+  the first concept; it is 666px now.
+- The concepts section opens on level 1, so the first thing on the page is the
+  fourteen terms everything else is defined against. That is the same "high
+  level to detailed" journey the zoom control offers, applied to the landing.
+- Products are not demoted, they are placed: they read as the concepts above
+  assembled and sold, which is the relationship the guide is trying to teach.
+
 ## Zoom levels
 - Every node declares `zoom` — **the coarsest level at which it should appear**,
   so a level is cumulative: level 2 means "1 and 2". The index and the graph
