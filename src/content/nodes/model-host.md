@@ -7,7 +7,7 @@ canonical:
     No settled term. AWS describes Bedrock as "a fully managed service" and
     others say inference provider, model gateway or serving platform. The role
     is distinct from the model provider and worth naming, whatever the name.
-tags: [core, org, infrastructure]
+tags: [orgs, infrastructure]
 zoom: 1
 summary: A service that runs someone else's model on its own hardware and sells
   you access to it, usually under its own API, billing, and identity system.

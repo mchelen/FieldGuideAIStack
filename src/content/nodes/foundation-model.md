@@ -14,7 +14,7 @@ canonical:
   note: >-
     Unusually well-attributed for this vocabulary: the report states outright
     that it is naming the category. Google's glossary carries the same sense.
-tags: [core, artifact]
+tags: [artifact]
 zoom: 2
 summary: A very large model pre-trained on broad data, general enough to answer
   a wide range of requests and to serve as the base other models are adapted

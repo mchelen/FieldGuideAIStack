@@ -13,7 +13,7 @@ canonical:
     older name is narrower — it assumed the thing being called was one of your
     functions — and lost ground as the category widened to search, [code
     execution](command-execution) and whole toolsets.
-tags: [capability, interface]
+tags: [capability, interfaces]
 zoom: 2
 summary: The model emits a structured request to run a named function with
   arguments; the caller runs it and feeds the result back. The model never

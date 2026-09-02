@@ -15,7 +15,7 @@ canonical:
     definition" and records an active disagreement about whether earlier
     architectures qualify. The term is used constantly and defined nowhere
     binding.
-tags: [core]
+tags: [models]
 zoom: 1
 summary: The umbrella term for models that produce content rather than classify
   it — text, images, audio, video — and the label under which most of this

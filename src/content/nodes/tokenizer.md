@@ -11,7 +11,7 @@ canonical:
   url: https://developers.google.com/machine-learning/glossary
   title: Machine Learning Glossary — Google for Developers
   verifiedOn: 2026-08-22
-tags: [core, artifact]
+tags: [artifact]
 zoom: 2
 summary: The program that turns raw input into the tokens a model can read, and
   the tokens back into text afterwards. It ships with the model and is not

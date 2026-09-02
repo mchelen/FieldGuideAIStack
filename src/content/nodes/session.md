@@ -16,7 +16,7 @@ canonical:
     with stored state. What is specific here is that a session owns a context
     window, which makes starting a new one a meaningful act rather than
     housekeeping.
-tags: [agentic, core]
+tags: [agentic]
 zoom: 2
 summary: One continuous run of an agent and the state scoped to it — its
   conversation, its context window, and everything that disappears when it ends.

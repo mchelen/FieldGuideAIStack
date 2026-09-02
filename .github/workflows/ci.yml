@@ -34,6 +34,13 @@ jobs:
       - name: Concept coverage
         run: npm run backlog
 
+      # The tag vocabulary is the guide's only non-exclusive facet and the
+      # thing the index filter runs on, so it has to stay a set of browsable
+      # subjects. Fails on tags too small to narrow anything, on one subject
+      # spelled two ways, and on a tag restating `kind` or `zoom`.
+      - name: Check tags
+        run: npm run check:tags
+
       # The content schema is enforced by the build itself -- a bad frontmatter
       # field or a relation pointing at a node that does not exist fails here.
       - name: Type check

@@ -3,7 +3,7 @@ title: ChatGPT
 kind: product
 vendor: OpenAI
 aka: [ChatGPT app]
-tags: [product, assistant]
+tags: [assistant]
 zoom: 1
 summary: OpenAI's conversational assistant, running on web, desktop and mobile,
   with connected apps and an agent mode you switch into.

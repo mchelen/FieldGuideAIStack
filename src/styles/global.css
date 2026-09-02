@@ -606,6 +606,31 @@ ol.sources li:target { background: var(--accent-soft); border-radius: 5px; }
 .zoom-count { font-family: var(--font-mono); font-size: 0.76rem; color: var(--ink-faint); }
 .zoom-control button[aria-pressed='true'] .zoom-count { color: var(--accent); }
 .zoom-blurb { color: var(--ink-soft); margin: 0 0 0.2rem; }
+
+/* The second axis. Visually quieter than the level control on purpose: the
+   ladder is the front door and the subjects are the way sideways, so they are
+   text-weight chips rather than a second row of buttons competing with it. */
+.subject-control { display: flex; flex-wrap: wrap; gap: 0.3rem 0.4rem; margin: 0 0 0.7rem; }
+.subject-control a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  background: var(--bg-raised);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.16rem 0.6rem;
+}
+.subject-control a:hover { border-color: var(--accent); color: var(--accent); }
+.subject-control a[aria-current='true'] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 620;
+}
+.subject-control a[aria-current='true'] .zoom-count { color: var(--accent); }
 .zoom-control button { flex-direction: column; align-items: flex-start; gap: 0; padding: 0.3rem 0.9rem 0.34rem; }
 .zoom-for { font-size: 0.74rem; color: var(--ink-faint); font-weight: 400; }
 .zoom-control button[aria-pressed='true'] .zoom-for { color: var(--accent); }
@@ -634,6 +659,12 @@ ol.sources li:target { background: var(--accent-soft); border-radius: 5px; }
    which a class selector setting `display: flex` beats. Without this the zoom
    control set the attribute on 139 cards and hid none of them. */
 .cards > .card[hidden] { display: none; }
+/* Same trap one level up: `.cards` sets `display: grid`, which beats the UA
+   stylesheet's [hidden] rule, so a filtered-out list would leave a vendor's
+   name over an empty row. Not reachable with the products in the guide today —
+   every subject one vendor carries, all three do — so it is written against the
+   next product rather than against a bug anyone has seen. */
+.cards[hidden] { display: none; }
 
 /* The quoted sentence under a source: evidence, not decoration. */
 .src-quote {

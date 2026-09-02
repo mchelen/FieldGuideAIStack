@@ -14,7 +14,7 @@ canonical:
     Named in the paper that introduced it and used unchanged since. Google's
     glossary capitalises it; most vendors do not. Nothing else about the term
     is contested.
-tags: [core, structure]
+tags: [structure]
 zoom: 2
 summary: The neural network architecture nearly every current language model is
   built from — a stack of self-attention layers, with no recurrence and no

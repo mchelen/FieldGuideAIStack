@@ -116,6 +116,68 @@ const problems = [];
   }
   await page.close();
 }
+// The subject filter, on the same principle: every chip's count against the
+// cards the page paints under it, across the whole index rather than the
+// concepts alone. The counts are rendered from the graph and the filtering is
+// done in the browser, so this is the only place the two are compared.
+{
+  const page = await browser.newPage({ viewport: { width: 1200, height: 900 } });
+  const res = await page.goto(`${origin}/`, { waitUntil: 'load' }).catch(() => null);
+  if (!res || res.status() >= 400) {
+    problems.push('index did not load — the subject-filter check could not run');
+  } else {
+    const seen = await page.evaluate(async () => {
+      const painted = () =>
+        [...document.querySelectorAll('.card[data-subjects]')].filter(
+          (c) => c.getClientRects().length > 0,
+        ).length;
+      const out = [];
+      // `Any subject` carries no count -- it clears the filter rather than
+      // naming a subject, and it leaves the level control where it was.
+      for (const a of document.querySelectorAll('.subject-control a[data-subject] .zoom-count')) {
+        const link = a.closest('a');
+        link.click();
+        // Driven by the hash, so the change lands on the hashchange event.
+        await new Promise((r) => setTimeout(r, 0));
+        await new Promise((r) => requestAnimationFrame(r));
+        out.push({
+          subject: link.dataset.subject,
+          claimed: Number(a.textContent),
+          painted: painted(),
+          // A vendor heading left over an empty list. Every subject in the
+          // guide today is carried by at least one product from every vendor,
+          // so this passes without ever finding the case; it is here for the
+          // first subject that is not, which is a product away.
+          strandedHeadings: [...document.querySelectorAll('h3')].filter(
+            (h) =>
+              h.getClientRects().length > 0 &&
+              h.nextElementSibling?.classList.contains('cards') &&
+              ![...h.nextElementSibling.querySelectorAll('.card')].some(
+                (c) => c.getClientRects().length > 0,
+              ),
+          ).length,
+        });
+      }
+      return out;
+    });
+    if (seen.length < 2) {
+      problems.push(`index: subject filter rendered ${seen.length} option(s)`);
+    }
+    for (const s of seen) {
+      if (s.painted !== s.claimed) {
+        problems.push(
+          `index: subject "${s.subject}" says ${s.claimed} pages but paints ${s.painted}`,
+        );
+      }
+      if (s.strandedHeadings) {
+        problems.push(
+          `index: subject "${s.subject}" leaves ${s.strandedHeadings} heading(s) over an empty list`,
+        );
+      }
+    }
+  }
+  await page.close();
+}
 // Search, exercised the way a reader uses it: type, and see what comes back.
 //
 // The case that matters is the alias one. The charter's whole framing is that
@@ -290,6 +352,6 @@ server.close();
 
 for (const p of problems) console.log(`  FAIL  ${p}`);
 console.log(
-  `${problems.length ? 'FAIL' : 'PASS'}  rendered layout — ${PAGES.length} page(s) at ${WIDTHS.join(', ')}px plus the zoom control and the applied illustration, ${problems.length} problem(s)`,
+  `${problems.length ? 'FAIL' : 'PASS'}  rendered layout — ${PAGES.length} page(s) at ${WIDTHS.join(', ')}px plus the zoom control, the subject filter and the applied illustration, ${problems.length} problem(s)`,
 );
 process.exit(problems.length ? 1 : 0);

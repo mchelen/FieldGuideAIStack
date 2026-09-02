@@ -15,7 +15,7 @@ canonical:
     Recent and vendor-coined, but consistently used for the same contrast:
     an assistant that acts against a codebase, as opposed to one that returns
     text a person applies.
-tags: [agentic, core]
+tags: [agentic]
 zoom: 2
 summary: Using an agent to write, run and fix code rather than to suggest it —
   the distinction being whether the tool can act on the repository itself.

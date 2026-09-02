@@ -11,7 +11,7 @@ canonical:
   url: https://developers.google.com/machine-learning/glossary
   title: Machine Learning Glossary — Google for Developers
   verifiedOn: 2026-08-22
-tags: [training, core]
+tags: [training]
 zoom: 2
 summary: A second training pass on an already-trained model, using a much
   smaller set of task-specific examples to move its weights toward one job.

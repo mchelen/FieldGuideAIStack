@@ -296,6 +296,35 @@ if (flowProblems.length) problems.push(`applied illustrations: ${flowProblems.sl
 else if (drawn === 0) problems.push('no page carries an applied illustration');
 else ok(`${drawn} applied illustration(s) drawn, each matching its frontmatter`);
 
+// The subject filter, which is only useful if its two halves agree. A control
+// offering a subject no card carries narrows the index to nothing; a card
+// carrying a subject the control does not offer is unreachable from here.
+{
+  const home = await readFile(join(DIST, 'index.html'), 'utf8');
+  const offered = new Set(
+    [...home.matchAll(/data-subject="([^"]+)"/g)].map((m) => m[1]).filter((t) => t !== 'all'),
+  );
+  const carried = new Set(
+    [...home.matchAll(/data-subjects="([^"]*)"/g)].flatMap((m) => m[1].split(' ')).filter(Boolean),
+  );
+  if (!offered.size) problems.push('index ships no subject filter');
+  for (const t of offered) {
+    if (!carried.has(t)) problems.push(`subject filter offers "${t}", which no concept card carries`);
+  }
+  for (const t of carried) {
+    if (!offered.has(t)) problems.push(`concept cards carry subject "${t}", which the filter does not offer`);
+  }
+  // Every chip on a concept page has to land on a subject the index knows, or
+  // the reader arrives at an unfiltered index and nothing explains why.
+  for (const id of ids) {
+    const html = await readFile(join(DIST, 'nodes', id, 'index.html'), 'utf8');
+    for (const m of html.matchAll(/href="[^"]*\/#subject=([^"]+)"/g)) {
+      if (!offered.has(m[1])) problems.push(`${id}: chip links to subject "${m[1]}", which the index does not offer`);
+    }
+  }
+  if (offered.size) ok(`subject filter: ${offered.size} subjects, every one carried and every chip resolving`);
+}
+
 const bundles = (await readdir(join(DIST, '_astro'))).filter((f) => f.endsWith('.js'));
 if (bundles.length === 0) problems.push('no client bundle emitted for the graph explorer');
 else ok(`${bundles.length} client bundle(s) emitted`);

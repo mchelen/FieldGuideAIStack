@@ -15,7 +15,7 @@ canonical:
     Google distinguishes the embedding vector from the embedding layer that
     produces it. In everyday use "embedding" means the vector, and the
     distinction only matters when discussing training.
-tags: [core, artifact]
+tags: [artifact]
 zoom: 2
 summary: A list of numbers representing a piece of content, positioned so that
   things with similar meaning end up near each other.

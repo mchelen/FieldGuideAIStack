@@ -14,7 +14,7 @@ canonical:
   note: >-
     No standards body defines it. Every major vendor and framework uses the same
     word for the same thing, which is as settled as this vocabulary gets.
-tags: [core, artifact]
+tags: [artifact]
 zoom: 1
 summary: The atomic unit a model reads and emits — usually a word fragment
   rather than a word, and the unit every limit and every bill is counted in.

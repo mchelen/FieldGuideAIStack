@@ -15,7 +15,7 @@ canonical:
     The mechanism predates the paper; the paper made it the whole architecture
     and fixed the vocabulary — self-attention, multi-head attention, query, key,
     value — that everyone now uses.
-tags: [core, structure]
+tags: [structure]
 zoom: 3
 summary: The operation that lets each position in a sequence look at every other
   position and weigh how much each one matters.

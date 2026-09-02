@@ -3,7 +3,7 @@ title: Gemini Spark
 kind: product
 vendor: Google
 aka: [Spark]
-tags: [product, agent]
+tags: [agentic]
 zoom: 1
 summary: Google's always-on personal agent — runs in the cloud after you close
   the laptop, and acts through Chrome using your logged-in accounts.

@@ -8,7 +8,7 @@ canonical:
     the same thing, and policy writing prefers "[frontier AI developer](frontier-lab)" for the
     subset operating at the leading edge. This guide separates provider, host
     and [hyperscaler](hyperscaler) because the same company is frequently two of the three.
-tags: [core, org]
+tags: [orgs]
 zoom: 1
 summary: The organization that trains a model and owns its weights, sets its
   license, and decides what gets released.

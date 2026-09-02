@@ -15,7 +15,7 @@ canonical:
     Standard in machine learning, and Google's entry notes that the generative
     case is broader than the classical one. The clipped plural "evals" is now
     more common in practice than the full word.
-tags: [evaluation, core]
+tags: [evaluation]
 zoom: 1
 summary: A repeatable test of model or system behaviour — the only thing that
   turns "it seems better" into a claim anyone can check.

@@ -12,7 +12,7 @@ canonical:
     carries no entry for the collective. Vendors increasingly use
     "post-training" for the whole phase after pretraining, and this guide
     follows that usage while recording that it is not settled.
-tags: [training, core]
+tags: [training]
 zoom: 2
 summary: Everything done to a model after pretraining to turn a text
   continuation engine into something that answers, follows instructions and

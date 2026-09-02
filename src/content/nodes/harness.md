@@ -13,7 +13,7 @@ canonical:
     describe the same component, and much writing has no word for it at all —
     which is precisely the confusion this guide exists to fix, since most
     claims about what "the AI" can do are claims about the harness.
-tags: [core, runtime]
+tags: [runtime]
 zoom: 1
 summary: The program that turns a model into something useful — it assembles
   context, calls the model, executes the tools the model asks for, and loops.

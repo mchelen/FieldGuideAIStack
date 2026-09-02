@@ -16,7 +16,7 @@ canonical:
     "test set" and "evaluation" but not "benchmark", which is a fair reflection
     of the term being about the social role of a dataset rather than a
     technical property of one.
-tags: [evaluation, core]
+tags: [evaluation]
 zoom: 2
 summary: A shared evaluation used to compare models — and, because it is shared,
   a target that models get optimised against.

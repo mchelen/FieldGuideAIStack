@@ -3,7 +3,7 @@ title: ChatGPT Work
 kind: product
 vendor: OpenAI
 aka: [Work mode, ChatGPT agent mode]
-tags: [product, agent]
+tags: [agentic]
 zoom: 1
 summary: OpenAI's agentic mode for multi-step work inside Business and
   Enterprise workspaces, producing documents, spreadsheets and presentations.

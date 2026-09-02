@@ -57,7 +57,7 @@ export function neighborhood(graph: Graph, centerId: string): Diagram {
     w: boxWidth(centerEntry.data.title),
     h: BOX_H + 6,
     center: true,
-    tag: centerEntry.data.tags[0] ?? 'core',
+    tag: centerEntry.data.tags[0] ?? 'concept',
   };
 
   const seen = new Set<string>();
@@ -88,7 +88,7 @@ export function neighborhood(graph: Graph, centerId: string): Diagram {
       w: boxWidth(entry.data.title),
       h: BOX_H,
       center: false,
-      tag: entry.data.tags[0] ?? 'core',
+      tag: entry.data.tags[0] ?? 'concept',
     };
     nodes.push(node);
 

@@ -345,6 +345,50 @@ any new development work.
 - Products are not demoted, they are placed: they read as the concepts above
   assembled and sold, which is the relationship the guide is trying to teach.
 
+## Tags, the subject facet
+- Tags are the guide's **only non-exclusive facet**. A page carries several, so
+  `sandbox` sits under both `agentic` and `safety` and neither has to win. That
+  is what makes them the right answer to "show me everything about security",
+  and it is why the `area` field in the concept inventory is not: `area` is a
+  partition, one home each, assigned once when the guide had twenty written
+  pages, and never sourced or re-examined since. It stays a backlog tool.
+- **A tag is a subject.** Not a level, not a kind. `core` sat on 27 pages while
+  `zoom: 1` sat on 25 and the two agreed on only ten — two claims about what a
+  beginner meets first, disagreeing, with the index rendering one of them in the
+  level control and the other in the chips right under it. `product` and `suite`
+  restated `kind` the same way. `npm run check:tags` fails on any tag that
+  restates a schema field, because the moment the two disagree the page argues
+  with itself.
+- **One subject, one spelling.** `org` and `orgs`, `interface` and `interfaces`:
+  browsing either gave you half the answer. The check fails on any two tags a
+  single character apart.
+- **A tag has to narrow something.** `protocol` was on one page and `standard`
+  on two. Under three pages a tag is a link, not a facet, and the check fails.
+- The vocabulary is enforced but **not authored by the checker.** Two reports
+  are warnings, because the fix is a judgement about subject matter: a tagged
+  page that links to nothing else under that tag, and a page whose linked
+  neighbours overwhelmingly carry a tag it lacks. `node scripts/check-tags.mjs
+  --all` lists every suggestion.
+- `scripts/lib/derived-tags.mjs` clusters the *edges* of the association graph
+  (link communities, Ahn/Bagrow/Lehmann 2010) so the check can ask the one
+  question the vocabulary cannot ask of itself: **is there a subject the guide
+  groups that nobody has named?** Fourteen of seventeen clusters currently have
+  no tag on a majority of their members. Nothing is rendered from it; it only
+  raises a warning count, so drift in the prose costs a line in a log.
+- The index filter is the browse surface, on a **second axis that composes with
+  the levels**: a level is how deep into the vocabulary you are and applies to
+  the concepts, a subject is which part of the guide you are in and applies to
+  the products too. Restricting subjects to the concepts stranded `assistant`,
+  which three product pages carry and no concept does, so its chips pointed at a
+  filter that did not offer it.
+- Subjects are driven by `location.hash`, not by the click: a chip on a concept
+  page lands on the index already narrowed, and the back button steps through
+  the subjects a reader has looked at. Arriving on a subject opens the level all
+  the way — you asked for everything about it.
+- `.cards[hidden]` needs its own rule for the same reason `.cards > .card[hidden]`
+  does. `display: grid` beats the UA stylesheet, so a filtered-out list left a
+  vendor's name sitting over an empty row.
+
 ## Zoom levels
 - Every node declares `zoom` — **the coarsest level at which it should appear**,
   so a level is cumulative: level 2 means "1 and 2". The index and the graph

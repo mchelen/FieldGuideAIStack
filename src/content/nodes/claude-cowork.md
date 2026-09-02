@@ -3,7 +3,7 @@ title: Claude Cowork
 kind: product
 vendor: Anthropic
 aka: [Cowork]
-tags: [product, agent]
+tags: [agentic]
 zoom: 1
 summary: Claude Code's agentic engine presented inside Claude Desktop without a
   terminal — aimed at people who want the autonomy but not the command line.

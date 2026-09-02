@@ -3,7 +3,7 @@ title: ChatGPT (product family)
 kind: suite
 vendor: OpenAI
 aka: [ChatGPT ecosystem, OpenAI product family]
-tags: [suite, product]
+tags: [product-anatomy]
 zoom: 1
 summary: OpenAI's family — ChatGPT itself, the Work agentic mode, and Codex —
   sold as modes and surfaces within one product rather than separate ones.

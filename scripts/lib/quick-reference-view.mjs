@@ -89,12 +89,11 @@ const KIND_BY_TAG = [
   // After `safety` on purpose: provenance is tagged both, and on the risks card
   // it is doing a control's job, not a licence's.
   ['openness', 'terms'],
-  ['org', 'who'],
   ['orgs', 'who'],
   ['agentic', 'process'],
   ['runtime', 'component'],
   ['infrastructure', 'component'],
-  ['interface', 'component'],
+  ['interfaces', 'component'],
   ['capability', 'component'],
   ['product-anatomy', 'component'],
 ];

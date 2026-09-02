@@ -3,7 +3,7 @@ title: Claude Code
 kind: product
 vendor: Anthropic
 aka: [claude CLI]
-tags: [product, agent, coding]
+tags: [agentic]
 zoom: 1
 summary: Anthropic's agentic coding tool — reads a codebase, edits files, runs
   commands, and works across terminal, IDE, desktop and browser.
