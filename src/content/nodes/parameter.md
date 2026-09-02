@@ -15,7 +15,7 @@ canonical:
     Marked a fundamentals term in Google's glossary and used identically across
     the field. The contrast that matters is with hyperparameter, not with any
     rival name.
-tags: [core, artifact]
+tags: [artifact]
 zoom: 2
 summary: One of the learned numbers inside a model. The count is the headline
   spec, and it is what "7B" or "70B" in a model's name refers to.

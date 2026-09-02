@@ -15,7 +15,7 @@ canonical:
     Borrowed from conversation analysis, where turn-taking is a term of art.
     The agentic sense adds one thing worth knowing: a turn may contain many
     model calls and tool executions, so it is not the same as a request.
-tags: [agentic, core]
+tags: [agentic]
 zoom: 3
 summary: One complete response within a session — from your message to the
   agent finishing, with any number of tool calls in between.

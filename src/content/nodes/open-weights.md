@@ -26,7 +26,7 @@ useCase:
     with "Llama", and a separate licence above 700 million monthly active users.
     [Self-hosting](self-hosting) and licence freedom are two questions; open weights answers
     only the first.
-tags: [licensing, openness, artifact]
+tags: [openness, artifact]
 zoom: 2
 summary: A model whose parameters you can download and run yourself — which
   says nothing about whether the license is open, or whether you could rebuild

@@ -3,7 +3,7 @@ title: Claude
 kind: product
 vendor: Anthropic
 aka: [Claude chat, claude.ai, Claude app]
-tags: [product, assistant]
+tags: [assistant]
 zoom: 1
 summary: Anthropic's conversational assistant — you ask, it answers, one turn at
   a time, with files you upload rather than files it reaches.

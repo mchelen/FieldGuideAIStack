@@ -20,7 +20,7 @@ useCase:
     worry into a specific finding you can act on — usually that you have
     downloadable weights under a bespoke licence, which is a different legal
     position from open source.
-tags: [licensing, openness, standard]
+tags: [openness]
 zoom: 2
 summary: A defined term, not a vibe — under OSI's Open Source AI Definition 1.0
   a system qualifies only if data information, training code, and parameters are

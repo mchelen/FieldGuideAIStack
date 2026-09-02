@@ -11,7 +11,7 @@ canonical:
   url: https://developers.google.com/machine-learning/glossary
   title: Machine Learning Glossary — Google for Developers
   verifiedOn: 2026-08-22
-tags: [agentic, core]
+tags: [agentic]
 zoom: 1
 summary: The cycle an agent repeats until it is done — observe, reason, act,
   take the feedback, go again. The single structural difference between an

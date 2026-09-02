@@ -19,7 +19,7 @@ useCase:
     can discover through `tools/list` and call through `tools/call`. The
     protocol's own documentation makes the analogy explicit: a USB-C port for
     AI applications.
-tags: [protocol, interface, standard]
+tags: [interfaces]
 zoom: 2
 summary: An open standard for connecting AI applications to external tools and
   data, so a tool built once works in any client that speaks the protocol.

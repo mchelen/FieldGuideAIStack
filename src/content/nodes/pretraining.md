@@ -14,7 +14,7 @@ canonical:
   note: >-
     Written both ways. Google hyphenates; most vendor documentation does not.
     Nothing turns on the choice.
-tags: [training, core]
+tags: [training]
 zoom: 2
 summary: The first and by far the most expensive training pass — a model
   learning language from an enormous general corpus, with no task in mind.

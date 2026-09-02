@@ -3,7 +3,7 @@ title: OpenAI Codex
 kind: product
 vendor: OpenAI
 aka: [Codex]
-tags: [product, agent, coding]
+tags: [agentic]
 zoom: 1
 summary: OpenAI's coding agent, running across a CLI, IDE extension, web, the
   ChatGPT desktop app and a cloud environment.

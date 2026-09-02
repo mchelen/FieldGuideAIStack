@@ -14,7 +14,7 @@ canonical:
     product usage. In marketing, "model" routinely names the artifact, the API
     and the whole product; keeping the narrow sense is what makes the rest of
     this guide's distinctions possible.
-tags: [core, artifact]
+tags: [artifact]
 zoom: 1
 summary: The trained artifact itself — an architecture plus a set of learned
   weights that maps input tokens to output token probabilities. Nothing more.

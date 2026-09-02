@@ -14,7 +14,7 @@ canonical:
     The name is borrowed from statistical physics and has been stable for
     decades. Vendors differ on the numeric range they accept, not on what the
     knob does.
-tags: [runtime, core]
+tags: [runtime]
 zoom: 2
 summary: The dial that controls how random a model's output is — applied after
   the model has produced its probabilities, not inside it.

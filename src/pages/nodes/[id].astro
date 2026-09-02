@@ -110,7 +110,7 @@ const derived = relations.filter((r) => r.derived);
     <p class="lede">{entry.data.summary}</p>
     <ul class="chips">
       {entry.data.tags.map((t) => (
-        <li><a class="chip" href={`${base}/#tag-${t}`}>{t}</a></li>
+        <li><a class="chip" href={`${base}/#subject=${t}`}>{t}</a></li>
       ))}
     </ul>
 

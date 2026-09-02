@@ -3,7 +3,7 @@ title: Gemini (product family)
 kind: suite
 vendor: Google
 aka: [Gemini ecosystem]
-tags: [suite, product]
+tags: [product-anatomy]
 zoom: 1
 summary: Google's family — the Gemini assistant and the Spark agent — split by
   subscription tier rather than by product name or interface.

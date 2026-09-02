@@ -31,7 +31,7 @@ aka:
     url: https://help.openai.com/en/articles/11487775-connectors-in-chatgpt
     verifiedOn: 2026-08-22
     note: Renamed from "connectors" in December 2025. The help article's URL slug still reads connectors-in-[chatgpt](chatgpt).
-tags: [capability, interface, product-anatomy]
+tags: [capability, interfaces, product-anatomy]
 zoom: 2
 summary: A packaged link between an assistant and an outside service, so it can
   read from and act in tools you already use.

@@ -13,7 +13,7 @@ canonical:
     generative one used here, and the reinforcement-learning one, where an
     agent is "the entity that uses a policy to maximize the expected return".
     Papers from before about 2022 usually mean the second.
-tags: [core, runtime]
+tags: [runtime]
 zoom: 1
 summary: A model driven in a loop by a harness, with tools, working toward a
   goal across multiple turns without a human in each one.

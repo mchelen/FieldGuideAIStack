@@ -16,7 +16,7 @@ canonical:
     is worth recording is that it names two different things — a ranking on a
     fixed benchmark, and a ranking from live pairwise human votes — which
     behave differently under pressure.
-tags: [evaluation, core]
+tags: [evaluation]
 zoom: 2
 summary: A public ranking of models — the most-read artifact in the field, and
   a measure that stops measuring once enough people are optimising for it.

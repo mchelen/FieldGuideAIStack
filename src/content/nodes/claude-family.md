@@ -3,7 +3,7 @@ title: Claude (product family)
 kind: suite
 vendor: Anthropic
 aka: [Claude ecosystem, Claude suite]
-tags: [suite, product]
+tags: [product-anatomy]
 zoom: 1
 summary: Anthropic's family — the Claude assistant, Cowork and Claude Code —
   built on one agentic architecture and sold as separately named products.

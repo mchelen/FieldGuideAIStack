@@ -5,7 +5,17 @@ import { loadGraph, tagIndex } from '../lib/graph';
 
 const graph = await loadGraph();
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const tags = tagIndex(graph);
+// Subjects, across the whole guide rather than the concepts alone. Restricting
+// them to concepts was the first attempt and it stranded `assistant`, which
+// three product pages carry and no concept does: the chips on those pages
+// pointed at a filter that did not offer the subject, and `check:output` says
+// so. The level control still applies to the concepts only -- levels are how
+// deep into the vocabulary you are, subjects are which part of the guide.
+// `check:tags` is what keeps this list browsable: every entry has at least
+// three pages and names a subject rather than a kind or a level.
+const subjects = tagIndex(graph).sort(
+  (a, b) => b.count - a.count || a.tag.localeCompare(b.tag),
+);
 
 const concepts = graph.nodes.filter((n) => n.kind === 'concept');
 const products = graph.nodes.filter((n) => n.kind === 'product');
@@ -100,6 +110,22 @@ const LEVELS = [
       <p class="zoom-blurb" data-blurbs={JSON.stringify(LEVELS.map((l) => l.blurb))}>
         {LEVELS[2].blurb}
       </p>
+      {/* The second axis, and deliberately not a second ladder: subjects
+          overlap, so `sandbox` is under both `agentic` and `safety` and picking
+          one never hides it from the other. Rendered as links so the list still
+          works with JavaScript off -- each one lands on this page with the
+          subject in the hash, and the script below picks it up. */}
+      <div class="subject-control" role="group" aria-label="Subject">
+        {/* No count on this one: it clears the subject rather than naming one,
+            and it leaves the level alone, so any number next to it would be
+            claiming something the level control can contradict. */}
+        <a href="#subject=all" data-subject="all" aria-current="true">Any subject</a>
+        {subjects.map((t) => (
+          <a href={`#subject=${t.tag}`} data-subject={t.tag} aria-current="false">
+            {t.tag} <span class="zoom-count">{t.count}</span>
+          </a>
+        ))}
+      </div>
       {/* A rule before each level's first card, so the ladder stays visible
           instead of the list simply getting longer. Hidden with its own level
           by the same filter. */}
@@ -111,11 +137,11 @@ const LEVELS = [
                 <span>Level {n.zoom}</span> {LEVELS[n.zoom - 1].adds}
               </li>
             )}
-          <li class="card" data-zoom={n.zoom}>
+          <li class="card" data-zoom={n.zoom} data-subjects={n.tags.join(' ')}>
             <a class="title" href={`${base}/nodes/${n.id}/`}>{n.title}</a>
             <p>{n.summary}</p>
             <ul class="chips" style="margin-top:auto;padding-top:0.4rem">
-              {n.tags.map((t) => <li><span class="chip">{t}</span></li>)}
+              {n.tags.map((t) => <li><a class="chip" href={`#subject=${t}`}>{t}</a></li>)}
             </ul>
           </li>
           </>
@@ -132,7 +158,7 @@ const LEVELS = [
       </p>
       <ul class="cards">
         {suites.map((n) => (
-          <li class="card is-suite">
+          <li class="card is-suite" data-subjects={n.tags.join(' ')}>
             <a class="title" href={`${base}/nodes/${n.id}/`}>{n.title}</a>
             <p>{n.summary}</p>
           </li>
@@ -152,7 +178,7 @@ const LEVELS = [
             <h3 style="margin-bottom:0.2rem">{group.vendor}</h3>
             <ul class="cards">
               {group.nodes.map((n) => (
-                <li class="card is-product">
+                <li class="card is-product" data-subjects={n.tags.join(' ')}>
                   <a class="title" href={`${base}/nodes/${n.id}/`}>{n.title}</a>
                   <p>{n.summary}</p>
                 </li>
@@ -163,62 +189,111 @@ const LEVELS = [
       }
     </section>
 
-    <section style="margin-top:3rem">
-      <h2><Icon name="naming" /> By tag</h2>
-      <ul class="cards">
-        {
-          tags.map((t) => (
-            <li class="card" id={`tag-${t.tag}`}>
-              <span class="title">{t.tag} <span style="color:var(--ink-faint);font-weight:400">· {t.count}</span></span>
-              <ul class="chips">
-                {graph.nodes
-                  .filter((n) => n.tags.includes(t.tag))
-                  .map((n) => (
-                    <li><a class="chip" href={`${base}/nodes/${n.id}/`}>{n.title}</a></li>
-                  ))}
-              </ul>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
   </div>
 </Base>
 
 <script>
-  // Progressive enhancement: the page ships every card and shows them all, and
-  // this narrows to a level. Starting at 1 once JavaScript is present makes the
-  // front door the twenty-seven terms the rest are defined against.
+  // Progressive enhancement, on two axes that compose. The page ships every
+  // card and shows them all, so with JavaScript off the index is complete and
+  // the subject links are ordinary anchors.
+  //
+  // The two axes are not the same kind of thing and are deliberately not drawn
+  // as one: a level is how deep into the vocabulary you are, and applies to the
+  // concepts; a subject is which part of the guide you are looking at, and
+  // applies to everything on the page including the products.
   const control = document.querySelector<HTMLElement>('.zoom-control');
+  const subjects = document.querySelector<HTMLElement>('.subject-control');
   // Every child carrying a level, not only the cards: the rules between levels
   // have to disappear with the cards they introduce, or level 1 shows a "Level
   // 3" heading with nothing under it.
   const cards = [...document.querySelectorAll<HTMLElement>('#concept-cards > [data-zoom]')];
+  const all = [...document.querySelectorAll<HTMLElement>('.card[data-subjects]')];
   const blurb = document.querySelector<HTMLElement>('.zoom-blurb');
-  if (control && cards.length && blurb) {
+  if (control && subjects && cards.length && blurb) {
     const blurbs = JSON.parse(blurb.dataset.blurbs ?? '[]') as string[];
     const buttons = [...control.querySelectorAll<HTMLButtonElement>('button')];
-    const apply = (level: number) => {
+    const links = [...subjects.querySelectorAll<HTMLAnchorElement>('a[data-subject]')];
+    let level = 1;
+    let subject = 'all';
+
+    const matches = (c: HTMLElement) =>
+      subject === 'all' || (c.dataset.subjects ?? '').split(' ').includes(subject);
+
+    const apply = () => {
       for (const b of buttons) b.setAttribute('aria-pressed', String(Number(b.dataset.zoom) === level));
-      for (const c of cards) c.hidden = Number(c.dataset.zoom) > level;
-      blurb.textContent = blurbs[level - 1] ?? '';
+      for (const a of links) a.setAttribute('aria-current', String(a.dataset.subject === subject));
+
+      for (const c of all) {
+        const deep = c.dataset.zoom ? Number(c.dataset.zoom) > level : false;
+        c.hidden = deep || !matches(c);
+      }
+      // Level rules carry a level but no subjects. Filtering by subject cuts
+      // across the levels, so a rule can be left introducing an empty run.
+      for (const rule of cards.filter((c) => !c.dataset.subjects)) {
+        let empty = true;
+        for (let n = rule.nextElementSibling; n instanceof HTMLElement && n.dataset.subjects; n = n.nextElementSibling) {
+          if (!n.hidden) empty = false;
+        }
+        rule.hidden = empty || Number(rule.dataset.zoom) > level;
+      }
+      // A vendor with nothing under the chosen subject should not leave its
+      // name behind over an empty row, and neither should a whole section.
+      for (const list of document.querySelectorAll<HTMLElement>('ul.cards')) {
+        const empty = ![...list.querySelectorAll<HTMLElement>('.card')].some((c) => !c.hidden);
+        list.hidden = empty;
+        const prev = list.previousElementSibling;
+        if (prev instanceof HTMLElement && prev.tagName === 'H3') prev.hidden = empty;
+      }
+      for (const section of document.querySelectorAll<HTMLElement>('main section, .wrap > section')) {
+        if (section.querySelector('#concept-cards')) continue; // keeps the controls visible
+        section.hidden = ![...section.querySelectorAll<HTMLElement>('.card')].some((c) => !c.hidden);
+      }
+
+      // Counted across every card, not the concepts alone: `assistant` is
+      // carried by three products and no concept, and counting concepts said
+      // "0 pages about assistant" with three of them visible underneath.
+      const shown = all.filter((c) => !c.hidden).length;
+      const deeper = cards.filter((c) => c.dataset.subjects && c.hidden && matches(c)).length;
+      blurb.textContent =
+        subject === 'all'
+          ? (blurbs[level - 1] ?? '')
+          : `${shown} page${shown === 1 ? '' : 's'} about ${subject}` +
+            (deeper ? `, with ${deeper} more at a finer level` : '') +
+            '. A page can sit under several subjects, so narrowing to one never takes it out of the others.';
       try {
         localStorage.setItem('fg-zoom', String(level));
       } catch {
-        /* private mode, or storage disabled — the control still works */
+        /* private mode, or storage disabled — the controls still work */
       }
     };
+
     control.addEventListener('click', (e) => {
       const b = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-zoom]');
-      if (b) apply(Number(b.dataset.zoom));
+      if (!b) return;
+      level = Number(b.dataset.zoom);
+      apply();
     });
-    let start = 1;
+
+    // Driven by the hash rather than by the click, so that a subject chip on a
+    // concept page lands here already narrowed, and so the browser's back
+    // button steps through the subjects a reader has looked at.
+    const fromHash = () => {
+      const m = /^#subject=(.+)$/.exec(location.hash);
+      const wanted = m ? decodeURIComponent(m[1]) : 'all';
+      subject = links.some((a) => a.dataset.subject === wanted) ? wanted : 'all';
+      // Arriving on a subject means "show me everything about this", so the
+      // level opens all the way rather than hiding most of the answer.
+      if (subject !== 'all') level = 3;
+      apply();
+    };
+    window.addEventListener('hashchange', fromHash);
+
     try {
       const saved = Number(localStorage.getItem('fg-zoom'));
-      if (saved >= 1 && saved <= 3) start = saved;
+      if (saved >= 1 && saved <= 3) level = saved;
     } catch {
       /* fall back to the first level */
     }
-    apply(start);
+    fromHash();
   }
 </script>

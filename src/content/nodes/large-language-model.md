@@ -15,7 +15,7 @@ canonical:
     Universally used and nowhere defined precisely. Google's own entry concedes
     the vagueness — "at a minimum" a language model with very many parameters,
     "more informally" any transformer-based one. There is no threshold.
-tags: [core, artifact]
+tags: [artifact]
 zoom: 1
 summary: A language model with a very large parameter count — in practice, the
   kind of model this whole guide is about, and the term the public uses for it.

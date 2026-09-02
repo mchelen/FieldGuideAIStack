@@ -8,7 +8,7 @@ canonical:
     the same way — Messages API, completions API, generate. "Inference API" is
     the generic description this guide uses because the vendor names are not
     interchangeable and the shape underneath them is.
-tags: [interface, infrastructure]
+tags: [interfaces, infrastructure]
 zoom: 2
 summary: The HTTP contract for calling a model — you post messages plus
   configuration, you get tokens back, and the server keeps nothing.

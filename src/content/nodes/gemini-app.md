@@ -3,7 +3,7 @@ title: Gemini
 kind: product
 vendor: Google
 aka: [Gemini app]
-tags: [product, assistant]
+tags: [assistant]
 zoom: 1
 summary: Google's multimodal assistant across mobile, web, macOS and Chrome,
   with Canvas, Deep Research, Gems and Workspace extensions.

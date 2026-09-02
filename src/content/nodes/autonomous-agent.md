@@ -15,7 +15,7 @@ canonical:
     turns on "without continuous human intervention", which every agent in this
     guide satisfies to some degree — see autonomy level for the dimension the
     word is flattening.
-tags: [agentic, core]
+tags: [agentic]
 zoom: 2
 summary: An agent pursuing a goal by planning, acting and adapting without
   step-by-step human direction — which describes a range, not a category.

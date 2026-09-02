@@ -16,7 +16,7 @@ canonical:
     Anthropic groups workflows and agents together as "agentic systems" and
     separates them on who decides the path — which is the distinction worth
     keeping.
-tags: [agentic, core]
+tags: [agentic]
 zoom: 2
 summary: A system where the steps are laid out in code in advance, and the model
   fills them in — as opposed to an agent, which decides its own path.
