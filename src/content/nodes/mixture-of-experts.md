@@ -12,7 +12,7 @@ canonical:
   url: https://arxiv.org/abs/1701.06538
   title: "Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer — Shazeer et al."
   verifiedOn: 2026-08-22
-tags: [structure]
+tags: [architecture]
 zoom: 3
 summary: An architecture that routes each token to a small subset of its
   parameters, so a model can hold far more of them than it uses on any one

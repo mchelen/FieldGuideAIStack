@@ -16,7 +16,7 @@ canonical:
     Two entries in the glossary rather than one; this page pairs them because
     the interesting fact is which half a model keeps. The terms predate
     transformers and are used more broadly in machine learning.
-tags: [models, structure]
+tags: [architecture, models]
 zoom: 3
 summary: The two halves of the original transformer, and the choice of which
   half a model keeps — a decision that explains what a model is shaped to do.

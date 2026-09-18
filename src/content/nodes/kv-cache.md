@@ -11,7 +11,7 @@ canonical:
   url: https://arxiv.org/abs/2309.06180
   title: Efficient Memory Management for Large Language Model Serving with PagedAttention — Kwon et al.
   verifiedOn: 2026-08-22
-tags: [runtime, structure]
+tags: [architecture, runtime]
 zoom: 3
 summary: The saved attention state for every token already processed, which is
   what makes generating the next token cheap — and what fills the accelerator's

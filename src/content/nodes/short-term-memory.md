@@ -11,7 +11,7 @@ canonical:
     psychology where it means something else entirely. In agentic systems it
     names the state scoped to one session — which is mostly just the context
     window, described from a different angle.
-tags: [agentic, structure]
+tags: [agentic, context]
 zoom: 3
 summary: State that lasts only for the current run — in practice the
   conversation itself, since there is nowhere else for it to live.

@@ -15,7 +15,7 @@ canonical:
     Specified rather than conventional — the spec says servers MUST publish one.
     Not to be confused with a model card, which documents a trained model rather
     than a running agent.
-tags: [interfaces, structure]
+tags: [interfaces]
 zoom: 3
 summary: A machine-readable declaration of an agent's identity, capabilities and
   interaction requirements — how one agent finds out what another can do.

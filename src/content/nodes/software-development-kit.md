@@ -15,7 +15,7 @@ canonical:
     Ordinary software vocabulary. The distinction worth keeping is between an
     SDK, which wraps the API call, and a harness or framework, which wraps the
     loop — they are frequently marketed as the same kind of thing.
-tags: [interfaces, structure]
+tags: [interfaces]
 zoom: 3
 summary: The vendor library wrapping an inference API — types, retries and
   streaming, so you are not assembling HTTP requests by hand.

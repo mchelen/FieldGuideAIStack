@@ -15,7 +15,7 @@ canonical:
     An ordinary software term used without modification. What it adds in an
     agentic harness is a specific contrast: hooks fire deterministically where
     tools fire at the model's discretion.
-tags: [agentic, structure]
+tags: [agentic]
 zoom: 3
 summary: A user-defined handler the harness runs automatically at a fixed point
   in its lifecycle — before a tool, after an edit, at session start.

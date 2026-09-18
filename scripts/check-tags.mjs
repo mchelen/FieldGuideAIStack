@@ -124,6 +124,45 @@ if (isolated.length) {
   );
 }
 
+// 4b. The inverse of rule 2: one name over two subjects.
+//
+// A tag claims its pages belong together, so members that never link to *each
+// other* are two claims sharing a word. `structure` was three — the agent
+// protocols, the model internals, and a harness's extension points — and
+// browsing it returned all three at once, which is no more useful than
+// browsing everything. Splitting it gave the model internals the name they
+// never had (`architecture`: attention, transformer, mixture-of-experts and
+// the rest carried nothing else, so they were unbrowsable).
+//
+// A warning, not a failure, for two reasons. The remedy is a judgement about
+// subject matter. And two groups can fail to link because the prose between
+// them is thin rather than because they are different subjects, which is why
+// this only speaks up for groups of three or more.
+const MIN_GROUP = 3;
+for (const [tag, members] of [...vocabulary].sort()) {
+  const set = new Set(members);
+  const seen = new Set();
+  const groups = [];
+  for (const start of members) {
+    if (seen.has(start)) continue;
+    const group = [];
+    const stack = [start];
+    seen.add(start);
+    while (stack.length) {
+      const id = stack.pop();
+      group.push(id);
+      for (const x of adj.get(id)) if (set.has(x) && !seen.has(x)) { seen.add(x); stack.push(x); }
+    }
+    groups.push(group.sort());
+  }
+  const apart = groups.filter((g) => g.length >= MIN_GROUP).sort((a, b) => b.length - a.length);
+  if (apart.length >= 2) {
+    warnings.push(
+      `tag "${tag}" covers ${apart.length} groups that never link to each other — one name over more than one subject: ${apart.map((g) => g.join('/')).join('  vs  ')}`,
+    );
+  }
+}
+
 // 5. Tags the graph says are missing. Not a failure: a page is about what it is
 //    about, and its neighbours only get a vote.
 const suggestions = [];

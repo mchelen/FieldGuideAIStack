@@ -15,7 +15,7 @@ canonical:
     Anthropic describes skills as following "the Agent Skills open standard",
     which makes this one of the few applied-stack terms with a specification
     behind it rather than a product convention alone.
-tags: [agentic, structure]
+tags: [agentic]
 zoom: 2
 summary: Packaged instructions that teach an agent a repeatable procedure —
   loaded when relevant rather than carried in the prompt.

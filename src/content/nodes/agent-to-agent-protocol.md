@@ -11,7 +11,7 @@ canonical:
   url: https://a2a-protocol.org/latest/
   title: A2A Protocol
   verifiedOn: 2026-08-22
-tags: [interfaces, structure]
+tags: [interfaces]
 zoom: 2
 summary: An open protocol for agents built by different vendors to discover and
   delegate to each other — the complement to MCP rather than a rival.

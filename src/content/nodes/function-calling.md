@@ -16,7 +16,7 @@ canonical:
     tool use is the capability, function calling is the request-and-response
     shape that implements it. Nobody else draws that line, so read the term in
     context.
-tags: [interfaces, structure]
+tags: [interfaces]
 zoom: 2
 summary: The API shape that lets a model request a named function with
   arguments — a structured block in the response rather than text you parse.
