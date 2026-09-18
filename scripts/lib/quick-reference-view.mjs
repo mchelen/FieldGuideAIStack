@@ -82,7 +82,11 @@ const KIND_BY_TAG = [
   ['evaluation', 'measure'],
   ['constraint', 'ceiling'],
   ['artifact', 'artifact'],
-  ['structure', 'store'],
+  // `structure` was retired: it covered the agent protocols, the model
+  // internals and a harness's extension points at once, and the first of those
+  // now reads as `architecture`. A transformer is a component of a model, not
+  // a place anything is kept, so it does not inherit `store`.
+  ['architecture', 'component'],
   ['technique', 'technique'],
   ['economics', 'cost'],
   ['safety', 'control'],
@@ -90,6 +94,13 @@ const KIND_BY_TAG = [
   // it is doing a control's job, not a licence's.
   ['openness', 'terms'],
   ['orgs', 'who'],
+  // Before `agentic`, and only after `technique`: the retrieval pages carry
+  // both and are ways of doing something, but what is left under `context`
+  // once the techniques are taken out is the places things are kept — the two
+  // memories and the vector database. Retiring `structure` is what exposed
+  // this: it had been mapping a transformer and an MCP server to `store`,
+  // which they are not, and the two memories, which they are.
+  ['context', 'store'],
   ['agentic', 'process'],
   ['runtime', 'component'],
   ['infrastructure', 'component'],

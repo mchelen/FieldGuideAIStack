@@ -15,7 +15,7 @@ canonical:
     Vendors call the feature "memory" without qualification; "long-term" is the
     contrast this guide draws to separate it from what a session holds. The
     implementation is consistently files rather than anything more exotic.
-tags: [agentic, structure]
+tags: [agentic, context]
 zoom: 2
 summary: State that survives across sessions — in practice a directory of files
   the agent writes and reads back, not a faculty of the model.

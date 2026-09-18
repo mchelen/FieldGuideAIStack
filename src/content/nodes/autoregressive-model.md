@@ -15,7 +15,7 @@ canonical:
     Google hyphenates; most current writing does not. The term is inherited
     from time-series statistics, where an autoregressive model predicts from
     its own past values, and the meaning carries over exactly.
-tags: [models, structure]
+tags: [architecture, models]
 zoom: 3
 summary: A model that predicts from its own previous predictions — which is
   every current large language model, and the source of several of their

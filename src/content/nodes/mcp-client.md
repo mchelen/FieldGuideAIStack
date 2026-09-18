@@ -13,7 +13,7 @@ canonical:
   note: >-
     Frequently confused with the host. The specification is precise: the host is
     the application, and a client is one connection it maintains per server.
-tags: [interfaces, structure]
+tags: [interfaces]
 zoom: 3
 summary: The connection a host creates for each server it talks to — one per
   server, dedicated, and the reason servers stay isolated from each other.

@@ -362,6 +362,27 @@ any new development work.
 - **One subject, one spelling.** `org` and `orgs`, `interface` and `interfaces`:
   browsing either gave you half the answer. The check fails on any two tags a
   single character apart.
+- **One name, one subject** — the inverse of the rule above, and the one that
+  needed the graph to see. `structure` covered the agent protocols, the model
+  internals and a harness's extension points, three groups that never link to
+  each other, so browsing it returned all three at once. A tag whose members
+  fall into two or more groups of three that share no link is two subjects
+  wearing one word; `check:tags` warns rather than fails, because the remedy is
+  editorial and because two groups can fail to link through thin prose as
+  easily as through being different things.
+- Splitting `structure` gave the model internals the name they never had.
+  `attention`, `transformer` and `mixture-of-experts` carried *only* `structure`,
+  which meant that in browse terms they were untagged; they are `architecture`
+  now, a word their own summaries already use. Nothing was left tagless: every
+  other member already carried `agentic`, `interfaces` or `product-anatomy`.
+- **The quick reference's `KIND_BY_TAG` reads the same vocabulary, so changing a
+  tag changes an icon.** Retiring `structure` showed it had been calling a
+  transformer, an MCP server and an SDK a `store`, which none of them are —
+  twenty of the twenty-two reclassifications were corrections. The two that were
+  not were the memories, which really are stores, and `context` now carries that
+  mapping, placed after `technique` so the retrieval pages stay techniques.
+  Check the whole diff of kinds when you touch tags; `check:output` only tells
+  you the generated fragments are stale, not that a label got worse.
 - **A tag has to narrow something.** `protocol` was on one page and `standard`
   on two. Under three pages a tag is a link, not a facet, and the check fails.
 - The vocabulary is enforced but **not authored by the checker.** Two reports

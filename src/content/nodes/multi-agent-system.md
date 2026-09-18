@@ -16,7 +16,7 @@ canonical:
     LLM-based usage is a special case of a decades-old research area, and
     Wikipedia notes it as "a new area of research" within it rather than a new
     idea.
-tags: [agentic, structure]
+tags: [agentic]
 zoom: 2
 summary: Several agents coordinating on a problem — with the delegation,
   duplication and communication costs that arrangement has always brought.

@@ -10,7 +10,7 @@ canonical:
   url: https://modelcontextprotocol.io/docs/2026-07-28/learn/architecture
   title: Architecture overview — Model Context Protocol
   verifiedOn: 2026-08-22
-tags: [interfaces, structure]
+tags: [interfaces]
 zoom: 2
 summary: The program that serves tools, resources and prompts to an MCP client —
   the unit an integration is packaged and shipped as.

@@ -11,7 +11,7 @@ canonical:
     defines it for agentic systems, and it covers everything from a routing
     switch to a model delegating to sub-agents. Anthropic's
     "orchestrator-workers" names one specific pattern within it.
-tags: [agentic, structure]
+tags: [agentic]
 zoom: 2
 summary: How a system decides which step, model or agent runs next — whether
   that decision sits in code or in a model call.

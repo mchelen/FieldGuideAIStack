@@ -12,7 +12,7 @@ canonical:
     agentic engine, and none of them publishes a word for the arrangement —
     which is part of why buyers compare individual products that were never
     meant to be compared in isolation.
-tags: [structure, product-anatomy]
+tags: [product-anatomy]
 zoom: 2
 summary: Several products sharing one engine, one account and one extension
   system, packaged separately for different audiences.
