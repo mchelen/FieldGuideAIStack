@@ -11,7 +11,7 @@ canonical:
     tokens in an ordinary completion call, others through a dedicated endpoint
     with prefix and suffix fields. The capability is settled; the interface is
     per-vendor and not portable.
-tags: [interfaces, capability]
+tags: [interfaces]
 zoom: 3
 summary: An endpoint shaped for completion inside existing text rather than
   after it — the API surface behind inline code completion.

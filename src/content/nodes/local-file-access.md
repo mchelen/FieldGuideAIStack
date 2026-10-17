@@ -8,7 +8,7 @@ canonical:
     "connect a folder" — and the distinction that matters, between your disk
     and a cloud sandbox you upload into, is rarely stated plainly. Named here
     so products can be compared on it.
-tags: [capability, product-anatomy]
+tags: [actions, product-anatomy]
 zoom: 2
 summary: Whether the agent can read and write files on your own machine, rather
   than only files you upload into a chat window.

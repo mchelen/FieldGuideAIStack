@@ -8,7 +8,7 @@ canonical:
     tasks" all describe it. Named here because it changes the oversight
     question — work that continues while nobody is watching cannot fall back to
     a [human in the loop](human-in-the-loop).
-tags: [capability, product-anatomy]
+tags: [actions, product-anatomy]
 zoom: 2
 summary: The work continues after you look away — running in the vendor's cloud
   rather than in the window you have open.

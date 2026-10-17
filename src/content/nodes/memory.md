@@ -15,7 +15,7 @@ canonical:
   url: https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/
   title: Agentic AI — Threats and Mitigations v1.1 — OWASP GenAI Security Project
   verifiedOn: 2026-08-22
-tags: [capability, runtime, product-anatomy]
+tags: [context, runtime, product-anatomy]
 zoom: 2
 summary: What an agent retains — within a run, and across runs — given that the
   model underneath remembers nothing at all.

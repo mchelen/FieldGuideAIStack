@@ -15,7 +15,7 @@ canonical:
     Abbreviated FIM throughout the literature and in the special tokens models
     use for it. "Infilling" is the older, more general word for the same
     capability.
-tags: [models, capability]
+tags: [models]
 zoom: 3
 summary: Generating text given both what precedes and what follows it — the
   capability behind code completion inside an existing file.

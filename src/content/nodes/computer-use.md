@@ -15,7 +15,7 @@ canonical:
     Named similarly by other vendors — computer use, operator, agent mode — for
     the same capability. No standard exists; the tool definitions are
     vendor-specific and not interchangeable.
-tags: [agentic, capability]
+tags: [agentic, actions]
 zoom: 2
 summary: An agent driving a whole computer through screenshots, mouse and
   keyboard, rather than calling an application's API.

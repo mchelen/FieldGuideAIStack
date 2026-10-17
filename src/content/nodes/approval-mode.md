@@ -14,7 +14,7 @@ canonical:
     the vendor term was checked; the two name the same thing and the vendor's
     is the one to use in writing. Nothing standardises the mode names
     themselves, which is what makes autonomy levels hard to compare.
-tags: [capability, safety, product-anatomy]
+tags: [actions, safety, product-anatomy]
 zoom: 2
 summary: The policy deciding which agent actions need your say-so — every one,
   only risky ones, or none.

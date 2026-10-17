@@ -8,8 +8,16 @@
  * core agentic capabilities and had no node at all. Both were found by a person
  * noticing, which does not scale.
  *
- * The lexicon is the capability concepts themselves, so it grows as the guide
- * does rather than being a hand-kept list that rots.
+ * The lexicon is whatever any product declares it bundles -- the same
+ * definition the comparison table uses (`comparison()` in src/lib/graph.ts), so
+ * the two can never disagree about what counts as a capability, and it grows as
+ * the guide does rather than being a hand-kept list that rots.
+ *
+ * It used to be the `capability` tag instead, which gave one tag two jobs: a
+ * subject for readers to browse, and this check's word list. That coupling is
+ * what stopped the tag being split when it turned out to name two subjects.
+ * Reading the relations instead also drops the concepts no product ships, which
+ * were only ever noise here, and picks up a capability someone forgets to tag.
  */
 import { loadNodes, report } from './lib/nodes.mjs';
 
@@ -19,15 +27,13 @@ const NEGATION =
   /\b(cannot|can't|can not|does not|doesn't|do not|don't|never|no|without|absent|lacks?|unable|nor|neither|not)\b/i;
 
 const nodes = await loadNodes();
-const capabilities = nodes.filter(
-  (n) =>
-    n.data.kind !== 'product' &&
-    n.data.kind !== 'suite' &&
-    // `capability` specifically, not the looser `product-anatomy`. Surface and
-    // product suite carry that tag but are structure rather than something a
-    // product bundles, and including them produced only false positives.
-    (n.data.tags ?? []).includes('capability'),
+const bundled = new Set(
+  nodes
+    .filter((n) => n.data.kind === 'product')
+    .flatMap((n) => (n.data.relations ?? []).filter((r) => r.type === 'bundles'))
+    .map((r) => r.target),
 );
+const capabilities = nodes.filter((n) => bundled.has(n.id));
 
 const terms = (n) =>
   [n.data.title, ...(n.data.aka ?? []).map((a) => (typeof a === 'string' ? a : a.term))]
