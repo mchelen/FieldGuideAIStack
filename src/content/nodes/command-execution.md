@@ -9,7 +9,7 @@ canonical:
     listing "run a shell command" among what a tool can be, without naming the
     capability. Vendors describe it in prose, which is exactly why it was
     missing from this guide's first comparison table.
-tags: [capability, product-anatomy]
+tags: [actions, product-anatomy]
 zoom: 2
 summary: The agent can run programs — tests, builds, installs, scripts — rather
   than only producing text describing what to run.

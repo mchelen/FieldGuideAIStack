@@ -105,7 +105,7 @@ const KIND_BY_TAG = [
   ['runtime', 'component'],
   ['infrastructure', 'component'],
   ['interfaces', 'component'],
-  ['capability', 'component'],
+  ['actions', 'component'],
   ['product-anatomy', 'component'],
 ];
 

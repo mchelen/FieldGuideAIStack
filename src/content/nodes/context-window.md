@@ -16,7 +16,7 @@ canonical:
     loaded skills, and points readers at the platform glossary "for the
     underlying model concept". This page covers the first; the second is
     context engineering.
-tags: [capability, constraint]
+tags: [context, constraint]
 zoom: 2
 summary: The maximum number of tokens a model can attend to in a single call —
   system prompt, conversation, tool results and its own output, all together.

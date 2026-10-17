@@ -12,7 +12,7 @@ canonical:
     Written both ways. Anthropic closes it up as "subagent"; the hyphenated
     form is common elsewhere. Distinct from a [multi-agent system](multi-agent-system), where the
     agents are independent rather than delegated to.
-tags: [capability, runtime]
+tags: [agentic, runtime]
 zoom: 3
 summary: A parent agent spawning child loops, each with its own context window
   and tools, and merging their results.

@@ -17,7 +17,7 @@ canonical:
     format. What differs is whether the schema is guaranteed or merely
     requested, which is the only distinction that matters and is not always
     stated on the page.
-tags: [interfaces, capability]
+tags: [interfaces]
 zoom: 2
 summary: Forcing model output to conform to a schema — enforced during
   decoding, so invalid output is not possible rather than merely unlikely.

@@ -375,6 +375,15 @@ any new development work.
   which meant that in browse terms they were untagged; they are `architecture`
   now, a word their own summaries already use. Nothing was left tagless: every
   other member already carried `agentic`, `interfaces` or `product-anatomy`.
+- `capability` was the second tag that rule caught, and it was the one #67 left
+  alone because `check:gaps` read it as its word list. Once the check read the
+  `bundles` relations instead, the split was editorial: the nine pages about
+  what an agent can *do* on your behalf — run commands, read files, drive a
+  browser, call tools — are `actions`; the three about what a session *holds*
+  already had homes, so `context-window` and `memory` joined `context` and
+  `sub-agent` joined `agentic`, which the checker had been suggesting. The
+  fill-in-the-middle pages and `structured-output` are model and interface
+  features, not things an agent does, and keep only their other tags.
 - **The quick reference's `KIND_BY_TAG` reads the same vocabulary, so changing a
   tag changes an icon.** Retiring `structure` showed it had been calling a
   transformer, an MCP server and an SDK a `store`, which none of them are —
@@ -631,10 +640,18 @@ any new development work.
   exactly this way: it was described in prose on four product pages while being
   invisible in the comparison.
 - `npm run check:gaps` does the checking that used to depend on someone
-  noticing. It reads the capability concepts as its lexicon, so it widens as
-  the guide does, and flags any product page whose prose describes a capability
-  it declares no `bundles` edge to. Removing the command execution edge from
-  Claude Code reproduces the original miss and the check catches it.
+  noticing. Its lexicon is every concept any product `bundles` — the same
+  definition the comparison table is built from — so it widens as the guide
+  does, and it flags any product page whose prose describes one of those
+  capabilities while declaring no `bundles` edge to it. Removing the command
+  execution edge from Claude Code reproduces the original miss and the check
+  catches it.
+- **The lexicon is the relations, never a tag.** It used to be the `capability`
+  tag, which gave one tag two jobs and is why that tag could not be split when
+  `check:tags` showed it naming two subjects. The one thing the relations
+  cannot see is a capability no product has declared yet; that is accepted,
+  because the check's question is "described but undeclared", and a concept
+  becomes a candidate the moment the first product declares it.
 - It suppresses sentences containing a negation, because a page saying a
   product *cannot* do something is evidence the empty cell is deliberate.
   Without that suppression the Claude page alone raises three false positives,

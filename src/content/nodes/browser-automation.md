@@ -14,7 +14,7 @@ canonical:
     browser use tool is the closer fit", where computer use drives a whole
     desktop. Acting on the page and acting on the screen are different
     capabilities with different costs.
-tags: [capability, product-anatomy]
+tags: [actions, product-anatomy]
 zoom: 2
 summary: The agent drives a real web browser — clicking, typing, navigating,
   filling forms — instead of calling an API.
