@@ -1,0 +1,27 @@
+name: Dependabot auto-merge
+
+# Arms auto-merge on every Dependabot pull request. GitHub then squash-merges it
+# once the required `build` check passes, and never if it fails, so a bump that
+# breaks the site waits for someone to fix it. See "Dependency updates" in
+# AGENTS.md.
+#
+# A merge made through GITHUB_TOKEN does not trigger other workflows, so these
+# merges do not redeploy the site. That is deliberate rather than worked
+# around: a dependency bump changes no content, and the next content merge
+# deploys it.
+
+on: pull_request
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - run: gh pr merge --auto --squash "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

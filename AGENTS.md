@@ -43,6 +43,12 @@ any new development work.
 ## Dependency updates
 - A bot pull request whose checks are green is safe to merge. Confirm the checks
   actually ran and passed, then merge it.
+- Dependabot pull requests merge themselves. `dependabot-auto-merge.yml` arms
+  auto-merge when one opens, and GitHub merges it once `build` is green. A
+  Dependabot pull request still open with green checks means that workflow
+  failed: find out why rather than only merging by hand. Its merges do not
+  trigger a deploy (a `GITHUB_TOKEN` merge never triggers other workflows);
+  the next content merge picks the bump up.
 - A bot pull request whose checks fail is work to do, not a reason to close it.
   Find out what broke, fix it, and land the update. Declining a security update
   because the upgrade needs code changes is not an option.
