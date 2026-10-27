@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^7.2.1",
-    "astro": "^7.2.8",
+    "astro": "^7.3.3",
     "cytoscape": "^3.33.1",
     "unist-util-visit": "^5.1.0"
   },
